@@ -7,32 +7,36 @@
 dir=~/.linux-config
 origdir=~/.linux-config.orig
 
+# put what you want to pre-install (Vundle, zsh...)
 install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git \
-    ~/.vim/bundle/Vundle.vim"
+    ./.vim/bundle/Vundle.vim"
 
 # put config/dir your want to sync in this variable
-files=".bashrc .vimrc .vim .vimperatorrc .tmux.conf .tmuxline .Rprofile \
-    .pythonrc .gitignore .gitconfig" 
+files=".bashrc .vimrc .vim .vimperatorrc .vimperator .tmux.conf .tmuxline \
+    .Rprofile .pythonrc .gitignore .gitconfig" 
+
 
 echo -n "Creating $origdir for backup ..."
 mkdir -p $origdir
 echo "done"
 
+
 echo -n "cd to $dir ..."
 cd $dir
 echo "done"
 
+
 for file in $files; do
-    echo "Moving dotfiles from ~ to $origdir"
-    mv ~/$file ~/$origdir
-    echo "Creating symlink to $file in ~/"
+    echo "Moving $file to $origdir"
+    mv ~/$file $origdir
+    echo "Symlinking to $file in $dir"
     ln -s $dir/$file ~/$file
 done
 
 
 # confirm before install
 confirm () {
-    # call with a prompt string or use a default
+    echo 
     read -r -p "${3:-Install $1? [y/N]} " response
     case $response in
         [yY][eE][sS]|[yY]) 
@@ -42,6 +46,8 @@ confirm () {
         echo "Operation aborted."
             ;;
     esac
+    echo 
 }
 
-confirm() Vundle '$install_vundle'
+
+confirm Vundle '$install_vundle'
