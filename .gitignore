@@ -1,0 +1,6 @@
+*.py[cod]
+*.RData
+test.*
+*.swp
+*~
+*.log

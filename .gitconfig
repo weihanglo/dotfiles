@@ -1,0 +1,15 @@
+[core]
+	editor = vimx
+	excludesfile = /home/weihang/.gitignore
+[merge]
+	tool = vimdiff
+[user]
+	name = weihang
+	email = b01605002@gmail.com
+[color]
+	ui = true
+	status = always
+[difftool]
+	prompt = false
+[diff]
+	tool = vimdiff

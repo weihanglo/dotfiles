@@ -1,0 +1,30 @@
+# Useful library ----------------------
+"""
+# General
+ipython
+jupyter
+matplotlib
+numpy
+scipy
+pandas
+
+# database
+pymongo
+
+# Crawler toolkit
+selenium
+requests
+beautifulsoup4
+pyquery
+
+# Web framework
+django
+flask
+
+# Text analytics
+jseg3
+nltk
+
+# OnmiCompletion (for vim)
+jedi
+"""
