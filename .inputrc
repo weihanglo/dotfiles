@@ -1,0 +1,26 @@
+set editing-mode vi
+set show-all-if-ambiguous on
+set completion-ignore-case on
+# first display the common prefix, then cycle options when hitting TAB
+menu-complete-display-prefix on
+
+#---------------------------------------
+# vi command mode
+#---------------------------------------
+set keymap vi-command
+
+#---------------------------------------
+# vi insert mode
+#---------------------------------------
+set keymap vi-insert
+
+# tab completion cycling
+TAB: menu-complete
+# Shift-TAB cycles completions backward
+"\e[Z": menu-complete-backward
+
+# for Ctrl+l clear screen
+Control-l: clear-screen 
+
+# required for insert normal 'p'
+"p": self-insert
