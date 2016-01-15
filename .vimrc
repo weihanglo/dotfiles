@@ -16,7 +16,7 @@ set incsearch
 set history=500
 set showcmd
 set wildmenu
-set wildmode=list:longest           " turn on wild mode huge list
+set wildmode=longest:full
 
 syntax off
 filetype off 

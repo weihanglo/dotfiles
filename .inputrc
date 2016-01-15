@@ -1,6 +1,7 @@
 set editing-mode vi
 set show-all-if-ambiguous on
 set completion-ignore-case on
+
 # first display the common prefix, then cycle options when hitting TAB
 menu-complete-display-prefix on
 

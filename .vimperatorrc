@@ -1,6 +1,6 @@
-"--------------------------"
-"   modified: 2015/09/03   "
-"--------------------------"
+"--------------------------------------"
+"         modified: 2016-01-15         "
+"--------------------------------------"
 
 
 source! /home/weihang/.vimperatorrc.local
@@ -14,6 +14,9 @@ set! javascript.options.jit.chrome=true
 colorscheme molokai
 set gui=none
 set nosb
+
+" animation of statusline
+set ani=true
 
 " for move happily
 nnoremap j 5j
