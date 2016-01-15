@@ -13,7 +13,6 @@ set laststatus=2
 set showmatch
 set hlsearch
 set incsearch
-"set cmdheight=2
 set history=500
 set showcmd
 set wildmenu
@@ -73,16 +72,18 @@ Plugin 'VundleVim/Vundle.vim'
 " Put your plugins below ---------------
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jalvesaq/R-Vim-runtime'
-Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jcfaria/Vim-R-plugin'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'jpalardy/vim-slime'
-Plugin 'edkolev/tmuxline.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'chrisbra/csv.vim'
 " Put your plugins above ---------------
 
 call vundle#end()            " required
@@ -141,14 +142,14 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='murmur'
 
 " git branch
-let g:airline#extensions#branch#enabled = 1 " git branch
+let g:airline#extensions#branch#enabled = 1
 
 " tabline
-let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-let g:airline#extensions#tabline#buffer_nr_show = 0 " buffer number
-let g:airline#extensions#tabline#buffer_idx_mode = 1 " tabline buffer index
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 " mapping buffer index on tabline
 nmap <leader>1 <Plug>AirlineSelectTab1
@@ -156,6 +157,7 @@ nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
 nmap <leader>4 <Plug>AirlineSelectTab4
 nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
 
 
 "---------------------------------------

@@ -4,9 +4,6 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
 # User specific aliases and functions
 alias shut='sync;sync;sync;sudo shutdown now'
 alias sshfml1='ssh -p 10022 lowh@fml1.fo.ntu.edu.tw'
@@ -20,27 +17,34 @@ alias py3='python3'
 alias phpmyadmin='firefox http://127.0.0.1/phpmyadmin/'
 #alias flask='source $HOME/wd/flask/bin/activate; cd $HOME/wd/flask'
 
+#---------------------------------------
+# enhanced prompt
+#---------------------------------------
 
-#-------------------
-# git branch
-#-------------------
-
-function parse_git_branch {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "("${ref#refs/heads/}")"
+# ssh or not
+ssh_or_not () {
+    ip=$(who am i |awk '{printf $5}')
+    if [ $ip ]; then echo [$HOSTNAME]; fi
 }
 
 
-#-------------------
-# colorful prompt
-#-------------------
+# parse git branch
+parse_git_branch () {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    echo "( "${ref#refs/heads/}")"
+}
 
+# colorful prompt
 PS1="\n\`
     if [ \$? = 0 ]; 
     then 
-        echo \[\e[1m\]\[\e[32m\]\W \$(parse_git_branch) \➤ \[\e[m\]\[\e[m\]
+        echo \[\e[1m\]\[\e[32m\]\W \
+        \$(ssh_or_not) \$(parse_git_branch) \
+        \➤ \[\e[m\]\[\e[m\]
     else 
-        echo \[\e[1m\]\[\e[31m\]\W \$(parse_git_branch) \➤ \[\e[m\]\[\e[m\] 
+        echo \[\e[1m\]\[\e[31m\]\W \
+        \$(ssh_or_not) \$(parse_git_branch) \
+        \➤ \[\e[m\]\[\e[m\] 
     fi\` "
 
 PS2='... '
