@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/weihang/.linux-config'
 let g:netrw_dirhist_2='/home/weihang/wd/lads-group8'
 let g:netrw_dirhist_3='/home/weihang'
+let g:netrw_dirhist_4='/home/weihang/wd/debian-R-setup'

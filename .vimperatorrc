@@ -15,9 +15,6 @@ colorscheme molokai
 set gui=none
 set nosb
 
-" animation of statusline
-set ani=true
-
 " for move happily
 nnoremap j 5j
 nnoremap k 10k

@@ -40,11 +40,11 @@ PS1="\n\`
     then 
         echo \[\e[1m\]\[\e[32m\]\W \
         \$(ssh_or_not) \$(parse_git_branch) \
-        \➤ \[\e[m\]\[\e[m\]
+        \➤ \[\e[m\]
     else 
         echo \[\e[1m\]\[\e[31m\]\W \
         \$(ssh_or_not) \$(parse_git_branch) \
-        \➤ \[\e[m\]\[\e[m\] 
+        \➤ \[\e[m\]
     fi\` "
 
 PS2='... '
