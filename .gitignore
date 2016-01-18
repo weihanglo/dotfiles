@@ -4,3 +4,4 @@ test.*
 *.swp
 *~
 *.log
+__pycache__/

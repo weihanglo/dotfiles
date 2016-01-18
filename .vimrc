@@ -1,6 +1,7 @@
 "---------------------------------------
 " General
 "---------------------------------------
+" {{{
 set encoding=utf-8
 set backup backupdir=~/.vim/backup/
 set clipboard=unnamedplus               " share system clipboard
@@ -13,7 +14,7 @@ set laststatus=2
 set showmatch
 set hlsearch incsearch
 set showcmd history=500
-set wildmenu wildmode=longest:full
+set wildmenu wildmode=longest:full,full
 set guifont=inconsolata\ 12
 set ruler
 set number relativenumber               " relative line number
@@ -21,21 +22,33 @@ set cursorline
 set guioptions=M
 syntax off                              " turn on after loading plugins
 filetype off                            " turn on after loading plugins
-
+" }}}
 
 "---------------------------------------
 " filetype
 "---------------------------------------
-" map localleader if necessary
-let maplocalleader = ','
-
+" {{{
 " recognize *.md files
-au BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
+autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
 
+" vim-r-plugin
+augroup filetype_r
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst}
+        \ call VimRPluginConf()
+augroup END
+
+" vimL
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
 
 "---------------------------------------
 " warp, break, indent, and folding
 "---------------------------------------
+" {{{
 set shiftwidth=4 softtabstop=4 expandtab
 set linebreak breakat-=. showbreak=------>\ 
 set cpoptions+=n
@@ -45,19 +58,26 @@ set autoindent
 set colorcolumn=80
 set nowrap
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
-
+" }}}
 
 "---------------------------------------
-" Keymapping
+" Key mapping
 "---------------------------------------
+" {{{
+" map localleader if necessary
+let maplocalleader = ','
+
 inoremap hh <Esc>
 inoremap jj <Esc>
 inoremap kk <Esc>
-
+inoremap jk <Esc>
+inoremap kj <Esc>
+" }}}
 
 "---------------------------------------
 " Vundle plugins setting
 "---------------------------------------
+" {{{
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -67,13 +87,12 @@ Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
-Plugin 'jalvesaq/R-Vim-runtime'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'jcfaria/Vim-R-plugin'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'jalvesaq/R-Vim-runtime'
+Plugin 'jcfaria/Vim-R-plugin'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'jpalardy/vim-slime'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -83,11 +102,12 @@ Plugin 'chrisbra/csv.vim'
 "
 call vundle#end()
 filetype plugin on
-
+" }}}
 
 "---------------------------------------
 " Colorscheme
 "---------------------------------------
+" {{{
 " solarized
 syntax enable
 set background=dark
@@ -95,23 +115,27 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 " toggle backgrond transparent
-let g:colorschemeToggler=0
+let g:colorschemeToggler=1
 function ColorschemeToggle()
-    if g:colors_name == 'solarized'
-        colorscheme PaperColor
-        AirlineTheme PaperColor
+    if g:colorschemeToggler
+        colorscheme solarized
+        AirlineTheme base16
+        let g:colorschemeToggler=0
     else
         set background=dark
         colorscheme solarized
         AirlineTheme murmur
+        let g:colorschemeToggler=1
     endif
 endfunction
 
 nmap <leader>t :call ColorschemeToggle()<CR>
-
-
+" }}}
 
 "---------------------------------------
+" vim-r-plugin
+"---------------------------------------
+" {{{
 function VimRPluginConf()
     let g:vimrplugin_notmuxconf = 1
     let g:vimrplugin_tmux_ob = 0          " vim split window as object browser
@@ -124,23 +148,23 @@ function VimRPluginConf()
     nmap <buffer> <Space> <Plug>RDSendLine
     echom "vim-r-plugin configuration complete"
 endfunction
-"
-au BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst} call VimRPluginConf()
-
+" }}}
 
 "---------------------------------------
 " vim-slime (REPL)
 "---------------------------------------
+" {{{
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 let g:slime_dont_ask_default = 1
 let g:slime_paste_file = tempname()
-
+" }}}
 
 "---------------------------------------
 " airline
 "---------------------------------------
+" {{{
 " theme
 let g:airline_powerline_fonts = 1
 let g:airline_theme='murmur'
@@ -163,11 +187,12 @@ let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
-
+" }}}
 
 "---------------------------------------
 " tmuxline
 "---------------------------------------
+" {{{
 let g:tmuxline_preset = {
     \'a'    : '#S',
     \'cwin' : ['#F#I', '#W'],
@@ -176,3 +201,4 @@ let g:tmuxline_preset = {
     \'y'    : ['⏰ %R', '%b %d'],
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
+" }}}
