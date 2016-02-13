@@ -1,11 +1,18 @@
 "--------------------------------------"
-"         modified: 2016-01-15         "
+"  Modified: Sat Jan 30 23:44:07 2016  "
 "--------------------------------------"
+
 
 
 source! /home/weihang/.vimperatorrc.local
 
 " vim: set ft=vimperator:
+
+" larger font size
+hi Normal -append font-size:18px
+
+" do not close windows with last tab
+set! browser.tabs.closeWindowWithLastTab=false
 
 " Make Firefox run faster by using JIT
 set! javascript.options.jit.chrome=true

@@ -1,7 +1,4 @@
-"---------------------------------------
-" General
-"---------------------------------------
-" {{{
+" General {{{
 set encoding=utf-8
 set backup backupdir=~/.vim/backup/
 set clipboard=unnamedplus               " share system clipboard
@@ -24,12 +21,18 @@ syntax off                              " turn on after loading plugins
 filetype off                            " turn on after loading plugins
 " }}}
 
-"---------------------------------------
-" filetype
-"---------------------------------------
-" {{{
-" recognize *.md files
-autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
+" filetype {{{
+" recognize *.m as objective-c
+augroup filetype_objc
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead *.m setfiletype objc
+augroup END
+
+" recognize *.md as markdown
+augroup filetype_markdown
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
+augroup END
 
 " vim-r-plugin
 augroup filetype_r
@@ -43,12 +46,15 @@ augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+" java
+augroup filetype_java
+    autocmd!
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete
+augroup END
 " }}}
 
-"---------------------------------------
-" warp, break, indent, and folding
-"---------------------------------------
-" {{{
+" warp, break, indent, and folding {{{
 set shiftwidth=4 softtabstop=4 expandtab
 set linebreak breakat-=. showbreak=------>\ 
 set cpoptions+=n
@@ -60,10 +66,7 @@ set nowrap
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 " }}}
 
-"---------------------------------------
-" Key mapping
-"---------------------------------------
-" {{{
+" Key mapping {{{
 " map localleader if necessary
 let maplocalleader = ','
 
@@ -74,25 +77,27 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 " }}}
 
-"---------------------------------------
-" Vundle plugins setting
-"---------------------------------------
-" {{{
+" Vundle plugins setting {{{
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Put your plugins below ---------------
 Plugin 'VundleVim/Vundle.vim'           " required with first priority
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
-Plugin 'edkolev/tmuxline.vim'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
+Plugin 'Yggdroot/indentLine'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'jalvesaq/R-Vim-runtime'
 Plugin 'jcfaria/Vim-R-plugin'
 Plugin 'davidhalter/jedi-vim'
+"Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'jpalardy/vim-slime'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -104,10 +109,7 @@ call vundle#end()
 filetype plugin on
 " }}}
 
-"---------------------------------------
-" Colorscheme
-"---------------------------------------
-" {{{
+" Colorscheme {{{
 " solarized
 syntax enable
 set background=dark
@@ -115,45 +117,49 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 " toggle backgrond transparent
-let g:colorschemeToggler=1
-function ColorschemeToggle()
-    if g:colorschemeToggler
-        colorscheme solarized
-        AirlineTheme base16
-        let g:colorschemeToggler=0
-    else
-        set background=dark
-        colorscheme solarized
-        AirlineTheme murmur
-        let g:colorschemeToggler=1
-    endif
-endfunction
+if !exists("*ColorschemeToggle")
+    let g:colorschemeToggler=1
+    function ColorschemeToggle()
+        if g:colorschemeToggler
+            colorscheme solarized
+            AirlineTheme base16
+            let g:colorschemeToggler=0
+        else
+            set background=dark
+            colorscheme solarized
+            AirlineTheme murmur
+            let g:colorschemeToggler=1
+        endif
+    endfunction
 
-nmap <leader>t :call ColorschemeToggle()<CR>
+    nmap <leader>t :call ColorschemeToggle()<CR>
+endif
+
 " }}}
 
-"---------------------------------------
-" vim-r-plugin
-"---------------------------------------
-" {{{
-function VimRPluginConf()
-    let g:vimrplugin_notmuxconf = 1
-    let g:vimrplugin_tmux_ob = 0          " vim split window as object browser
-    let g:vimrplugin_restart = 1          " restart new session
-    let g:vimrplugin_assign = 0           " Do not bind '_' as ' <- '
-    let g:vimrplugin_rconsole_height = 12
-    let g:vimrplugin_tmux_title = "automatic"
-    " press for sending code to R console 
-    vmap <buffer> <Space> <Plug>RDSendSelection
-    nmap <buffer> <Space> <Plug>RDSendLine
-    echom "vim-r-plugin configuration complete"
-endfunction
+" vim-r-plugin {{{
+if !exists("*VimRPluginConf")
+    function VimRPluginConf()
+        let g:vimrplugin_notmuxconf = 1
+        let g:vimrplugin_tmux_ob = 0          " vim split window as object browser
+        let g:vimrplugin_restart = 1          " restart new session
+        let g:vimrplugin_assign = 0           " Do not bind '_' as ' <- '
+        let g:vimrplugin_rconsole_height = 12
+        let g:vimrplugin_tmux_title = "automatic"
+        " press for sending code to R console 
+        vmap <buffer> <Space> <Plug>RDSendSelection
+        nmap <buffer> <Space> <Plug>RDSendLine
+        echom "vim-r-plugin configuration complete"
+    endfunction
+endif
 " }}}
 
-"---------------------------------------
-" vim-slime (REPL)
-"---------------------------------------
-" {{{
+" !!!Terminate!!! YouCompleteMe {{{
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" }}}
+
+" vim-slime (REPL) {{{
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
@@ -161,10 +167,7 @@ let g:slime_dont_ask_default = 1
 let g:slime_paste_file = tempname()
 " }}}
 
-"---------------------------------------
-" airline
-"---------------------------------------
-" {{{
+" airline {{{
 " theme
 let g:airline_powerline_fonts = 1
 let g:airline_theme='murmur'
@@ -189,10 +192,7 @@ let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
 " }}}
 
-"---------------------------------------
-" tmuxline
-"---------------------------------------
-" {{{
+" tmuxline {{{
 let g:tmuxline_preset = {
     \'a'    : '#S',
     \'cwin' : ['#F#I', '#W'],

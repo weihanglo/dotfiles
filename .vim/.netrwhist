@@ -1,6 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/weihang/.linux-config'
 let g:netrw_dirhist_2='/home/weihang/wd/lads-group8'
 let g:netrw_dirhist_3='/home/weihang'
 let g:netrw_dirhist_4='/home/weihang/wd/debian-R-setup'
+let g:netrw_dirhist_5='/home/weihang/wd/buy-new-PC'
+let g:netrw_dirhist_6='/home/weihang/wd/java_test'
+let g:netrw_dirhist_7='/home/weihang/wd/play/buy-new-PC'
+let g:netrw_dirhist_8='/home/weihang/.vimperator'
