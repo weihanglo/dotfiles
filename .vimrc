@@ -3,7 +3,7 @@ set encoding=utf-8
 set backup backupdir=~/.vim/backup/
 set clipboard=unnamedplus               " share system clipboard
 set mousehide                           " hide mouse when typing
-set autochdir                           " auto cd to current dir
+set noautochdir                         " no auto cd to current dir
 set backspace=2                         " backspace is able to delete
 set nocompatible                        " be iMproved, no compatible with vi
 set hidden                              " open buf without saving current
@@ -19,6 +19,12 @@ set cursorline
 set guioptions=M
 syntax off                              " turn on after loading plugins
 filetype off                            " turn on after loading plugins
+
+augroup autoloadview
+ autocmd!
+ autocmd BufWinEnter *.* silent loadview
+augroup END
+
 " }}}
 
 " filetype {{{
@@ -84,20 +90,19 @@ call vundle#begin()
 " Put your plugins below ---------------
 Plugin 'VundleVim/Vundle.vim'           " required with first priority
 Plugin 'edkolev/tmuxline.vim'
-Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
-Plugin 'Yggdroot/indentLine'
-"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Yggdroot/indentLine'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'jalvesaq/R-Vim-runtime'
 Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'davidhalter/jedi-vim'
-"Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'jpalardy/vim-slime'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -154,7 +159,7 @@ if !exists("*VimRPluginConf")
 endif
 " }}}
 
-" !!!Terminate!!! YouCompleteMe {{{
+" !!!Not downloaded yet!!! YouCompleteMe {{{
 "let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 "let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " }}}
@@ -172,21 +177,12 @@ let g:slime_paste_file = tempname()
 let g:airline_powerline_fonts = 1
 let g:airline_theme='murmur'
 
-" tabline: mapping buffer index on tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-
 " integration
+let g:airline#extensions#tabline#enabled = 1            " tabline
 let g:airline#extensions#branch#enabled = 1             " fugitive
 let g:airline#extensions#csv#column_display = 'Name'    " csv.vim
-let g:airline#extensions#bufferline#enabled = 1         " bufferline
 let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
+let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
@@ -198,7 +194,7 @@ let g:tmuxline_preset = {
     \'cwin' : ['#F#I', '#W'],
     \'win'  : ['#F#I', '#W'],
     \'x'    : '#(uptime | rev | cut -d":" -f1 | rev | sed s/,//g)',
-    \'y'    : ['⏰ %R', '%b %d'],
+    \'y'    : ['%R', '%b %d'],
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
 " }}}

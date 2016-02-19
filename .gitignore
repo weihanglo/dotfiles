@@ -4,4 +4,6 @@ test.*
 *.swp
 *~
 *.log
+*.db
+*.sqilte
 __pycache__/

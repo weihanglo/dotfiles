@@ -12,8 +12,8 @@ install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git \
     ./.vim/bundle/Vundle.vim"
 
 # put config/dir your want to sync in this variable
-files=".bashrc .vimrc .vim .vimperatorrc .vimperator .tmux.conf .tmuxline \
-    .Rprofile .pythonrc .gitignore .gitconfig" 
+files=".bashrc .vimrc .vimperatorrc .vimperator/colors/molokai.vimp .tmux.conf \
+    .tmuxline .Rprofile .pythonrc .gitignore .gitconfig" 
 
 
 echo -n "Creating $origdir for backup ..."
@@ -36,7 +36,7 @@ done
 
 # confirm before install
 confirm () {
-    echo 
+    echo
     read -r -p "${3:-Install $1? [y/N]} " response
     case $response in
         [yY][eE][sS]|[yY]) 
