@@ -13,7 +13,7 @@ install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git \
 
 # put config/dir your want to sync in this variable
 files=".bashrc .vimrc .vimperatorrc .vimperator/colors/molokai.vimp .tmux.conf \
-    .tmuxline .Rprofile .pythonrc .gitignore .gitconfig" 
+    .tmuxline .Rprofile .pythonrc.py .gitignore .gitconfig"
 
 
 echo -n "Creating $origdir for backup ..."

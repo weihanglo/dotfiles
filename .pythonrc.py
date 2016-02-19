@@ -10,16 +10,17 @@ pandas
 
 # database
 pymongo
+sqlalchemy
 
 # Crawler toolkit
 selenium
 requests
-beautifulsoup4
+BeautifulSoup4
 pyquery
 
 # Web framework
 django
-flask
+Flask
 
 # Text analytics
 jseg3

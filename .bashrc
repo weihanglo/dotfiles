@@ -57,9 +57,9 @@ PS2='... '
 # python3 startup
 #-------------------
 
-if [ -f $HOME/.pythonrc ]
+if [ -f $HOME/.pythonrc.py ]
 then
-    export PYTHONSTARTUP=$HOME/.pythonrc
+    export PYTHONSTARTUP=$HOME/.pythonrc.py
 fi
 
 
