@@ -1,6 +1,6 @@
 # .bashrc
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [ -f /etc/bashrc ] && [ $(uname) != "Darwin" ]; then
     /etc/bashrc
 fi
 

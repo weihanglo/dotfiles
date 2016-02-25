@@ -35,8 +35,8 @@ done
 
 
 # OSX specified
-if [[ $(uname) == "Darwin" ]] then
-    ln -s .bashrc .bash_profile
+if [[ $(uname) == "Darwin" ]]; then
+    ln -s .bashrc ~/.bash_profile;
 fi
 
 # confirm before install
