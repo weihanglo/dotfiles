@@ -1,14 +1,9 @@
 # Synchronize Linux config files using Git/Github
 
-### Initiate:
+### Usage:
 
 ```bash
-git clone https://github.com/weihanglo/linux-config ~/.linux-config
-sh ~/.linux-config/makeconfig.sh
-```
-
-### Synchronize:
-```bash
+git clone https://github.com/weihanglo/linux-config.git ~/.linux-config
 sh ~/.linux-config/makeconfig.sh
 ```
 
