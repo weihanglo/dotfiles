@@ -13,7 +13,7 @@ install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git \
 
 # put config/dir your want to sync in this variable
 files=".bashrc .vimrc .vimperatorrc .vimperator/colors/molokai.vimp .tmux.conf \
-    .tmuxline .Rprofile .pythonrc.py .gitignore .gitconfig"
+    .tmuxline .Rprofile .pythonrc.py .inputrc .gitignore .gitconfig"
 
 
 echo -n "Creating $origdir for backup ..."
@@ -33,6 +33,11 @@ for file in $files; do
     ln -s $dir/$file ~/$file
 done
 
+
+# OSX specified
+if [[ $(uname) == "Darwin" ]] then
+    ln -s .bashrc .bash_profile
+fi
 
 # confirm before install
 confirm () {

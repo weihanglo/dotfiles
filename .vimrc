@@ -154,7 +154,6 @@ if !exists("*VimRPluginConf")
         " press for sending code to R console 
         vmap <buffer> <Space> <Plug>RDSendSelection
         nmap <buffer> <Space> <Plug>RDSendLine
-        echom "vim-r-plugin configuration complete"
     endfunction
 endif
 " }}}
