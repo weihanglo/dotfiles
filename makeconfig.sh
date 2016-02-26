@@ -36,7 +36,9 @@ done
 
 # OSX specified
 if [[ $(uname) == "Darwin" ]]; then
-    ln -s .bashrc ~/.bash_profile;
+    printf ". .bashrc\nexport LANG=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8" >> \
+    ~/.bash_profile;
+    echo "Create OS X specified .bash_profile"
 fi
 
 # confirm before install
