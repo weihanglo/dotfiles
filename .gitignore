@@ -1,9 +1,9 @@
 *.py[cod]
 *.RData
-test.*
-*.swp
+*.sw[op]
 *~
 *.log
 *.db
 *.sqilte
+*.sqilte3
 __pycache__/

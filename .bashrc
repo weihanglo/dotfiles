@@ -83,7 +83,7 @@ fi
 #-------------------
 # OSX specified
 #-------------------
-if [ $(uname) != "Darwin" ]; then
+if [ $(uname) == "Darwin" ]; then
 
     # Change locale
     export LANG=en_US.UTF-8¬

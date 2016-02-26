@@ -1,7 +1,7 @@
 " General {{{
 set encoding=utf-8
 set backup backupdir=~/.vim/backup/
-set clipboard+=unnamedplus               " share system clipboard
+set clipboard+=unnamed,unnamedplus      " share system clipboard
 set mousehide                           " hide mouse when typing
 set noautochdir                         " no auto cd to current dir
 set backspace=2                         " backspace is able to delete
