@@ -1,7 +1,7 @@
 # .bashrc
 # Source global definitions
-if [ -f /etc/bashrc ] && [ $(uname) != "Darwin" ]; then
-    /etc/bashrc
+if [ -f /etc/bashrc ] ; then
+    . /etc/bashrc
 fi
 
 
@@ -84,9 +84,12 @@ fi
 # OSX specified
 #-------------------
 if [ $(uname) != "Darwin" ]; then
+
+    # Change locale
     export LANG=en_US.UTF-8¬
     export LC_ALL=en_US.UTF-8
 
+    # source bash_completion
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi

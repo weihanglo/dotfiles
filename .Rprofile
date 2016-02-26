@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------#
 #                                   Rprofile                                   #
 #                                                                              #
-#            Modified at Thu Dec 31 09:39:51 CST 2015 by Weihang Lo            #
+#            Modified at Fri Feb 26 13:33:03 CST 2016 by Weihang Lo            #
 #------------------------------------------------------------------------------#
 
 #interactive load .Rprofile START
@@ -31,6 +31,14 @@ cat("\nAutoloaded Functions...\n\n", paste("--", ls("Autoloads"), "\n"))
 #-----------------------------
 # Useful packages list
 #-----------------------------
+
+#---Prerequisite---
+# devtools
+# colorout
+# vimcom
+#install.packages("devtools")
+#devtools::install_github("jalvesaq/colorout")
+#devtools::install_github("jalvesaq/VimCom")__
 
 #---General---
 # doParallel
