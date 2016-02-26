@@ -2,10 +2,8 @@
 # Source global definitions
 if [ -f /etc/bashrc ] && [ $(uname) != "Darwin" ]; then
     /etc/bashrc
-else
-    export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
 fi
+
 
 # User specific aliases and functions
 alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
@@ -81,3 +79,12 @@ fi
 # new: create a file named ".inputrc" in home
 #      set editing-mode vi
 #      set keymap vi-command
+
+#-------------------
+# OSX specified
+#-------------------
+if [ $(uname) != "Darwin" ]; then
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
+fi
