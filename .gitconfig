@@ -1,6 +1,6 @@
 [core]
-	editor = vimx
-	excludesfile = /home/weihang/.gitignore
+	editor = vim
+	excludesfile = ~/.gitignore
 [merge]
 	tool = vimdiff
 [user]

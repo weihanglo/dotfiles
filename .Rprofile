@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------#
 #                                   Rprofile                                   #
 #                                                                              #
-#            Modified at Thu Dec 31 09:39:51 CST 2015 by Weihang Lo            #
+#            Modified at Fri Feb 26 13:33:03 CST 2016 by Weihang Lo            #
 #------------------------------------------------------------------------------#
 
 #################################################################
@@ -32,6 +32,14 @@ cat("\nAutoloaded Functions...\n\n", paste("--", ls("Autoloads"), "\n"))
 #-----------------------------
 # Useful packages list
 #-----------------------------
+
+#---Prerequisite---
+# devtools
+# colorout
+# vimcom
+#install.packages("devtools")
+#devtools::install_github("jalvesaq/colorout")
+#devtools::install_github("jalvesaq/VimCom")__
 
 #---General---
 # doParallel
@@ -102,10 +110,10 @@ cat("\nAutoloaded Functions...\n\n", paste("--", ls("Autoloads"), "\n"))
 #-----------------------------
 
 #---Set CRAN mirror---
-local({ 
-        r <- getOption("repos") 
+local({
+        r <- getOption("repos")
         r["CRAN"] <- "http://cran.csie.ntu.edu.tw/"
-        options(repos = r) 
+        options(repos = r)
 })
 
 #---Set prompt---
@@ -121,14 +129,14 @@ options(continue = ". ")
 
 #---Improved ls---
 .ls <- function (pos = 1, pattern, order.by, decreasing=FALSE) {
-    if(length(ls(pos = pos, pattern = pattern))==0) stop("Nothing found.") 
+    if(length(ls(pos = pos, pattern = pattern))==0) stop("Nothing found.")
     nply <- function(names, fn) sapply(names, function(x) fn(get(x, pos)))
     names <- ls(pos = pos, pattern = pattern)
 
     obj.class <- nply(names, function(x) as.character(class(x))[1])
     obj.mode <- nply(names, mode)
     obj.type <- ifelse(is.na(obj.class), obj.mode, obj.class)
-    obj.size <- nply(names, 
+    obj.size <- nply(names,
         function(x) format(utils::object.size(x), units = "auto")
     )
 

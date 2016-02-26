@@ -34,11 +34,6 @@ for file in $files; do
 done
 
 
-# OSX specified
-if [[ $(uname) == "Darwin" ]]; then
-    ln -s .bashrc ~/.bash_profile;
-fi
-
 # confirm before install
 confirm () {
     echo
