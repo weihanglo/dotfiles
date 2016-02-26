@@ -34,13 +34,6 @@ for file in $files; do
 done
 
 
-# OSX specified
-if [[ $(uname) == "Darwin" ]]; then
-    printf ". .bashrc\nexport LANG=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8" >> \
-    ~/.bash_profile;
-    echo "Create OS X specified .bash_profile"
-fi
-
 # confirm before install
 confirm () {
     echo
