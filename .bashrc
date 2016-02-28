@@ -12,13 +12,11 @@ alias sshfml2='ssh -Yp 20022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml2='sftp -P 20022 lowh@fml1.fo.ntu.edu.tw'
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
-alias ipynb='ipython notebook'
+alias ipn='jupyter notebook'
 alias py3='python3'
 alias phpmyadmin='firefox http://127.0.0.1/phpmyadmin/'
 if [ $(which vimx) ]; then
-    alias vim='vimx --servername VIM'
-else
-    alias vim='vim --servername VIM'
+    alias vim='vimx'
 fi
 
 
