@@ -1,7 +1,7 @@
 " General {{{
 set encoding=utf-8
 set backup backupdir=~/.vim/backup/
-set clipboard+=unnamed,unnamedplus      " share system clipboard
+set clipboard=unnamed,unnamedplus              " share system clipboard
 set mousehide                           " hide mouse when typing
 set noautochdir                         " no auto cd to current dir
 set backspace=2                         " backspace is able to delete
@@ -119,26 +119,22 @@ syntax enable
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+" }}}
 
-" toggle backgrond transparent
-if !exists("*ColorschemeToggle")
-    let g:colorschemeToggler=1
-    function ColorschemeToggle()
-        if g:colorschemeToggler
-            colorscheme solarized
-            AirlineTheme base16
-            let g:colorschemeToggler=0
-        else
-            set background=dark
-            colorscheme solarized
-            AirlineTheme murmur
-            let g:colorschemeToggler=1
-        endif
-    endfunction
+" vim-multiple-cursors {{{
+" before multiple cursors
+function! Multiple_cursors_before()
+    if exists('g:jedi#popup_on_dot')==1
+        let g:jedi#popup_on_dot=0
+    endif
+endfunction
 
-    nmap <leader>t :call ColorschemeToggle()<CR>
-endif
-
+" after multiple cursors
+function! Multiple_cursors_after()
+    if exists('g:jedi#popup_on_dot')==0
+        let g:jedi#popup_on_dot=1
+    endif
+endfunction
 " }}}
 
 " vim-r-plugin {{{
@@ -155,11 +151,6 @@ if !exists("*VimRPluginConf")
         nmap <buffer> <Space> <Plug>RDSendLine
     endfunction
 endif
-" }}}
-
-" !!!Not downloaded yet!!! YouCompleteMe {{{
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " }}}
 
 " vim-slime (REPL) {{{
