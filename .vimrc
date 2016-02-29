@@ -124,15 +124,15 @@ colorscheme solarized
 " vim-multiple-cursors {{{
 " before multiple cursors
 function! Multiple_cursors_before()
-    if exists('g:jedi#popup_on_dot')==1
-        let g:jedi#popup_on_dot=0
+    if g:jedi#popup_on_dot == 1
+        let g:jedi#popup_on_dot = 0
     endif
 endfunction
 
 " after multiple cursors
 function! Multiple_cursors_after()
-    if exists('g:jedi#popup_on_dot')==0
-        let g:jedi#popup_on_dot=1
+    if g:jedi#popup_on_dot == 0
+        let g:jedi#popup_on_dot = 1
     endif
 endfunction
 " }}}
@@ -146,7 +146,7 @@ if !exists("*VimRPluginConf")
         let g:vimrplugin_assign = 0           " Do not bind '_' as ' <- '
         let g:vimrplugin_rconsole_height = 12
         let g:vimrplugin_tmux_title = "automatic"
-        " press for sending code to R console 
+        " press for sending code to R console
         vmap <buffer> <Space> <Plug>RDSendSelection
         nmap <buffer> <Space> <Plug>RDSendLine
     endfunction

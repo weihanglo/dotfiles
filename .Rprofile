@@ -39,7 +39,7 @@ cat("\nAutoloaded Functions...\n\n", paste("--", ls("Autoloads"), "\n"))
 # vimcom
 #install.packages("devtools")
 #devtools::install_github("jalvesaq/colorout")
-#devtools::install_github("jalvesaq/VimCom")__
+#devtools::install_github("jalvesaq/VimCom")
 
 #---General---
 # doParallel
