@@ -3,6 +3,7 @@ set encoding=utf-8
 set backup backupdir=~/.vim/backup/
 set clipboard=unnamed,unnamedplus       " share system clipboard
 set mousehide                           " hide mouse when typing
+set mouse=a                             " enable mouse for all modes
 set noautochdir                         " no auto cd to current dir
 set backspace=2                         " backspace is able to delete
 set nocompatible                        " be iMproved, no compatible with vi
@@ -10,21 +11,19 @@ set hidden                              " open buf without saving current
 set laststatus=2
 set showmatch
 set hlsearch incsearch
-set showcmd history=500
-set wildmenu wildmode=longest:full,full
-set guifont=inconsolata\ 12
+set showcmd history=1000
+set wildmenu wildmode=longest:full,full " I love wildcard mode
 set ruler
 set number relativenumber               " relative line number
 set cursorline
-set guioptions=M
-syntax off                              " turn on after loading plugins
-filetype off                            " turn on after loading plugins
+syntax off                              " would turn on after loading plugins
+filetype off                            " would turn on after loading plugins
 
+" auto load view if exists
 augroup autoloadview
- autocmd!
- autocmd BufWinEnter *.* silent loadview
+    autocmd!
+    autocmd BufWinEnter *.* silent loadview
 augroup END
-
 " }}}
 
 " filetype {{{
@@ -81,6 +80,21 @@ inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap jk <Esc>
 inoremap kj <Esc>
+
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+"" Move visual block
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
 " }}}
 
 " Vundle plugins setting {{{
