@@ -1,6 +1,6 @@
 # .bashrc
 # Source global definitions
-if [ -f /etc/bashrc ] ; then
+if [[ -f /etc/bashrc ]]; then
     . /etc/bashrc
 fi
 
@@ -15,7 +15,7 @@ alias ipy='ipython3'
 alias ipn='jupyter notebook'
 alias py3='python3'
 alias phpmyadmin='firefox http://127.0.0.1/phpmyadmin/'
-if [ $(which vimx) ]; then
+if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
@@ -23,21 +23,17 @@ fi
 #---------------------------------------
 # enhanced prompt
 #---------------------------------------
-
-# ssh or not
 function ssh_or_not {
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        echo [$HOSTNAME]; 
+    if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+        echo [$HOSTNAME]
     else
         case $(ps -o comm= -p $PPID) in
-            sshd|*/sshd) 
-            echo [$HOSTNAME]; 
+            sshd|*/sshd)
+            echo [$HOSTNAME]
         esac
     fi
 }
 
-
-# parse git branch
 function parse_git_branch {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     echo "( "${ref#refs/heads/}")"
@@ -45,7 +41,7 @@ function parse_git_branch {
 
 # colorful prompt
 PS1="\`
-    if [ \$? = 0 ];
+    if [[ \$? = 0 ]];
     then
         echo \[\e[1m\]\[\e[32m\]\W \
         \$(ssh_or_not) \$(parse_git_branch) \
@@ -59,13 +55,10 @@ PS1="\`
 PS2='... '
 
 
-
 #-------------------
 # python3 startup
 #-------------------
-
-if [ -f $HOME/.pythonrc.py ]
-then
+if [[ -f $HOME/.pythonrc.py ]]; then
     export PYTHONSTARTUP=$HOME/.pythonrc.py
 fi
 
@@ -81,14 +74,14 @@ fi
 #-------------------
 # OSX specified
 #-------------------
-if [ $(uname) == "Darwin" ]; then
+if [[ $(uname) == "Darwin" ]]; then
 
     # Change locale
     export LANG=en_US.UTF-8¬
     export LC_ALL=en_US.UTF-8
 
     # source bash_completion
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
         . $(brew --prefix)/etc/bash_completion
     fi
 fi

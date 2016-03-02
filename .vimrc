@@ -1,28 +1,25 @@
 " General {{{
 set encoding=utf-8
-set backup backupdir=~/.vim/backup/
 set clipboard=unnamed,unnamedplus       " share system clipboard
 set mousehide                           " hide mouse when typing
-set mouse=a                             " enable mouse for all modes
-set noautochdir                         " no auto cd to current dir
 set backspace=2                         " backspace is able to delete
 set nocompatible                        " be iMproved, no compatible with vi
 set hidden                              " open buf without saving current
 set laststatus=2
 set showmatch
-set hlsearch incsearch
-set showcmd history=1000
-set wildmenu wildmode=longest:full,full " I love wildcard mode
-set ruler
-set number relativenumber               " relative line number
+set hlsearch
+set incsearch
+set history=10000
+set wildmenu wildmode=longest:full,full
+set number
+set relativenumber                      " relative line number
 set cursorline
-syntax off                              " would turn on after loading plugins
-filetype off                            " would turn on after loading plugins
+set lazyredraw
+set dictionary+=/usr/share/dict/words
 
-" auto load view if exists
 augroup autoloadview
-    autocmd!
-    autocmd BufWinEnter *.* silent loadview
+   autocmd!
+   autocmd BufWinEnter *.* silent! loadview
 augroup END
 " }}}
 
@@ -60,9 +57,9 @@ augroup END
 " }}}
 
 " warp, break, indent, and folding {{{
-set shiftwidth=4 softtabstop=4 expandtab
-set linebreak breakat-=. showbreak=------>\ 
-set cpoptions+=n
+set shiftwidth=4
+set softtabstop=4
+set expandtab
 set smarttab
 set smartindent
 set autoindent
@@ -74,6 +71,9 @@ set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 " Key mapping {{{
 " map localleader if necessary
 let maplocalleader = ','
+
+cnoreabbrev Bd bd
+cnoreabbrev Bd! bd!
 
 inoremap hh <Esc>
 inoremap jj <Esc>
@@ -97,34 +97,32 @@ vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 " }}}
 
-" Vundle plugins setting {{{
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+
+" Vim-plug plugins setting {{{
+call plug#begin('~/.vim/plugged')
 
 " Put your plugins below ---------------
-Plugin 'VundleVim/Vundle.vim'           " required with first priority
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-ctrlspace/vim-ctrlspace'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'artur-shaik/vim-javacomplete2'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'jalvesaq/R-Vim-runtime'
-Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'jpalardy/vim-slime'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'chrisbra/csv.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'jalvesaq/R-Vim-runtime', {'for': 'r'}
+Plug 'jcfaria/Vim-R-plugin', {'for': 'r'}
+Plug 'jpalardy/vim-slime', {'for': ['r', 'python', 'bash']}
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " Put your plugins above ---------------
 "
-call vundle#end()
-filetype plugin on
+filetype plugin indent on                   " required!
+call plug#end()
 " }}}
 
 " Colorscheme {{{
@@ -188,7 +186,9 @@ let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
 let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
 
 " auto-generate snapshots
-let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
+if empty(glob('~/.tmuxline'))
+    let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
+endif
 " }}}
 
 " tmuxline {{{
