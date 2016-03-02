@@ -1,30 +1,24 @@
 " General {{{
 set encoding=utf-8
-set backup backupdir=~/.vim/backup/
 set clipboard=unnamed,unnamedplus       " share system clipboard
-set mousehide                           " hide mouse when typing
-set noautochdir                         " no auto cd to current dir
 set backspace=2                         " backspace is able to delete
 set nocompatible                        " be iMproved, no compatible with vi
 set hidden                              " open buf without saving current
 set laststatus=2
 set showmatch
-set hlsearch incsearch
-set showcmd history=500
+set hlsearch
+set incsearch
+set history=10000
 set wildmenu wildmode=longest:full,full
-set guifont=inconsolata\ 12
-set ruler
-set number relativenumber               " relative line number
+set number
+set relativenumber                      " relative line number
 set cursorline
-set guioptions=M
-syntax off                              " turn on after loading plugins
-filetype off                            " turn on after loading plugins
+set dictionary+=/usr/share/dict/words
 
 augroup autoloadview
- autocmd!
- autocmd BufWinEnter *.* silent loadview
+   autocmd!
+   autocmd BufWinEnter *.* silent! loadview
 augroup END
-
 " }}}
 
 " filetype {{{
@@ -61,9 +55,9 @@ augroup END
 " }}}
 
 " warp, break, indent, and folding {{{
-set shiftwidth=4 softtabstop=4 expandtab
-set linebreak breakat-=. showbreak=------>\ 
-set cpoptions+=n
+set shiftwidth=4 
+set softtabstop=4 
+set expandtab
 set smarttab
 set smartindent
 set autoindent
@@ -76,6 +70,9 @@ set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 " map localleader if necessary
 let maplocalleader = ','
 
+cnoreabbrev Bd bd
+cnoreabbrev Bd! bd!
+
 inoremap hh <Esc>
 inoremap jj <Esc>
 inoremap kk <Esc>
@@ -84,7 +81,11 @@ inoremap kj <Esc>
 " }}}
 
 " Vundle plugins setting {{{
-set runtimepath+=~/.vim/bundle/Vundle.vim
+if has('nvim')
+    set runtimepath+=~/.config/nvim/bundle/Vundle.vim
+else
+    set runtimepath+=~/.vim/bundle/Vundle.vim
+endif
 call vundle#begin()
 
 " Put your plugins below ---------------
@@ -97,8 +98,6 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jalvesaq/R-Vim-runtime'
 Plugin 'jcfaria/Vim-R-plugin'
@@ -174,7 +173,9 @@ let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
 let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
 
 " auto-generate snapshots
-let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
+if empty(glob('~/.tmuxline'))
+    let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
+endif
 " }}}
 
 " tmuxline {{{
@@ -186,4 +187,10 @@ let g:tmuxline_preset = {
     \'y'    : ['%R', '%b %d'],
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
+" }}}
+
+" Neovim-only config {{{
+if has('nvim')
+
+endif
 " }}}
