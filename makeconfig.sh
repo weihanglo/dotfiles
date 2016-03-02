@@ -8,8 +8,9 @@ dir=~/.linux-config
 origdir=~/.linux-config.orig
 
 # put what you want to pre-install (Vundle, zsh...)
-install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git \
-    ./.vim/bundle/Vundle.vim"
+install_neovim_brew="brew install neovim/neovim/neovim"
+install_nvim-python="pip3 install neovim"
+
 
 # put config/dir your want to sync in this variable
 files=".bashrc .vimrc .vimperatorrc .vimperator/colors/molokai.vimp .tmux.conf \
@@ -39,15 +40,23 @@ confirm () {
     echo
     read -r -p "${3:-Install $1? [y/N]} " response
     case $response in
-        [yY][eE][sS]|[yY]) 
+        [yY][eE][sS]|[yY])
         eval $2
             ;;
         *)
         echo "Operation aborted."
             ;;
     esac
-    echo 
+    echo
 }
 
 
-confirm Vundle '$install_vundle'
+# confirm installation
+if [[ $(uname) == "Darwin" ]]; then
+
+    confirm neovim '$install_neovim_brew'
+
+    if [[ -f $(which 'pip3') ]]; then
+        confirm nvim-python '$install_nvim_python'
+    fi
+fi

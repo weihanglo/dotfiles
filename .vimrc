@@ -119,7 +119,7 @@ Plug 'honza/vim-snippets'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/R-Vim-runtime', {'for': 'r'}
 Plug 'jcfaria/Vim-R-plugin', {'for': 'r'}
-Plug 'jpalardy/vim-slime', {'for': ['r', 'python', 'bash']}
+Plug 'jpalardy/vim-slime'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
