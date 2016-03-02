@@ -13,6 +13,7 @@ set wildmenu wildmode=longest:full,full
 set number
 set relativenumber                      " relative line number
 set cursorline
+set lazyredraw
 set dictionary+=/usr/share/dict/words
 
 augroup autoloadview
@@ -55,8 +56,8 @@ augroup END
 " }}}
 
 " warp, break, indent, and folding {{{
-set shiftwidth=4 
-set softtabstop=4 
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set smarttab
 set smartindent
@@ -80,36 +81,31 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 " }}}
 
-" Vundle plugins setting {{{
-if has('nvim')
-    set runtimepath+=~/.config/nvim/bundle/Vundle.vim
-else
-    set runtimepath+=~/.vim/bundle/Vundle.vim
-endif
-call vundle#begin()
+" Vim-plug plugins setting {{{
+call plug#begin('~/.vim/plugged')
 
 " Put your plugins below ---------------
-Plugin 'VundleVim/Vundle.vim'           " required with first priority
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-ctrlspace/vim-ctrlspace'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'jalvesaq/R-Vim-runtime'
-Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'jpalardy/vim-slime'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'chrisbra/csv.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'jalvesaq/R-Vim-runtime', {'for': 'r'}
+Plug 'jcfaria/Vim-R-plugin', {'for': 'r'}
+Plug 'jpalardy/vim-slime', {'for': ['r', 'python', 'bash']}
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " Put your plugins above ---------------
 "
-call vundle#end()
-filetype plugin on
+filetype plugin indent on                   " required!
+call plug#end()
 " }}}
 
 " Colorscheme {{{
@@ -187,10 +183,4 @@ let g:tmuxline_preset = {
     \'y'    : ['%R', '%b %d'],
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
-" }}}
-
-" Neovim-only config {{{
-if has('nvim')
-
-endif
 " }}}
