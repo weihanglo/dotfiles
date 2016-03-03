@@ -8,4 +8,13 @@ sh ~/.linux-config/makeconfig.sh
 ```
 
 
+### Requirements
+- [tmux][tmux]
+- [jedi][jedi]: `pip3 install jedi`
+- [powerline fonts][powerline-fonts]
+
+[tmux]: https://tmux.github.io/
+[jedi]: https://github.com/davidhalter/jedi
+[powerline-fonts]: https://github.com/powerline/fonts
+
 Weihang Lo

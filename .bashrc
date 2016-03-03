@@ -10,13 +10,15 @@ alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml1='sftp -P 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sshfml2='ssh -Yp 20022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml2='sftp -P 20022 lowh@fml1.fo.ntu.edu.tw'
+alias sshlopen='ssh 140.112.147.131'
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias ipn='jupyter notebook'
 alias py3='python3'
-alias phpmyadmin='firefox http://127.0.0.1/phpmyadmin/'
+alias vimr='vim --servername VIM'
 if [[ $(which vimx) ]]; then
     alias vim='vimx'
+    alias vimr='vimx --servername VIM'
 fi
 
 
