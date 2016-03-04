@@ -7,8 +7,8 @@ fi
 #---------------------------------------
 # User specific aliases and functions
 #---------------------------------------
-alias cdd = 'cd ~/Desktop'
-alias cdw = 'cd ~/wd'
+alias cdd='cd ~/Desktop'
+alias cdw='cd ~/wd'
 
 alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml1='sftp -P 10022 lowh@fml1.fo.ntu.edu.tw'

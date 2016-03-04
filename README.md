@@ -13,8 +13,8 @@ sh ~/.linux-config/makeconfig.sh
 - [Neovim][neovim]
 - [Powerline Fonts][powerline-fonts]
 
-[tmux]: https://tmux.github.io/
-[neovim]: https://github.com/neovim/neovim
+[tmux]: https://tmux.github.io
+[neovim]: https://neovim.io
 [powerline-fonts]: https://github.com/powerline/fonts
 
 Weihang Lo
