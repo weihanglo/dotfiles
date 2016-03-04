@@ -11,12 +11,18 @@ if (interactive()) {
 #-----------------------------
 # Autoload packages
 #-----------------------------
-options(warn = -1)
-options(vimcom.verbose = -1)
-require(vimcom)
-require(colorout)
-options(warn = 0)
+if (library(colorout, logical.return = TRUE)) {
+    message(base::sprintf("colorout %s loaded",
+        as.character(utils::packageVersion("colorout"))))
+}
 
+if (Sys.getenv("NVIMR_TMPDIR") != "") {
+    options(nvimcom.verbose = 1)
+    library(nvimcom)
+} else if (Sys.getenv("VIMRPLUGIN_TMPDIR") != "") {
+    options(vimcom.verbose = 1) 
+    library(vimcom)
+}
 
 #-----------------------------
 # Autoload functions
@@ -26,7 +32,7 @@ autoload("data.table", "data.table")
 autoload("fread", "data.table")
 autoload("microbenchmark", "microbenchmark")
 autoload("ggplot", "ggplot2")
-cat("\nAutoloaded Functions...\n\n", paste("--", ls("Autoloads"), "\n"))
+message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
 
 
 #-----------------------------
@@ -36,10 +42,11 @@ cat("\nAutoloaded Functions...\n\n", paste("--", ls("Autoloads"), "\n"))
 #---Prerequisite---
 # devtools
 # colorout
-# vimcom
+# vimcom or nvimcom
 #install.packages("devtools")
 #devtools::install_github("jalvesaq/colorout")
 #devtools::install_github("jalvesaq/VimCom")
+#devtools::install_github("jalvesaq/nvimcom")
 
 #---General---
 # doParallel
@@ -158,12 +165,12 @@ options(continue = ". ")
 
 .First <- function() {
     try(utils::loadhistory("~/.Rhistory"))
-    cat("\n\nSuccessfully loaded .Rprofile at", date(), "\n\n")
+    message("\n\nSuccessfully loaded .Rprofile at", date())
 }
 
 .Last <- function() {
     try(utils::savehistory("~/.Rhistory"))
-    cat("\nExit R session at", date(), "\n\n")
+    message("\nExit R session at", date())
 }
 
 #interactive load .Rprofile END

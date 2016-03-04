@@ -7,6 +7,8 @@ set laststatus=2
 set showmatch
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 set number
 set relativenumber
 set cursorline
@@ -52,20 +54,15 @@ augroup END
 " vim-r-plugin
 augroup filetype_r
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst}
-        \ call VimRPluginConf()
+    autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst,Rout}
+                \ nnoremap <silent> <localleader>rf :call RConfig()
+                \ <CR>:normal <localleader>rf<CR>
 augroup END
 
 " vimL
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
-augroup END
-
-" java
-augroup filetype_java
-    autocmd!
-    autocmd FileType java setlocal omnifunc=javacomplete#Complete
 augroup END
 
 augroup filetype_python
@@ -104,38 +101,53 @@ cnoreabbrev BD! bd!
 "" Move visual block
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
+" Emulate Tmux ^az
+function ZoomWindow()
+    let cpos = getpos(".")
+    tabnew %
+    redraw
+    call cursor(cpos[1], cpos[2])
+    normal! zz
+endfunction
+nmap gz :call ZoomWindow()<CR>
 " }}}
 
 " Vim-plug {{{
 
+" if using Vim
+if !has('nvim')
+    set runtimepath+=~/.config/nvim/
+endif
+
 " auto install vim-plug.vim
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'altercation/vim-colors-solarized'
 Plug 'w0ng/vim-hybrid'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'jalvesaq/R-Vim-runtime', {'for': 'r'}
-Plug 'jcfaria/Vim-R-plugin', {'for': 'r'}
-Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'jpalardy/vim-slime'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'jalvesaq/R-Vim-runtime', {'on': []}
+Plug 'jcfaria/Vim-R-plugin', {'on': []}
+Plug 'jalvesaq/Nvim-R', {'on': []}
+Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
+Plug 'jpalardy/vim-slime', {'for': 'python'}
 
 filetype plugin indent on
 
@@ -169,19 +181,26 @@ function! Multiple_cursors_after()
 endfunction
 " }}}
 
-" vim-r-plugin {{{
-if !exists("*VimRPluginConf")
-    function VimRPluginConf()
-        let g:vimrplugin_restart = 1          " restart new session
-        let g:vimrplugin_assign = 0           " Do not bind '_' as ' <- '
-        let g:vimrplugin_tmux_title = "automatic"
-        vmap <buffer> <Space> <Plug>RDSendSelection
-        nmap <buffer> <Space> <Plug>RDSendLine
+" vim-r-plugin and Nvim-R {{{
+if !exists("*RConfig")
+    function RConfig()
+        if has("nvim")
+            let Rout_more_colors = 1
+            let R_assign = 0
+            let R_tmux_title = "automatic"
+            let R_args = ['--no-save', '--no-restore', '--quiet']
+            call plug#load('Nvim-R')
+        else
+            let g:vimrplugin_restart = 1
+            let g:vimrplugin_assign = 0
+            let g:vimrplugin_tmux_title = "automatic"
+            call plug#load('Vim-R-plugin', 'R-Vim-runtime')
+        endif
     endfunction
 endif
 " }}}
 
-" vim-slime (REPL) {{{
+" vim-slime (REPL via tmux) {{{
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}

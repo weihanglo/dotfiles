@@ -1,29 +1,33 @@
-# .bashrc
+#!/bin/bash
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
     . /etc/bashrc
 fi
 
-
+#---------------------------------------
 # User specific aliases and functions
+#---------------------------------------
+alias cdd = 'cd ~/Desktop'
+alias cdw = 'cd ~/wd'
+
 alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml1='sftp -P 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sshfml2='ssh -Yp 20022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml2='sftp -P 20022 lowh@fml1.fo.ntu.edu.tw'
-alias sshlopen='ssh 140.112.147.131'
+alias sshlopen='ssh -Y 140.112.147.131'
+
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias ipn='jupyter notebook'
 alias py3='python3'
-alias vimr='vim --servername VIM'
+alias nv='nvim'
 if [[ $(which vimx) ]]; then
     alias vim='vimx'
-    alias vimr='vimx --servername VIM'
 fi
 
 
 #---------------------------------------
-# enhanced prompt
+# Enhanced prompt
 #---------------------------------------
 function ssh_or_not {
     if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
@@ -41,7 +45,9 @@ function parse_git_branch {
     echo "( "${ref#refs/heads/}")"
 }
 
-# colorful prompt
+#---------------------------------------
+# Colorful prompt
+#---------------------------------------
 PS1="\`
     if [[ \$? = 0 ]];
     then
@@ -58,7 +64,7 @@ PS2='... '
 
 
 #-------------------
-# python3 startup
+# Python3 startup
 #-------------------
 if [[ -f $HOME/.pythonrc.py ]]; then
     export PYTHONSTARTUP=$HOME/.pythonrc.py
@@ -66,7 +72,7 @@ fi
 
 
 #-------------------
-# vi mode in bash
+# Vi mode in bash
 #-------------------
 # old: set -o vi
 # new: create a file named ".inputrc" in home
@@ -77,6 +83,7 @@ fi
 # OSX specified
 #-------------------
 if [[ $(uname) == "Darwin" ]]; then
+    alias ls='ls -G'
 
     # Change locale
     export LANG=en_US.UTF-8¬
