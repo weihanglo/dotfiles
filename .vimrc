@@ -14,6 +14,7 @@ set lazyredraw
 set history=100
 set foldnestmax=2
 set nowrap
+set scrolloff=2
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -66,6 +67,11 @@ augroup filetype_java
     autocmd!
     autocmd FileType java setlocal omnifunc=javacomplete#Complete
 augroup END
+
+augroup filetype_python
+    autocmd!
+    autocmd FileType python setlocal foldmethod=indent
+augroup END
 " }}}
 
 " Key mapping {{{
@@ -78,25 +84,29 @@ inoremap kk <Esc>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev Bd bd
-cnoreabbrev bD bd
 cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qa qa
 cnoreabbrev W! w!
+cnoreabbrev Wq wq
+cnoreabbrev WQ wq
+cnoreabbrev Wa wa
+cnoreabbrev WA wa
+cnoreabbrev Q q
 cnoreabbrev Q! q!
+cnoreabbrev Qa qa
+cnoreabbrev QA qa
 cnoreabbrev Qa! qa!
+cnoreabbrev QA! qa!
+cnoreabbrev Bd bd
+cnoreabbrev BD bd
 cnoreabbrev Bd! bd!
-cnoreabbrev bD! bd!
+cnoreabbrev BD! bd!
 
 "" Move visual block
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 " }}}
 
-" Vim-plug plugins setting {{{
+" Vim-plug {{{
 
 " auto install vim-plug.vim
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -107,37 +117,40 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Put your plugins below ---------------
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'w0ng/vim-hybrid'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'jalvesaq/R-Vim-runtime', {'for': 'r'}
+Plug 'jcfaria/Vim-R-plugin', {'for': 'r'}
+Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'jalvesaq/R-Vim-runtime', {'for': 'r'}
-Plug 'jcfaria/Vim-R-plugin', {'for': 'r'}
 Plug 'jpalardy/vim-slime'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
-" Put your plugins above ---------------
-"
-filetype plugin indent on                   " required!
+
+filetype plugin indent on
+
 call plug#end()
 " }}}
 
 " Colorscheme {{{
 " solarized
-syntax enable
+"syntax enable
+"set background=dark
+"let g:solarized_termcolors = 256
+"colorscheme solarized
+" hybrid
 set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme hybrid
 " }}}
 
 " vim-multiple-cursors {{{
