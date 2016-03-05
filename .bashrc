@@ -94,3 +94,5 @@ if [[ $(uname) == "Darwin" ]]; then
         . $(brew --prefix)/etc/bash_completion
     fi
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -51,7 +51,7 @@ augroup filetype_markdown
     autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
 augroup END
 
-" vim-r-plugin
+" R
 augroup filetype_r
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst,Rout}
@@ -65,6 +65,7 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
+" python
 augroup filetype_python
     autocmd!
     autocmd FileType python setlocal foldmethod=indent
@@ -74,6 +75,9 @@ augroup END
 " Key mapping {{{
 " map localleader if necessary
 let maplocalleader = ','
+
+" Disguise FZF as CtrlP
+nnoremap <silent> <C-P> :FZF<CR>
 
 inoremap hh <Esc>
 inoremap jj <Esc>
@@ -101,19 +105,10 @@ cnoreabbrev BD! bd!
 "" Move visual block
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
-" Emulate Tmux ^az
-function ZoomWindow()
-    let cpos = getpos(".")
-    tabnew %
-    redraw
-    call cursor(cpos[1], cpos[2])
-    normal! zz
-endfunction
-nmap gz :call ZoomWindow()<CR>
+
 " }}}
 
 " Vim-plug {{{
-
 " if using Vim
 if !has('nvim')
     set runtimepath+=~/.config/nvim/
@@ -131,25 +126,24 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized', {'on': []}
 Plug 'w0ng/vim-hybrid'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'ctrlpvim/ctrlp.vim', {'on': []}
 Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
+Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'jpalardy/vim-slime', {'for': 'python'}
 Plug 'jalvesaq/R-Vim-runtime', {'on': []}
 Plug 'jcfaria/Vim-R-plugin', {'on': []}
 Plug 'jalvesaq/Nvim-R', {'on': []}
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
-Plug 'jpalardy/vim-slime', {'for': 'python'}
-
-filetype plugin indent on
 
 call plug#end()
 " }}}
@@ -211,7 +205,7 @@ let g:slime_paste_file = tempname()
 " airline {{{
 " theme
 let g:airline_powerline_fonts = 1
-let g:airline_theme='murmur'
+let g:airline_theme='hybrid'
 
 " integration
 let g:airline#extensions#tabline#enabled = 1            " tabline
@@ -220,9 +214,7 @@ let g:airline#extensions#csv#column_display = 'Name'    " csv.vim
 let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
 
 " auto-generate snapshots
-if empty(glob('~/.tmuxline'))
-    let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
-endif
+let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
 " }}}
 
 " tmuxline {{{

@@ -1,12 +1,18 @@
+#--------------------------------------#
+#              .pythonrc.py            #
+#                                      #
+#      Sat Feb 27 01:06:53 CST 2016    #
+#--------------------------------------#
+
 #---------------------------------------
-#              .pythonrc.py
-#
-#      Sat Feb 27 01:06:53 CST 2016
+# Autoload modules
 #---------------------------------------
+from pprint import pprint
 
 
-
-# My favorite libraries ----------------
+#---------------------------------------
+# Useful libraries
+#---------------------------------------
 
 #---General---
 # ipython           :: enhanced shell
@@ -21,11 +27,12 @@
 # pymongo           :: official solution for MongoDB API
 # sqlalchemy
 
-#---Crawler---
+#---Crawler | parser---
 # selenium          :: browser automation
 # requests
 # BeautifulSoup4    :: simple html/xml parser
 # pyquery           :: jquery-like parser
+# lxml              :: xml parser (dependency: libxml2)
 
 #---Web framework---
 # django
@@ -35,4 +42,4 @@
 # nltk              :: natural language processing
 
 #---OnmiCompletion---
-# jedi              :: egine for jedi-vim
+# jedi              :: engine for jedi-vim
