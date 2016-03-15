@@ -1,5 +1,5 @@
 " General {{{
-set encoding=utf-8
+"set encoding=utf-8
 set mouse=a
 set nocompatible
 set hidden
@@ -68,7 +68,7 @@ augroup END
 " python
 augroup filetype_python
     autocmd!
-    autocmd FileType python setlocal foldmethod=indent
+    autocmd FileType python setlocal foldmethod=indent completeopt-=preview
 augroup END
 " }}}
 
@@ -78,6 +78,14 @@ let maplocalleader = ','
 
 " Disguise FZF as CtrlP
 nnoremap <silent> <C-P> :FZF<CR>
+
+" preview markdown in firefox 
+" dependency: firefox plugin 'Markdown Viewer'
+if has('mac')
+    nnoremap <silent> <localleader>md :!open -a firefox %:p<CR><CR>
+elseif has('unix')
+    nnoremap <silent> <localleader>md :!firefox %:p<CR><CR>
+endif
 
 inoremap hh <Esc>
 inoremap jj <Esc>

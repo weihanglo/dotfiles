@@ -1,20 +1,23 @@
-# Synchronize Linux config files using Git/Github
+Git for Linux Config Files
+==========================
 
-### Usage:
+Usage
+-----
+Just clone and run script!
 
 ```bash
 git clone https://github.com/weihanglo/linux-config.git ~/.linux-config
 sh ~/.linux-config/makeconfig.sh
 ```
 
+Requirements
+------------
 
-### Requirements
-- [Tmux][tmux]
-- [Neovim][neovim]
-- [Powerline Fonts][powerline-fonts]
+- [FZF](https://github.com/junegunn/fzf)
+- [Tmux](https://tmux.github.io)
+- [jedi](http://jedi.jedidjah.ch)
+- [Neovim](https://neovim.io)
+- [Powerline Fonts](https://github.com/powerline/fonts)
 
-[tmux]: https://tmux.github.io
-[neovim]: https://neovim.io
-[powerline-fonts]: https://github.com/powerline/fonts
 
-Weihang Lo
+*Weihang Lo*

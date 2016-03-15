@@ -9,12 +9,14 @@ fi
 #---------------------------------------
 alias cdd='cd ~/Desktop'
 alias cdw='cd ~/wd'
+alias ..='cd ..'
 
 alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml1='sftp -P 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sshfml2='ssh -Yp 20022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml2='sftp -P 20022 lowh@fml1.fo.ntu.edu.tw'
-alias sshlopen='ssh -Y 140.112.147.131'
+alias sshlopen131='ssh -Y 140.112.147.131'
+alias sshlopen132='ssh -Y 140.112.147.132'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -25,6 +27,13 @@ if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
+#---------------------------------------
+# History setting
+#---------------------------------------
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTCONTROL=ignoreboth
+export PROMPT_COMMAND='history -a'
 
 #---------------------------------------
 # Enhanced prompt
