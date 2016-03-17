@@ -28,6 +28,21 @@ if [[ $(which vimx) ]]; then
 fi
 
 #---------------------------------------
+# Environment variables
+#---------------------------------------
+# EDITOR and VISUAL
+if [[ -f $(which 'nvim') ]]; then
+    export VISUAL=nvim
+    export EDITOR=nvim
+elif [[ -f $(which 'vimx') ]]; then
+    export VISUAL=vimx
+    export EDITOR=vimx
+else
+    export VISUAL=vim
+    export EDITOR=vim
+fi
+
+#---------------------------------------
 # History setting
 #---------------------------------------
 export HISTFILESIZE=
