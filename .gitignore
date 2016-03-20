@@ -6,4 +6,6 @@
 *.db
 *.sqilte
 *.sqilte3
-__pycache__/
+
+__pycache__
+.DS_Store

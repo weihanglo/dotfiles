@@ -10,6 +10,11 @@ fi
 alias cdd='cd ~/Desktop'
 alias cdw='cd ~/wd'
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ll='ls -lh'
+
+alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
+alias share='python3 -m http.server'
 
 alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
 alias sftpfml1='sftp -P 10022 lowh@fml1.fo.ntu.edu.tw'

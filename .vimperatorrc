@@ -1,5 +1,5 @@
 "--------------------------------------"
-"  Modified: Fri Mar  4 18:27:40 2016  "
+"  Modified: Fri Mar 18 13:33:41 2016  "
 "--------------------------------------"
 
 set hlsearch
@@ -22,9 +22,10 @@ set! browser.tabs.closeWindowWithLastTab=false
 set! javascript.options.jit.chrome=true
 
 " colorscheme and gui
-colorscheme molokai
-set gui=none
-set nosb
+"colorscheme molokai
+colorscheme solarized_dark
+set gui=none,tabs
+set noscrollbars
 hi Normal -append font-size:18px
 
 " for move happily
@@ -40,4 +41,4 @@ nnoremap gR :emenu View.Close Reader View<CR>
 " search and hint
 set hlsearch
 set hintchars=0123456789hjklasdfgyuiopqwertnmzxcvb
-set complete=sl 
+set complete=sl
