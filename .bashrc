@@ -16,12 +16,12 @@ alias ll='ls -lh'
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias share='python3 -m http.server'
 
-alias sshfml1='ssh -Yp 10022 lowh@fml1.fo.ntu.edu.tw'
-alias sftpfml1='sftp -P 10022 lowh@fml1.fo.ntu.edu.tw'
-alias sshfml2='ssh -Yp 20022 lowh@fml1.fo.ntu.edu.tw'
-alias sftpfml2='sftp -P 20022 lowh@fml1.fo.ntu.edu.tw'
-alias sshlopen131='ssh -Y 140.112.147.131'
-alias sshlopen132='ssh -Y 140.112.147.132'
+alias sshfml1='ssh -Yp 10022 $FML'
+alias sftpfml1='sftp -P 10022 $FML'
+alias sshfml2='ssh -Yp 20022 $FML'
+alias sftpfml2='sftp -P 20022 $FML'
+alias sshlopen131='ssh -Y $LOPEN1'
+alias sshlopen132='ssh -Y $LOPEN2'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -35,6 +35,11 @@ fi
 #---------------------------------------
 # Environment variables
 #---------------------------------------
+# SSH servers
+export FML='lowh@fml1.fo.ntu.edu.tw'
+export LOPEN1='140.112.147.131'
+export LOPEN2='140.112.147.132'
+
 # EDITOR and VISUAL
 if [[ -f $(which 'nvim') ]]; then
     export VISUAL=nvim
@@ -47,13 +52,21 @@ else
     export EDITOR=vim
 fi
 
-#---------------------------------------
-# History setting
-#---------------------------------------
+# Python3 startup ----------------------
+if [[ -f $HOME/.pythonrc.py ]]; then
+    export PYTHONSTARTUP=$HOME/.pythonrc.py
+fi
+
+# Ruby GEM_PATH ------------------------
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
+
+# History setting ----------------------
 export HISTFILESIZE=
 export HISTSIZE=
 export HISTCONTROL=ignoreboth
 export PROMPT_COMMAND='history -a'
+
 
 #---------------------------------------
 # Enhanced prompt
@@ -69,9 +82,20 @@ function ssh_or_not {
     fi
 }
 
-function parse_git_branch {
+function git_branch {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     echo "( "${ref#refs/heads/}")"
+}
+
+function git_since_last_commit {
+    now=`date +%s`;
+    last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
+    seconds_since_last_commit=$((now-last_commit));
+    minutes_since_last_commit=$((seconds_since_last_commit/60));
+    hours_since_last_commit=$((minutes_since_last_commit/60));
+    minutes_since_last_commit=$((minutes_since_last_commit%60));
+    
+    echo "${hours_since_last_commit}h${minutes_since_last_commit}m ";
 }
 
 #---------------------------------------
@@ -81,24 +105,15 @@ PS1="\`
     if [[ \$? = 0 ]];
     then
         echo \[\e[1m\]\[\e[32m\]\W \
-        \$(ssh_or_not) \$(parse_git_branch) \
+        \$(ssh_or_not) \$(git_branch) \$(git_since_last_commit) \
         \➤ \[\e[m\]
     else
         echo \[\e[1m\]\[\e[31m\]\W \
-        \$(ssh_or_not) \$(parse_git_branch) \
+        \$(ssh_or_not) \$(git_branch) \$(git_since_last_commit) \
         \➤ \[\e[m\]
     fi\` "
 
 PS2='... '
-
-
-#-------------------
-# Python3 startup
-#-------------------
-if [[ -f $HOME/.pythonrc.py ]]; then
-    export PYTHONSTARTUP=$HOME/.pythonrc.py
-fi
-
 
 #-------------------
 # Vi mode in bash

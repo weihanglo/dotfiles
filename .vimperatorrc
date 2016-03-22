@@ -1,5 +1,5 @@
 "--------------------------------------"
-"  Modified: Fri Mar 18 13:33:41 2016  "
+"  Modified: Mon Mar 21 23:18:13 2016  "
 "--------------------------------------"
 
 set hlsearch
@@ -37,6 +37,9 @@ nnoremap l gt
 " enter/close Reader View
 nnoremap gr :emenu View.Enter Reader View<CR>
 nnoremap gR :emenu View.Close Reader View<CR>
+
+" for convenience
+nnoremap <C-c> <insert>
 
 " search and hint
 set hlsearch
