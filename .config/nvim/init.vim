@@ -24,6 +24,8 @@ set smarttab
 set smartindent
 set autoindent
 set colorcolumn=80
+set timeoutlen=500
+set winminheight=0
 set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
 set dictionary+=/usr/share/dict/words
@@ -55,8 +57,8 @@ augroup END
 augroup filetype_r
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst,Rout}
-                \ nnoremap <silent> <localleader>rf :call RConfig()
-                \ <CR>:normal <localleader>rf<CR>
+        \ nnoremap <silent> <localleader>rf :call RConfig()
+        \ <CR>:normal <localleader>rf<CR>
 augroup END
 
 " vimL
@@ -68,7 +70,15 @@ augroup END
 " python
 augroup filetype_python
     autocmd!
-    autocmd FileType python setlocal foldmethod=indent completeopt-=preview
+    autocmd FileType python 
+        \ setlocal foldmethod=indent completeopt-=preview
+augroup END
+
+" for web development
+augroup filetype_web
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html}
+        \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 " }}}
 
@@ -143,11 +153,10 @@ Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
-Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'jpalardy/vim-slime'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'jpalardy/vim-slime', {'for': 'python'}
 Plug 'jalvesaq/R-Vim-runtime', {'on': []}
 Plug 'jcfaria/Vim-R-plugin', {'on': []}
 Plug 'jalvesaq/Nvim-R', {'on': []}

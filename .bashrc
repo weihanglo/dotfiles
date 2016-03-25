@@ -7,8 +7,9 @@ fi
 #---------------------------------------
 # User specific aliases and functions
 #---------------------------------------
-alias cdd='cd ~/Desktop'
-alias cdw='cd ~/wd'
+alias cdd='cd ~/Desktop/'
+alias cdw='cd ~/wd/'
+alias cdl='cd ~/Downloads/'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ll='ls -lh'
@@ -17,8 +18,8 @@ alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias share='python3 -m http.server'
 
 alias sshfml1='ssh -Yp 10022 $FML'
-alias sftpfml1='sftp -P 10022 $FML'
 alias sshfml2='ssh -Yp 20022 $FML'
+alias sftpfml1='sftp -P 10022 $FML'
 alias sftpfml2='sftp -P 20022 $FML'
 alias sshlopen131='ssh -Y $LOPEN1'
 alias sshlopen132='ssh -Y $LOPEN2'
@@ -39,6 +40,7 @@ fi
 export FML='lowh@fml1.fo.ntu.edu.tw'
 export LOPEN1='140.112.147.131'
 export LOPEN2='140.112.147.132'
+
 
 # EDITOR and VISUAL
 if [[ -f $(which 'nvim') ]]; then
@@ -73,13 +75,15 @@ export PROMPT_COMMAND='history -a'
 #---------------------------------------
 function ssh_or_not {
     if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-        echo [$HOSTNAME]
+        remote_host=[$HOSTNAME]
     else
         case $(ps -o comm= -p $PPID) in
             sshd|*/sshd)
-            echo [$HOSTNAME]
+            remote_host=[$HOSTNAME]
         esac
     fi
+
+    echo ${remote_hostname}
 }
 
 function git_branch {
@@ -87,29 +91,37 @@ function git_branch {
     echo "( "${ref#refs/heads/}")"
 }
 
-function git_since_last_commit {
-    now=`date +%s`;
+function git_last_commit {
+    now=$(date +%s);
     last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
-    seconds_since_last_commit=$((now-last_commit));
-    minutes_since_last_commit=$((seconds_since_last_commit/60));
-    hours_since_last_commit=$((minutes_since_last_commit/60));
-    minutes_since_last_commit=$((minutes_since_last_commit%60));
-    
-    echo "${hours_since_last_commit}h${minutes_since_last_commit}m ";
+    seconds=$((now-last_commit));
+    minutes=$((seconds/60));
+    hours=$((minutes/60));
+    days=$((hours/24));
+
+    minutes=$((minutes%60));
+    hours=$((hours%24));
+
+    if (( ${days} > 0)); then
+        last_time="${days}d${hours}h ";
+    else
+        last_time="${hours}h${minutes}m ";
+    fi
+
+    echo ${last_time}
 }
 
 #---------------------------------------
 # Colorful prompt
 #---------------------------------------
 PS1="\`
-    if [[ \$? = 0 ]];
-    then
+    if [[ \$? = 0 ]]; then
         echo \[\e[1m\]\[\e[32m\]\W \
-        \$(ssh_or_not) \$(git_branch) \$(git_since_last_commit) \
+        \$(ssh_or_not) \$(git_branch) \$(git_last_commit) \
         \➤ \[\e[m\]
     else
         echo \[\e[1m\]\[\e[31m\]\W \
-        \$(ssh_or_not) \$(git_branch) \$(git_since_last_commit) \
+        \$(ssh_or_not) \$(git_branch) \$(git_last_commit) \
         \➤ \[\e[m\]
     fi\` "
 

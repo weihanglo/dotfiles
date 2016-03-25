@@ -1,0 +1,20 @@
+" vimrc for XVim
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set number
+set relativenumber
+set expandtab
+set clipboard+=unnamed
+set timeoutlen=500
+
+" mapping
+inoremap hh <Esc>
+inoremap jj <Esc>
+inoremap kk <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" XVim only
+set pasteboard

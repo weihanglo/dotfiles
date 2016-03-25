@@ -38,9 +38,6 @@ nnoremap l gt
 nnoremap gr :emenu View.Enter Reader View<CR>
 nnoremap gR :emenu View.Close Reader View<CR>
 
-" for convenience
-nnoremap <C-c> <insert>
-
 " search and hint
 set hlsearch
 set hintchars=0123456789hjklasdfgyuiopqwertnmzxcvb
