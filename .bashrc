@@ -83,7 +83,7 @@ function ssh_or_not {
         esac
     fi
 
-    echo ${remote_hostname}
+    echo ${remote_host}
 }
 
 function git_branch {

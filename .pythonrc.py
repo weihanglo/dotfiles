@@ -1,14 +1,12 @@
 #--------------------------------------#
 #              .pythonrc.py            #
 #                                      #
-#      Sat Feb 27 01:06:53 CST 2016    #
+#      Mon Mar 28 00:00:25 CST 2016    #
 #--------------------------------------#
 
 #---------------------------------------
 # Autoload modules
 #---------------------------------------
-from pprint import pprint
-
 
 #---------------------------------------
 # Useful libraries
@@ -20,7 +18,7 @@ from pprint import pprint
 # matplotlib
 # numpy             :: matrix manipulation
 # scipy
-# pandas
+# pandas            :: Dataframe-like objects manipulation
 # python-magic      :: guess mimetype (dependency: libmagic)
 
 #---database---
