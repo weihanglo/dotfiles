@@ -40,7 +40,7 @@ fi
 export FML='lowh@fml1.fo.ntu.edu.tw'
 export LOPEN1='140.112.147.131'
 export LOPEN2='140.112.147.132'
-
+export PATH=$HOME/.local/bin:$PATH
 
 # EDITOR and VISUAL
 if [[ -f $(which 'nvim') ]]; then
@@ -75,15 +75,15 @@ export PROMPT_COMMAND='history -a'
 #---------------------------------------
 function ssh_or_not {
     if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-        remote_host=[$HOSTNAME]
+        remote_hostname=[$HOSTNAME]
     else
         case $(ps -o comm= -p $PPID) in
             sshd|*/sshd)
-            remote_host=[$HOSTNAME]
+            remote_hostname=[$HOSTNAME]
         esac
     fi
 
-    echo ${remote_host}
+    echo ${remote_hostname}
 }
 
 function git_branch {
