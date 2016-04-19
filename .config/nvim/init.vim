@@ -156,6 +156,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jpalardy/vim-slime'
+Plug 'kchmck/vim-coffee-script'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/R-Vim-runtime', {'on': []}
 Plug 'jcfaria/Vim-R-plugin', {'on': []}
@@ -166,11 +167,6 @@ call plug#end()
 " }}}
 
 " Colorscheme {{{
-" solarized
-"syntax enable
-"set background=dark
-"let g:solarized_termcolors = 256
-"colorscheme solarized
 " hybrid
 set background=dark
 colorscheme hybrid

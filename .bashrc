@@ -19,8 +19,10 @@ alias share='python3 -m http.server'
 
 alias sshfml1='ssh -Yp 10022 $FML'
 alias sshfml2='ssh -Yp 20022 $FML'
+alias sshfml3='ssh -Yp 30022 $FML'
 alias sftpfml1='sftp -P 10022 $FML'
 alias sftpfml2='sftp -P 20022 $FML'
+alias sftpfml3='sftp -P 30022 $FML'
 alias sshlopen131='ssh -Y $LOPEN1'
 alias sshlopen132='ssh -Y $LOPEN2'
 

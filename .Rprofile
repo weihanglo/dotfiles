@@ -59,8 +59,9 @@ message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
 # rgl ---> require: freeglut-devel
 # plotly
 # ggplot2
+# gridExtra
 # animation ---> require: ImageMagick
-#install.packages(c("rgl", "plotly", "ggplot2", "animation"))
+#install.packages(c("rgl", "plotly", "ggplot2", "gridExtra", "animation"))
 
 #---Spatial analysis---
 # spatstat
@@ -165,12 +166,12 @@ options(continue = ". ")
 
 .First <- function() {
     try(utils::loadhistory("~/.Rhistory"))
-    message("\n\nSuccessfully loaded .Rprofile at", date())
+    message("\n\nSuccessfully loaded .Rprofile at ", date())
 }
 
 .Last <- function() {
     try(utils::savehistory("~/.Rhistory"))
-    message("\nExit R session at", date())
+    message("\nExit R session at ", date())
 }
 
 #interactive load .Rprofile END
