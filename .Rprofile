@@ -56,8 +56,9 @@ message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
 # rgl ---> require: freeglut-devel
 # plotly
 # ggplot2
+# gridExtra
 # animation ---> require: ImageMagick
-#install.packages(c("rgl", "plotly", "ggplot2", "animation"))
+#install.packages(c("rgl", "plotly", "ggplot2", "gridExtra", "animation"))
 
 #---Spatial analysis---
 # spatstat

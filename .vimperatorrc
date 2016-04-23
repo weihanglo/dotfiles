@@ -1,5 +1,5 @@
 "--------------------------------------"
-"  Modified: Mon Mar 21 23:18:13 2016  "
+"  Modified: Fri Apr 15 09:33:45 2016  "
 "--------------------------------------"
 
 set hlsearch
@@ -22,7 +22,6 @@ set! browser.tabs.closeWindowWithLastTab=false
 set! javascript.options.jit.chrome=true
 
 " colorscheme and gui
-"colorscheme molokai
 colorscheme solarized_dark
 set gui=none,tabs
 set noscrollbars
@@ -42,3 +41,11 @@ nnoremap gR :emenu View.Close Reader View<CR>
 set hlsearch
 set hintchars=0123456789hjklasdfgyuiopqwertnmzxcvb
 set complete=sl
+
+" quick marks
+qmark f https://feedly.com
+qmark g https://github.com
+qmark p https://protonmail.com
+qmark b https://bitbucket.org
+qmark j https://jira-rd.hyweb.com.tw
+qmark w cwb.gov.tw
