@@ -56,9 +56,8 @@ augroup END
 " R
 augroup filetype_r
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst,Rout}
-        \ nnoremap <silent> <localleader>rf :call RConfig()
-        \ <CR>:normal <localleader>rf<CR>
+    autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst,Rout} 
+        \ call RConfig()
 augroup END
 
 " vimL
@@ -144,11 +143,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized', {'on': []}
 Plug 'w0ng/vim-hybrid'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plug 'ctrlpvim/ctrlp.vim', {'on': []}
 Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -157,9 +154,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jpalardy/vim-slime'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'jalvesaq/R-Vim-runtime', {'on': []}
-Plug 'jcfaria/Vim-R-plugin', {'on': []}
-Plug 'jalvesaq/Nvim-R', {'on': []}
+Plug 'jalvesaq/Nvim-R'
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 
 call plug#end()
@@ -200,12 +195,6 @@ if !exists("*RConfig")
             let R_assign = 0
             let R_tmux_title = "automatic"
             let R_args = ['--no-save', '--no-restore', '--quiet']
-            call plug#load('Nvim-R')
-        else
-            let g:vimrplugin_restart = 1
-            let g:vimrplugin_assign = 0
-            let g:vimrplugin_tmux_title = "automatic"
-            call plug#load('Vim-R-plugin', 'R-Vim-runtime')
         endif
     endfunction
 endif

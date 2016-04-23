@@ -19,9 +19,6 @@ if (library(colorout, logical.return = TRUE)) {
 if (Sys.getenv("NVIMR_TMPDIR") != "") {
     options(nvimcom.verbose = 1)
     library(nvimcom)
-} else if (Sys.getenv("VIMRPLUGIN_TMPDIR") != "") {
-    options(vimcom.verbose = 1) 
-    library(vimcom)
 }
 
 #-----------------------------
@@ -165,12 +162,12 @@ options(continue = ". ")
 
 .First <- function() {
     try(utils::loadhistory("~/.Rhistory"))
-    message("\n\nSuccessfully loaded .Rprofile at", date())
+    message("\n\nSuccessfully loaded .Rprofile at ", date())
 }
 
 .Last <- function() {
     try(utils::savehistory("~/.Rhistory"))
-    message("\nExit R session at", date())
+    message("\nExit R session at ", date())
 }
 
 #interactive load .Rprofile END
