@@ -17,7 +17,7 @@ neovim_init="ln -is $dir/.config/nvim/init.vim $HOME/.vimrc"
 ## put config/dir your want to sync in this variable
 files=".bashrc .vimrc .vimperatorrc .vimperator/colors/molokai.vimp \
     .tmux.conf .Rprofile .pythonrc.py .inputrc .gitignore .gitconfig \
-    .config/nvim/init.vim"
+    .config/nvim/init.vim .xvimrc"
 
 
 echo -n "Creating $origdir for backup ..."

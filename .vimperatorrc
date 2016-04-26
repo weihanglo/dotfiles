@@ -43,9 +43,9 @@ set hintchars=0123456789hjklasdfgyuiopqwertnmzxcvb
 set complete=sl
 
 " quick marks
-qmark f https://feedly.com
-qmark g https://github.com
-qmark p https://protonmail.com
-qmark b https://bitbucket.org
-qmark j https://jira-rd.hyweb.com.tw
-qmark w cwb.gov.tw
+silent qmark f https://feedly.com
+silent qmark g https://github.com
+silent qmark p https://protonmail.com
+silent qmark b https://bitbucket.org
+silent qmark j https://jira-rd.hyweb.com.tw
+silent qmark w cwb.gov.tw

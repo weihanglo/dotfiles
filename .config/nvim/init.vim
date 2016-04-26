@@ -23,6 +23,7 @@ set expandtab
 set smarttab
 set smartindent
 set autoindent
+set linebreak
 set colorcolumn=80
 set timeoutlen=500
 set winminheight=0
@@ -122,6 +123,9 @@ cnoreabbrev BD! bd!
 "" Move visual block
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
+
+"" Highlight visual selected text
+vnoremap // y/<C-R>"<CR>
 
 " }}}
 
