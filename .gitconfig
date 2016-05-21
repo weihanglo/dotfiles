@@ -6,8 +6,8 @@
 	tool = vimdiff
 	path = nvim
 [user]
-	name = weihang
-	email = weihanglo@protonmail.com
+	name = Weihang Lo
+	email = b01605002@gmail.com
 [color]
 	ui = true
 	diff = always

@@ -92,9 +92,9 @@ nnoremap <silent> <C-P> :FZF<CR>
 " preview markdown in firefox 
 " dependency: firefox plugin 'Markdown Viewer'
 if has('mac')
-    nnoremap <silent> <localleader>md :!open -a firefox %:p<CR><CR>
+    nnoremap <silent> <localleader>op :!open -a firefox %:p<CR><CR>
 elseif has('unix')
-    nnoremap <silent> <localleader>md :!firefox %:p<CR><CR>
+    nnoremap <silent> <localleader>op :!firefox %:p<CR><CR>
 endif
 
 inoremap hh <Esc>
@@ -102,6 +102,7 @@ inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap jk <Esc>
 inoremap kj <Esc>
+
 
 cnoreabbrev W w
 cnoreabbrev W! w!
@@ -119,6 +120,8 @@ cnoreabbrev Bd bd
 cnoreabbrev BD bd
 cnoreabbrev Bd! bd!
 cnoreabbrev BD! bd!
+cnoreabbrev Nohl nohl
+cnoreabbrev NOhl nohl
 
 "" Move visual block
 vnoremap K :m '<-2<CR>gv=gv

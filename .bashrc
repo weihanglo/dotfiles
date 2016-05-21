@@ -8,8 +8,8 @@ fi
 # User specific aliases and functions
 #---------------------------------------
 alias cdd='cd ~/Desktop/'
-alias cdw='cd ~/wd/'
 alias cdl='cd ~/Downloads/'
+alias cdc='cd ~/Documents/'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ll='ls -lh'
@@ -17,14 +17,14 @@ alias ll='ls -lh'
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias share='python3 -m http.server'
 
-alias sshfml1='ssh -Yp 10022 $FML'
-alias sshfml2='ssh -Yp 20022 $FML'
-alias sshfml3='ssh -Yp 30022 $FML'
-alias sftpfml1='sftp -P 10022 $FML'
-alias sftpfml2='sftp -P 20022 $FML'
-alias sftpfml3='sftp -P 30022 $FML'
-alias sshlopen131='ssh -Y $LOPEN1'
-alias sshlopen132='ssh -Y $LOPEN2'
+alias sshfml1='ssh -Yp 10022 ${FML}'
+alias sshfml2='ssh -Yp 20022 ${FML}'
+alias sshfml3='ssh -Yp 30022 ${FML}'
+alias sftpfml1='sftp -P 10022 ${FML}'
+alias sftpfml2='sftp -P 20022 ${FML}'
+alias sftpfml3='sftp -P 30022 ${FML}'
+alias sshlopen131='ssh -Y ${LOPEN1}'
+alias sshlopen132='ssh -Y ${LOPEN2}'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -35,14 +35,26 @@ if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
+function update_packages {
+    if [[ $(uname) == "Darwin" ]]; then
+        brew update && brew upgrade
+    elif [[ -f /etc/debian_version ]]; then
+        sudo apt-get -y update && sudo apt-get -y upgrade
+    else
+        sudo dnf -y update
+    fi
+}
+
 #---------------------------------------
 # Environment variables
 #---------------------------------------
+# Aditional PATHs
+export PATH=$HOME/.local/bin:$PATH
+
 # SSH servers
 export FML='lowh@fml1.fo.ntu.edu.tw'
 export LOPEN1='140.112.147.131'
 export LOPEN2='140.112.147.132'
-export PATH=$HOME/.local/bin:$PATH
 
 # EDITOR and VISUAL
 if [[ -f $(which 'nvim') ]]; then
