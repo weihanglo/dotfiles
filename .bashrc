@@ -23,8 +23,6 @@ alias sshfml3='ssh -Yp 30022 ${FML}'
 alias sftpfml1='sftp -P 10022 ${FML}'
 alias sftpfml2='sftp -P 20022 ${FML}'
 alias sftpfml3='sftp -P 30022 ${FML}'
-alias sshlopen131='ssh -Y ${LOPEN1}'
-alias sshlopen132='ssh -Y ${LOPEN2}'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -53,8 +51,6 @@ export PATH=$HOME/.local/bin:$PATH
 
 # SSH servers
 export FML='lowh@fml1.fo.ntu.edu.tw'
-export LOPEN1='140.112.147.131'
-export LOPEN2='140.112.147.132'
 
 # EDITOR and VISUAL
 if [[ -f $(which 'nvim') ]]; then

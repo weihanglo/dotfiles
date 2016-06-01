@@ -161,6 +161,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jpalardy/vim-slime'
 Plug 'kchmck/vim-coffee-script'
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R'
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
@@ -190,17 +191,35 @@ function! Multiple_cursors_after()
 endfunction
 " }}}
 
-" vim-r-plugin and Nvim-R {{{
+" Nvim-R {{{
 if !exists("*RConfig")
     function RConfig()
         if has("nvim")
             let Rout_more_colors = 1
             let R_assign = 0
-            let R_tmux_title = "automatic"
             let R_args = ['--no-save', '--no-restore', '--quiet']
+            inoremap <C-Space> <C-x><C-o>
         endif
     endfunction
 endif
+" }}}
+
+" YouCompleteMe {{{
+"let g:ycm_python_binary_path = '/usr/local/bin/python3'
+" }}}
+
+" Ultisnip {{{
+"let g:UltiSnipsExpandTrigger = "<nop>"
+"let g:ulti_expand_or_jump_res = 0
+"function ExpandSnippetOrCarriageReturn()
+"    let snippet = UltiSnips#ExpandSnippetOrJump()
+"    if g:ulti_expand_or_jump_res > 0
+"        return snippet
+"    else
+"        return "\<CR>"
+"    endif
+"endfunction
+"inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 " }}}
 
 " vim-slime (REPL via tmux) {{{
