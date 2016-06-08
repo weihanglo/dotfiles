@@ -9,3 +9,11 @@
 
 __pycache__
 .DS_Store
+
+
+#-------------------
+# XCode
+#-------------------
+*.moved-aside
+*.xcuserstate
+xcuserdata/

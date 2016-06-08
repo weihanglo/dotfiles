@@ -103,7 +103,6 @@ inoremap kk <Esc>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
-
 cnoreabbrev W w
 cnoreabbrev W! w!
 cnoreabbrev Wq wq
@@ -112,6 +111,7 @@ cnoreabbrev Wa wa
 cnoreabbrev WA wa
 cnoreabbrev Q q
 cnoreabbrev Q! q!
+cnoreabbrev q1 q!
 cnoreabbrev Qa qa
 cnoreabbrev QA qa
 cnoreabbrev Qa! qa!
@@ -148,7 +148,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'bling/vim-airline'
-Plug 'edkolev/tmuxline.vim'
+Plug 'weihanglo/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0ng/vim-hybrid'
 Plug 'terryma/vim-multiple-cursors'
