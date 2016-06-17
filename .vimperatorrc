@@ -48,4 +48,5 @@ silent qmark g https://github.com
 silent qmark p https://getpocket.com
 silent qmark b https://bitbucket.org
 silent qmark j https://jira-rd.hyweb.com.tw
+silent qmark c https://calendar.google.com
 silent qmark w cwb.gov.tw

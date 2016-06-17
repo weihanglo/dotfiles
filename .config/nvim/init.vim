@@ -86,9 +86,6 @@ augroup END
 " map localleader if necessary
 let maplocalleader = ','
 
-" Disguise FZF as CtrlP
-nnoremap <silent> <C-P> :FZF<CR>
-
 " preview markdown in firefox 
 " dependency: firefox plugin 'Markdown Viewer'
 if has('mac')
@@ -152,7 +149,6 @@ Plug 'weihanglo/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0ng/vim-hybrid'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -160,8 +156,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jpalardy/vim-slime'
-Plug 'kchmck/vim-coffee-script'
-"Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R'
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
@@ -202,24 +196,6 @@ if !exists("*RConfig")
         endif
     endfunction
 endif
-" }}}
-
-" YouCompleteMe {{{
-"let g:ycm_python_binary_path = '/usr/local/bin/python3'
-" }}}
-
-" Ultisnip {{{
-"let g:UltiSnipsExpandTrigger = "<nop>"
-"let g:ulti_expand_or_jump_res = 0
-"function ExpandSnippetOrCarriageReturn()
-"    let snippet = UltiSnips#ExpandSnippetOrJump()
-"    if g:ulti_expand_or_jump_res > 0
-"        return snippet
-"    else
-"        return "\<CR>"
-"    endif
-"endfunction
-"inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 " }}}
 
 " vim-slime (REPL via tmux) {{{

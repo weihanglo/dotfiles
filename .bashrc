@@ -10,12 +10,12 @@ fi
 alias cdd='cd ~/Desktop/'
 alias cdl='cd ~/Downloads/'
 alias cdc='cd ~/Documents/'
+alias cdw='cd ~/Documents/works/'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ll='ls -lh'
 
-alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
-alias share='python3 -m http.server'
+
 
 alias sshfml1='ssh -Yp 10022 ${FML}'
 alias sshfml2='ssh -Yp 20022 ${FML}'
@@ -23,6 +23,11 @@ alias sshfml3='ssh -Yp 30022 ${FML}'
 alias sftpfml1='sftp -P 10022 ${FML}'
 alias sftpfml2='sftp -P 20022 ${FML}'
 alias sftpfml3='sftp -P 30022 ${FML}'
+
+alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
+alias pyserver='python3 -m http.server'
+alias tree='tree -ACF'
+alias tmux='tmux attach'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
