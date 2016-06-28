@@ -27,7 +27,6 @@ alias sftpfml3='sftp -P 30022 ${FML}'
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias pyserver='python3 -m http.server'
 alias tree='tree -ACF'
-alias tmux='tmux attach'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'

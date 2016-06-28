@@ -10,10 +10,17 @@
 __pycache__
 .DS_Store
 
+node_modules
+npm-debug.log
+
 
 #-------------------
-# XCode
+# XCode, iOS dev
 #-------------------
 *.moved-aside
 *.xcuserstate
-xcuserdata/
+*.xcscmblueprint
+*.xcworkspacedata
+Podfile.lock
+xcuserdata
+Pods

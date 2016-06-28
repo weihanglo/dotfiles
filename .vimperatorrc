@@ -43,10 +43,11 @@ set hintchars=0123456789hjklasdfgyuiopqwertnmzxcvb
 set complete=sl
 
 " quick marks
+silent qmark b https://bitbucket.org
+silent qmark c https://calendar.google.com
 silent qmark f https://feedly.com
 silent qmark g https://github.com
-silent qmark p https://getpocket.com
-silent qmark b https://bitbucket.org
 silent qmark j https://jira-rd.hyweb.com.tw
-silent qmark c https://calendar.google.com
+silent qmark m https://www.messenger.com
+silent qmark p https://getpocket.com
 silent qmark w cwb.gov.tw
