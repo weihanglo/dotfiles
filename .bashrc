@@ -37,7 +37,11 @@ if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
-function update_packages {
+function source_nvm {
+    [ -f $(brew --prefix nvm)/nvm.sh ] && . $(brew --prefix nvm)/nvm.sh
+}
+
+function pkgupdate {
     if [[ $(uname) == "Darwin" ]]; then
         brew update && brew upgrade
     elif [[ -f /etc/debian_version ]]; then
@@ -46,6 +50,7 @@ function update_packages {
         sudo dnf -y update
     fi
 }
+
 
 #---------------------------------------
 # Environment variables
@@ -77,6 +82,9 @@ fi
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
+# NVM PATH (mac only) ------------------
+export NVM_DIR=$HOME/.nvm
+
 # History setting ----------------------
 export HISTFILESIZE=
 export HISTSIZE=
@@ -87,7 +95,7 @@ export PROMPT_COMMAND='history -a'
 #---------------------------------------
 # Enhanced prompt
 #---------------------------------------
-function ssh_or_not {
+function __ssh_or_not {
     if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
         remote_hostname=[$HOSTNAME]
     else
@@ -100,12 +108,12 @@ function ssh_or_not {
     echo ${remote_hostname}
 }
 
-function git_branch {
+function __git_branch {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     echo "( "${ref#refs/heads/}")"
 }
 
-function git_last_commit {
+function __git_last_commit {
     now=$(date +%s);
     last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
     seconds=$((now-last_commit));
@@ -131,11 +139,11 @@ function git_last_commit {
 PS1="\`
     if [[ \$? = 0 ]]; then
         echo \[\e[1m\]\[\e[32m\]\W \
-        \$(ssh_or_not) \$(git_branch) \$(git_last_commit) \
+        \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
         \➤ \[\e[m\]
     else
         echo \[\e[1m\]\[\e[31m\]\W \
-        \$(ssh_or_not) \$(git_branch) \$(git_last_commit) \
+        \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
         \➤ \[\e[m\]
     fi\` "
 
