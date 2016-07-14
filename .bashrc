@@ -9,13 +9,12 @@ fi
 #---------------------------------------
 alias cdd='cd ~/Desktop/'
 alias cdl='cd ~/Downloads/'
-alias cdc='cd ~/Documents/'
-alias cdw='cd ~/Documents/works/'
+alias cdw='cd ~/Documents/works/Git/'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 alias ll='ls -lh'
-
-
+alias la='ls -lha'
 
 alias sshfml1='ssh -Yp 10022 ${FML}'
 alias sshfml2='ssh -Yp 20022 ${FML}'
@@ -33,12 +32,17 @@ alias ipy='ipython3'
 alias ipn='jupyter notebook'
 alias py3='python3'
 alias nv='nvim'
+
 if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
 function source_nvm {
-    [ -f $(brew --prefix nvm)/nvm.sh ] && . $(brew --prefix nvm)/nvm.sh
+    if [[ $(uname) == "Darwin" ]]; then
+        [ -f $(brew --prefix nvm)/nvm.sh ] && . $(brew --prefix nvm)/nvm.sh
+    else
+        echo "Function 'source_nvm' has not implemented on this platform."
+    fi
 }
 
 function pkgupdate {
@@ -49,6 +53,10 @@ function pkgupdate {
     else
         sudo dnf -y update
     fi
+}
+
+function podreinstall {
+    [ -d Pods ] && rm -rf Pods Podfile.lock *.xcworkspace && pod install
 }
 
 
