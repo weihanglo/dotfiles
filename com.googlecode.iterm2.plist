@@ -91,7 +91,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents</string>
+	<string>~/.linux-config</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -119,26 +119,6 @@
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
-	<key>NSToolbar Configuration Terminal Toolbar</key>
-	<dict>
-		<key>TB Display Mode</key>
-		<integer>1</integer>
-		<key>TB Icon Size Mode</key>
-		<integer>1</integer>
-		<key>TB Is Shown</key>
-		<integer>0</integer>
-		<key>TB Size Mode</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
-	<dict>
-		<key>TB Is Shown</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSWindow Frame Preferences</key>
-	<string>328 339 606 456 0 0 1280 800 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>332 306 620 392 0 0 1280 800 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 83 796 473 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -883,35 +863,14 @@
 			<string>/Users/weihang</string>
 		</dict>
 	</array>
-	<key>NoSyncConfirmBeta</key>
-	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>E79F52D0-D446-4439-BDD5-D3DA75DDD542</string>
-	<key>NoSyncLastTipTime</key>
-	<real>481358789.885113</real>
+	<string>E0FBC6DF-BDB5-4087-B458-EEFF4B9ADCC1</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
-	<key>NoSyncPermissionToShowTip</key>
-	<true/>
-	<key>NoSyncSilenceAnnoyingBellAutomatically</key>
-	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>480191731.49537599</real>
-	<key>NoSyncTimeOfLastPromo</key>
-	<real>479903206.51202703</real>
-	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>480132863.45632601</real>
-	<key>NoSyncTipsDisabled</key>
-	<true/>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>000</string>
-		<string>0000</string>
-		<string>0001</string>
-		<string>0002</string>
-	</array>
+	<real>490379574.86807197</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -960,7 +919,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/weihang/.linux-config/</string>
+	<string>/Users/weihanglo/.linux-config</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -974,11 +933,13 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=3</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=33</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-16T15:13:46Z</date>
+	<date>2016-07-16T17:18:01Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
