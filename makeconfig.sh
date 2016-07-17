@@ -8,10 +8,17 @@ dir=$HOME/.linux-config
 origdir=$HOME/.linux-config.orig
 
 # put what you want to pre-install (Vundle, zsh...)
-install_neovim_brew="brew install neovim/neovim/neovim"
-install_nvim_python="pip3 install neovim"
-neovim_init="mkdir -p $HOME/.config/nvim && \
-    ln -is $dir/.config/nvim/init.vim $HOME/.vimrc"
+function install_neovim_brew { 
+    brew install neovim/neovim/neovim 
+}
+
+function install_nvim_python { 
+    pip3 install neovim 
+}
+
+function neovim_init {
+    ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
+}
 
 
 
@@ -33,6 +40,7 @@ echo "done"
 
 for file in $files; do
     echo "Moving $file to $origdir"
+    mkdir -p $HOME/$(dirname $file)
     mv $HOME/$file $origdir
     echo "Symlinking to $file in $dir"
     ln -is $dir/$file $HOME/$file
@@ -45,7 +53,7 @@ confirm () {
     read -r -p "${3:-Confirm $1? [y/N]} " response
     case $response in
         [yY][eE][sS]|[yY])
-        eval $2
+        $2
             ;;
         *)
         echo "Operation aborted."
@@ -58,11 +66,11 @@ confirm () {
 # confirm installation
 if [[ $(uname) == "Darwin" ]]; then
 
-    confirm 'Install neovim' '$install_neovim_brew'
+    confirm 'Install neovim' install_neovim_brew
 
     if [[ -f $(which 'pip3') ]]; then
-        confirm 'Install nvim-python' '$install_nvim_python'
+        confirm 'Install nvim-python' install_nvim_python
     fi
 fi
 
-confirm "Replace .vimrc by neovim's init.vim" '$neovim_init'
+confirm "Replace .vimrc by neovim's init.vim" neovim_init
