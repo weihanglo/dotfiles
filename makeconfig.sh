@@ -10,7 +10,8 @@ origdir=$HOME/.linux-config.orig
 # put what you want to pre-install (Vundle, zsh...)
 install_neovim_brew="brew install neovim/neovim/neovim"
 install_nvim_python="pip3 install neovim"
-neovim_init="ln -is $dir/.config/nvim/init.vim $HOME/.vimrc"
+neovim_init="mkdir -p $HOME/.config/nvim && \
+    ln -is $dir/.config/nvim/init.vim $HOME/.vimrc"
 
 
 

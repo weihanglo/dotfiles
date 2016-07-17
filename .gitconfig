@@ -29,3 +29,5 @@
 	ci = commit
 	st = status
 	br = branch
+	pu = push
+	pl = pull
