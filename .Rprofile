@@ -1,12 +1,12 @@
-#------------------------------------------------------------------------------#
-#                                   Rprofile                                   #
-#                                                                              #
-#            Modified at Fri Feb 26 13:33:03 CST 2016 by Weihang Lo            #
-#------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
+#                                   Rprofile                                  #
+#                                                                             #
+#            Modified at Tue Jul 19 21:21:24 CST 2016 by Weihang Lo           #
+#-----------------------------------------------------------------------------#
 
-#################################################################
-#interactive load .Rprofile START
 if (interactive()) {
+#interactive load .Rprofile START
+
 
 #-----------------------------
 # Autoload packages
@@ -24,11 +24,8 @@ if (Sys.getenv("NVIMR_TMPDIR") != "") {
 #-----------------------------
 # Autoload functions
 #-----------------------------
-autoload("%>>%", "pipeR")
-autoload("data.table", "data.table")
 autoload("fread", "data.table")
 autoload("microbenchmark", "microbenchmark")
-autoload("ggplot", "ggplot2")
 message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
 
 
@@ -37,78 +34,39 @@ message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
 #-----------------------------
 
 #---Prerequisite---
-# devtools
-# colorout
-# vimcom or nvimcom
 #install.packages("devtools")
 #devtools::install_github("jalvesaq/colorout")
-#devtools::install_github("jalvesaq/VimCom")
 #devtools::install_github("jalvesaq/nvimcom")
 
 #---General---
 # doParallel
 # data.table
 # microbenchmark
-# rmarkdown ---> require: pandoc
-#install.packages(c("doParallel", "data.table", "microbenchmark", "rmarkdown"))
+# rmarkdown
 
 #---Plot---
-# rgl ---> require: freeglut-devel
 # plotly
 # ggplot2
-# gridExtra
-# animation ---> require: ImageMagick
-#install.packages(c("rgl", "plotly", "ggplot2", "gridExtra", "animation"))
+# animation
 
 #---Spatial analysis---
 # spatstat
 # raster
 # rgeos
-# rgdal ---> require: gdal, gdal-devel, proj...
+# rgdal
 # ggmap
 # leaflet
-#install.packages(c("spatstat", "raster", "rgeos", "rgdal", "ggmap", "leaflet"))
-
-#---Data I/O---
-# RMySQL
-# RSQLite
-# RPostgreSQL
-# rmongodb
-# readxl
-#install.packages(c("RMySQL", "RSQLite", "RPostgreSQL", "rmongodb", "readxl"))
-
-#---Ecology---
-# vegan
 
 #---Web related---
-# XML
 # RCurl
 # rvest
-# selectr
 # jsonlite
-#install.packages(c("rvest", "RCurl", "XML", "selectr", "jsonlite"))
-
-#---Machine learning---
-# rpart
-# party
-# randomForest
-# e1071
-#install.packages(c("rpart", "party", "randomForest", "e1071"))
 
 #---Text mining---
 # tm
-# tmcn --> on R-forge
+# tmcn
 # jiebaR
 # wordcloud
-# SnowballC
-# LSAfun
-#install.packages(c("tm", "tmcn", "jiebaR", "wordcloud", "SnowballC", "LSAfun"))
-
-#---Scientific computing---
-# rootSolve
-# deSolve
-#install.packages(c("rootSolve", "deSolve"))
-
 
 #-----------------------------
 # Set options
@@ -116,14 +74,13 @@ message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
 
 #---Set CRAN mirror---
 local({
-        r <- getOption("repos")
-        r["CRAN"] <- "http://cran.csie.ntu.edu.tw/"
-        options(repos = r)
+    r <- getOption("repos")
+    r["CRAN"] <- "http://cran.csie.ntu.edu.tw/"
+    options(repos = r)
 })
 
 #---Set prompt---
 options(continue = ". ")
-
 
 #-----------------------------
 # Convenient function
