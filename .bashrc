@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#---------------------------------------
-#   .bashrc for GNU bash, version 4.3
-#             by Weihang Lo
-#               July 2016
-#---------------------------------------
+#--------------------------------------#
+#  .bashrc for GNU bash, version 4.3   #
+#            by Weihang Lo             #
+#              July 2016               #
+#--------------------------------------#
 
 # Source global definitions
 [[ -f /etc/bashrc ]] && . /etc/bashrc
