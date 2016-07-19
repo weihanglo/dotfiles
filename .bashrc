@@ -1,8 +1,13 @@
 #!/bin/bash
+
+#---------------------------------------
+#   .bashrc for GNU bash, version 4.3
+#             by Weihang Lo
+#               July 2016
+#---------------------------------------
+
 # Source global definitions
-if [[ -f /etc/bashrc ]]; then
-    . /etc/bashrc
-fi
+[[ -f /etc/bashrc ]] && . /etc/bashrc
 
 #---------------------------------------
 # User specific aliases and functions
@@ -57,7 +62,7 @@ function podreinstall {
 
 
 #---------------------------------------
-# Environment variables
+# Environment variables and configs
 #---------------------------------------
 # Aditional PATHs
 export PATH=$HOME/.local/bin:$PATH
@@ -98,6 +103,11 @@ else
     [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 fi
+
+# Shell Options
+shopt -s autocd
+shopt -s cdspell
+
 
 #---------------------------------------
 # Enhanced prompt
