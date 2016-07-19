@@ -90,6 +90,14 @@ export HISTSIZE=
 export HISTCONTROL=ignoreboth
 export PROMPT_COMMAND='history -a'
 
+# Bash completion ----------------------
+if [[ $(uname) == "Darwin" ]]; then
+    [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]] && \
+    . $(brew --prefix)/share/bash-completion/bash_completion
+else
+    [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
+fi
 
 #---------------------------------------
 # Enhanced prompt
@@ -132,9 +140,6 @@ function __git_last_commit {
     echo ${last_time}
 }
 
-#---------------------------------------
-# Colorful prompt
-#---------------------------------------
 PS1="\`
     if [[ \$? = 0 ]]; then
         echo \[\e[1m\]\[\e[32m\]\W \
@@ -147,15 +152,6 @@ PS1="\`
     fi\` "
 
 PS2='... '
-
-# bash completion (bash_completion2 formula in homebrew)
-if [[ $(uname) == "Darwin" ]]; then
-    [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]] && \
-    . $(brew --prefix)/share/bash-completion/bash_completion
-else
-    [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
-fi
 
 #-------------------
 # OSX specified
