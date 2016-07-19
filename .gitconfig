@@ -13,9 +13,9 @@
 	email = b01605002@gmail.com
 [color]
 	ui = true
-	diff = always
-	status = always
-	interactive = always
+	diff = true
+	status = true
+	interactive = true
 [diff]
 	tool = nvimdiff
 [difftool]
@@ -23,14 +23,13 @@
 [difftool "nvimdiff"]
 	cmd = nvim -d $LOCAL $REMOTE
 [alias]
-	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 	lgg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 	co = checkout
 	ci = commit -v
 	st = status -sb
-	br = branch
-	pu = push
-	pl = pull
+	br = branch -vv
 	cp = cherry-pick
 	rb = rebase -i
 	df = diff
+	ss = stash
