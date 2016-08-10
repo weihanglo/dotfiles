@@ -3,9 +3,11 @@
 	excludesfile = ~/.gitignore
 	compression = 0
 [merge]
-	tool = nvimdiff
+	tool = nvim
 [mergetool]
 	prompt = true
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "nvimdiff"]
 	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [user]
@@ -17,10 +19,10 @@
 	status = true
 	interactive = true
 [diff]
-	tool = nvimdiff
+	tool = nvim
 [difftool]
 	prompt = true
-[difftool "nvimdiff"]
+[difftool "nvim"]
 	cmd = nvim -d $LOCAL $REMOTE
 [alias]
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
@@ -31,4 +33,5 @@
 	cp = cherry-pick
 	rb = rebase -i
 	df = difftool
+	mg = mergetool
 	ss = stash
