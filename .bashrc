@@ -18,8 +18,7 @@ alias cdw='cd ~/Documents/works/Git/'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ll='ls -lh'
-alias la='ls -lha'
+alias ll='ls -lhF'
 
 alias sshfml1='ssh -Yp 10022 ${FML}'
 alias sshfml2='ssh -Yp 20022 ${FML}'
@@ -58,6 +57,15 @@ function pkgupdate {
 
 function podreinstall {
     [ -d Pods ] && rm -rf Pods Podfile.lock *.xcworkspace && pod install
+}
+
+# Update all Git repository under current directory
+function repoupdate {
+    local cur_dir=$(pwd)
+    ls | while read i; do
+        cd $i && echo "$i $(git remote update > /dev/null && git status -sb)"
+        cd $cur_dir
+    done
 }
 
 
@@ -118,7 +126,8 @@ function __ssh_or_not {
     else
         case $(ps -o comm= -p $PPID) in
             sshd|*/sshd)
-            remote_hostname=[$HOSTNAME]
+                remote_hostname=[$HOSTNAME]
+                ;;
         esac
     fi
 

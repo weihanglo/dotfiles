@@ -136,7 +136,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>307</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -145,7 +145,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>769 33 445 94 0 0 1280 800 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>275 98 796 473 0 0 1280 800 </string>
+	<string>296 131 918 495 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1280 800 0 0 1280 800 </string>
 	<key>New Bookmarks</key>
@@ -410,7 +410,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>Advanced</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -930,7 +930,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
@@ -946,7 +946,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>E0FBC6DF-BDB5-4087-B458-EEFF4B9ADCC1</string>
 	<key>NoSyncLastTipTime</key>
-	<real>490603033.776402</real>
+	<real>491412232.31476098</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -958,6 +958,14 @@
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
+		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
+		<string>0004</string>
+		<string>0005</string>
+		<string>0006</string>
+		<string>0007</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -1025,7 +1033,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-19T06:37:15Z</date>
+	<date>2016-07-29T09:54:50Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

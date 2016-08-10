@@ -30,5 +30,5 @@
 	br = branch -vv
 	cp = cherry-pick
 	rb = rebase -i
-	df = diff
+	df = difftool
 	ss = stash
