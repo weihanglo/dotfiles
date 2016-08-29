@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 4.3   #
 #            by Weihang Lo             #
-#              July 2016               #
+#             August 2016              #
 #--------------------------------------#
 
 # Source global definitions
@@ -35,13 +35,12 @@ alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias ipn='jupyter notebook'
 alias py3='python3'
-alias nv='nvim'
 
 if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
-function source_nvm {
+function load_nvm {
     [[ $(uname) == "Darwin" ]] && . $(brew --prefix nvm)/nvm.sh
 }
 
@@ -49,9 +48,9 @@ function pkgupdate {
     if [[ $(uname) == "Darwin" ]]; then
         brew update && brew upgrade
     elif [[ -f /etc/debian_version ]]; then
-        sudo apt-get -y update && sudo apt-get -y upgrade
+        sudo apt-get update -y && sudo apt-get upgrade -y
     else
-        sudo dnf -y update
+        sudo dnf upgrade -y
     fi
 }
 
@@ -61,10 +60,10 @@ function podreinstall {
 
 # Update all Git repository under current directory
 function repoupdate {
-    local cur_dir=$(pwd)
     ls | while read i; do
-        cd $i && echo "$i $(git remote update > /dev/null && git status -sb)"
-        cd $cur_dir
+        pushd $i > /dev/null
+        echo "$i $(git remote update > /dev/null && git status -sb)"
+        popd > /dev/null
     done
 }
 
@@ -111,10 +110,6 @@ else
     [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 fi
-
-# Shell Options
-shopt -s autocd
-shopt -s cdspell
 
 
 #---------------------------------------

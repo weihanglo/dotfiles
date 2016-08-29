@@ -77,7 +77,7 @@ augroup END
 " for web development
 augroup filetype_web
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html}
+    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html,yaml,yml,toml}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 " }}}
@@ -157,7 +157,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jpalardy/vim-slime'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 
 call plug#end()

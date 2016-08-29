@@ -47,7 +47,8 @@ silent qmark b https://bitbucket.org
 silent qmark c https://calendar.google.com
 silent qmark f https://feedly.com
 silent qmark g https://github.com
+silent qmark h https://hub.docker.com
 silent qmark j https://jira-rd.hyweb.com.tw
-silent qmark m https://www.messenger.com
+silent qmark m https://www.meetup.com
 silent qmark p https://getpocket.com
 silent qmark w cwb.gov.tw
