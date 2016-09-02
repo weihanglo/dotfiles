@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 4.3   #
 #            by Weihang Lo             #
-#             August 2016              #
+#           September  2016            #
 #--------------------------------------#
 
 # Source global definitions
@@ -40,11 +40,7 @@ if [[ $(which vimx) ]]; then
     alias vim='vimx'
 fi
 
-function load_nvm {
-    [[ $(uname) == "Darwin" ]] && . $(brew --prefix nvm)/nvm.sh
-}
-
-function pkgupdate {
+pkgupdate() {
     if [[ $(uname) == "Darwin" ]]; then
         brew update && brew upgrade
     elif [[ -f /etc/debian_version ]]; then
@@ -54,12 +50,12 @@ function pkgupdate {
     fi
 }
 
-function podreinstall {
+podreinstall() {
     [ -d Pods ] && rm -rf Pods Podfile.lock *.xcworkspace && pod install
 }
 
 # Update all Git repository under current directory
-function repoupdate {
+repoupdate() {
     ls | while read i; do
         pushd $i > /dev/null
         echo "$i $(git remote update > /dev/null && git status -sb)"
@@ -101,11 +97,32 @@ fi
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
-# NVM PATH (mac only) ------------------
+# NVM PATH and lazy loading ------------
+# (macOS only)
 export NVM_DIR=$HOME/.nvm
 
+nvm() {
+    unset -f nvm
+    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
+    [ -s $_NVM_SH ] && . $_NVM_SH
+    nvm $@
+}
+
+node() {
+    unset -f node
+    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
+    [ -s $_NVM_SH ] && . $_NVM_SH
+    node $@
+}
+
+npm() {
+    unset -f npm
+    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
+    [ -s $_NVM_SH ] && . $_NVM_SH
+    npm $@
+}
+
 # History setting ----------------------
-export HISTFILESIZE=
 export HISTSIZE=
 export HISTCONTROL=ignoreboth
 export PROMPT_COMMAND='history -a'
@@ -123,7 +140,7 @@ fi
 #---------------------------------------
 # Enhanced prompt
 #---------------------------------------
-function __ssh_or_not {
+__ssh_or_not() {
     if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
         remote_hostname=[$HOSTNAME]
     else
@@ -137,12 +154,12 @@ function __ssh_or_not {
     echo ${remote_hostname}
 }
 
-function __git_branch {
+__git_branch() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     echo "( "${ref#refs/heads/}")"
 }
 
-function __git_last_commit {
+__git_last_commit() {
     now=$(date +%s);
     last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
     seconds=$((now-last_commit))
