@@ -36,9 +36,8 @@ alias ipy='ipython3'
 alias ipn='jupyter notebook'
 alias py3='python3'
 
-if [[ $(which vimx) ]]; then
-    alias vim='vimx'
-fi
+[[ $(which atom-beta) ]] && alias atom='atom-beta'
+[[ $(which vimx) ]] && alias vim='vimx'
 
 pkgupdate() {
     if [[ $(uname) == "Darwin" ]]; then
