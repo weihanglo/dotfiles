@@ -66,6 +66,9 @@ repoupdate() {
 #---------------------------------------
 # Environment variables and configs
 #---------------------------------------
+# LESS pager
+export LESS="isFMRX"
+
 # Aditional PATHs
 export PATH=$HOME/.local/bin:$PATH
 
