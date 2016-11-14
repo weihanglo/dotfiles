@@ -226,7 +226,6 @@ let g:tmuxline_preset = {
     \'a'    : '#S',
     \'cwin' : ['#F#I', '#W'],
     \'win'  : ['#F#I', '#W'],
-    \'x'    : '#(uptime | rev | cut -d":" -f1 | rev | sed s/,//g)',
     \'y'    : ['%R', '%b %d'],
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
