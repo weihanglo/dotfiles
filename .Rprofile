@@ -1,12 +1,13 @@
 #-----------------------------------------------------------------------------#
 #                                   Rprofile                                  #
 #                                                                             #
-#            Modified at Tue Jul 19 21:21:24 CST 2016 by Weihang Lo           #
+#            Modified at Mon Nov 14 18:19:37 CST 2016 by Weihang Lo           #
 #-----------------------------------------------------------------------------#
 
-if (interactive()) {
-#interactive load .Rprofile START
+if (!interactive())
+    return()
 
+#interactive load .Rprofile ---------------------------------------------------
 
 #-----------------------------
 # Autoload packages
@@ -27,46 +28,6 @@ if (Sys.getenv("NVIMR_TMPDIR") != "") {
 autoload("fread", "data.table")
 autoload("microbenchmark", "microbenchmark")
 message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
-
-
-#-----------------------------
-# Useful packages list
-#-----------------------------
-
-#---Prerequisite---
-#install.packages("devtools")
-#devtools::install_github("jalvesaq/colorout")
-#devtools::install_github("jalvesaq/nvimcom")
-
-#---General---
-# doParallel
-# data.table
-# microbenchmark
-# rmarkdown
-
-#---Plot---
-# plotly
-# ggplot2
-# animation
-
-#---Spatial analysis---
-# spatstat
-# raster
-# rgeos
-# rgdal
-# ggmap
-# leaflet
-
-#---Web related---
-# RCurl
-# rvest
-# jsonlite
-
-#---Text mining---
-# tm
-# tmcn
-# jiebaR
-# wordcloud
 
 #-----------------------------
 # Set options
@@ -126,7 +87,4 @@ options(continue = ". ")
 .Last <- function() {
     try(utils::savehistory("~/.Rhistory"))
     message("\nExit R session at ", date())
-}
-
-#interactive load .Rprofile END
 }
