@@ -12,9 +12,9 @@
 #---------------------------------------
 # User specific aliases and functions
 #---------------------------------------
-alias cdd='cd ~/Desktop/'
-alias cdl='cd ~/Downloads/'
-alias cdw='cd ~/Documents/works/Git/'
+alias cdd='cd $HOME/Desktop/'
+alias cdc='cd $HOME/Documents/'
+alias cdl='cd $HOME/Downloads/'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -74,6 +74,11 @@ export PATH=$HOME/.local/bin:$PATH
 
 # SSH servers
 export FML='lowh@fml1.fo.ntu.edu.tw'
+
+# Bookmark manager '.bm.sh'
+export BOOKMARKPATH=$HOME/.bookmarks
+[ -f $HOME/.bm.sh ] && . $HOME/.bm.sh
+
 
 # EDITOR and VISUAL
 if [[ -f $(which 'nvim') ]]; then

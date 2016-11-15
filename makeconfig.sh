@@ -23,9 +23,12 @@ function neovim_init {
 
 
 ## put config/dir your want to sync in this variable
-files=".bashrc .vimrc .vimperatorrc .vimperator/colors/solarized_dark.vimp \
-    .tmux.conf .Rprofile .pythonrc.py .inputrc .gitignore .gitconfig \
-    .ipython/profile_default/ipython_config.py .config/nvim/init.vim .xvimrc"
+files="\
+    .bashrc .inputrc .tmux.conf .bm.sh\
+    .gitignore .gitconfig \
+    .vimrc .vimperatorrc .vimperator/colors/solarized_dark.vimp \
+    .config/nvim/init.vim .xvimrc \
+    .Rprofile .pythonrc.py .ipython/profile_default/ipython_config.py"
 
 
 echo -n "Creating $origdir for backup ..."
