@@ -34,6 +34,7 @@ function bm() {
 
         rm|remove) shift
             [ -z $1 ] && echo -e "\e[31mError:\e[0m missing arg 'bookmark'" \
+                && return 1
             rm -i "$BOOKMARKPATH/$1" || echo "No such bookmark: $1"
             ;;
 
