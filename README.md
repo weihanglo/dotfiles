@@ -22,7 +22,9 @@ Configure your favorite tools with `git clone`!
 - [iTerm2](https://www.iterm2.com)
 - [Vimperator](http://www.vimperator.org)
 - [XVim](http://xvim.org)
+- [nvm](https://github.com/creationix/nvm)
 - [IPython](https://ipython.org)
+- [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org)
 
 Want to share your config file? 
 Feel free to create an issue or pull request!
