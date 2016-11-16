@@ -12,9 +12,6 @@
 #---------------------------------------
 # User specific aliases and functions
 #---------------------------------------
-alias cdd='cd $HOME/Desktop/'
-alias cdc='cd $HOME/Documents/'
-alias cdl='cd $HOME/Downloads/'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -188,13 +185,13 @@ __git_last_commit() {
 
 PS1="\`
     if [[ \$? = 0 ]]; then
-        echo \[\e[1m\]\[\e[32m\]\W \
+        echo \[\e[1\;32m\]\W \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \➤ \[\e[m\]
+        \➤ \[\e[0m\]
     else
-        echo \[\e[1m\]\[\e[31m\]\W \
+        echo \[\e[1\;31m\]\W \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \➤ \[\e[m\]
+        \➤ \[\e[0m\]
     fi\` "
 
 PS2='... '

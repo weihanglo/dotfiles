@@ -16,7 +16,7 @@ function bm() {
     local USAGE="Usage: bm [add|go|rm|ls] [bookmark]"
 
     if  [ -z ${BOOKMARKPATH} ] ; then
-        echo "Error: environment variable 'BOOKMARKPATH' not found."
+        echo "\e[31mError:\e[0m environment variable 'BOOKMARKPATH' not found."
         return 1
     fi
 
@@ -27,10 +27,13 @@ function bm() {
             ;;
 
         g|go) shift
+            [ -z $1 ] && echo -e "\e[31mError:\e[0m missing arg 'bookmark'" \
+                && return 1
             cd -P "$BOOKMARKPATH/$1" 2>/dev/null || echo "No such bookmark: $1"
             ;;
 
         rm|remove) shift
+            [ -z $1 ] && echo -e "\e[31mError:\e[0m missing arg 'bookmark'" \
             rm -i "$BOOKMARKPATH/$1" || echo "No such bookmark: $1"
             ;;
 
