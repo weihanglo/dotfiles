@@ -77,7 +77,7 @@ export FML='lowh@fml1.fo.ntu.edu.tw'
 
 # Bookmark manager '.bm.sh'
 export BOOKMARKPATH=$HOME/.bookmarks
-[ -f $HOME/.bm.sh ] && . $HOME/.bm.sh
+[ -f $HOME/.bm.bash ] && . $HOME/.bm.bash
 
 
 # EDITOR and VISUAL

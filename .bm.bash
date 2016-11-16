@@ -13,7 +13,7 @@
 # http://stackoverflow.com/questions/7374534/directory-bookmarking-for-bash
 
 function bm() {
-    USAGE="Usage: bm [add|go|rm|ls] [bookmark]"
+    local USAGE="Usage: bm [add|go|rm|ls] [bookmark]"
 
     if  [ -z ${BOOKMARKPATH} ] ; then
         echo "Error: environment variable 'BOOKMARKPATH' not found."
@@ -23,22 +23,50 @@ function bm() {
     case $1 in
 
         a|add) shift
-            mkdir -p "$BOOKMARKPATH" && ln -s "$(pwd)" "$BOOKMARKPATH/$1"
+            mkdir -p "$BOOKMARKPATH" && ln -is "$(pwd)" "$BOOKMARKPATH/$1"
             ;;
 
         g|go) shift
             cd -P "$BOOKMARKPATH/$1" 2>/dev/null || echo "No such bookmark: $1"
             ;;
 
-        rm) shift
+        rm|remove) shift
             rm -i "$BOOKMARKPATH/$1" || echo "No such bookmark: $1"
             ;;
 
         ls|list)
-            ls -l $BOOKMARKPATH | awk 'NR > 1 { print $9, "->", $11}'
+            ls -lA $BOOKMARKPATH | grep "\->" | \
+                awk 'NR > 0 { printf "%-20s -> %s\n", $9, $11}'
             ;;
 
-        *) echo "$USAGE"
+        *)
+            echo "$USAGE"
             ;;
     esac
 }
+
+
+# bash completion -----------------
+
+__bm_completion() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    case ${COMP_CWORD} in 
+        1)
+            COMPREPLY=($(compgen -W "add go rm ls" ${cur}))
+            ;;
+
+        2)
+            case ${prev} in
+                g|go|rm|remove)
+                    local words
+                    words=$(find $BOOKMARKPATH -type l -exec basename {} ';')
+                    COMPREPLY=($(compgen -W "$words" ${cur}))
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+complete -F __bm_completion bm

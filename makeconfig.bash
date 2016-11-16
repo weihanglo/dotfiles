@@ -21,10 +21,23 @@ function neovim_init {
 }
 
 
+function add_bm_completion {
+    if [[ $(uname) == "Darwin" ]]; then
+        [ -d $(brew --prefix)/etc/bash_completion.d ] && \
+        ln -s $HOME/.bm.bash \
+            "$(brew --prefix)/etc/bash_completion.d/bm.bash"
+    else
+        [ $PS1 && -d /etc/bash_completion.d ] && \
+        ln -s $HOME/.bm.bash /etc/bash_completion.d/bm.bash
+    fi
+}
+
+
+
 
 ## put config/dir your want to sync in this variable
 files="\
-    .bashrc .inputrc .tmux.conf .bm.sh\
+    .bashrc .inputrc .tmux.conf .bm.bash \
     .gitignore .gitconfig \
     .vimrc .vimperatorrc .vimperator/colors/solarized_dark.vimp \
     .config/nvim/init.vim .xvimrc \
@@ -56,10 +69,10 @@ confirm () {
     read -r -p "${3:-Confirm $1? [y/N]} " response
     case $response in
         [yY][eE][sS]|[yY])
-        $2
+            $2
             ;;
         *)
-        echo "Operation aborted."
+            echo "Operation aborted."
             ;;
     esac
     echo
@@ -77,3 +90,5 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 confirm "Replace .vimrc by neovim's init.vim" neovim_init
+
+confirm "Add bash-completion for bm (bookmark manager)" add_bm_completion
