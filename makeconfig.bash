@@ -24,11 +24,11 @@ function neovim_init {
 function add_bm_completion {
     if [[ $(uname) == "Darwin" ]]; then
         [ -d $(brew --prefix)/etc/bash_completion.d ] && \
-        ln -s $HOME/.bm.bash \
+        ln -is $HOME/.bm.bash \
             "$(brew --prefix)/etc/bash_completion.d/bm.bash"
     else
         [ $PS1 && -d /etc/bash_completion.d ] && \
-        ln -s $HOME/.bm.bash /etc/bash_completion.d/bm.bash
+        ln -is $HOME/.bm.bash /etc/bash_completion.d/bm.bash
     fi
 }
 
