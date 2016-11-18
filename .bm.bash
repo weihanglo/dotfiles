@@ -13,7 +13,7 @@
 # http://stackoverflow.com/questions/7374534/directory-bookmarking-for-bash
 
 function bm() {
-    local USAGE="Usage: bm [add|go|rm|ls] [bookmark]"
+    local USAGE="Usage: bm [add|go|rm|ls] [bookmark ...]"
 
     if  [ -z ${BOOKMARKPATH} ] ; then
         echo "\e[31mError:\e[0m environment variable 'BOOKMARKPATH' not found."
@@ -38,6 +38,13 @@ function bm() {
             rm -i "$BOOKMARKPATH/$1" || echo "No such bookmark: $1"
             ;;
 
+        mv|move) shift
+            [ -z "$1$2" ] && \
+                echo -e "\e[31mError:\e[0m missing arg 'bookmark'" && return 1
+            mv -i "$BOOKMARKPATH/$1" "$BOOKMARKPATH/$2" || \
+                echo "Rename bookmark failed: $1 -> $2"
+            ;;
+
         ls|list)
             ls -lA $BOOKMARKPATH | grep "\->" | \
                 awk 'NR > 0 { printf "%-20s -> %s\n", $9, $11}'
@@ -58,12 +65,12 @@ __bm_completion() {
 
     case ${COMP_CWORD} in 
         1)
-            COMPREPLY=($(compgen -W "add go rm ls" ${cur}))
+            COMPREPLY=($(compgen -W "add go rm mv ls" ${cur}))
             ;;
 
         2)
             case ${prev} in
-                g|go|rm|remove)
+                g|go|rm|remove|mv|move)
                     local words
                     words=$(find $BOOKMARKPATH -type l -exec basename {} ';')
                     COMPREPLY=($(compgen -W "$words" ${cur}))

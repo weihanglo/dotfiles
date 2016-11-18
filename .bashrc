@@ -17,6 +17,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -lhF'
 
+alias sshptt='ssh bbsu@ptt.cc'
 alias sshfml1='ssh -Yp 10022 ${FML}'
 alias sshfml2='ssh -Yp 20022 ${FML}'
 alias sshfml3='ssh -Yp 30022 ${FML}'
