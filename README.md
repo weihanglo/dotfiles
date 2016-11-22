@@ -1,5 +1,5 @@
-Git for Linux Config Files
-==========================
+Linux Configuration Files (Dotfiles)
+====================================
 
 Usage
 -----
@@ -7,7 +7,7 @@ Just clone and run script!
 
 ```bash
 git clone https://github.com/weihanglo/linux-config.git ~/.linux-config
-sh ~/.linux-config/makeconfig.sh
+. ~/.linux-config/makeconfig.bash
 ```
 
 Useful Tools
