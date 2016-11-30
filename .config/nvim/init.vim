@@ -22,6 +22,8 @@ set softtabstop=4
 set expandtab
 set smarttab
 set smartindent
+set splitbelow
+set splitright
 set autoindent
 set linebreak
 set colorcolumn=80

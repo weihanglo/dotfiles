@@ -23,7 +23,9 @@ npm-debug.log
 *.xcuserstate
 *.xcscmblueprint
 *.xcworkspacedata
-Podfile.lock
 xcuserdata
-Pods
+DerivedData
 build
+Pods
+Carthage
+Podfile.lock
