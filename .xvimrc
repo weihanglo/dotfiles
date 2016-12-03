@@ -6,8 +6,9 @@ set hlsearch
 set number
 set relativenumber
 set expandtab
-set clipboard+=unnamed
-set timeoutlen=500
+set clipboard=unnamed
+set blinkcursor
+set timeoutlen=1000
 
 " mapping
 inoremap hh <Esc>
@@ -18,3 +19,6 @@ inoremap kj <Esc>
 
 " XVim only
 set pasteboard
+nnoremap <space>b :xccmd toggleBreakpointAtCurrentLine<CR>
+nnoremap <C-p> :xccmd openQuickly<cr>
+nnoremap <C-t> :xccmd openQuickly<cr>

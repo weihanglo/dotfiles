@@ -88,14 +88,6 @@ augroup END
 " map localleader if necessary
 let maplocalleader = ','
 
-" preview markdown in firefox 
-" dependency: firefox plugin 'Markdown Viewer'
-if has('mac')
-    nnoremap <silent> <localleader>op :!open -a firefox %:p<CR><CR>
-elseif has('unix')
-    nnoremap <silent> <localleader>op :!firefox %:p<CR><CR>
-endif
-
 inoremap hh <Esc>
 inoremap jj <Esc>
 inoremap kk <Esc>
@@ -122,7 +114,7 @@ cnoreabbrev BD! bd!
 cnoreabbrev Nohl nohl
 cnoreabbrev NOhl nohl
 
-"" Move visual block
+" Move visual block
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 
