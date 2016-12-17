@@ -4,8 +4,8 @@
 # Creates symlinks to config files
 #---------------------------------------
 
-dir=$HOME/.linux-config
-origdir=$HOME/.linux-config.orig
+dir=$HOME/.dotfiles
+origdir=$HOME/.dotfiles.orig
 
 # put what you want to pre-install (Vundle, zsh...)
 install_neovim_brew() { 

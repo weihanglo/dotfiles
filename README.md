@@ -1,4 +1,4 @@
-Linux Configuration Files (Dotfiles)
+⚙️ Dotfiles for macOS/Linux!!
 ====================================
 
 Usage
@@ -6,24 +6,25 @@ Usage
 Just clone and run script!
 
 ```bash
-git clone https://github.com/weihanglo/linux-config.git ~/.linux-config
-. ~/.linux-config/makeconfig.bash
+git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
+. ~/.dotfiles/makeconfig.bash
 ```
 
-Useful Tools
-------------
+Tools We Love
+-------------
 
 Configure your favorite tools with `git clone`!
 
+- [Hyper](https://hyper.is)
+- [IPython](https://ipython.org)
 - [Jedi](http://jedi.jedidjah.ch)
 - [Neovim](https://neovim.io)
-- [fzf](https://github.com/junegunn/fzf)
-- [tmux](https://tmux.github.io)
-- [iTerm2](https://www.iterm2.com)
 - [Vimperator](http://www.vimperator.org)
 - [XVim](http://xvim.org)
+- [FZF](https://github.com/junegunn/fzf)
+- [iTerm2](https://www.iterm2.com)
 - [nvm](https://github.com/creationix/nvm)
-- [IPython](https://ipython.org)
+- [tmux](https://tmux.github.io)
 - [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org)
 
 Want to share your config file? 
