@@ -39,8 +39,7 @@ function add_bm_completion {
 files="\
     .bashrc .inputrc .tmux.conf .bm.bash \
     .gitignore .gitconfig \
-    .vimrc .vimperatorrc .vimperator/colors/solarized_dark.vimp \
-    .config/nvim/init.vim .xvimrc \
+    .vimrc .config/nvim/init.vim .xvimrc \
     .Rprofile .pythonrc.py .ipython/profile_default/ipython_config.py"
 
 
