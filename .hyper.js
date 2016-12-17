@@ -16,7 +16,7 @@ module.exports = {
     foregroundColor: 'white',
 
     // terminal background color
-    backgroundColor: 'rgba(1, 1, 1, .8)',
+    backgroundColor: 'rgba(1,1,1,0.6)',
 
     // border color (window, tabs)
     borderColor: 'rgba(255,255,255,0.1)',
@@ -30,12 +30,12 @@ module.exports = {
     // set to `true` if you're using a Linux set up
     // that doesn't shows native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
-    showHamburgerMenu: 'true',
+    showHamburgerMenu: '',
 
     // set to `false` if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
     // default: `true` on windows and Linux (ignored on macOS)
-    showWindowControls: 'false',
+    showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: '0',
@@ -79,6 +79,9 @@ module.exports = {
     // if true, selected text will automatically be copied to the clipboard
     copyOnSelect: false
 
+    // URL to custom bell
+    // bellSoundURL: 'http://example.com/bell.mp3',
+
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
@@ -90,8 +93,7 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     'hyper-blink',
-    'hyper-autohide-tabs',
-    'hyperterm-cursor'
+//    'hyper-autohide-tabs',
   ],
 
   // in development, you can create a directory under
