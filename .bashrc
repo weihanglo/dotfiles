@@ -107,31 +107,29 @@ export PATH=$GEM_HOME/bin:$PATH
 # (macOS only)
 export NVM_DIR=$HOME/.nvm
 
-nvm() {
-    unset -f nvm
+__load_nvm_lazy() {
+    unset -f $1
     local _NVM_SH=$(brew --prefix nvm)/nvm.sh
     [ -s $_NVM_SH ] && . $_NVM_SH
-    nvm $@
+    $@
 }
 
-node() {
-    unset -f node
-    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
-    [ -s $_NVM_SH ] && . $_NVM_SH
-    node $@
-}
-
-npm() {
-    unset -f npm
-    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
-    [ -s $_NVM_SH ] && . $_NVM_SH
-    npm $@
-}
+npm() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
+nvm() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
+node() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
+yarn() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
+gulp() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
 
 # History setting ----------------------
 export HISTSIZE=
 export HISTCONTROL=ignoreboth
 export PROMPT_COMMAND='history -a'
+showhistory() {
+    local limit=$([[ $1 =~ ^[0-9]+$ ]] && echo $1 || echo 10)
+    history | awk '{CMD[$2]++;count++;}END \
+        { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
+        grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n"$limit"
+}
 
 # Bash completion ----------------------
 if [[ $(uname) == "Darwin" ]]; then

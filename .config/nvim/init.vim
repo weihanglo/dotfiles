@@ -138,18 +138,18 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'bling/vim-airline'
-Plug 'weihanglo/tmuxline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0ng/vim-hybrid'
+Plug 'weihanglo/tmuxline.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jpalardy/vim-slime'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
@@ -162,6 +162,7 @@ call plug#end()
 " hybrid
 set background=dark
 colorscheme hybrid
+"hi Normal ctermbg=none
 " }}}
 
 " vim-multiple-cursors {{{
@@ -187,7 +188,7 @@ if !exists("*RConfig")
             let Rout_more_colors = 1
             let R_assign = 0
             let R_args = ['--no-save', '--no-restore', '--quiet']
-            inoremap <C-Space> <C-x><C-o>
+"            inoremap <C-Space> <C-x><C-o>      " conflicts with ctrl-space
         endif
     endfunction
 endif
@@ -203,20 +204,45 @@ let g:slime_paste_file = tempname()
 
 " airline {{{
 " theme
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '»'
+let g:airline_left_sep = ' '
+let g:airline_right_sep = '«'
+let g:airline_right_sep = ' '
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.branch = ''
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_theme='hybrid'
 
 " integration
-let g:airline#extensions#tabline#enabled = 1            " tabline
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#enabled = 1             " fugitive
 let g:airline#extensions#csv#column_display = 'Name'    " csv.vim
-let g:airline#extensions#ctrlspace#enabled = 1          " ctrlspace
+let g:airline#extensions#tabline#enabled = 1            " tabline
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#buffer_nr_format = '%s '
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
 " }}}
 
 " tmuxline {{{
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '»',
+    \ 'right' : '',
+    \ 'right_alt' : '«',
+    \ 'space' : ' '}
 let g:tmuxline_preset = {
     \'a'    : '#S',
     \'cwin' : ['#F#I', '#W'],

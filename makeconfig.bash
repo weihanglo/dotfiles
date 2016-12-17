@@ -8,20 +8,20 @@ dir=$HOME/.linux-config
 origdir=$HOME/.linux-config.orig
 
 # put what you want to pre-install (Vundle, zsh...)
-function install_neovim_brew { 
+install_neovim_brew() { 
     brew install neovim/neovim/neovim 
 }
 
-function install_nvim_python { 
+install_nvim_python() { 
     pip3 install neovim 
 }
 
-function neovim_init {
+neovim_init() {
     ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
 }
 
 
-function add_bm_completion {
+add_bm_completion() {
     if [[ $(uname) == "Darwin" ]]; then
         [ -d $(brew --prefix)/etc/bash_completion.d ] && \
         ln -is $HOME/.bm.bash \
@@ -37,7 +37,7 @@ function add_bm_completion {
 
 ## put config/dir your want to sync in this variable
 files="\
-    .bashrc .inputrc .tmux.conf .bm.bash \
+    .bashrc .inputrc .tmux.conf .bm.bash .hyper.js\
     .gitignore .gitconfig \
     .vimrc .config/nvim/init.vim .xvimrc \
     .Rprofile .pythonrc.py .ipython/profile_default/ipython_config.py"
