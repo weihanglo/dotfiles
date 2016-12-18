@@ -1,7 +1,8 @@
 " General {{{
 "set encoding=utf-8
 set mouse=a
-set nocompatible
+"set nocompatible
+set termguicolors " neovim
 set hidden
 set laststatus=2
 set showmatch
@@ -30,7 +31,7 @@ set colorcolumn=80
 set timeoutlen=500
 set winminheight=0
 set backspace=indent,eol,start
-set clipboard=unnamed,unnamedplus
+set clipboard+=unnamed,unnamedplus
 set dictionary+=/usr/share/dict/words
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 set wildmenu wildmode=longest:full,full
