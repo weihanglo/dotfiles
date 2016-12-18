@@ -1,8 +1,6 @@
 " General {{{
-"set encoding=utf-8
 set mouse=a
-"set nocompatible
-set termguicolors " neovim
+set termguicolors
 set hidden
 set laststatus=2
 set showmatch
