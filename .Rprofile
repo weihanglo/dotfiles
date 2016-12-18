@@ -1,17 +1,14 @@
 #-----------------------------------------------------------------------------#
 #                                   Rprofile                                  #
 #                                                                             #
-#            Modified at Mon Nov 14 18:19:37 CST 2016 by Weihang Lo           #
+#            Modified at Sun Dec 18 16:37:21 CST 2016 by Weihang Lo           #
 #-----------------------------------------------------------------------------#
 
-if (!interactive())
-    return()
+if (!interactive()) { return() }
 
 #interactive load .Rprofile ---------------------------------------------------
 
-#-----------------------------
-# Autoload packages
-#-----------------------------
+# Autoload packages --------------------
 if (library(colorout, logical.return = TRUE)) {
     message(base::sprintf("colorout %s loaded",
         as.character(utils::packageVersion("colorout"))))
@@ -22,16 +19,7 @@ if (Sys.getenv("NVIMR_TMPDIR") != "") {
     library(nvimcom)
 }
 
-#-----------------------------
-# Autoload functions
-#-----------------------------
-autoload("fread", "data.table")
-autoload("microbenchmark", "microbenchmark")
-message("\nAutoloaded Functions...\n", paste("\n--", ls("Autoloads")))
-
-#-----------------------------
-# Set options
-#-----------------------------
+# Set options --------------------------
 
 #---Set CRAN mirror---
 local({
@@ -43,12 +31,7 @@ local({
 #---Set prompt---
 options(continue = ". ")
 
-#-----------------------------
-# Convenient function
-#-----------------------------
-
-#---rm all---
-.rm <- function(...) rm(list=ls(1), pos=1, ...)
+# Convenient function ------------------
 
 #---Improved ls---
 .ls <- function (pos = 1, pattern, order.by, decreasing=FALSE) {
@@ -70,14 +53,11 @@ options(continue = ". ")
     out <- data.frame(obj.type, obj.size, obj.dim)
     names(out) <- c("Type", "Size", "Rows", "Columns")
 
-    if (!missing(order.by)) out <- out[order(out[[order.by]]), ]
+    if (!missing(order.by)) { out <- out[order(out[[order.by]]), ] }
     out
 }
 
-
-#-----------------------------
-# Start & Exit
-#-----------------------------
+# Start & Exit -------------------------
 
 .First <- function() {
     try(utils::loadhistory("~/.Rhistory"))
