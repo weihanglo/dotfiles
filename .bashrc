@@ -16,6 +16,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -lhF'
+alias grep='grep --color'
 
 alias sshptt='ssh bbsu@ptt.cc'
 alias sshptt2='ssh bbsu@ptt2.cc'
@@ -38,7 +39,7 @@ alias py3='python3'
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
 [[ $(which vimx) ]] && alias vim='vimx'
 
-pkgupdate() {
+update() {
     if [[ $(uname) == "Darwin" ]]; then
         brew update && brew upgrade
     elif [[ -f /etc/debian_version ]]; then
@@ -48,12 +49,12 @@ pkgupdate() {
     fi
 }
 
-podreinstall() {
+pod_reinstall() {
     [ -d Pods ] && rm -rf Pods Podfile.lock *.xcworkspace && pod install
 }
 
 # Update all Git repository under current directory
-repoupdate() {
+repo_update() {
     ls | while read i; do
         pushd $i > /dev/null
         echo "$i $(git remote update > /dev/null && git status -sb)"
@@ -187,11 +188,11 @@ PS1="\`
     if [[ \$? = 0 ]]; then
         echo \[\e[1\;32m\]\W \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \➤ \[\e[0m\]
+        \😀 \[\e[0m\]
     else
         echo \[\e[1\;31m\]\W \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \➤ \[\e[0m\]
+        \😱 \[\e[0m\]
     fi\` "
 
 PS2='... '
@@ -202,7 +203,6 @@ PS2='... '
 if [[ $(uname) == "Darwin" ]]; then
     alias ls='ls -G'
 
-    # Change locale
     export LANG=en_US.UTF-8¬
     export LC_ALL=en_US.UTF-8
 fi
