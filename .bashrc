@@ -108,18 +108,17 @@ export PATH=$GEM_HOME/bin:$PATH
 # (macOS only)
 export NVM_DIR=$HOME/.nvm
 
-__load_nvm_lazy() {
-    unset -f $1
+__lazy_nvm() {
+    unset -f nvm node npm yarn gulp
     local _NVM_SH=$(brew --prefix nvm)/nvm.sh
     [ -s $_NVM_SH ] && . $_NVM_SH
-    $@
 }
 
-npm() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
-nvm() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
-node() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
-yarn() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
-gulp() { __load_nvm_lazy ${FUNCNAME[0]} "$@"; }
+npm() { __lazy_nvm; npm $@; }
+nvm() { __lazy_nvm; nvm $@; }
+node() { __lazy_nvm; node $@; }
+yarn() { __lazy_nvm; yarn $@; }
+gulp() { __lazy_nvm; gulp $@; }
 
 # History setting ----------------------
 export HISTSIZE=
@@ -161,7 +160,7 @@ __ssh_or_not() {
 
 __git_branch() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "( "${ref#refs/heads/}")"
+    echo "( ${ref#refs/heads/})"
 }
 
 __git_last_commit() {
