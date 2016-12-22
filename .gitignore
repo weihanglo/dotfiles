@@ -13,7 +13,7 @@ __pycache__
 node_modules
 npm-debug.log
 
-.cs_files
+build
 
 
 #-------------------
@@ -25,7 +25,6 @@ npm-debug.log
 *.xcworkspacedata
 xcuserdata
 DerivedData
-build
 Pods
 Carthage
 Podfile.lock
