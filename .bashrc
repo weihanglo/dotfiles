@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #--------------------------------------#
-#  .bashrc for GNU bash, version 4.3   #
+#  .bashrc for GNU bash, version 4.4   #
 #            by Weihang Lo             #
-#           September  2016            #
+#              Dec. 2016               #
 #--------------------------------------#
 
 # Source global definitions
@@ -166,7 +166,7 @@ __git_branch() {
 __git_last_commit() {
     now=$(date +%s);
     last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
-    seconds=$((now-last_commit))
+    seconds=$((now - last_commit))
     minutes=$((seconds / 60))
     hours=$((minutes  / 60))
     days=$((hours / 24))
@@ -202,7 +202,7 @@ PS2='... '
 if [[ $(uname) == "Darwin" ]]; then
     alias ls='ls -G'
 
-    export LANG=en_US.UTF-8¬
+    export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
 fi
 
