@@ -89,8 +89,8 @@ else
     export VISUAL=vim EDITOR=vim
 fi
 
-# Python3 startup ----------------------
-[[ -f $HOME/.pythonrc.py ]] && export PYTHONSTARTUP=$HOME/.pythonrc.py
+# Python3 configurations ---------------
+#[[ -f $HOME/.pythonrc.py ]] && export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # Python3 virtualenvwrapper
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
