@@ -16,16 +16,12 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -lhF'
-alias grep='grep --color'
 
 alias sshptt='ssh bbsu@ptt.cc'
 alias sshptt2='ssh bbsu@ptt2.cc'
 alias sshfml1='ssh -Yp 10022 ${FML}'
 alias sshfml2='ssh -Yp 20022 ${FML}'
 alias sshfml3='ssh -Yp 30022 ${FML}'
-alias sftpfml1='sftp -P 10022 ${FML}'
-alias sftpfml2='sftp -P 20022 ${FML}'
-alias sftpfml3='sftp -P 30022 ${FML}'
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias pyserver='python3 -m http.server'
@@ -39,16 +35,6 @@ alias py3='python3'
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
 [[ $(which vimx) ]] && alias vim='vimx'
 
-update() {
-    if [[ $(uname) == "Darwin" ]]; then
-        brew update && brew upgrade
-    elif [[ -f /etc/debian_version ]]; then
-        sudo apt-get update -y && sudo apt-get upgrade -y
-    else
-        sudo dnf upgrade -y
-    fi
-}
-
 pod_reinstall() {
     [ -d Pods ] && rm -rf Pods Podfile.lock *.xcworkspace && pod install
 }
@@ -59,6 +45,7 @@ repo_update() {
         pushd $i > /dev/null
         echo "$i $(git remote update > /dev/null && git status -sb)"
         popd > /dev/null
+        echo
     done
 }
 
@@ -75,7 +62,7 @@ export PATH=$HOME/.local/bin:$PATH
 # SSH servers
 export FML='lowh@fml1.fo.ntu.edu.tw'
 
-# Bookmark manager '.bm.sh'
+# Bookmark manager '.bm.bash'
 export BOOKMARKPATH=$HOME/.bookmarks
 [ -f $HOME/.bm.bash ] && . $HOME/.bm.bash
 
@@ -90,12 +77,17 @@ else
 fi
 
 # Python3 configurations ---------------
-#[[ -f $HOME/.pythonrc.py ]] && export PYTHONSTARTUP=$HOME/.pythonrc.py
+# pyenv
+pyenv() {
+    unset -f pyenv
+    source <(pyenv init -)
+    pyenv $@
+}
 
 # Python3 virtualenvwrapper
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
     export WORKON_HOME=$HOME/.virtualenvs
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+    export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
     export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
     source /usr/local/bin/virtualenvwrapper_lazy.sh
 fi
@@ -103,6 +95,11 @@ fi
 # Ruby GEM_PATH ------------------------
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
+
+# Run local npm executable
+npm_exec() {
+    $(npm bin)/ $@ 
+}
 
 # NVM PATH and lazy loading ------------
 # (macOS only)
@@ -124,12 +121,6 @@ gulp() { __lazy_nvm; gulp $@; }
 export HISTSIZE=
 export HISTCONTROL=ignoreboth
 export PROMPT_COMMAND='history -a'
-showhistory() {
-    local limit=$([[ $1 =~ ^[0-9]+$ ]] && echo $1 || echo 10)
-    history | awk '{CMD[$2]++;count++;}END \
-        { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
-        grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n"$limit"
-}
 
 # Bash completion ----------------------
 if [[ $(uname) == "Darwin" ]]; then
@@ -187,11 +178,11 @@ PS1="\`
     if [[ \$? = 0 ]]; then
         echo \[\e[1\;32m\]\W \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \😀 \[\e[0m\]
+        \☻ \[\e[0m\]
     else
         echo \[\e[1\;31m\]\W \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \😱 \[\e[0m\]
+        \✘ \[\e[0m\]
     fi\` "
 
 PS2='... '

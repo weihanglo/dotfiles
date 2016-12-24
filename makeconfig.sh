@@ -24,11 +24,11 @@ neovim_init() {
 add_bm_completion() {
     if [[ $(uname) == "Darwin" ]]; then
         [ -d $(brew --prefix)/etc/bash_completion.d ] && \
-        ln -is $HOME/.bm.bash \
-            "$(brew --prefix)/etc/bash_completion.d/bm.bash"
+        ln -is $HOME/.bm.sh \
+            "$(brew --prefix)/etc/bash_completion.d/bm.sh"
     else
         [ $PS1 && -d /etc/bash_completion.d ] && \
-        ln -is $HOME/.bm.bash /etc/bash_completion.d/bm.bash
+        ln -is $HOME/.bm.sh /etc/bash_completion.d/bm.sh
     fi
 }
 
@@ -37,7 +37,7 @@ add_bm_completion() {
 
 ## put config/dir your want to sync in this variable
 files="\
-    .bashrc .inputrc .tmux.conf .bm.bash .hyper.js\
+    .bashrc .inputrc .tmux.conf .bm.sh .hyper.js\
     .gitignore .gitconfig \
     .vimrc .config/nvim/init.vim .xvimrc \
     .Rprofile .pythonrc.py .ipython/profile_default/ipython_config.py"
