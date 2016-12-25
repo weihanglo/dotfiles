@@ -17,8 +17,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -lhF'
 
-alias sshptt='ssh bbsu@ptt.cc'
-alias sshptt2='ssh bbsu@ptt2.cc'
 alias sshfml1='ssh -Yp 10022 ${FML}'
 alias sshfml2='ssh -Yp 20022 ${FML}'
 alias sshfml3='ssh -Yp 30022 ${FML}'
@@ -29,8 +27,6 @@ alias tree='tree -ACF'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
-alias ipn='jupyter notebook'
-alias py3='python3'
 
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
 [[ $(which vimx) ]] && alias vim='vimx'
@@ -64,7 +60,7 @@ export FML='lowh@fml1.fo.ntu.edu.tw'
 
 # Bookmark manager '.bm.bash'
 export BOOKMARKPATH=$HOME/.bookmarks
-[ -f $HOME/.bm.bash ] && . $HOME/.bm.bash
+[ -f $HOME/.bm.sh ] && . $HOME/.bm.sh
 
 
 # EDITOR and VISUAL
