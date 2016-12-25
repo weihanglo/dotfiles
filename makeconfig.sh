@@ -27,7 +27,7 @@ add_bm_completion() {
         ln -is $HOME/.bm.sh \
             "$(brew --prefix)/etc/bash_completion.d/bm.sh"
     else
-        [ $PS1 && -d /etc/bash_completion.d ] && \
+        [[ $PS1 && -d /etc/bash_completion.d ]] && \
         ln -is $HOME/.bm.sh /etc/bash_completion.d/bm.sh
     fi
 }

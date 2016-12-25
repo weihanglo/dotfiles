@@ -87,7 +87,7 @@ pyenv() {
 # Python3 virtualenvwrapper
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
     export WORKON_HOME=$HOME/.virtualenvs
-    export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
     export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
     source /usr/local/bin/virtualenvwrapper_lazy.sh
 fi
