@@ -102,16 +102,28 @@ npm_exec() {
 export NVM_DIR=$HOME/.nvm
 
 __lazy_nvm() {
-    unset -f nvm node npm yarn gulp
     local _NVM_SH=$(brew --prefix nvm)/nvm.sh
     [ -s $_NVM_SH ] && . $_NVM_SH
 }
 
-npm() { __lazy_nvm; npm $@; }
-nvm() { __lazy_nvm; nvm $@; }
-node() { __lazy_nvm; node $@; }
-yarn() { __lazy_nvm; yarn $@; }
-gulp() { __lazy_nvm; gulp $@; }
+# load executable in alias=default
+__find_node_globals() {
+    local default=`cat $NVM_DIR/alias/default`
+    local NODE_GLOBALS=(`find \
+        $NVM_DIR/versions/node/$default/bin/ -type l -maxdepth 1 | \
+        xargs -n 1 basename`)
+    NODE_GLOBALS+=("node")
+    NODE_GLOBALS+=("nvm")
+
+    for cmd in "${NODE_GLOBALS[@]}"; do
+        eval "${cmd}(){ unset -f ${NODE_GLOBALS[@]}; __lazy_nvm; ${cmd} \$@; }"
+    done
+
+    unset cmd
+}
+
+__find_node_globals
+
 
 # History setting ----------------------
 export HISTSIZE=
@@ -142,7 +154,7 @@ __ssh_or_not() {
         esac
     fi
 
-    echo ${remote_hostname}
+    echo $remote_hostname
 }
 
 __git_branch() {
@@ -161,13 +173,13 @@ __git_last_commit() {
     minutes=$((minutes % 60))
     hours=$((hours % 24))
 
-    if (( ${days} > 0)); then
+    if (( $days > 0)); then
         last_time="${days}d${hours}h"
     else
         last_time="${hours}h${minutes}m"
     fi
 
-    echo ${last_time}
+    echo $last_time
 }
 
 PS1="\`

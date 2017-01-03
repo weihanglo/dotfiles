@@ -12,7 +12,7 @@
 	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [user]
 	name = Weihang Lo
-	email = b01605002@gmail.com
+	email = weihanglotw@gmail.com
 [color]
 	ui = true
 	diff = true
