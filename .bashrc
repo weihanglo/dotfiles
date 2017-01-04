@@ -159,7 +159,9 @@ __ssh_or_not() {
 
 __git_branch() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "( ${ref#refs/heads/})"
+    status=$([[ $(git status -s) ]] && echo '*')
+    stash=$([[ $(git stash list) ]] && echo '⚑')
+    echo "( ${ref#refs/heads/}$status$stash)"
 }
 
 __git_last_commit() {
