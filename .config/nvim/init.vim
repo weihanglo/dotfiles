@@ -137,22 +137,34 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+" user interface
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0ng/vim-hybrid'
-Plug 'weihanglo/tmuxline.vim'
+Plug 'weihanglo/tmuxline.vim' "forked from 'edkolev/tmuxline'
+
+" fast moves
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+
+" snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
+
+" scm
 Plug 'airblade/vim-gitgutter'
-Plug 'jpalardy/vim-slime'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tpope/vim-fugitive'
+
+" filetype
+Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
-Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
+Plug 'keith/swift', {'for': 'swift'}
 Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
+
+" miscellaneous
+Plug 'jpalardy/vim-slime'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
 " }}}

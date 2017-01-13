@@ -200,6 +200,11 @@ PS2='... '
 #-------------------
 # OSX specified
 #-------------------
+
+# fastlane intergration
+[ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
+
+# local
 if [[ $(uname) == "Darwin" ]]; then
     alias ls='ls -G'
 
