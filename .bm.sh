@@ -16,7 +16,7 @@ function bm() {
     local USAGE="Usage: bm [add|go|rm|ls] [bookmark ...]"
 
     if  [ -z ${BOOKMARKPATH} ] ; then
-        echo "\e[31mError:\e[0m environment variable 'BOOKMARKPATH' not found."
+        echo -e "\e[31mError:\e[0m env variable 'BOOKMARKPATH' not found."
         return 1
     fi
 
