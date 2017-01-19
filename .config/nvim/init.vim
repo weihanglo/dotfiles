@@ -159,7 +159,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
-Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
 
 " miscellaneous
 Plug 'jpalardy/vim-slime'
