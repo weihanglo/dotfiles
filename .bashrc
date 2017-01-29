@@ -29,11 +29,8 @@ alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
+[[ $(which apm-beta) ]] && alias apm='apm-beta'
 [[ $(which vimx) ]] && alias vim='vimx'
-
-pod_reinstall() {
-    [ -d Pods ] && rm -rf Pods Podfile.lock *.xcworkspace && pod install
-}
 
 # Update all Git repository under current directory
 repo_update() {

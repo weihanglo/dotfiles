@@ -260,3 +260,8 @@ let g:tmuxline_preset = {
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
 " }}}
+
+" Python Setup {{{
+let g:loaded_python_provider = 0
+let g:python3_host_prog = '/usr/local/bin/python3'
+" }}}
