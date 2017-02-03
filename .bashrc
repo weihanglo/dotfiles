@@ -17,9 +17,9 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -lhF'
 
-alias sshfml1='ssh -Yp 10022 ${FML}'
-alias sshfml2='ssh -Yp 20022 ${FML}'
-alias sshfml3='ssh -Yp 30022 ${FML}'
+alias sshfml1='ssh -Yp 10022 $FML'
+alias sshfml2='ssh -Yp 20022 $FML'
+alias sshfml3='ssh -Yp 30022 $FML'
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias pyserver='python3 -m http.server'
@@ -195,13 +195,13 @@ PS1="\`
 PS2='... '
 
 #-------------------
-# OSX specified
+# Miscellaneous
 #-------------------
 
 # fastlane intergration
 [ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
 
-# local
+# macOS local
 if [[ $(uname) == "Darwin" ]]; then
     alias ls='ls -G'
 
