@@ -140,8 +140,8 @@ call plug#begin('~/.config/nvim/plugged')
 " user interface
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0ng/vim-hybrid'
 Plug 'weihanglo/tmuxline.vim' "forked from 'edkolev/tmuxline'
+Plug 'joshdick/onedark.vim'
 
 " fast moves
 Plug 'terryma/vim-multiple-cursors'
@@ -156,6 +156,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " filetype
+Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -170,7 +171,7 @@ call plug#end()
 " Colorscheme {{{
 " hybrid
 set background=dark
-colorscheme hybrid
+colorscheme onedark
 "hi Normal ctermbg=none
 " }}}
 
@@ -229,7 +230,7 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_theme='hybrid'
+let g:airline_theme = 'onedark'
 
 " integration
 let g:airline#extensions#whitespace#enabled = 0

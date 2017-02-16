@@ -13,9 +13,6 @@ __pycache__
 node_modules
 npm-debug.log
 
-build
-
-
 #-------------------
 # XCode, iOS dev
 #-------------------
