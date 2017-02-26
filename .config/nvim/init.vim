@@ -78,7 +78,7 @@ augroup END
 " for web development
 augroup filetype_web
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html,yaml,yml,toml}
+    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html,yaml,yml,toml,json}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 " }}}
@@ -163,6 +163,7 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 
 " miscellaneous
 Plug 'jpalardy/vim-slime'
+Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
