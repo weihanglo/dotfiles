@@ -15,6 +15,7 @@ Tools We Love
 
 Configure your favorite tools with `git clone`!
 
+- [Atom](https://atom.io)
 - [Bookmark Manager](.bm.sh)
 - [fastlane](https://fastlane.tools)
 - [FZF](https://github.com/junegunn/fzf)
