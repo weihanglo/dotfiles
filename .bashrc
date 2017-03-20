@@ -195,8 +195,8 @@ PS1="\`
 PS2='... '
 
 # Android Command-line Tools
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+#export ANDROID_HOME=$HOME/Library/Android/sdk
+#export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
 # fastlane intergration
 [ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
