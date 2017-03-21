@@ -37,7 +37,7 @@ add_bm_completion() {
 
 ## put config/dir your want to sync in this variable
 files="\
-    .bashrc .inputrc .tmux.conf .bm.sh .hyper.js\
+    .bashrc .inputrc .tmux.conf .bm.sh .hyper.js .curlrc\
     .gitignore .gitconfig \
     .vimrc .config/nvim/init.vim .xvimrc \
     .Rprofile .pythonrc.py .ipython/profile_default/ipython_config.py"
