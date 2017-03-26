@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 4.4   #
 #            by Weihang Lo             #
-#              Dec. 2016               #
+#              Mar. 2017               #
 #--------------------------------------#
 
 # Source global definitions
@@ -17,12 +17,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -lhF'
 
-alias sshfml1='ssh -Yp 10022 $FML'
-alias sshfml2='ssh -Yp 20022 $FML'
-alias sshfml3='ssh -Yp 30022 $FML'
-
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
-alias pyserver='python3 -m http.server'
 alias tree='tree -ACF'
 
 alias R='R --no-save --no-restore -q'
@@ -51,9 +46,6 @@ export LESS="isFMRX"
 
 # Aditional PATHs
 export PATH=$HOME/.local/bin:$PATH
-
-# SSH servers
-export FML='lowh@fml1.fo.ntu.edu.tw'
 
 # Bookmark manager '.bm.bash'
 export BOOKMARKPATH=$HOME/.bookmarks
@@ -107,7 +99,7 @@ __lazy_nvm() {
 __find_node_globals() {
     local default=`cat $NVM_DIR/alias/default`
     local NODE_GLOBALS=(`find \
-        $NVM_DIR/versions/node/$default/bin/ -type l -maxdepth 1 | \
+        $NVM_DIR/versions/node/$default/bin -type l -maxdepth 1 | \
         xargs -n 1 basename`)
     NODE_GLOBALS+=("node")
     NODE_GLOBALS+=("nvm")
@@ -193,10 +185,6 @@ PS1="\`
     fi\` "
 
 PS2='... '
-
-# Android Command-line Tools
-#export ANDROID_HOME=$HOME/Library/Android/sdk
-#export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
 # fastlane intergration
 [ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
