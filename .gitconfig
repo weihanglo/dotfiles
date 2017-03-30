@@ -35,8 +35,6 @@
 	br = branch -vv
 	cp = cherry-pick
 	rb = rebase -i
-	df = difftool
-	mg = mergetool
 	ss = stash
 	sm = submodule
 [filter "lfs"]
