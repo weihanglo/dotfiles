@@ -27,6 +27,11 @@ alias ipy='ipython3'
 [[ $(which apm-beta) ]] && alias apm='apm-beta'
 [[ $(which vimx) ]] && alias vim='vimx'
 
+# open PTT (the largest BBS in Taiwan)
+ptt() {
+    ssh bbsu@ptt.cc # Unicode
+}
+
 # Update all Git repository under current directory
 repo_update() {
     ls | while read i; do
