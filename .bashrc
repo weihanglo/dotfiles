@@ -88,7 +88,7 @@ export PATH=$GEM_HOME/bin:$PATH
 
 # Run local npm executable
 npm_exec() {
-    $(npm bin)/ $@ 
+    $(npm bin)/$@
 }
 
 # NVM PATH and lazy loading ------------
