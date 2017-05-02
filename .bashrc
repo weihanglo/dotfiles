@@ -87,34 +87,6 @@ npm_exec() {
     $(npm bin)/$@
 }
 
-# NVM PATH and lazy loading ------------
-# (macOS only)
-export NVM_DIR=$HOME/.nvm
-
-__lazy_nvm() {
-    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
-    [ -s $_NVM_SH ] && . $_NVM_SH
-}
-
-# load executable in alias=default
-__find_node_globals() {
-    default=`cat $NVM_DIR/alias/default`
-    NODE_GLOBALS=(`find \
-        $NVM_DIR/versions/node/$default/bin -type l -maxdepth 1 | \
-        xargs -n 1 basename`)
-    NODE_GLOBALS+=("node")
-    NODE_GLOBALS+=("nvm")
-
-    for cmd in "${NODE_GLOBALS[@]}"; do
-        eval "${cmd}(){ unset -f ${NODE_GLOBALS[@]}; __lazy_nvm; ${cmd} \$@; }"
-    done
-
-    unset cmd
-}
-
-__find_node_globals
-
-
 # History setting ----------------------
 export HISTSIZE=
 export HISTCONTROL=ignoreboth
@@ -129,6 +101,30 @@ else
     . /usr/share/bash-completion/bash_completion
 fi
 
+# NVM PATH and lazy loading ------------
+# (macOS only)
+export NVM_DIR=$HOME/.nvm
+
+__lazy_nvm() {
+    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
+    [ -s $_NVM_SH ] && . $_NVM_SH --no-use
+}
+
+# load executable in alias=default
+__find_node_globals() {
+    default=`cat $NVM_DIR/alias/default`
+    NODE_GLOBALS=(`find \
+        $NVM_DIR/versions/node/$default/bin -type l -maxdepth 1 | \
+        xargs -n 1 basename`)
+    NODE_GLOBALS+=("node")
+    NODE_GLOBALS+=("nvm")
+
+    for cmd in "${NODE_GLOBALS[@]}"; do
+        eval "${cmd}(){ unset -f ${NODE_GLOBALS[@]}; __lazy_nvm; ${cmd} \$@; }"
+    done
+}
+
+__find_node_globals # should load after bash completions
 
 #---------------------------------------
 # Enhanced prompt
