@@ -22,15 +22,11 @@ alias tree='tree -ACF'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
+alias ipn='jupyter notebook'
 
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
 [[ $(which apm-beta) ]] && alias apm='apm-beta'
 [[ $(which vimx) ]] && alias vim='vimx'
-
-# open PTT (the largest BBS in Taiwan)
-ptt() {
-    ssh bbsu@ptt.cc # Unicode
-}
 
 # Update all Git repository under current directory
 repo_update() {
@@ -102,8 +98,8 @@ __lazy_nvm() {
 
 # load executable in alias=default
 __find_node_globals() {
-    local default=`cat $NVM_DIR/alias/default`
-    local NODE_GLOBALS=(`find \
+    default=`cat $NVM_DIR/alias/default`
+    NODE_GLOBALS=(`find \
         $NVM_DIR/versions/node/$default/bin -type l -maxdepth 1 | \
         xargs -n 1 basename`)
     NODE_GLOBALS+=("node")
