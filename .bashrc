@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 4.4   #
 #            by Weihang Lo             #
-#              Mar. 2017               #
+#              May. 2017               #
 #--------------------------------------#
 
 # Source global definitions
@@ -23,10 +23,10 @@ alias tree='tree -ACF'
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias ipn='jupyter notebook'
+alias g='git'
 
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
 [[ $(which apm-beta) ]] && alias apm='apm-beta'
-[[ $(which vimx) ]] && alias vim='vimx'
 
 # Update all Git repository under current directory
 repo_update() {
@@ -54,12 +54,20 @@ export BOOKMARKPATH=$HOME/.bookmarks
 
 
 # EDITOR and VISUAL
-if [[ -f $(which 'nvim') ]]; then
-    export VISUAL=nvim EDITOR=nvim
-elif [[ -f $(which 'vimx') ]]; then
-    export VISUAL=vimx EDITOR=vimx
+export VISUAL=nvim EDITOR=nvim
+
+# History setting ----------------------
+export HISTSIZE=
+export HISTCONTROL=ignoreboth
+export PROMPT_COMMAND='history -a'
+
+# Bash completion ----------------------
+if [[ $(uname) == "Darwin" ]]; then
+    [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]] && \
+    . $(brew --prefix)/share/bash-completion/bash_completion
 else
-    export VISUAL=vim EDITOR=vim
+    [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
 fi
 
 # Python3 configurations ---------------
@@ -82,30 +90,17 @@ fi
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
+
+# Node.js environment configuration ----
+
 # Run local npm executable
 npm_exec() {
     $(npm bin)/$@
 }
 
-# History setting ----------------------
-export HISTSIZE=
-export HISTCONTROL=ignoreboth
-export PROMPT_COMMAND='history -a'
-
-# Bash completion ----------------------
-if [[ $(uname) == "Darwin" ]]; then
-    [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]] && \
-    . $(brew --prefix)/share/bash-completion/bash_completion
-else
-    [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
-fi
-
-# NVM PATH and lazy loading ------------
-# (macOS only)
+# NVM PATH and lazy loading
 export NVM_DIR=$HOME/.nvm
-
-__lazy_nvm() {
+__lazy_nvm() { # (macOS only)
     local _NVM_SH=$(brew --prefix nvm)/nvm.sh
     [ -s $_NVM_SH ] && . $_NVM_SH --no-use
 }
@@ -122,9 +117,13 @@ __find_node_globals() {
     for cmd in "${NODE_GLOBALS[@]}"; do
         eval "${cmd}(){ unset -f ${NODE_GLOBALS[@]}; __lazy_nvm; ${cmd} \$@; }"
     done
+    unset cmd
 }
 
 __find_node_globals # should load after bash completions
+
+# fastlane intergration ----------------
+[ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
 
 #---------------------------------------
 # Enhanced prompt
@@ -182,9 +181,6 @@ PS1="\`
     fi\` "
 
 PS2='... '
-
-# fastlane intergration
-[ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
 
 #-------------------
 # Miscellaneous
