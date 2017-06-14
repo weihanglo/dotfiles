@@ -23,7 +23,6 @@ alias tree='tree -ACF'
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias ipn='jupyter notebook'
-alias g='git'
 
 [[ $(which atom-beta) ]] && alias atom='atom-beta'
 [[ $(which apm-beta) ]] && alias apm='apm-beta'
@@ -52,7 +51,6 @@ export PATH=$HOME/.local/bin:$PATH
 export BOOKMARKPATH=$HOME/.bookmarks
 [ -f $HOME/.bm.sh ] && . $HOME/.bm.sh
 
-
 # EDITOR and VISUAL
 export VISUAL=nvim EDITOR=nvim
 
@@ -69,6 +67,15 @@ else
     [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 fi
+
+# Android ANDROID_HOME -----------------
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/tools/bin:$PATH"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
+alias emulator="$ANDROID_HOME/tools/emulator"
+
+# Rust Path
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Python3 configurations ---------------
 # pyenv
@@ -102,7 +109,7 @@ npm_exec() {
 export NVM_DIR=$HOME/.nvm
 __lazy_nvm() { # (macOS only)
     local _NVM_SH=$(brew --prefix nvm)/nvm.sh
-    [ -s $_NVM_SH ] && . $_NVM_SH --no-use
+    [ -s $_NVM_SH ] && . $_NVM_SH
 }
 
 # load executable in alias=default
@@ -171,11 +178,11 @@ __git_last_commit() {
 
 PS1="\`
     if [[ \$? = 0 ]]; then
-        echo \[\e[1\;32m\]\W \
+        echo \[\e[1\;32m\]\"\W\" \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
         \☻ \[\e[0m\]
     else
-        echo \[\e[1\;31m\]\W \
+        echo \[\e[1\;31m\]\"\W\" \
         \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
         \✘ \[\e[0m\]
     fi\` "
