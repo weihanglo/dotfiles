@@ -117,6 +117,9 @@ cnoreabbrev NOhl nohl
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 
+" Sort quickly
+vnoremap gs :sort<CR>
+
 "" Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
 
