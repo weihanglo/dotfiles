@@ -79,19 +79,19 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Python3 configurations ---------------
 # pyenv
-pyenv() {
-    unset -f pyenv
-    source <(pyenv init -)
-    pyenv $@
-}
+#pyenv() {
+#    unset -f pyenv
+#    source <(pyenv init -)
+#    pyenv $@
+#}
 
 # Python3 virtualenvwrapper
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-    export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
-fi
+#if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+#    export WORKON_HOME=$HOME/.virtualenvs
+#    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+#    export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+#    source /usr/local/bin/virtualenvwrapper_lazy.sh
+#fi
 
 # Ruby GEM_PATH ------------------------
 export GEM_HOME=$HOME/.gem
