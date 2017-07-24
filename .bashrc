@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 4.4   #
 #            by Weihang Lo             #
-#              May. 2017               #
+#             July. 2017               #
 #--------------------------------------#
 
 # Source global definitions
@@ -18,7 +18,7 @@ alias ....='cd ../../..'
 alias ll='ls -lhF'
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
-alias tree='tree -ACF'
+alias tree='tree -ACF --dirsfirst'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -74,9 +74,6 @@ export PATH="$ANDROID_HOME/tools/bin:$PATH"
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
 alias emulator="$ANDROID_HOME/tools/emulator"
 
-# Rust Path
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # Python3 configurations ---------------
 # pyenv
 #pyenv() {
@@ -84,14 +81,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 #    source <(pyenv init -)
 #    pyenv $@
 #}
-
-# Python3 virtualenvwrapper
-#if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-#    export WORKON_HOME=$HOME/.virtualenvs
-#    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-#    export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-#    source /usr/local/bin/virtualenvwrapper_lazy.sh
-#fi
 
 # Ruby GEM_PATH ------------------------
 export GEM_HOME=$HOME/.gem

@@ -19,14 +19,12 @@ Configure your favorite tools with `git clone`!
 - [Bookmark Manager](.bm.sh)
 - [fastlane](https://fastlane.tools)
 - [FZF](https://github.com/junegunn/fzf)
-- [Hyper](https://hyper.is)
 - [IPython](https://ipython.org)
 - [iTerm2](https://www.iterm2.com)
 - [Neovim](https://neovim.io)
 - [nvm](https://github.com/creationix/nvm)
 - [pyenv](https://github.com/yyuu/pyenv)
 - [tmux](https://tmux.github.io)
-- [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org)
 - [XVim](http://xvim.org)
 
 Want to share your config file? 

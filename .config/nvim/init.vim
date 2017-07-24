@@ -166,7 +166,8 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 
 " miscellaneous
 Plug 'jpalardy/vim-slime'
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
@@ -193,6 +194,12 @@ function! Multiple_cursors_after()
         let g:jedi#popup_on_dot = 1
     endif
 endfunction
+" }}}
+
+" Nerd tree {{{
+nmap <localleader><C-n> :NERDTreeToggle<cr>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && 
+    \ b:NERDTree.isTabTree()) | q | endif
 " }}}
 
 " Nvim-R {{{
