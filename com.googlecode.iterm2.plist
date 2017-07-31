@@ -106,7 +106,9 @@
 		<string>12</string>
 		<string>13</string>
 		<string>14</string>
+		<string>16</string>
 		<string>18</string>
+		<string>20</string>
 		<string>24</string>
 		<string>36</string>
 		<string>48</string>
@@ -115,7 +117,6 @@
 		<string>96</string>
 		<string>144</string>
 		<string>288</string>
-		<string>20</string>
 	</array>
 	<key>NSFontPanelSizeSliderParams</key>
 	<string>2 0 100</string>
@@ -160,13 +161,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>780 137 445 77 0 0 1280 800 </string>
+	<string>779 33 445 77 0 0 1280 800 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>332 306 620 392 0 0 1280 800 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 76 599 519 0 0 1280 800 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>217 288 770 429 0 0 1280 800 </string>
+	<string>217 241 937 512 0 0 1280 800 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 216 592 584 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -775,11 +776,11 @@
 			<key>Name</key>
 			<string>Weihang</string>
 			<key>Non Ascii Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>FiraCode-Regular 20</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>FiraCode-Regular 20</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1069,7 +1070,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-05-26T01:26:47Z</date>
+	<date>2017-07-28T23:39:51Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1131,6 +1132,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.beta.3</string>
+	<string>3.1.beta.5</string>
 </dict>
 </plist>

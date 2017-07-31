@@ -23,7 +23,6 @@ Configure your favorite tools with `git clone`!
 - [iTerm2](https://www.iterm2.com)
 - [Neovim](https://neovim.io)
 - [nvm](https://github.com/creationix/nvm)
-- [pyenv](https://github.com/yyuu/pyenv)
 - [tmux](https://tmux.github.io)
 - [XVim](http://xvim.org)
 
