@@ -45,10 +45,10 @@ repo_update() {
 export LESS="isFMRX"
 
 # Aditional PATHs
-export PATH=$HOME/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Bookmark manager '.bm.bash'
-export BOOKMARKPATH=$HOME/.bookmarks
+export BOOKMARKPATH="$HOME/.bookmarks"
 [ -f $HOME/.bm.sh ] && . $HOME/.bm.sh
 
 # EDITOR and VISUAL
@@ -82,20 +82,17 @@ alias emulator="$ANDROID_HOME/tools/emulator"
 #    pyenv $@
 #}
 
-# Ruby GEM_PATH ------------------------
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
+# RUST ---------------------------------
+export PATH="$HOME/.cargo/bin:$PATH"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
+# Ruby GEM_PATH ------------------------
+export GEM_HOME="$HOME/.gem"
+export PATH="$GEM_HOME/bin:$PATH"
 
 # Node.js environment configuration ----
-
-# Run local npm executable
-npm_exec() {
-    $(npm bin)/$@
-}
-
 # NVM PATH and lazy loading
-export NVM_DIR=$HOME/.nvm
+export NVM_DIR="$HOME/.nvm"
 __lazy_nvm() { # (macOS only)
     local _NVM_SH=$(brew --prefix nvm)/nvm.sh
     [ -s $_NVM_SH ] && . $_NVM_SH
@@ -119,7 +116,7 @@ __find_node_globals() {
 __find_node_globals # should load after bash completions
 
 # fastlane intergration ----------------
-[ -d ~/.fastlane ] && export PATH=$HOME/.fastlane/bin:$PATH
+[ -d ~/.fastlane ] && export PATH="$HOME/.fastlane/bin:$PATH"
 
 #---------------------------------------
 # Enhanced prompt

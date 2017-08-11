@@ -143,12 +143,11 @@ call plug#begin('~/.config/nvim/plugged')
 " user interface
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'weihanglo/tmuxline.vim' "forked from 'edkolev/tmuxline'
+Plug 'edkolev/tmuxline.vim'
 Plug 'joshdick/onedark.vim'
 
 " fast moves
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -156,11 +155,11 @@ Plug 'honza/vim-snippets'
 
 " scm
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 
 " filetype
 Plug 'sheerun/vim-polyglot'
-Plug 'chrisbra/csv.vim', {'for': ['csv', 'tsv']}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'racer-rust/vim-racer', {'for': 'rust'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 
@@ -199,7 +198,6 @@ if !exists("*RConfig")
             let Rout_more_colors = 1
             let R_assign = 0
             let R_args = ['--no-save', '--no-restore', '--quiet']
-"            inoremap <C-Space> <C-x><C-o>      " conflicts with ctrl-space
         endif
     endfunction
 endif
@@ -231,12 +229,11 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_theme = 'onedark'
+let g:airline_theme = 'jellybeans'
 
 " integration
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#enabled = 1             " fugitive
-let g:airline#extensions#csv#column_display = 'Name'    " csv.vim
 let g:airline#extensions#tabline#enabled = 1            " tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_tab_nr = 0

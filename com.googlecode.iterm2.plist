@@ -167,7 +167,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 76 599 519 0 0 1280 800 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>217 241 937 512 0 0 1280 800 </string>
+	<string>217 173 918 507 0 0 1280 800 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 216 592 584 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -776,11 +776,11 @@
 			<key>Name</key>
 			<string>Weihang</string>
 			<key>Non Ascii Font</key>
-			<string>FiraCode-Regular 20</string>
+			<string>FiraCode-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 20</string>
+			<string>FiraCode-Regular 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1070,7 +1070,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-07-28T23:39:51Z</date>
+	<date>2017-08-01T02:55:52Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
