@@ -24,9 +24,6 @@ alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias ipn='jupyter notebook'
 
-[[ $(which atom-beta) ]] && alias atom='atom-beta'
-[[ $(which apm-beta) ]] && alias apm='apm-beta'
-
 # Update all Git repository under current directory
 repo_update() {
     ls | while read i; do
@@ -143,15 +140,15 @@ __git_branch() {
 }
 
 __git_last_commit() {
-    now=$(date +%s);
-    last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
-    seconds=$((now - last_commit))
-    minutes=$((seconds / 60))
-    hours=$((minutes  / 60))
-    days=$((hours / 24))
+    now=$(date +%s)
+    last_commit="$(git log --pretty=format:%at -1 2> /dev/null)" || return
+    seconds="$((now - last_commit))"
+    minutes="$((seconds / 60))"
+    hours="$((minutes  / 60))"
+    days="$((hours / 24))"
 
-    minutes=$((minutes % 60))
-    hours=$((hours % 24))
+    minutes="$((minutes % 60))"
+    hours="$((hours % 24))"
 
     if (( $days > 0)); then
         last_time="${days}d${hours}h"

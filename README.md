@@ -15,16 +15,15 @@ Tools We Love
 
 Configure your favorite tools with `git clone`!
 
-- [Atom](https://atom.io)
 - [Bookmark Manager](.bm.sh)
-- [fastlane](https://fastlane.tools)
 - [FZF](https://github.com/junegunn/fzf)
 - [IPython](https://ipython.org)
-- [iTerm2](https://www.iterm2.com)
 - [Neovim](https://neovim.io)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [XVim](http://xvim.org)
+- [iTerm2](https://www.iterm2.com)
 - [nvm](https://github.com/creationix/nvm)
 - [tmux](https://tmux.github.io)
-- [XVim](http://xvim.org)
 
 Want to share your config file? 
 Feel free to create an issue or pull request!

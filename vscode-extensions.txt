@@ -1,0 +1,15 @@
+christian-kohler.npm-intellisense
+christian-kohler.path-intellisense
+cssho.vscode-svgviewer
+dbaeumer.vscode-eslint
+file-icons.file-icons
+formulahendry.code-runner
+hbenl.vscode-firefox-debug
+jpoissonnier.vscode-styled-components
+kalitaalexey.vscode-rust
+msjsdiag.debugger-for-chrome
+rust-lang.rust
+shd101wyy.markdown-preview-enhanced
+vscodevim.vim
+vsmobile.vscode-react-native
+zhuangtongfa.Material-theme

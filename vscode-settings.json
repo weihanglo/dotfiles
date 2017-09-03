@@ -1,0 +1,53 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontFamily": "'Fira Code', 'Fira Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 20,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [80, 120],
+    "editor.tabSize": 2,
+    "eslint.autoFixOnSave": true,
+    "explorer.openEditors.visible": 0,
+    "extensions.ignoreRecommendations": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "rust.rustup": {
+        "toolchain": "stable-x86_64-apple-darwin",
+        "nightlyToolchain": "nightly-x86_64-apple-darwin"
+    },
+    "rust.mode": "rls",
+    "rust.rls": {
+        "useRustfmt": true
+    },
+    "search.useIgnoreFilesByDefault": true,
+    "terminal.integrated.fontSize": 18,
+    "terminal.integrated.rightClickCopyPaste": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.foldfix": true,
+    "vim.history": 300,
+    "vim.hlsearch": true,
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors" : {
+        "normal": "#21252B",
+        "insert": "#0d61ac",
+        "visual": "#437019",
+        "visualline": "#437019",
+        "visualblock": "#437019",
+        "replace": "#870000"
+    },
+    "vim.useSystemClipboard": true,
+    "window.zoomLevel": 0,
+    "window.newWindowDimensions": "inherit",
+    "workbench.editor.tabCloseButton": "off",
+    "workbench.iconTheme": "file-icons",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#21252B",
+        "statusBar.noFolderBackground": "#21252B",
+        "statusBar.debuggingBackground": "#21252B"
+    },
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "One Dark Pro Vivid",
+    "workbench.statusBar.visible": true
+}
