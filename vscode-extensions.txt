@@ -2,7 +2,6 @@ christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
 cssho.vscode-svgviewer
 dbaeumer.vscode-eslint
-file-icons.file-icons
 formulahendry.code-runner
 hbenl.vscode-firefox-debug
 jpoissonnier.vscode-styled-components
