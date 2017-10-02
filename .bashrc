@@ -66,10 +66,10 @@ else
 fi
 
 # Android ANDROID_HOME -----------------
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$ANDROID_HOME/tools/bin:$PATH"
-export PATH="$ANDROID_HOME/platform-tools:$PATH"
-alias emulator="$ANDROID_HOME/tools/emulator"
+#export ANDROID_HOME="$HOME/Library/Android/sdk"
+#export PATH="$ANDROID_HOME/tools/bin:$PATH"
+#export PATH="$ANDROID_HOME/platform-tools:$PATH"
+#alias emulator="$ANDROID_HOME/tools/emulator"
 
 # Python3 configurations ---------------
 # pyenv
@@ -91,15 +91,24 @@ export PATH="$GEM_HOME/bin:$PATH"
 # NVM PATH and lazy loading
 export NVM_DIR="$HOME/.nvm"
 __lazy_nvm() { # (macOS only)
-    local _NVM_SH=$(brew --prefix nvm)/nvm.sh
+    if [[ $(uname) == "Darwin" ]]; then
+        local _NVM_SH="$(brew --prefix nvm)/nvm.sh"
+    else
+        local _NVM_SH="$HOME/.nvm/nvm.sh"
+    fi
     [ -s $_NVM_SH ] && . $_NVM_SH
 }
 
 # load executable in alias=default
 __find_node_globals() {
-    default=`cat $NVM_DIR/alias/default`
+    DEFAULT_ALIAS=$NVM_DIR/alias/default
+    if [ ! -s $DEFAULT_ALIAS ]; then
+        echo "NVM default alias not found!"
+        return
+    fi
+    default=`cat $DEFAULT_ALIAS`
     NODE_GLOBALS=(`find \
-        $NVM_DIR/versions/node/$default/bin -type l -maxdepth 1 | \
+        $NVM_DIR/versions/node/$default/bin -maxdepth 1 -type l | \
         xargs -n 1 basename`)
     NODE_GLOBALS+=("node")
     NODE_GLOBALS+=("nvm")
@@ -110,7 +119,7 @@ __find_node_globals() {
     unset cmd
 }
 
-__find_node_globals # should load after bash completions
+__find_node_globals # Must load after bash completions.
 
 # fastlane intergration ----------------
 [ -d ~/.fastlane ] && export PATH="$HOME/.fastlane/bin:$PATH"
