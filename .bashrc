@@ -22,18 +22,6 @@ alias tree='tree -ACF --dirsfirst'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
-alias ipn='jupyter notebook'
-
-# Update all Git repository under current directory
-repo_update() {
-    ls | while read i; do
-        pushd $i > /dev/null
-        echo "$i $(git remote update > /dev/null && git status -sb)"
-        popd > /dev/null
-        echo
-    done
-}
-
 
 #---------------------------------------
 # Environment variables and configs
