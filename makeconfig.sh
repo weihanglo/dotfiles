@@ -20,7 +20,6 @@ neovim_init() {
     ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
 }
 
-
 add_bm_completion() {
     if [[ $(uname) == "Darwin" ]]; then
         [ -d $(brew --prefix)/etc/bash_completion.d ] && \
@@ -32,15 +31,11 @@ add_bm_completion() {
     fi
 }
 
-
-
-
 ## put config/dir your want to sync in this variable
 files="\
     .bashrc .inputrc .tmux.conf .bm.sh .gitignore .gitconfig \
-    .vimrc .config/nvim/init.vim .xvimrc \
+    .vimrc .config/nvim/init.vim .xvimrc .nvm/default-packages \
     .Rprofile .ipython/profile_default/ipython_config.py"
-
 
 echo -n "Creating $origdir for backup ..."
 mkdir -p $origdir
@@ -60,7 +55,6 @@ for file in $files; do
     ln -is $dir/$file $HOME/$file
 done
 
-
 # confirm before install
 confirm () {
     echo
@@ -76,17 +70,13 @@ confirm () {
     echo
 }
 
-
 # confirm installation
-if [[ $(uname) == "Darwin" ]]; then
-
+if [[ $(uname) == 'Darwin' ]]; then
     confirm 'Install neovim' install_neovim_brew
-
     if [[ -f $(which 'pip3') ]]; then
         confirm 'Install nvim-python' install_nvim_python
     fi
 fi
 
 confirm "Replace .vimrc by neovim's init.vim" neovim_init
-
 confirm "Add bash-completion for bm (bookmark manager)" add_bm_completion
