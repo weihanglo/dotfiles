@@ -91,7 +91,6 @@ __lazy_nvm() { # (macOS only)
 __find_node_globals() {
     DEFAULT_ALIAS=$NVM_DIR/alias/default
     if [ ! -s $DEFAULT_ALIAS ]; then
-        echo "NVM default alias not found!"
         return
     fi
     default=`cat $DEFAULT_ALIAS`
