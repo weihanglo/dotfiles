@@ -9,7 +9,7 @@ origdir=$HOME/.dotfiles.orig
 
 # put what you want to pre-install (Vundle, zsh...)
 install_neovim_brew() { 
-    brew install neovim/neovim/neovim 
+    brew install neovim
 }
 
 install_nvim_python() { 
@@ -21,13 +21,21 @@ neovim_init() {
 }
 
 add_bm_completion() {
-    if [[ $(uname) == "Darwin" ]]; then
+    if [[ $(uname) == 'Darwin' ]]; then
         [ -d $(brew --prefix)/etc/bash_completion.d ] && \
         ln -is $HOME/.bm.sh \
             "$(brew --prefix)/etc/bash_completion.d/bm.sh"
     else
         [[ $PS1 && -d /etc/bash_completion.d ]] && \
         ln -is $HOME/.bm.sh /etc/bash_completion.d/bm.sh
+    fi
+}
+
+install_tmux_package_manager() {
+    if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    else
+        echo 'TMUX Package Manager has already be installed.'
     fi
 }
 
@@ -58,7 +66,7 @@ done
 # confirm before install
 confirm () {
     echo
-    read -r -p "${3:-Confirm $1? [y/N]} " response
+    read -p "${3:-}Confirm $1? [y/N]" response
     case $response in
         [yY][eE][sS]|[yY])
             $2
@@ -72,11 +80,12 @@ confirm () {
 
 # confirm installation
 if [[ $(uname) == 'Darwin' ]]; then
-    confirm 'Install neovim' install_neovim_brew
+    confirm 'install neovim' install_neovim_brew
     if [[ -f $(which 'pip3') ]]; then
-        confirm 'Install nvim-python' install_nvim_python
+        confirm 'install nvim-python' install_nvim_python
     fi
 fi
 
-confirm "Replace .vimrc by neovim's init.vim" neovim_init
-confirm "Add bash-completion for bm (bookmark manager)" add_bm_completion
+confirm "replace .vimrc by neovim's init.vim" neovim_init
+confirm "add bash-completion for bm (bookmark manager)" add_bm_completion
+confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
