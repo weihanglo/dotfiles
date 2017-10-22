@@ -1,39 +1,41 @@
 " General {{{
-set mouse=a
-set termguicolors
-set hidden
-set laststatus=2
-set showmatch
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set number
-set relativenumber
-set cursorline
-set lazyredraw
-set history=100
-set foldnestmax=2
-set nowrap
-set scrolloff=2
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set smarttab
-set smartindent
-set splitbelow
-set splitright
 set autoindent
-set linebreak
-set colorcolumn=80
-set timeoutlen=500
-set winminheight=0
 set backspace=indent,eol,start
 set clipboard+=unnamed,unnamedplus
+set colorcolumn=80
+set cursorline
 set dictionary+=/usr/share/dict/words
+set expandtab
+set foldnestmax=2
+set hidden
+set history=100
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set lazyredraw
+set linebreak
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
-set wildmenu wildmode=longest:full,full
+set mouse=a
+set nowrap
+set number
+set relativenumber
+set scrolloff=2
+set shiftwidth=4
+set showmatch
+set smartcase
+set smartindent
+set smarttab
+set softtabstop=4
+set splitbelow
+set splitright
+set timeoutlen=500
 set wildignore+=*.swo,*.swp,*.RData,*~,*.log,*.db,*.sqilte,*__pycache__/*
+set wildmenu wildmode=longest:full,full
+set winminheight=0
+if has('termguicolors')
+    set termguicolors
+endif
 " }}}
 
 " filetype {{{

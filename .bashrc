@@ -180,4 +180,4 @@ if [[ $(uname) == "Darwin" ]]; then
     export LC_ALL=en_US.UTF-8
 fi
 
-[ -f ~/.fzf.bash ] && . ~/.fzf.bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
