@@ -80,7 +80,7 @@ augroup END
 " for web development
 augroup filetype_web
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html,yaml,yml,toml,json}
+    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html,yaml,yml,toml,json,md}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 " }}}
@@ -150,6 +150,7 @@ Plug 'joshdick/onedark.vim'
 
 " fast moves
 Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/nerdtree'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -203,6 +204,10 @@ if !exists("*RConfig")
         endif
     endfunction
 endif
+" }}}
+
+" NERDTree {{{
+map <LocalLeader><C-o> :NERDTreeToggle<CR>
 " }}}
 
 " vim-slime (REPL via tmux) {{{
@@ -262,7 +267,15 @@ let g:tmuxline_preset = {
     \'options' : {'status-justify' : 'left'}}
 " }}}
 
+" FZF {{{
+map <LocalLeader><C-p> :FZF<CR>
+" }}}
+
 " Python Setup {{{
 let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/local/bin/python3'
+if empty(glob('/usr/local/bin/python3'))
+    let g:python3_host_prog = '/usr/bin/python3'
+else
+    let g:python3_host_prog = '/usr/local/bin/python3'
+endif
 " }}}
