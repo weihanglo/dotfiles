@@ -164,7 +164,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'racer-rust/vim-racer', {'for': 'rust'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'jalvesaq/Nvim-R', {'for': 'r'}
+
+" linter
+Plug 'w0rp/ale'
 
 " miscellaneous
 Plug 'jpalardy/vim-slime'
@@ -194,20 +196,16 @@ function! Multiple_cursors_after()
 endfunction
 " }}}
 
-" Nvim-R {{{
-if !exists("*RConfig")
-    function RConfig()
-        if has("nvim")
-            let Rout_more_colors = 1
-            let R_assign = 0
-            let R_args = ['--no-save', '--no-restore', '--quiet']
-        endif
-    endfunction
-endif
+" ale {{{
+" Enable completion where available.
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 " }}}
 
 " NERDTree {{{
-map <LocalLeader><C-o> :NERDTreeToggle<CR>
+nnoremap <LocalLeader><C-o> :NERDTreeToggle<CR>
+nnoremap <LocalLeader>c :bp\|bd #<CR>
 " }}}
 
 " vim-slime (REPL via tmux) {{{
@@ -245,6 +243,7 @@ let g:airline#extensions#tabline#enabled = 1            " tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#buffer_nr_format = '%s '
+let g:airline#extensions#ale#enabled = 1
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
@@ -265,10 +264,6 @@ let g:tmuxline_preset = {
     \'y'    : ['%R', '%b %d'],
     \'z'    : '#H',
     \'options' : {'status-justify' : 'left'}}
-" }}}
-
-" FZF {{{
-map <LocalLeader><C-p> :FZF<CR>
 " }}}
 
 " Python Setup {{{
