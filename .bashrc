@@ -108,9 +108,6 @@ __find_node_globals() {
 
 __find_node_globals # Must load after bash completions.
 
-# fastlane intergration ----------------
-[ -d ~/.fastlane ] && export PATH="$HOME/.fastlane/bin:$PATH"
-
 #---------------------------------------
 # Enhanced prompt
 #---------------------------------------
