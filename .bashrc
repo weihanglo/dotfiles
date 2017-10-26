@@ -22,6 +22,7 @@ alias tree='tree -ACF --dirsfirst'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
+alias nvi='nvim --noplugin'
 
 #---------------------------------------
 # Environment variables and configs
@@ -89,19 +90,22 @@ __lazy_nvm() { # (macOS only)
 
 # load executable in alias=default
 __find_node_globals() {
-    DEFAULT_ALIAS=$NVM_DIR/alias/default
-    if [ ! -s $DEFAULT_ALIAS ]; then
+    default_alias=$NVM_DIR/alias/default
+    if [ ! -s $default_alias ]; then
         return
     fi
-    default=`cat $DEFAULT_ALIAS`
-    NODE_GLOBALS=(`find \
+    default=`cat $default_alias`
+    if [ "$default" = 'system' ]; then
+        return
+    fi
+    node_globals=(`find \
         $NVM_DIR/versions/node/$default/bin -maxdepth 1 -type l | \
         xargs -n 1 basename`)
-    NODE_GLOBALS+=("node")
-    NODE_GLOBALS+=("nvm")
+    node_globals+=("node")
+    node_globals+=("nvm")
 
-    for cmd in "${NODE_GLOBALS[@]}"; do
-        eval "${cmd}(){ unset -f ${NODE_GLOBALS[@]}; __lazy_nvm; ${cmd} \$@; }"
+    for cmd in "${node_globals[@]}"; do
+        eval "${cmd}(){ unset -f ${node_globals[@]}; __lazy_nvm; ${cmd} \$@; }"
     done
     unset cmd
 }

@@ -38,7 +38,7 @@ if has('termguicolors')
 endif
 " }}}
 
-" filetype {{{
+" Filetype {{{
 " auto load view if exists
 augroup autoloadview
    autocmd!
@@ -127,6 +127,17 @@ vnoremap // y/<C-R>"<CR>
 
 " }}}
 
+" Neovim Python Setup {{{
+"let g:loaded_python_provider = 0 " disable python2 neovim support
+if exists(glob('/usr/local/bin/python3'))
+    let g:python3_host_prog = '/usr/local/bin/python3'
+    let g:ycm_python_binary_path = '/usr/local/bin/python3'
+else
+    let g:python3_host_prog = '/usr/bin/python3'
+    let g:ycm_python_binary_path = '/usr/bin/python3'
+endif
+" }}}
+
 " Vim-plug {{{
 " if using Vim
 if !has('nvim')
@@ -147,30 +158,33 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'bling/vim-bufferline'
 
 " fast moves
 Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdtree'
-
-" snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " scm
 Plug 'airblade/vim-gitgutter'
 
-" filetype
-Plug 'sheerun/vim-polyglot'
-Plug 'rust-lang/rust.vim', {'for': 'rust'}
-Plug 'racer-rust/vim-racer', {'for': 'rust'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-
 " linter
 Plug 'w0rp/ale'
 
+" snippets/completions
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" filetype and completions
+Plug 'sheerun/vim-polyglot'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'Valloric/YouCompleteMe', { 'do': 
+    \ './install.py --js-completer --rust-completer' }
+
 " miscellaneous
-Plug 'jpalardy/vim-slime'
+Plug 'jpalardy/vim-slime', { 'for': ['javascript', 'python', 'r'] }
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'ryanss/vim-hackernews'
 
 call plug#end()
 " }}}
@@ -180,35 +194,35 @@ set background=dark
 colorscheme onedark
 " }}}
 
-" vim-multiple-cursors {{{
-" before multiple cursors
-function! Multiple_cursors_before()
-    if exists('g:jedi#popup_on_dot')
-        let g:jedi#popup_on_dot = 0
-    endif
-endfunction
-
-" after multiple cursors
-function! Multiple_cursors_after()
-    if exists('g:jedi#popup_on_dot')
-        let g:jedi#popup_on_dot = 1
-    endif
-endfunction
-" }}}
-
-" ale {{{
+" ALE {{{
 " Enable completion where available.
+let g:ale_completion_enabled = 1
+let g:ale_lint_delay = 1000
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 " }}}
 
+" YCM {{{
+" make YCM compatible with UltiSnips <tab>
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"}}}
+
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" }}}
+"
 " NERDTree {{{
 nnoremap <LocalLeader><C-o> :NERDTreeToggle<CR>
 nnoremap <LocalLeader>c :bp\|bd #<CR>
 " }}}
 
-" vim-slime (REPL via tmux) {{{
+" vim-slime {{{
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
@@ -216,16 +230,30 @@ let g:slime_dont_ask_default = 1
 let g:slime_paste_file = tempname()
 " }}}
 
-" airline {{{
+" vim-grep {{{
+let g:grepper = {}
+let g:grepper.tools = ['rg', 'grep', 'git']
+" Search working directory
+nnoremap <leader>g :Grepper<cr>
+" Search opened buffers
+nnoremap <leader>G :Grepper -buffers<cr>
+" Search the word under the cursor
+nnoremap <leader>* :Grepper  -cword -noprompt<cr>
+" Search with operators
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+" }}}
+
+" Airline {{{
 " theme
 let g:airline_powerline_fonts = 0
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
 let g:airline_left_sep = '»'
 let g:airline_left_sep = ' '
 let g:airline_right_sep = '«'
 let g:airline_right_sep = ' '
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
 let g:airline_symbols.crypt = '🔒'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.maxlinenr = '☰'
@@ -238,39 +266,27 @@ let g:airline_theme = 'jellybeans'
 
 " integration
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#branch#enabled = 1             " fugitive
-let g:airline#extensions#tabline#enabled = 1            " tabline
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#buffer_nr_format = '%s '
-let g:airline#extensions#ale#enabled = 1
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
 " }}}
 
-" tmuxline {{{
+" Tmuxline {{{
 let g:tmuxline_powerline_separators = 0
-let g:tmuxline_separators = {
-    \ 'left' : '',
-    \ 'left_alt': '»',
-    \ 'right' : '',
-    \ 'right_alt' : '«',
-    \ 'space' : ' '}
-let g:tmuxline_preset = {
-    \'a'    : '#S',
-    \'cwin' : ['#F#I', '#W'],
-    \'win'  : ['#F#I', '#W'],
-    \'y'    : ['%R', '%b %d'],
-    \'z'    : '#H',
-    \'options' : {'status-justify' : 'left'}}
-" }}}
-
-" Python Setup {{{
-let g:loaded_python_provider = 0
-if empty(glob('/usr/local/bin/python3'))
-    let g:python3_host_prog = '/usr/bin/python3'
-else
-    let g:python3_host_prog = '/usr/local/bin/python3'
-endif
+let g:tmuxline_separators = {}
+let g:tmuxline_separators.left = ''
+let g:tmuxline_separators.left_alt = '»'
+let g:tmuxline_separators.right = ''
+let g:tmuxline_separators.right_alt = '«'
+let g:tmuxline_separators.space = ' '
+let g:tmuxline_preset = {}
+let g:tmuxline_preset.a = '#S'
+let g:tmuxline_preset.cwin = ['#F#I', '#W']
+let g:tmuxline_preset.win = ['#F#I', '#W']
+let g:tmuxline_preset.y = ['%R', '%b %d']
+let g:tmuxline_preset.z = '#H'
+let g:tmuxline_preset.options = { 'status-justify' : 'left'}
 " }}}
