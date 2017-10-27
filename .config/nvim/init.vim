@@ -6,6 +6,7 @@ set colorcolumn=80
 set cursorline
 set dictionary+=/usr/share/dict/words
 set expandtab
+set foldmethod=indent
 set foldnestmax=2
 set hidden
 set history=100
@@ -45,36 +46,16 @@ augroup autoloadview
    autocmd BufWinEnter *.* silent! loadview
 augroup END
 
-" recognize *.m as objective-c
-augroup filetype_objc
-    autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.m setfiletype objc
-augroup END
-
 " recognize *.md as markdown
 augroup filetype_markdown
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
 augroup END
 
-" R
-augroup filetype_r
-    autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{R,Rnw,Rd,Rmd,Rrst,Rout} 
-        \ call RConfig()
-augroup END
-
 " vimL
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
-augroup END
-
-" python
-augroup filetype_python
-    autocmd!
-    autocmd FileType python 
-        \ setlocal foldmethod=indent completeopt-=preview
 augroup END
 
 " for web development
@@ -240,11 +221,11 @@ let g:slime_paste_file = tempname()
 let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
-nnoremap <leader>g :Grepper<cr>
+nnoremap <LocalLeader>g :Grepper<cr>
 " Search opened buffers
-nnoremap <leader>G :Grepper -buffers<cr>
+nnoremap <LocalLeader>G :Grepper -buffers<cr>
 " Search the word under the cursor
-nnoremap <leader>* :Grepper  -cword -noprompt<cr>
+nnoremap <LocalLeader>g* :Grepper  -cword -noprompt<cr>
 " Search with operators
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)

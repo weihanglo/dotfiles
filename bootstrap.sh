@@ -1,13 +1,16 @@
 #!/bin/bash
-
-#---------------------------------------
-# Creates symlinks to config files
-#---------------------------------------
+#--------------------------------------#
+#    Boostrap all your config files    #
+#            by Weihang Lo             #
+#              Oct. 2017               #
+#--------------------------------------#
 
 dir=$HOME/.dotfiles
 origdir=$HOME/.dotfiles.orig
 
-# put what you want to pre-install (Vundle, zsh...)
+# --------------------------------------
+# Put your pre-install command here
+# --------------------------------------
 install_neovim_brew() { 
     brew install neovim
 }
@@ -39,27 +42,29 @@ install_tmux_package_manager() {
     fi
 }
 
-## put config/dir your want to sync in this variable
+# --------------------------------------
+# Put config/dir to sync in this variable
+# --------------------------------------
 files="\
     .bashrc .inputrc .tmux.conf .bm.sh .gitignore .gitconfig \
     .vimrc .config/nvim/init.vim .xvimrc .nvm/default-packages \
-    .Rprofile .ipython/profile_default/ipython_config.py"
+    .Rprofile .ipython/profile_default/ipython_config.py .tern-config"
 
 echo -n "Creating $origdir for backup ..."
 mkdir -p $origdir
 echo "done"
 
-
 echo -n "cd to $dir ..."
 cd $dir
 echo "done"
 
-
+# Symlink files
 for file in $files; do
-    echo "Moving $file to $origdir"
+    echo "$file"
+    echo -e "\tMoving $file to $origdir"
     mkdir -p $HOME/$(dirname $file)
     mv $HOME/$file $origdir
-    echo "Symlinking to $file in $dir"
+    echo -e "\tSymlinking to $file in $dir"
     ln -is $dir/$file $HOME/$file
 done
 
@@ -77,6 +82,10 @@ confirm () {
     esac
     echo
 }
+
+# --------------------------------------
+# Call pre-defined install functions
+# --------------------------------------
 
 # confirm installation
 if [[ $(uname) == 'Darwin' ]]; then

@@ -1,5 +1,5 @@
 ⚙️ Dotfiles for macOS/Linux!!
-====================================
+============================
 
 Usage
 -----
@@ -23,6 +23,7 @@ Configure your favorite tools with `git clone`!
 - [XVim](http://xvim.org)
 - [iTerm2](https://www.iterm2.com)
 - [nvm](https://github.com/creationix/nvm)
+- [Tern](https://ternjs.net/)
 - [tmux](https://tmux.github.io)
 
 Want to share your config file? 
