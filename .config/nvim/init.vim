@@ -158,7 +158,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'bling/vim-bufferline'
 
 " fast moves
 Plug 'terryma/vim-multiple-cursors'
@@ -176,14 +175,17 @@ Plug 'honza/vim-snippets'
 
 " filetype and completions
 Plug 'sheerun/vim-polyglot'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'Valloric/YouCompleteMe', { 'do': 
-    \ './install.py --js-completer --rust-completer' }
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'racer-rust/vim-racer', {'for': 'rust'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do' : 'npm install' }
+
+" search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " miscellaneous
 Plug 'jpalardy/vim-slime', { 'for': ['javascript', 'python', 'r'] }
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'ryanss/vim-hackernews'
 
 call plug#end()
@@ -205,18 +207,22 @@ let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 " }}}
 
-" YCM {{{
-" make YCM compatible with UltiSnips <tab>
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"}}}
+" vim-multiple-cursors {{{
+" before multiple cursors
+function! Multiple_cursors_before()
+    if exists('g:jedi#popup_on_dot')
+        let g:jedi#popup_on_dot = 0
+    endif
+endfunction
 
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" after multiple cursors
+function! Multiple_cursors_after()
+    if exists('g:jedi#popup_on_dot')
+        let g:jedi#popup_on_dot = 1
+    endif
+endfunction
 " }}}
-"
+
 " NERDTree {{{
 nnoremap <LocalLeader><C-o> :NERDTreeToggle<CR>
 nnoremap <LocalLeader>c :bp\|bd #<CR>
@@ -230,9 +236,9 @@ let g:slime_dont_ask_default = 1
 let g:slime_paste_file = tempname()
 " }}}
 
-" vim-grep {{{
-let g:grepper = {}
-let g:grepper.tools = ['rg', 'grep', 'git']
+" vim-grepper {{{
+let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
+let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
 nnoremap <leader>g :Grepper<cr>
 " Search opened buffers
