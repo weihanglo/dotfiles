@@ -173,6 +173,10 @@ PS2='... '
 # Miscellaneous
 #-------------------
 
+# FZF default configs
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # macOS local
 if [[ $(uname) == "Darwin" ]]; then
     alias ls='ls -G'

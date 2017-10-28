@@ -102,10 +102,7 @@ cnoreabbrev NOhl nohl
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 
-" Sort quickly
-vnoremap gs :sort<CR>
-
-"" Highlight visual selected text
+" Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
 
 " }}}
@@ -175,11 +172,6 @@ Plug 'ryanss/vim-hackernews'
 call plug#end()
 " }}}
 
-" Colorscheme {{{
-set background=dark
-colorscheme onedark
-" }}}
-
 " ALE {{{
 " Enable completion where available.
 let g:ale_completion_enabled = 1
@@ -208,8 +200,16 @@ endfunction
 " }}}
 
 " NERDTree {{{
-nnoremap <LocalLeader><C-o> :NERDTreeToggle<CR>
-nnoremap <LocalLeader>c :bp\|bd #<CR>
+nnoremap <silent><LocalLeader><C-o> :NERDTreeToggle<CR>
+nnoremap <silent><LocalLeader>c :bp\|bd #<CR>
+" }}}
+
+" FZF {{{
+" Use system's default options.
+nnoremap <silent><c-p> :FZF<CR>
+" Do not ignore ignores!
+nnoremap <silent><LocalLeader><C-P> :call 
+    \ fzf#run({'source': 'rg --files -u'})<CR>
 " }}}
 
 " vim-slime {{{
@@ -224,14 +224,19 @@ let g:slime_paste_file = tempname()
 let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
-nnoremap <LocalLeader>g :Grepper<cr>
+nnoremap <silent><LocalLeader>g :Grepper<cr>
 " Search opened buffers
-nnoremap <LocalLeader>G :Grepper -buffers<cr>
+nnoremap <silent><LocalLeader>G :Grepper -buffers<cr>
 " Search the word under the cursor
-nnoremap <LocalLeader>g* :Grepper  -cword -noprompt<cr>
+nnoremap <silent><LocalLeader>g* :Grepper -cword -noprompt<cr>
 " Search with operators
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+" }}}
+
+" Colorscheme {{{
+set background=dark
+colorscheme onedark
 " }}}
 
 " Airline {{{
