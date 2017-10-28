@@ -85,8 +85,10 @@ cnoreabbrev WA wa
 cnoreabbrev Q q
 cnoreabbrev Q! q!
 cnoreabbrev q1 q!
+cnoreabbrev qA qa
 cnoreabbrev Qa qa
 cnoreabbrev QA qa
+cnoreabbrev qA! qa!
 cnoreabbrev Qa! qa!
 cnoreabbrev QA! qa!
 cnoreabbrev Bd bd
@@ -146,6 +148,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " scm
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 " linter
 Plug 'w0rp/ale'
