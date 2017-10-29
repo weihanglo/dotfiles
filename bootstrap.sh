@@ -20,7 +20,6 @@ origdir=$HOME/.dotfiles.orig
 # --------------------------------------
 
 files=(
-    .Rprofile
     .bashrc
     .bm.sh
     .config/alacritty/alacritty.yml
