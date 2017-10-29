@@ -33,7 +33,6 @@ files=(
     .tern-config
     .tmux.conf
     .vimrc
-    .xinputrc
     .xvimrc
 )
 

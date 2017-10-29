@@ -150,16 +150,18 @@ Plug 'tpope/vim-fugitive'
 " linter
 Plug 'w0rp/ale'
 
-" snippets/completions
+" snippets/autocompletions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', { 'do': 
+    \ './install.py --js-completer --rust-completer' }
 
-" filetype and completions
+" filetype
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
-Plug 'racer-rust/vim-racer', {'for': 'rust'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do' : 'npm install' }
+"Plug 'racer-rust/vim-racer', {'for': 'rust'}
+"Plug 'davidhalter/jedi-vim', {'for': 'python'}
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do' : 'npm install' }
 
 " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -170,6 +172,23 @@ Plug 'jpalardy/vim-slime', { 'for': ['javascript', 'python', 'r'] }
 Plug 'ryanss/vim-hackernews'
 
 call plug#end()
+" }}}
+
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger = '<c-j>'
+" }}}
+
+" YouCompleteMe {{{
+nnoremap <silent><LocalLeader>jd :YcmCompleter GoToDefinition<CR>
+let g:ycm_filetype_specific_completion_to_disable = {
+    \ 'vim': 1,
+    \ 'gitcommit': 1
+    \}
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-p>', '<Up>']
 " }}}
 
 " ALE {{{
@@ -200,7 +219,7 @@ endfunction
 " }}}
 
 " NERDTree {{{
-nnoremap <silent><LocalLeader><C-o> :NERDTreeToggle<CR>
+nnoremap <silent><c-b> :NERDTreeToggle<CR>
 nnoremap <silent><LocalLeader>c :bp\|bd #<CR>
 " }}}
 
