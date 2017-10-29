@@ -49,7 +49,8 @@ augroup END
 " recognize *.md as markdown
 augroup filetype_markdown
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
+    autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown 
+        \ setlocal nofoldenable
 augroup END
 
 " vimL
@@ -164,12 +165,16 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 "Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do' : 'npm install' }
 
 " search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', {
+    \ 'dir': '~/.fzf',
+    \ 'do': './install --all',
+    \ 'on': 'FZF'
+    \}
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " miscellaneous
 Plug 'jpalardy/vim-slime', { 'for': ['javascript', 'python', 'r'] }
-Plug 'ryanss/vim-hackernews'
+Plug 'ryanss/vim-hackernews', { 'on': 'HackerNews' }
 
 call plug#end()
 " }}}
@@ -179,16 +184,17 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 " }}}
 
 " YouCompleteMe {{{
-nnoremap <silent><LocalLeader>jd :YcmCompleter GoToDefinition<CR>
-let g:ycm_filetype_specific_completion_to_disable = {
-    \ 'vim': 1,
-    \ 'gitcommit': 1
-    \}
+" map to <LocalLeader>K to act like default man.vim's keymapping.
+nnoremap <silent><LocalLeader>K :YcmCompleter GoToDefinition<CR>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-p>', '<Up>']
+let g:ycm_filetype_specific_completion_to_disable = {
+    \ 'vim': 1,
+    \ 'gitcommit': 1
+    \}
 " }}}
 
 " ALE {{{
@@ -219,7 +225,7 @@ endfunction
 " }}}
 
 " NERDTree {{{
-nnoremap <silent><c-b> :NERDTreeToggle<CR>
+nnoremap <silent><m-n> :NERDTreeToggle<CR>
 nnoremap <silent><LocalLeader>c :bp\|bd #<CR>
 " }}}
 

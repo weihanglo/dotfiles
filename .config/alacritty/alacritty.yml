@@ -44,7 +44,7 @@ font:
   use_thin_strokes: true
 
 # Background opacity
-background_opacity: 0.83
+background_opacity: .85
 
 visual_bell:
   duration: 0
@@ -52,30 +52,31 @@ visual_bell:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-# Colors (XTerm)
+# Colors (One Dark)
 colors:
-   # Default colors
-   primary:
-     background: '0x000000'
-     foreground: '0xffffff'
-   # Normal colors
-   normal:
-     black:   '0x000000'
-     red:     '0xcd0000'
-     green:   '0x00cd00'
-     yellow:  '0xcdcd00'
-     blue:    '0x0000ee'
-     magenta: '0xcd00cd'
-     cyan:    '0x00cdcd'
-     white:   '0xe5e5e5'
+  # Default colors
+  primary:
+    background: '0x1e2127'
+    foreground: '0xabb2bf'
 
-   # Bright colors
-   bright:
-     black:   '0x7f7f7f'
-     red:     '0xff0000'
-     green:   '0x00ff00'
-     yellow:  '0xffff00'
-     blue:    '0x5c5cff'
-     magenta: '0xff00ff'
-     cyan:    '0x00ffff'
-     white:   '0xffffff'
+  # Normal colors
+  normal:
+    black:   '0x1e2127'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
+
+  # Bright colors
+  bright:
+    black:   '0x5c6370'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xffffff'
