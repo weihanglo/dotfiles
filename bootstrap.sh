@@ -10,29 +10,37 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Source and destination
+# Define source and backup directory
 
 dir=$HOME/.dotfiles
 origdir=$HOME/.dotfiles.orig
 
-# confirm helper function running before installation
-confirm () {
-    echo
-    read -p "${3:-}Confirm $1? [y/N]" response
-    case $response in
-        [yY][eE][sS]|[yY])
-            $2
-            ;;
-        *)
-            echo "Operation aborted."
-            ;;
-    esac
-    echo
-}
+# --------------------------------------
+# Put config/dir to sync in this variable
+# --------------------------------------
+
+files=(
+    .Rprofile
+    .bashrc
+    .bm.sh
+    .config/alacritty/alacritty.yml
+    .config/nvim/init.vim
+    .gitconfig
+    .gitignore
+    .inputrc
+    .ipython/profile_default/ipython_config.py
+    .nvm/default-packages
+    .tern-config
+    .tmux.conf
+    .vimrc
+    .xinputrc
+    .xvimrc
+)
 
 # --------------------------------------
-# Put your pre-install command below
+# Put custom installaltion commands here
 # --------------------------------------
+
 install_neovim_brew() {
     brew install neovim
 }
@@ -45,7 +53,7 @@ install_ripgrep() {
     cargo install ripgrep
 }
 
-neovim_init() {
+neovim_replace_vimrc() {
     ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
 }
 
@@ -67,26 +75,6 @@ install_tmux_package_manager() {
         echo 'TMUX Package Manager has already be installed.'
     fi
 }
-
-# --------------------------------------
-# Put config/dir to sync in this variable
-# --------------------------------------
-files=(
-    .Rprofile 
-    .bashrc 
-    .bm.sh 
-    .config/alacritty/alacritty.yml
-    .config/nvim/init.vim 
-    .gitconfig
-    .gitignore 
-    .inputrc 
-    .ipython/profile_default/ipython_config.py
-    .nvm/default-packages
-    .tern-config 
-    .tmux.conf 
-    .vimrc 
-    .xvimrc 
-)
 
 # --------------------------------------
 # Start symlink files
@@ -111,8 +99,24 @@ for file in ${files[@]}; do
 done
 
 # --------------------------------------
-# Call pre-defined install functions here
+# Call pre-defined custom commmands here
 # --------------------------------------
+
+# confirm helper function running before installation
+confirm () {
+    echo
+    read -p "${3:-}Confirm $1? [y/N]" response
+    case $response in
+        [yY][eE][sS]|[yY])
+            $2
+            ;;
+        *)
+            echo "Operation aborted."
+            ;;
+    esac
+    echo
+}
+
 
 # confirm installation
 if [[ $(uname) == 'Darwin' ]]; then
@@ -122,7 +126,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     fi
 fi
 
-confirm "replace .vimrc by neovim's init.vim" neovim_init
+confirm "replace .vimrc by neovim's init.vim" neovim_replace_vimrc
 confirm "add bash-completion for bm (bookmark manager)" add_bm_completion
 confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
 confirm "install ripgrep, a better grep" install_ripgrep
