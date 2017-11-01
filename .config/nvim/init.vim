@@ -19,8 +19,8 @@ set linebreak
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 set mouse=a
 set nowrap
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 set scrolloff=2
 set shiftwidth=4
 set showmatch
@@ -202,10 +202,12 @@ let g:ycm_filetype_specific_completion_to_disable = {
 let g:ale_completion_enabled = 1
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
 " }}}
 
 " vim-multiple-cursors {{{
