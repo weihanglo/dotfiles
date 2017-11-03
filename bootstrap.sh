@@ -5,11 +5,6 @@
 #              Oct. 2017               #
 #--------------------------------------#
 
-# Unoffical strict mode
-# Reference: http://redsymbol.net/articles/unofficial-bash-strict-mode/
-set -euo pipefail
-IFS=$'\n\t'
-
 # Define source and backup directory
 
 dir=$HOME/.dotfiles
@@ -90,6 +85,10 @@ echo "done"
 for file in ${files[@]}; do
     echo "$file"
     echo -e "\tMoving $file to $origdir"
+    if [[ -z "$file" ]]; then
+        echo -e "No file $file found"
+        return
+    fi
     mkdir -p $HOME/$(dirname $file)
     mv $HOME/$file $origdir
     echo -e "\tSymlinking to $file in $dir"

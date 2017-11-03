@@ -109,8 +109,12 @@ vnoremap // y/<C-R>"<CR>
 " }}}
 
 " Neovim Python Setup {{{
-"let g:loaded_python_provider = 0 " disable python2 neovim support
-if exists(glob('/usr/local/bin/python3'))
+if !empty(glob('/usr/local/bin/python'))
+    let g:python_host_prog = '/usr/local/bin/python'
+else
+    let g:python_host_prog = '/usr/bin/python'
+endif
+if !empty(glob('/usr/local/bin/python3'))
     let g:python3_host_prog = '/usr/local/bin/python3'
     let g:ycm_python_binary_path = '/usr/local/bin/python3'
 else
@@ -227,7 +231,7 @@ endfunction
 " }}}
 
 " NERDTree {{{
-nnoremap <silent><m-n> :NERDTreeToggle<CR>
+nnoremap <silent><LocalLeader>n :NERDTreeToggle<CR>
 nnoremap <silent><LocalLeader>c :bp\|bd #<CR>
 " }}}
 
