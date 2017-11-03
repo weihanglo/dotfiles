@@ -11,7 +11,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 
 ## Tools We Love
 
-- [**Alacritty**][alacritty]: Fastest terminal emulator ever!
+- [**Alacritty**][alacritty]: Maybe the fastest terminal emulator ever!
 - [**bm**][bm]: Tiny script for jumping between directories.
 - [**FZF**][fzf]: Fuzzy finder goes rock.
 - [**IPython**][ipython]: A must-have for a python lover.
