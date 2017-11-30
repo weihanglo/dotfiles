@@ -52,11 +52,6 @@ visual_bell:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-shell:
-  program: /usr/local/bin/bash
-  args:
-    - --login
-
 # Colors (One Dark)
 colors:
   # Default colors
