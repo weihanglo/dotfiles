@@ -62,7 +62,8 @@ augroup END
 " for web development
 augroup filetype_web
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.{js,css,html,yaml,yml,toml,json,md}
+    autocmd BufNewFile,BufFilePre,BufRead
+        \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 " }}}
@@ -159,7 +160,7 @@ Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': 
-    \ './install.py --js-completer --rust-completer' }
+    \ './install.py --tern-completer --racer-completer' }
 
 " filetype
 Plug 'sheerun/vim-polyglot'
@@ -211,6 +212,7 @@ let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
+\   'typescript': ['tslint', 'tsserver', 'typecheck']
 \}
 " }}}
 
