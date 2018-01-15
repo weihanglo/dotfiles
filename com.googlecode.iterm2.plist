@@ -142,7 +142,7 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>2040 713 400 129 1280 0 1920 1080 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>330 306 620 392 0 0 1280 800 </string>
+	<string>1930 516 620 392 1280 0 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 122 796 473 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -1030,7 +1030,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-12-18T15:13:03Z</date>
+	<date>2018-01-10T03:47:56Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1038,7 +1038,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<false/>
 	<key>SmartPlacement</key>
@@ -1088,6 +1088,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.20171217-nightly</string>
+	<string>3.1.20180107-nightly</string>
 </dict>
 </plist>
