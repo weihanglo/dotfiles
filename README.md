@@ -30,7 +30,7 @@ Feel free to create an issue or pull request!
 
 [The MIT License (MIT)](LICENSE)
 
-Copyright © 2015 Weihang Lo
+Copyright © 2015 - 2018 Weihang Lo
 
 [alacritty]: https://github.com/jwilm/alacritty
 [bm]: .bm.sh
