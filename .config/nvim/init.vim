@@ -180,7 +180,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " miscellaneous
 Plug 'jpalardy/vim-slime',
     \{ 'for': ['javascript', 'python', 'r', 'typescript'] }
-Plug 'ryanss/vim-hackernews', { 'on': 'HackerNews' }
 
 call plug#end()
 " }}}
