@@ -54,27 +54,20 @@ else
     . /usr/share/bash-completion/bash_completion
 fi
 
+# Ruby GEM_PATH ------------------------
+export GEM_HOME="$HOME/.gem"
+export PATH="$GEM_HOME/bin:$PATH"
+
 # Android ANDROID_HOME -----------------
 #export ANDROID_HOME="$HOME/Library/Android/sdk"
 #export PATH="$ANDROID_HOME/tools/bin:$PATH"
 #export PATH="$ANDROID_HOME/platform-tools:$PATH"
 #alias emulator="$ANDROID_HOME/tools/emulator"
 
-# Python3 configurations ---------------
-# pyenv
-#pyenv() {
-#    unset -f pyenv
-#    source <(pyenv init -)
-#    pyenv $@
-#}
-
-# RUST ---------------------------------
-export PATH="$HOME/.cargo/bin:$PATH"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-
 # Node.js environment configuration ----
 # NVM PATH and lazy loading
 export NVM_DIR="$HOME/.nvm"
+
 __lazy_nvm() { # (macOS only)
     if [[ $(uname) == "Darwin" ]]; then
         local _NVM_SH="$(brew --prefix nvm)/nvm.sh"
@@ -107,6 +100,18 @@ __find_node_globals() {
 }
 
 __find_node_globals # Must load after bash completions.
+
+# Python3 configurations ---------------
+# pyenv
+#pyenv() {
+#    unset -f pyenv
+#    source <(pyenv init -)
+#    pyenv $@
+#}
+
+# RUST ---------------------------------
+source "$HOME/.cargo/env"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 #---------------------------------------
 # Enhanced prompt

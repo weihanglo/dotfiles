@@ -14,9 +14,11 @@ origdir=$HOME/.dotfiles.orig
 # Put config/dir to sync in this variable
 # --------------------------------------
 
+
 files=(
     .bashrc
     .bm.sh
+    .cargo/config
     .config/alacritty/alacritty.yml
     .config/nvim/init.vim
     .gitconfig
