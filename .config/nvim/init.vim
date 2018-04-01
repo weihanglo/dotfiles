@@ -165,9 +165,11 @@ Plug 'Valloric/YouCompleteMe', { 'do':
 " filetype
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'styled-components/vim-styled-components',
+    \{'for': ['javascript', 'typescript']}
 "Plug 'racer-rust/vim-racer', {'for': 'rust'}
 "Plug 'davidhalter/jedi-vim', {'for': 'python'}
-"Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do' : 'npm install' }
+"Plug 'ternjs/tern_for_vim', {'for': ['javascript'], 'do' : 'npm install' }
 
 " search
 Plug 'junegunn/fzf', {
