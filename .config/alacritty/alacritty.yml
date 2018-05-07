@@ -4,18 +4,16 @@
 env:
   TERM: xterm-256color
 
-# Window dimensions in character columns and lines
-# (changes require restart)
-dimensions:
-  columns: 80
-  lines: 24
-
-# Adds this many blank pixels of padding around the window
-# Units are physical pixels; this is not DPI aware.
-# (change requires restart)
-padding:
-  x: 2
-  y: 2
+window:
+  dimensions:
+    columns: 80
+    lines: 24
+  padding:
+    x: 2
+    y: 2
+  # Window decorations
+  # Setting this to false will result in window without borders and title bar.
+  decorations: true
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
@@ -34,17 +32,17 @@ font:
   italic:
     family: Fira Mono
     style: Italic
-  size: 16.0
+  size: 18
   offset:
-    x: 0.0
-    y: 0.0
+    x: 0
+    y: 0
   glyph_offset:
-    x: 0.0
-    y: 0.0
+    x: 0
+    y: 0
   use_thin_strokes: true
 
 # Background opacity
-background_opacity: .85
+background_opacity: .70
 
 visual_bell:
   duration: 0
@@ -80,3 +78,12 @@ colors:
     magenta: '0xc678dd'
     cyan:    '0x56b6c2'
     white:   '0xffffff'
+
+# Shell
+#
+# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
+# Entries in shell.args are passed unmodified as arguments to the shell.
+shell:
+  program: /usr/local/bin/bash
+  args:
+    - --login

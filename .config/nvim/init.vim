@@ -167,9 +167,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'styled-components/vim-styled-components',
     \{'for': ['javascript', 'typescript']}
-"Plug 'racer-rust/vim-racer', {'for': 'rust'}
-"Plug 'davidhalter/jedi-vim', {'for': 'python'}
-"Plug 'ternjs/tern_for_vim', {'for': ['javascript'], 'do' : 'npm install' }
+" Plug 'racer-rust/vim-racer', {'for': 'rust'}
+" Plug 'davidhalter/jedi-vim', {'for': 'python'}
+" Plug 'ternjs/tern_for_vim', {'for': ['javascript'], 'do' : 'npm install' }
 
 " search
 Plug 'junegunn/fzf', {
@@ -182,6 +182,8 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " miscellaneous
 Plug 'jpalardy/vim-slime',
     \{ 'for': ['javascript', 'python', 'r', 'typescript'] }
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 " }}}
@@ -319,4 +321,8 @@ let g:tmuxline_preset.win = ['#F#I', '#W']
 let g:tmuxline_preset.y = ['%R', '%b %d']
 let g:tmuxline_preset.z = '#H'
 let g:tmuxline_preset.options = { 'status-justify' : 'left'}
+" }}}
+
+" {{{ vim-polyglot
+let g:vim_markdown_conceal = 0
 " }}}
