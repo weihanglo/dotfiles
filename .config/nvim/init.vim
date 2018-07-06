@@ -154,7 +154,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " linter
-Plug 'w0rp/ale'
 
 " snippets/autocompletions
 Plug 'SirVer/ultisnips'
@@ -163,7 +162,7 @@ Plug 'Valloric/YouCompleteMe', { 'do':
     \ './install.py --tern-completer --racer-completer' }
 
 " filetype
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'styled-components/vim-styled-components',
     \{'for': ['javascript', 'typescript']}
