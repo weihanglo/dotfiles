@@ -134,7 +134,7 @@ __git_branch() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     status=$([[ $(git status -s) ]] && echo '*')
     stash=$([[ $(git stash list) ]] && echo '⚑')
-    echo "( ${ref#refs/heads/}$status$stash)"
+    echo "(${ref#refs/heads/}$status$stash)"
 }
 
 __git_last_commit() {
