@@ -72,12 +72,6 @@ augroup END
 " map localleader if necessary
 let maplocalleader = ','
 
-inoremap hh <Esc>
-inoremap jj <Esc>
-inoremap kk <Esc>
-inoremap jk <Esc>
-inoremap kj <Esc>
-
 cnoreabbrev W w
 cnoreabbrev W! w!
 cnoreabbrev Wq wq
@@ -162,7 +156,7 @@ Plug 'Valloric/YouCompleteMe', { 'do':
     \ './install.py --tern-completer --racer-completer' }
 
 " filetype
-"Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'styled-components/vim-styled-components',
     \{'for': ['javascript', 'typescript']}
@@ -181,7 +175,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " miscellaneous
 Plug 'jpalardy/vim-slime',
     \{ 'for': ['javascript', 'python', 'r', 'typescript'] }
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
 
 call plug#end()
