@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 4.4   #
 #            by Weihang Lo             #
-#             July. 2017               #
+#              Aug. 2018               #
 #--------------------------------------#
 
 # Source global definitions
@@ -79,7 +79,7 @@ __lazy_nvm() { # (macOS only)
 
 # load executable in alias=default
 __find_node_globals() {
-    default_alias=$NVM_DIR/alias/default
+    default_alias="$NVM_DIR/alias/default"
     if [ ! -s $default_alias ]; then
         return
     fi
