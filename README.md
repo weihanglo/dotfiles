@@ -13,6 +13,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 
 - [**Alacritty**][alacritty]: Maybe the fastest terminal emulator ever!
 - [**bm**][bm]: Tiny script for jumping between directories.
+- [**diff-so-fancy**][diff-so-fancy]: Better lookin diffs.
 - [**FZF**][fzf]: Fuzzy finder goes rock.
 - [**IPython**][ipython]: A must-have for a python lover.
 - [**Neovim**][neovim]: Next-generation Vim. Required.
@@ -34,6 +35,7 @@ Copyright © 2015 - 2018 Weihang Lo
 
 [alacritty]: https://github.com/jwilm/alacritty
 [bm]: .bm.sh
+[diff-so-fancy]: https://github.com/so-fancy/diff-so-fancy
 [fzf]: https://github.com/junegunn/fzf
 [ipython]: https://ipython.org
 [neovim]: https://neovim.io

@@ -145,9 +145,9 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 381 620 392 0 0 1440 900 </string>
+	<string>650 1416 620 392 0 900 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>469 1015 796 473 0 900 1920 1080 </string>
+	<string>469 1015 796 486 0 900 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 900 1920 1080 0 900 1920 1080 </string>
 	<key>New Bookmarks</key>
@@ -776,7 +776,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>10000</integer>
+			<integer>0</integer>
 			<key>Scrollback With Status Bar</key>
 			<false/>
 			<key>Scrollback in Alternate Screen</key>
@@ -1047,7 +1047,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-08-08T23:28:30Z</date>
+	<date>2018-08-21T00:13:42Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
