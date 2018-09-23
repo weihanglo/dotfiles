@@ -15,10 +15,11 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ll='ls -lhF'
+alias ll='exa -@lhgF --git'
+
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
-alias tree='tree -ACF --dirsfirst'
+alias tree='exa -TF --group-directories-first'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -131,6 +132,9 @@ __ssh_or_not() {
 }
 
 __git_branch() {
+    if [[ "$NO_GIT" = true ]]; then
+        return
+    fi
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     status=$([[ $(git status -s) ]] && echo '*')
     stash=$([[ $(git stash list) ]] && echo '⚑')
@@ -138,6 +142,9 @@ __git_branch() {
 }
 
 __git_last_commit() {
+    if [[ "$NO_GIT" = true ]]; then
+        return
+    fi
     now=$(date +%s)
     last_commit="$(git log --pretty=format:%at -1 2> /dev/null)" || return
     seconds="$((now - last_commit))"
