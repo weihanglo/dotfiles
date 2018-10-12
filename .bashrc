@@ -15,7 +15,7 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ll='exa -@lhgF --git'
+alias ll='exa -lhgF --git'
 
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
