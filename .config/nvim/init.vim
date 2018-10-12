@@ -148,6 +148,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " linter
+Plug 'w0rp/ale'
 
 " snippets/autocompletions
 Plug 'SirVer/ultisnips'
