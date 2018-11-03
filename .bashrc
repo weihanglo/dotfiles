@@ -15,11 +15,13 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias ls='exa'
 alias ll='exa -lhgF --git'
 
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias tree='exa -TF --group-directories-first'
+alias cat='bat'
 
 alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
@@ -54,6 +56,10 @@ else
     [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 fi
+
+# RUST ---------------------------------
+source "$HOME/.cargo/env"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # Ruby GEM_PATH ------------------------
 export GEM_HOME="$HOME/.gem"
@@ -109,10 +115,6 @@ __find_node_globals # Must load after bash completions.
 #    source <(pyenv init -)
 #    pyenv $@
 #}
-
-# RUST ---------------------------------
-source "$HOME/.cargo/env"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 #---------------------------------------
 # Enhanced prompt
@@ -187,8 +189,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # macOS local
 if [[ $(uname) == "Darwin" ]]; then
-    alias ls='ls -G'
-
+    # alias ls='ls -G'
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
 fi

@@ -12,6 +12,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 ## Tools We Love
 
 - [**Alacritty**][alacritty]: Maybe the fastest terminal emulator ever!
+- [**bat**][bat]: A cat(1) clone with wings 🦇.
 - [**bm**][bm]: Tiny script for jumping between directories.
 - [**diff-so-fancy**][diff-so-fancy]: Better lookin diffs.
 - [**exa**][exa]: Modern `ls` with sane defaults and `tree`'s functionalities.
@@ -35,6 +36,7 @@ Feel free to create an issue or pull request!
 Copyright © 2015 - 2018 Weihang Lo
 
 [alacritty]: https://github.com/jwilm/alacritty
+[bat]: https://github.com/sharkdp/bat
 [bm]: .bm.sh
 [diff-so-fancy]: https://github.com/so-fancy/diff-so-fancy
 [exa]: https://the.exa.website/
