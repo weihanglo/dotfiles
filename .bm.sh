@@ -46,7 +46,7 @@ function bm() {
             ;;
 
         ls|list)
-            ls -lA $BOOKMARKPATH | grep "\->" | \
+            \ls -lA $BOOKMARKPATH | grep "\->" | \
                 awk 'NR > 0 { printf "%-20s -> %s\n", $9, $11}'
             ;;
 
