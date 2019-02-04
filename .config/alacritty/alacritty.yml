@@ -11,12 +11,32 @@ window:
   padding:
     x: 2
     y: 2
+  dynamic_padding: false
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
   #     - buttonless: Title bar, transparent background and title bar buttons
   #     - transparent: Title bar, transparent background, but no title bar buttons
   decorations: none
+  start_maximized: true
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 100000
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 3
+  # Faux Scrolling
+  #
+  # The `faux_multiplier` setting controls the number of lines the terminal
+  # should scroll when the alternate screen buffer is active. This is used
+  # to allow mouse scrolling for applications like `man`.
+  #
+  # Specifying `0` will disable faux scrolling.
+  faux_multiplier: 3
+  # Scroll to the bottom when new text is written to the terminal.
+  auto_scroll: false
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
@@ -27,13 +47,13 @@ draw_bold_text_with_bright_colors: true
 # Font configuration (changes require restart)
 font:
   normal:
-    family: Fira Mono
+    family: Fira Code
     style: Medium
   bold:
-    family: Fira Mono
+    family: Fira Code
     style: Bold
   italic:
-    family: Fira Mono
+    family: Fira Code
     style: Italic
   size: 18
   offset:
@@ -42,11 +62,10 @@ font:
   glyph_offset:
     x: 0
     y: 0
-  scale_with_dpi: true
   use_thin_strokes: true
 
 # Background opacity
-background_opacity: .70
+background_opacity: 1.0
 
 visual_bell:
   duration: 0
@@ -83,75 +102,208 @@ colors:
     cyan:    '0x56b6c2'
     white:   '0xffffff'
 
+# Mouse bindings
+#
+# Available fields:
+#   - mouse
+#   - action
+#   - mods (optional)
+#
+# Values for `mouse`:
+#   - Middle
+#   - Left
+#   - Right
+#   - Numeric identifier such as `5`
+#
+# All available `mods` and `action` values are documented in the key binding
+# section.
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+mouse:
+  # Click settings
+  #
+  # The `double_click` and `triple_click` settings control the time
+  # alacritty should wait for accepting multiple clicks as one double
+  # or triple click.
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: false
+
+  url:
+    # URL launcher
+    #
+    # This program is executed when clicking on a text which is recognized as a URL.
+    # The URL is always added to the command as the last parameter.
+    #
+    # When set to `None`, URL launching will be disabled completely.
+    #
+    # Default:
+    #   - (macOS) open
+    #   - (Linux) xdg-open
+    #   - (Windows) explorer
+    #launcher: xdg-open
+
+    # URL modifiers
+    #
+    # These are the modifiers that need to be held down for opening URLs when clicking
+    # on them. The available modifiers are documented in the key binding section.
+    modifiers: None
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-  # When set to `true`, selected text will be copied to both the primary and
-  # the selection clipboard. Otherwise, it will only be copied to the selection
-  # clipboard.
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
+
+# Allow terminal applications to change Alacritty's window title.
+dynamic_title: true
+
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
 
 # Shell
 #
-# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
-# Entries in shell.args are passed unmodified as arguments to the shell.
+# You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
+# Entries in `shell.args` are passed unmodified as arguments to the shell.
+#
+# Default:
+#   - (Linux/macOS) /bin/bash --login
+#   - (Windows) powershell
 shell:
   program: /usr/local/bin/bash
   args:
     - --login
 
+# Send ESC (\x1b) before characters when alt is pressed.
+alt_send_esc: true
+
 # Key bindings
 #
-# Each binding is defined as an object with some properties. Most of the
-# properties are optional. All of the alphabetical keys should have a letter for
-# the `key` value such as `V`. Function keys are probably what you would expect
-# as well (F1, F2, ..). The number keys above the main keyboard are encoded as
-# `Key1`, `Key2`, etc. Keys on the number pad are encoded `Number1`, `Number2`,
-# etc.  These all match the glutin::VirtualKeyCode variants.
+# Key bindings are specified as a list of objects. Each binding will specify a
+# key and modifiers required to trigger it, terminal modes where the binding is
+# applicable, and what should be done when the key binding fires. It can either
+# send a byte sequence to the running application (`chars`), execute a
+# predefined action (`action`) or fork and execute a specified command plus
+# arguments (`command`).
 #
-# A list with all available `key` names can be found here:
-# https://docs.rs/glutin/*/glutin/enum.VirtualKeyCode.html#variants
+# Bindings are always filled by default, but will be replaced when a new binding
+# with the same triggers is defined. To unset a default binding, it can be
+# mapped to the `None` action.
 #
-# Possible values for `mods`
-# `Command`, `Super` refer to the super/command/windows key
-# `Control` for the control key
-# `Shift` for the Shift key
-# `Alt` and `Option` refer to alt/option
+# Example:
+#   `- { key: V, mods: Control|Shift, action: Paste }`
 #
-# mods may be combined with a `|`. For example, requiring control and shift
-# looks like:
+# Available fields:
+#   - key
+#   - mods (optional)
+#   - chars | action | command (exactly one required)
+#   - mode (optional)
 #
-# mods: Control|Shift
+# Values for `key`:
+#   - `A` -> `Z`
+#   - `F1` -> `F12`
+#   - `Key1` -> `Key0`
 #
-# The parser is currently quite sensitive to whitespace and capitalization -
-# capitalization must match exactly, and piped items must not have whitespace
-# around them.
+#   A full list with available key codes can be found here:
+#   https://docs.rs/glutin/*/glutin/enum.VirtualKeyCode.html#variants
 #
-# Either an `action`, `chars`, or `command` field must be present.
-#   `action` must be one of `Paste`, `PasteSelection`, `Copy`, or `Quit`.
-#   `chars` writes the specified string every time that binding is activated.
-#     These should generally be escape sequences, but they can be configured to
-#     send arbitrary strings of bytes.
-#   `command` must be a map containing a `program` string, and `args` array of
-#     strings. For example:
-#     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
+#   Instead of using the name of the keys, the `key` field also supports using
+#   the scancode of the desired key. Scancodes have to be specified as a
+#   decimal number.
+#   This command will allow you to display the hex scancodes for certain keys:
+#     `showkey --scancodes`
+#
+# Values for `mods`:
+#   - Command
+#   - Control
+#   - Super
+#   - Shift
+#   - Alt
+#
+#   Multiple `mods` can be combined using `|` like this: `mods: Control|Shift`.
+#   Whitespace and capitalization is relevant and must match the example.
+#
+# Values for `chars`:
+#   The `chars` field writes the specified string to the terminal. This makes
+#   it possible to pass escape sequences.
+#   To find escape codes for bindings like `PageUp` ("\x1b[5~"), you can run
+#   the command `showkey -a` outside of tmux.
+#   Note that applications use terminfo to map escape sequences back to
+#   keys. It is therefore required to update the terminfo when
+#   changing an escape sequence.
+#
+# Values for `action`:
+#   - Paste
+#   - PasteSelection
+#   - Copy
+#   - IncreaseFontSize
+#   - DecreaseFontSize
+#   - ResetFontSize
+#   - ScrollPageUp
+#   - ScrollPageDown
+#   - ScrollToTop
+#   - ScrollToBottom
+#   - ClearHistory
+#   - Hide
+#   - Quit
+#   - ClearLogNotice
+#   - SpawnNewInstance
+#   - None
+#
+# Values for `command`:
+#   The `command` field must be a map containing a `program` string and
+#   an `args` array of command line parameter strings.
+#
+#   Example:
+#       `command: { program: "alacritty", args: ["-e", "vttest"] }`
+#
+# Values for `mode`:
+#   - ~AppCursor
+#   - AppCursor
+#   - ~AppKeypad
+#   - AppKeypad
 key_bindings:
-  - { key: V,        mods: Command, action: Paste                        }
-  - { key: C,        mods: Command, action: Copy                         }
+  # (Windows/Linux only)
+  #- { key: V,        mods: Control|Shift,    action: Paste               }
+  #- { key: C,        mods: Control|Shift,    action: Copy                }
+  #- { key: Insert,   mods: Shift,   action: PasteSelection               }
+  #- { key: Key0,     mods: Control, action: ResetFontSize                }
+  #- { key: Equals,   mods: Control, action: IncreaseFontSize             }
+  #- { key: Subtract, mods: Control, action: DecreaseFontSize             }
+
+  # (macOS only)
+  #- { key: Key0,     mods: Command, action: ResetFontSize                }
+  #- { key: Equals,   mods: Command, action: IncreaseFontSize             }
+  #- { key: Minus,    mods: Command, action: DecreaseFontSize             }
+  #- { key: K,        mods: Command, action: ClearHistory                 }
+  #- { key: K,        mods: Command, chars: "\x0c"                        }
+  #- { key: V,        mods: Command, action: Paste                        }
+  #- { key: C,        mods: Command, action: Copy                         }
+  #- { key: H,        mods: Command, action: Hide                         }
+  #- { key: Q,        mods: Command, action: Quit                         }
+  #- { key: W,        mods: Command, action: Quit                         }
+
   - { key: Paste,                   action: Paste                        }
   - { key: Copy,                    action: Copy                         }
-  - { key: H,        mods: Command, action: Hide                         }
-  - { key: Q,        mods: Command, action: Quit                         }
-  - { key: W,        mods: Command, action: Quit                         }
+  - { key: L,        mods: Control, action: ClearLogNotice               }
+  - { key: L,        mods: Control, chars: "\x0c"                        }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
   - { key: End,                     chars: "\x1b[F",   mode: ~AppCursor  }
-  - { key: Key0,     mods: Command, action: ResetFontSize                }
-  - { key: Equals,   mods: Command, action: IncreaseFontSize             }
-  - { key: Minus,    mods: Command, action: DecreaseFontSize             }
-  - { key: K,        mods: Command, action: ClearHistory                 }
-  - { key: K,        mods: Command, chars: "\x0c"                        }
   - { key: PageUp,   mods: Shift,   chars: "\x1b[5;2~"                   }
   - { key: PageUp,   mods: Control, chars: "\x1b[5;5~"                   }
   - { key: PageUp,                  chars: "\x1b[5~"                     }
@@ -231,16 +383,17 @@ key_bindings:
   - { key: F10,      mods: Alt,     chars: "\x1b[21;6~"                  }
   - { key: F11,      mods: Alt,     chars: "\x1b[23;6~"                  }
   - { key: F12,      mods: Alt,     chars: "\x1b[24;6~"                  }
-  - { key: F1,       mods: Command, chars: "\x1b[1;3P"                   }
-  - { key: F2,       mods: Command, chars: "\x1b[1;3Q"                   }
-  - { key: F3,       mods: Command, chars: "\x1b[1;3R"                   }
-  - { key: F4,       mods: Command, chars: "\x1b[1;3S"                   }
-  - { key: F5,       mods: Command, chars: "\x1b[15;3~"                  }
-  - { key: F6,       mods: Command, chars: "\x1b[17;3~"                  }
-  - { key: F7,       mods: Command, chars: "\x1b[18;3~"                  }
-  - { key: F8,       mods: Command, chars: "\x1b[19;3~"                  }
-  - { key: F9,       mods: Command, chars: "\x1b[20;3~"                  }
-  - { key: F10,      mods: Command, chars: "\x1b[21;3~"                  }
-  - { key: F11,      mods: Command, chars: "\x1b[23;3~"                  }
-  - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
+  - { key: F1,       mods: Super,   chars: "\x1b[1;3P"                   }
+  - { key: F2,       mods: Super,   chars: "\x1b[1;3Q"                   }
+  - { key: F3,       mods: Super,   chars: "\x1b[1;3R"                   }
+  - { key: F4,       mods: Super,   chars: "\x1b[1;3S"                   }
+  - { key: F5,       mods: Super,   chars: "\x1b[15;3~"                  }
+  - { key: F6,       mods: Super,   chars: "\x1b[17;3~"                  }
+  - { key: F7,       mods: Super,   chars: "\x1b[18;3~"                  }
+  - { key: F8,       mods: Super,   chars: "\x1b[19;3~"                  }
+  - { key: F9,       mods: Super,   chars: "\x1b[20;3~"                  }
+  - { key: F10,      mods: Super,   chars: "\x1b[21;3~"                  }
+  - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                  }
+  - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                  }
   - { key: NumpadEnter,             chars: "\n"                          }
+
