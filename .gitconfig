@@ -14,7 +14,7 @@
 	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [user]
 	name = Weihang Lo
-	email = weihanglotw@gmail.com
+	email = me@weihanglo.tw
 	signingkey = D7DBF189825E82E7
 [color]
 	ui = true
