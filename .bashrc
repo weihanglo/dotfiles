@@ -71,6 +71,10 @@ export PATH="$GEM_HOME/bin:$PATH"
 #export PATH="$ANDROID_HOME/platform-tools:$PATH"
 #alias emulator="$ANDROID_HOME/tools/emulator"
 
+## Golang environment ------------------
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+
 # Node.js environment configuration ----
 # NVM PATH and lazy loading
 export NVM_DIR="$HOME/.nvm"
