@@ -27,6 +27,8 @@ alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias nvi='nvim --noplugin'
 
+alias k='kubectl'
+
 #---------------------------------------
 # Environment variables and configs
 #---------------------------------------
@@ -50,8 +52,9 @@ export PROMPT_COMMAND='history -a'
 
 # Bash completion ----------------------
 if [[ $(uname) == "Darwin" ]]; then
-    [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]] && \
-    . $(brew --prefix)/share/bash-completion/bash_completion
+    export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+    [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && \
+    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 else
     [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion

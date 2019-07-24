@@ -109,13 +109,22 @@ if !empty(glob('/usr/local/bin/python'))
 else
     let g:python_host_prog = '/usr/bin/python'
 endif
-if !empty(glob('/usr/local/bin/python3'))
-    let g:python3_host_prog = '/usr/local/bin/python3'
-    let g:ycm_python_binary_path = '/usr/local/bin/python3'
+
+" Reference: https://duseev.com/articles/vim-python-pipenv/
+let pipenv_venv_path = system('pipenv --venv')
+if v:shell_error == 0
+  let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+  let g:ycm_python_binary_path = venv_path . '/bin/python'
 else
-    let g:python3_host_prog = '/usr/bin/python3'
-    let g:ycm_python_binary_path = '/usr/bin/python3'
+  if !empty(glob('/usr/local/bin/python3'))
+      let g:python3_host_prog = '/usr/local/bin/python3'
+      let g:ycm_python_binary_path = '/usr/local/bin/python3'
+  else
+      let g:python3_host_prog = '/usr/bin/python3'
+      let g:ycm_python_binary_path = '/usr/bin/python3'
+  endif
 endif
+
 " }}}
 
 " Vim-plug {{{
