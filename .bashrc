@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #--------------------------------------#
-#  .bashrc for GNU bash, version 4.4   #
+#  .bashrc for GNU bash, version 5.0   #
 #            by Weihang Lo             #
-#              Aug. 2018               #
+#              Aug. 2019               #
 #--------------------------------------#
 
 # Source global definitions
@@ -14,20 +14,15 @@
 #---------------------------------------
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'
 alias ls='exa'
 alias ll='exa -lhgF --git'
-
 
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias tree='exa -TF --group-directories-first'
 alias cat='bat'
 
-alias R='R --no-save --no-restore -q'
 alias ipy='ipython3'
 alias nvi='nvim --noplugin'
-
-alias k='kubectl'
 
 #---------------------------------------
 # Environment variables and configs
@@ -65,8 +60,8 @@ source "$HOME/.cargo/env"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # Ruby GEM_PATH ------------------------
-export GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/bin:$PATH"
+#export GEM_HOME="$HOME/.gem"
+#export PATH="$GEM_HOME/bin:$PATH"
 
 # Android ANDROID_HOME -----------------
 #export ANDROID_HOME="$HOME/Library/Android/sdk"
