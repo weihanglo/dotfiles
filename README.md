@@ -11,20 +11,21 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 
 ## Tools We Love
 
-- [**Alacritty**][alacritty]: Maybe the fastest terminal emulator ever!
-- [**bat**][bat]: A cat(1) clone with wings 🦇.
-- [**bm**][bm]: Tiny script for jumping between directories.
-- [**diff-so-fancy**][diff-so-fancy]: Better lookin diffs.
-- [**exa**][exa]: Modern `ls` with sane defaults and `tree`'s functionalities.
-- [**FZF**][fzf]: Fuzzy finder goes rock.
-- [**IPython**][ipython]: A must-have for a python lover.
-- [**Neovim**][neovim]: Next-generation Vim. Required.
-- [**Tern**][tern]: JavaScript auto-completion library.
-- [**XVim**][xvim]: Bring Vim to Xcode.
-- [**iTerm2**][iterm2]: Feature-rich terminal emulator on macOS.
-- [**nvm**][nvm]: Ease the pain of switch between different Node.js versions.
-- [**ripgrep**][ripgrep]: Better, stronger `grep` written in Rust.
-- [**tmux**][tmux]: Awesome tool that defeats all terminal window managers.
+- [**Alacritty**]: Maybe the fastest terminal emulator ever!
+- [**bat**]: A cat(1) clone with wings 🦇.
+- [**bm**]: Tiny script for jumping between directories.
+- [**diff-so-fancy**]: Better lookin diffs.
+- [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
+- [**FZF**]: Fuzzy finder goes rock.
+- [**IPython**]: A must-have for a python lover.
+- [**Neovim**]: Next-generation Vim. Required.
+- [**Starship**]: Cross-shell prompt with sane defaults.
+- [**Tern**]: JavaScript auto-completion library.
+- [**XVim**]: Bring Vim to Xcode.
+- [**iTerm2**]: Feature-rich terminal emulator on macOS.
+- [**nvm**]: Ease the pain of switch between different Node.js versions.
+- [**ripgrep**]: Better, stronger `grep` written in Rust.
+- [**tmux**]: Awesome tool that defeats all terminal window managers.
 
 Want to share your config file? 
 Feel free to create an issue or pull request!
@@ -33,19 +34,20 @@ Feel free to create an issue or pull request!
 
 [The MIT License (MIT)](LICENSE)
 
-Copyright © 2015 - 2018 Weihang Lo
+Copyright © 2015 - 2019 Weihang Lo
 
-[alacritty]: https://github.com/jwilm/alacritty
-[bat]: https://github.com/sharkdp/bat
-[bm]: .bm.sh
-[diff-so-fancy]: https://github.com/so-fancy/diff-so-fancy
-[exa]: https://the.exa.website/
-[fzf]: https://github.com/junegunn/fzf
-[ipython]: https://ipython.org
-[neovim]: https://neovim.io
-[tern]: https://ternjs.net
-[xvim]: http://xvim.org
-[iterm2]: https://www.iterm2.com
-[nvm]: https://github.com/creationix/nvm
-[ripgrep]: https://github.com/burntsushi/ripgrep
-[tmux]: https://tmux.github.io
+[**Alacritty**]: https://github.com/jwilm/alacritty
+[**bat**]: https://github.com/sharkdp/bat
+[**bm**]: .bm.sh
+[**diff-so-fancy**]: https://github.com/so-fancy/diff-so-fancy
+[**exa**]: https://the.exa.website/
+[**FZF**]: https://github.com/junegunn/fzf
+[**IPython**]: https://ipython.org
+[**Neovim**]: https://neovim.io
+[**Starship**]: https://starship.rs
+[**Tern**]: https://ternjs.net
+[**XVim**]: http://xvim.org
+[**iTerm2**]: https://www.iterm2.com
+[**nvm**]: https://github.com/creationix/nvm
+[**ripgrep**]: https://github.com/burntsushi/ripgrep
+[**tmux**]: https://tmux.github.io

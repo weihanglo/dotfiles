@@ -14,13 +14,13 @@ origdir=$HOME/.dotfiles.orig
 # Put config/dir to sync in this variable
 # --------------------------------------
 
-
 files=(
     .bashrc
     .bm.sh
     .cargo/config
     .config/alacritty/alacritty.yml
     .config/nvim/init.vim
+    .config/starship.toml
     .gitconfig
     .gitignore
     .inputrc
@@ -36,16 +36,20 @@ files=(
 # Put custom installaltion commands here
 # --------------------------------------
 
-install_neovim_brew() {
+install_neovim() {
     brew install neovim
 }
 
 install_nvim_python() {
-    pip3 install neovim
+    pip3 install neovim pynvim
 }
 
 install_ripgrep() {
     cargo install ripgrep
+}
+
+install_starship() {
+    cargo install starship
 }
 
 neovim_replace_vimrc() {
@@ -119,7 +123,7 @@ confirm () {
 
 # confirm installation
 if [[ $(uname) == 'Darwin' ]]; then
-    confirm 'install neovim' install_neovim_brew
+    confirm 'install neovim' install_neovim
     if [[ -f $(which 'pip3') ]]; then
         confirm 'install nvim-python' install_nvim_python
     fi
@@ -129,3 +133,4 @@ confirm "replace .vimrc by neovim's init.vim" neovim_replace_vimrc
 confirm "add bash-completion for bm (bookmark manager)" add_bm_completion
 confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
 confirm "install ripgrep, a better grep" install_ripgrep
+confirm "install starship, prompt with sane defaults" install_starship

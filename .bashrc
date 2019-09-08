@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #--------------------------------------#
 #  .bashrc for GNU bash, version 5.0   #
 #            by Weihang Lo             #
-#              Aug. 2019               #
+#              Sep. 2019               #
 #--------------------------------------#
 
 # Source global definitions
@@ -60,8 +60,8 @@ source "$HOME/.cargo/env"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # Ruby GEM_PATH ------------------------
-#export GEM_HOME="$HOME/.gem"
-#export PATH="$GEM_HOME/bin:$PATH"
+export GEM_HOME="$HOME/.gem"
+export PATH="$GEM_HOME/bin:$PATH"
 
 # Android ANDROID_HOME -----------------
 #export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -121,65 +121,9 @@ __find_node_globals # Must load after bash completions.
 #---------------------------------------
 # Enhanced prompt
 #---------------------------------------
-__ssh_or_not() {
-    if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-        remote_hostname=[$HOSTNAME]
-    else
-        case $(ps -o comm= -p $PPID) in
-            sshd|*/sshd)
-                remote_hostname=[$HOSTNAME]
-                ;;
-        esac
-    fi
 
-    echo $remote_hostname
-}
-
-__git_branch() {
-    if [[ "$NO_GIT" = true ]]; then
-        return
-    fi
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    status=$([[ $(git status -s) ]] && echo '*')
-    stash=$([[ $(git stash list) ]] && echo '⚑')
-    echo "(${ref#refs/heads/}$status$stash)"
-}
-
-__git_last_commit() {
-    if [[ "$NO_GIT" = true ]]; then
-        return
-    fi
-    now=$(date +%s)
-    last_commit="$(git log --pretty=format:%at -1 2> /dev/null)" || return
-    seconds="$((now - last_commit))"
-    minutes="$((seconds / 60))"
-    hours="$((minutes  / 60))"
-    days="$((hours / 24))"
-
-    minutes="$((minutes % 60))"
-    hours="$((hours % 24))"
-
-    if (( $days > 0)); then
-        last_time="${days}d${hours}h"
-    else
-        last_time="${hours}h${minutes}m"
-    fi
-
-    echo $last_time
-}
-
-PS1="\`
-    if [[ \$? = 0 ]]; then
-        echo \[\e[1\;32m\]\"\W\" \
-        \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \☻ \[\e[0m\]
-    else
-        echo \[\e[1\;31m\]\"\W\" \
-        \$(__ssh_or_not) \$(__git_branch) \$(__git_last_commit) \
-        \✘ \[\e[0m\]
-    fi\` "
-
-PS2='... '
+# Just launch the starship!!! (https://starship.rs/)
+eval "$(starship init bash)"
 
 #-------------------
 # Miscellaneous

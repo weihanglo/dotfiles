@@ -1,0 +1,11 @@
+add_newline = false
+
+[character]
+use_symbol_for_status = true
+
+[directory]
+truncation_length = 2
+fish_style_pwd_dir_length = 1
+
+[git_status]
+show_sync_count = true
