@@ -112,11 +112,11 @@ __find_node_globals # Must load after bash completions.
 
 # Python3 configurations ---------------
 # pyenv
-#pyenv() {
-#    unset -f pyenv
-#    source <(pyenv init -)
-#    pyenv $@
-#}
+pyenv() {
+    unset -f pyenv
+    source <(pyenv init -)
+    pyenv $@
+}
 
 #---------------------------------------
 # Enhanced prompt
