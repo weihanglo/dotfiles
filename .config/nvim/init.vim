@@ -114,14 +114,11 @@ endif
 let pipenv_venv_path = system('pipenv --venv')
 if v:shell_error == 0
   let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-  let g:ycm_python_binary_path = venv_path . '/bin/python'
 else
   if !empty(glob('/usr/local/bin/python3'))
       let g:python3_host_prog = '/usr/local/bin/python3'
-      let g:ycm_python_binary_path = '/usr/local/bin/python3'
   else
       let g:python3_host_prog = '/usr/bin/python3'
-      let g:ycm_python_binary_path = '/usr/bin/python3'
   endif
 endif
 
@@ -154,22 +151,22 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " scm
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-
 " linter
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " snippets/autocompletions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', { 'do': 
-    \ './install.py --tern-completer --racer-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': 
+"     \ './install.py --tern-completer --racer-completer' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " filetype
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
-" Plug 'racer-rust/vim-racer', {'for': 'rust'}
-" Plug 'davidhalter/jedi-vim', {'for': 'python'}
-" Plug 'ternjs/tern_for_vim', {'for': ['javascript'], 'do' : 'npm install' }
 
 " search
 Plug 'junegunn/fzf', {
@@ -181,7 +178,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " miscellaneous
 Plug 'jpalardy/vim-slime',
-    \{ 'for': ['javascript', 'python', 'r', 'typescript'] }
+    \{ 'for': ['javascript', 'python', 'r', 'typescript', 'bash'] }
 Plug 'tpope/vim-commentary'
 
 call plug#end()
@@ -189,20 +186,6 @@ call plug#end()
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger = '<c-j>'
-" }}}
-
-" YouCompleteMe {{{
-" map to <LocalLeader>K to act like default man.vim's keymapping.
-nnoremap <silent><LocalLeader>K :YcmCompleter GoToDefinition<CR>
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-p>', '<Up>']
-let g:ycm_filetype_specific_completion_to_disable = {
-    \ 'vim': 1,
-    \ 'gitcommit': 1
-    \}
 " }}}
 
 " ALE {{{
@@ -213,11 +196,16 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint', 'tsserver', 'typecheck']
-\}
-" }}}
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \   'typescript': ['tslint', 'tsserver', 'typecheck'],
+" \   'python': ['flake8', 'pylint']
+" \}
+" let g:ale_fixers = {
+" \   'javascript': ['eslint'],
+" \   'typescript': ['tslint', 'tsserver', 'typecheck']
+" \}
+" " }}}
 
 " vim-multiple-cursors {{{
 " before multiple cursors
@@ -269,6 +257,16 @@ nnoremap <silent><LocalLeader>g* :Grepper -cword -noprompt<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 " }}}
+"
+" Language server {{{
+let g:LanguageClient_serverCommands = {
+\   'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+\   'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+\   'javascript.jsx': ['tcp://127.0.0.1:2089'],
+\   'python': ['/usr/local/bin/pyls'],
+\}
+" }}}
+
 
 " Colorscheme {{{
 "set background=dark
