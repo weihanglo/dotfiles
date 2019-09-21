@@ -146,7 +146,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'joshdick/onedark.vim'
 
 " fast moves
 Plug 'terryma/vim-multiple-cursors'
@@ -183,7 +182,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " miscellaneous
 Plug 'jpalardy/vim-slime',
     \{ 'for': ['javascript', 'python', 'r', 'typescript'] }
-"Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
 
 call plug#end()
@@ -273,8 +271,8 @@ xmap gs <plug>(GrepperOperator)
 " }}}
 
 " Colorscheme {{{
-set background=dark
-colorscheme onedark
+"set background=dark
+"colorscheme onedark
 " }}}
 
 " Airline {{{
