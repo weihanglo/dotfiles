@@ -155,10 +155,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 
 " snippets/autocompletions
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" Plug 'Valloric/YouCompleteMe', { 'do': 
-"     \ './install.py --tern-completer --racer-completer' }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -184,10 +180,6 @@ Plug 'tpope/vim-commentary'
 call plug#end()
 " }}}
 
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger = '<c-j>'
-" }}}
-
 " ALE {{{
 " Enable completion where available.
 let g:ale_completion_enabled = 1
@@ -205,7 +197,7 @@ let g:ale_sign_warning = '.'
 " \   'javascript': ['eslint'],
 " \   'typescript': ['tslint', 'tsserver', 'typecheck']
 " \}
-" " }}}
+" }}}
 
 " vim-multiple-cursors {{{
 " before multiple cursors
