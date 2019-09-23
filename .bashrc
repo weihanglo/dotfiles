@@ -42,7 +42,8 @@ export VISUAL=nvim EDITOR=nvim
 
 # History setting ----------------------
 export HISTSIZE=
-export HISTCONTROL=ignoreboth
+export HISTCONTROL="erasedups:ignoreboth"
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 export PROMPT_COMMAND='history -a'
 
 # Bash completion ----------------------
