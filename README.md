@@ -24,6 +24,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**XVim**]: Bring Vim to Xcode.
 - [**iTerm2**]: Feature-rich terminal emulator on macOS.
 - [**nvm**]: Ease the pain of switch between different Node.js versions.
+- [**pyenv**]: Simple Python version management.
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
 - [**tmux**]: Awesome tool that defeats all terminal window managers.
 
@@ -49,5 +50,6 @@ Copyright © 2015 - 2019 Weihang Lo
 [**XVim**]: http://xvim.org
 [**iTerm2**]: https://www.iterm2.com
 [**nvm**]: https://github.com/creationix/nvm
+[**pyenv**]: https://github.com/pyenv/pyenv
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
 [**tmux**]: https://tmux.github.io

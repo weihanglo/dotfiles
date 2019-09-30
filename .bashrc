@@ -71,7 +71,7 @@ export PATH="$GEM_HOME/bin:$PATH"
 #alias emulator="$ANDROID_HOME/tools/emulator"
 
 ## Golang environment ------------------
-export GOPATH="$HOME/.go"
+export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 # Node.js environment configuration ----
@@ -113,11 +113,12 @@ __find_node_globals # Must load after bash completions.
 
 # Python3 configurations ---------------
 # pyenv
-pyenv() {
-    unset -f pyenv
+#pyenv() {
+#    unset -f pyenv
     source <(pyenv init -)
-    pyenv $@
-}
+    source <(pyenv virtualenv-init -)
+#    pyenv $@
+#}
 
 #---------------------------------------
 # Enhanced prompt
