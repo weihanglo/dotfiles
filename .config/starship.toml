@@ -10,5 +10,35 @@ fish_style_pwd_dir_length = 1
 [git_status]
 show_sync_count = true
 
+[git_state]
+disabled = true
+
 [package]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[aws]
+disabled = true
+
+[conda]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[env_var]
+disabled = true
+
+[golang]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[java]
+disabled = true
+
+[ruby]
 disabled = true
