@@ -14,6 +14,8 @@
 #---------------------------------------
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias ls='exa'
 alias ll='exa -lhgF --git'
 
