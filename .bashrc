@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 5.0   #
 #            by Weihang Lo             #
-#              Sep. 2019               #
+#              Nov. 2019               #
 #--------------------------------------#
 
 # Source global definitions
@@ -24,7 +24,6 @@ alias tree='exa -TF --group-directories-first'
 alias cat='bat'
 
 alias ipy='ipython3'
-alias nvi='nvim --noplugin'
 
 #---------------------------------------
 # Environment variables and configs
@@ -66,12 +65,6 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
 
-# Android ANDROID_HOME -----------------
-#export ANDROID_HOME="$HOME/Library/Android/sdk"
-#export PATH="$ANDROID_HOME/tools/bin:$PATH"
-#export PATH="$ANDROID_HOME/platform-tools:$PATH"
-#alias emulator="$ANDROID_HOME/tools/emulator"
-
 ## Golang environment ------------------
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
@@ -80,7 +73,7 @@ export PATH="$GOPATH/bin:$PATH"
 # NVM PATH and lazy loading
 export NVM_DIR="$HOME/.nvm"
 
-__lazy_nvm() { # (macOS only)
+__lazy_nvm() {
     if [[ $(uname) == "Darwin" ]]; then
         local _NVM_SH="$(brew --prefix nvm)/nvm.sh"
     else
@@ -114,13 +107,10 @@ __find_node_globals() {
 __find_node_globals # Must load after bash completions.
 
 # Python3 configurations ---------------
-# pyenv
-#pyenv() {
-#    unset -f pyenv
-    source <(pyenv init -)
-    source <(pyenv virtualenv-init -)
-#    pyenv $@
-#}
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
+source <(pyenv init -)
 
 #---------------------------------------
 # Enhanced prompt
