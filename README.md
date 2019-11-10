@@ -1,4 +1,4 @@
-# ⚙️ Dotfiles for macOS/Linux!!
+# Dotfiles for macOS/Linux!!
 
 ## Usage
 
@@ -12,7 +12,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 ## Tools We Love
 
 - [**Alacritty**]: Maybe the fastest terminal emulator ever!
-- [**bat**]: A cat(1) clone with wings 🦇.
+- [**bat**]: A cat(1) clone with wings.
 - [**bm**]: Tiny script for jumping between directories.
 - [**diff-so-fancy**]: Better lookin diffs.
 - [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
