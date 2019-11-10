@@ -10,14 +10,11 @@ fish_style_pwd_dir_length = 1
 [git_status]
 show_sync_count = true
 
-[git_state]
-disabled = true
-
 [package]
 disabled = true
 
 [kubernetes]
-disabled = true
+disabled = false
 
 [aws]
 disabled = true
