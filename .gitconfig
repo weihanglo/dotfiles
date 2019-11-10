@@ -39,6 +39,7 @@
 	rb = rebase -i
 	ss = stash
 	sm = submodule
+	sw = switch
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
