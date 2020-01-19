@@ -18,24 +18,3 @@ disabled = false
 
 [aws]
 disabled = true
-
-[conda]
-disabled = true
-
-[dotnet]
-disabled = true
-
-[env_var]
-disabled = true
-
-[golang]
-disabled = true
-
-[nix_shell]
-disabled = true
-
-[java]
-disabled = true
-
-[ruby]
-disabled = true
