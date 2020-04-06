@@ -3,6 +3,7 @@ set autoindent
 set backspace=indent,eol,start
 set clipboard+=unnamed,unnamedplus
 set colorcolumn=80
+set completeopt=menu,menuone,preview,noinsert,noselect
 set cursorline
 set dictionary+=/usr/share/dict/words
 set expandtab
@@ -49,7 +50,7 @@ augroup END
 " recognize *.md as markdown
 augroup filetype_markdown
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown 
+    autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
         \ setlocal nofoldenable
 augroup END
 
@@ -100,7 +101,6 @@ vnoremap J :m '>+1<CR>gv=gv
 
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
-
 " }}}
 
 " Neovim Python Setup {{{
@@ -113,13 +113,16 @@ endif
 " Reference: https://duseev.com/articles/vim-python-pipenv/
 let pipenv_venv_path = system('pipenv --venv')
 if v:shell_error == 0
-  let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+    let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+    let g:ycm_python_binary_path = venv_path . '/bin/python'
 else
-  if !empty(glob('/usr/local/bin/python3'))
-      let g:python3_host_prog = '/usr/local/bin/python3'
-  else
-      let g:python3_host_prog = '/usr/bin/python3'
-  endif
+    if !empty(glob('/usr/local/bin/python3'))
+        let g:python3_host_prog = '/usr/local/bin/python3'
+        let g:ycm_python_binary_path = '/usr/local/bin/python3'
+    else
+        let g:python3_host_prog = '/usr/bin/python3'
+        let g:ycm_python_binary_path = '/usr/bin/python3'
+    endif
 endif
 
 " }}}
@@ -151,14 +154,15 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " scm
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+
 " linter
 Plug 'dense-analysis/ale'
 
 " snippets/autocompletions
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ycm-core/YouCompleteMe', { 'do':
+    \ './install.py --ts-completer  --rust-completer --go-completer' }
 
 " filetype
 Plug 'sheerun/vim-polyglot'
@@ -180,23 +184,50 @@ Plug 'tpope/vim-commentary'
 call plug#end()
 " }}}
 
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger = '<c-j>'
+" }}}
+
+" YouCompleteMe {{{
+" map to <LocalLeader>K to act like default man.vim's keymapping.
+nnoremap <silent><LocalLeader>K :YcmCompleter GoToDefinition<CR>
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-p>', '<Up>']
+let g:ycm_filetype_specific_completion_to_disable = {
+    \ 'vim': 1,
+    \ 'gitcommit': 1
+    \}
+let g:ycm_language_server =
+    \ [
+    \   {
+    \     'name': 'rust',
+    \     'cmdline': ['rust-analyzer'],
+    \     'filetypes': ['rust'],
+    \     'project_root_files': ['Cargo.toml']
+    \   }
+    \ ]
+" }}}"
+
 " ALE {{{
 " Enable completion where available.
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
-" let g:ale_linters = {
-" \   'javascript': ['eslint'],
-" \   'typescript': ['tslint', 'tsserver', 'typecheck'],
-" \   'python': ['flake8', 'pylint']
-" \}
-" let g:ale_fixers = {
-" \   'javascript': ['eslint'],
-" \   'typescript': ['tslint', 'tsserver', 'typecheck']
-" \}
+let g:ale_linters = {
+    \   'javascript': ['eslint'],
+    \   'typescript': ['tslint', 'tsserver', 'typecheck'],
+    \   'python': ['flake8', 'pylint']
+    \}
+let g:ale_fixers = {
+    \   'javascript': ['eslint'],
+    \   'typescript': ['tslint', 'tsserver', 'typecheck']
+    \}
 " }}}
 
 " vim-multiple-cursors {{{
@@ -224,7 +255,7 @@ nnoremap <silent><LocalLeader>c :bp\|bd #<CR>
 " Use system's default options.
 nnoremap <silent><c-p> :FZF<CR>
 " Do not ignore ignores!
-nnoremap <silent><LocalLeader><C-P> :call 
+nnoremap <silent><LocalLeader><C-P> :call
     \ fzf#run({'source': 'rg --files -u'})<CR>
 " }}}
 
@@ -249,16 +280,6 @@ nnoremap <silent><LocalLeader>g* :Grepper -cword -noprompt<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 " }}}
-"
-" Language server {{{
-let g:LanguageClient_serverCommands = {
-\   'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
-\   'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-\   'javascript.jsx': ['tcp://127.0.0.1:2089'],
-\   'python': ['/usr/local/bin/pyls'],
-\}
-" }}}
-
 
 " Colorscheme {{{
 "set background=dark
