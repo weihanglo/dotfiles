@@ -67,6 +67,13 @@ augroup filetype_web
         \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
+" Go
+augroup filetype_go
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead
+        \ *.{go}
+        \ setlocal softtabstop=0 noexpandtab shiftwidth=4
+augroup END
 " }}}
 
 " Key mapping {{{
