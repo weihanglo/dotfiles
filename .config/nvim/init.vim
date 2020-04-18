@@ -72,7 +72,7 @@ augroup filetype_go
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead
         \ *.{go}
-        \ setlocal softtabstop=0 noexpandtab shiftwidth=4
+        \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 augroup END
 " }}}
 
