@@ -169,7 +169,7 @@ Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ycm-core/YouCompleteMe', { 'do':
-    \ './install.py --ts-completer  --rust-completer --go-completer' }
+    \ './install.py --ts-completer --go-completer' }
 
 " filetype
 Plug 'sheerun/vim-polyglot'
