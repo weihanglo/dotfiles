@@ -186,7 +186,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " miscellaneous
 Plug 'jpalardy/vim-slime',
     \{ 'for': ['javascript', 'python', 'r', 'typescript', 'bash'] }
-Plug 'tpope/vim-commentary'
 
 call plug#end()
 " }}}
@@ -200,7 +199,7 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 nnoremap <silent><LocalLeader>K :YcmCompleter GoToDefinition<CR>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
 let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-p>', '<Up>']
 let g:ycm_filetype_specific_completion_to_disable = {
