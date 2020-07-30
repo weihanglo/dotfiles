@@ -161,7 +161,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " scm
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
 
 " linter
 Plug 'dense-analysis/ale'
@@ -169,6 +169,7 @@ Plug 'dense-analysis/ale'
 " snippets/autocompletions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ycm-core/YouCompleteMe', { 'do':
     \ './install.py --ts-completer --go-completer' }
 
@@ -192,6 +193,10 @@ call plug#end()
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger = '<c-j>'
+" }}}
+
+" Tagbar {{{
+nnoremap <silent><LocalLeader>t :TagbarToggle<CR>
 " }}}
 
 " YouCompleteMe {{{
