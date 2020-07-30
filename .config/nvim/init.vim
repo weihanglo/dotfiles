@@ -19,9 +19,9 @@ set lazyredraw
 set linebreak
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 set mouse=a
-set nowrap
 set nonumber
 set norelativenumber
+set nowrap
 set scrolloff=2
 set shiftwidth=4
 set showmatch
@@ -32,6 +32,7 @@ set softtabstop=4
 set splitbelow
 set splitright
 set timeoutlen=500
+set updatetime=1000
 set wildignore+=*.swo,*.swp,*.RData,*~,*.log,*.db,*.sqilte,*__pycache__/*
 set wildmenu wildmode=longest:full,full
 set winminheight=0
@@ -173,7 +174,6 @@ Plug 'ycm-core/YouCompleteMe', { 'do':
 
 " filetype
 Plug 'sheerun/vim-polyglot'
-Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 " search
 Plug 'junegunn/fzf', {
@@ -222,17 +222,18 @@ let g:ycm_language_server =
 let g:ale_completion_enabled = 0
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 let g:ale_linters = {
     \   'javascript': ['eslint'],
-    \   'typescript': ['tslint', 'tsserver', 'typecheck'],
+    \   'typescript': ['eslint', 'tsserver', 'typecheck'],
     \   'python': ['flake8', 'pylint']
     \}
 let g:ale_fixers = {
     \   'javascript': ['eslint'],
-    \   'typescript': ['tslint', 'tsserver', 'typecheck']
+    \   'typescript': ['eslint', 'tsserver', 'typecheck']
     \}
 " }}}
 
@@ -275,7 +276,6 @@ let g:slime_paste_file = tempname()
 
 " vim-grepper {{{
 let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
-let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
 nnoremap <silent><LocalLeader>g :Grepper<cr>
 " Search opened buffers
@@ -285,11 +285,6 @@ nnoremap <silent><LocalLeader>g* :Grepper -cword -noprompt<cr>
 " Search with operators
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
-" }}}
-
-" Colorscheme {{{
-"set background=dark
-"colorscheme onedark
 " }}}
 
 " Airline {{{
