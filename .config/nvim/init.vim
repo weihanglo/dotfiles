@@ -156,7 +156,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 
 " fast moves
-Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " scm
@@ -240,22 +239,6 @@ let g:ale_fixers = {
     \   'javascript': ['eslint'],
     \   'typescript': ['eslint', 'tsserver', 'typecheck']
     \}
-" }}}
-
-" vim-multiple-cursors {{{
-" before multiple cursors
-function! Multiple_cursors_before()
-    if exists('g:jedi#popup_on_dot')
-        let g:jedi#popup_on_dot = 0
-    endif
-endfunction
-
-" after multiple cursors
-function! Multiple_cursors_after()
-    if exists('g:jedi#popup_on_dot')
-        let g:jedi#popup_on_dot = 1
-    endif
-endfunction
 " }}}
 
 " NERDTree {{{
