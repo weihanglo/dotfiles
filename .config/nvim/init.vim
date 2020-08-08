@@ -157,6 +157,7 @@ Plug 'edkolev/tmuxline.vim'
 
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'mg979/vim-visual-multi'
 
 " scm
 Plug 'airblade/vim-gitgutter'
@@ -298,9 +299,9 @@ let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
 let g:tmuxline_powerline_separators = 0
 let g:tmuxline_separators = {}
 let g:tmuxline_separators.left = ''
-let g:tmuxline_separators.left_alt = '»'
+let g:tmuxline_separators.left_alt = ''
 let g:tmuxline_separators.right = ''
-let g:tmuxline_separators.right_alt = '«'
+let g:tmuxline_separators.right_alt = ''
 let g:tmuxline_separators.space = ' '
 let g:tmuxline_preset = {}
 let g:tmuxline_preset.a = '#S'
