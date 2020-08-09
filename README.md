@@ -14,7 +14,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**Alacritty**]: Maybe the fastest terminal emulator ever!
 - [**bat**]: A cat(1) clone with wings.
 - [**bm**]: Tiny script for jumping between directories.
-- [**diff-so-fancy**]: Better lookin diffs.
+- [**delta**]: Enjoyable diff viewer.
 - [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
 - [**FZF**]: Fuzzy finder goes rock.
 - [**IPython**]: A must-have for a python lover.
@@ -35,12 +35,12 @@ Feel free to create an issue or pull request!
 
 [The MIT License (MIT)](LICENSE)
 
-Copyright © 2015 - 2019 Weihang Lo
+Copyright © 2015 - 2020 Weihang Lo
 
 [**Alacritty**]: https://github.com/jwilm/alacritty
 [**bat**]: https://github.com/sharkdp/bat
 [**bm**]: .bm.sh
-[**diff-so-fancy**]: https://github.com/so-fancy/diff-so-fancy
+[**delta**]: https://github.com/dandavison/delta
 [**exa**]: https://the.exa.website/
 [**FZF**]: https://github.com/junegunn/fzf
 [**IPython**]: https://ipython.org
