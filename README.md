@@ -20,8 +20,6 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**IPython**]: A must-have for a python lover.
 - [**Neovim**]: Next-generation Vim. Required.
 - [**Starship**]: Cross-shell prompt with sane defaults.
-- [**Tern**]: JavaScript auto-completion library.
-- [**XVim**]: Bring Vim to Xcode.
 - [**iTerm2**]: Feature-rich terminal emulator on macOS.
 - [**nvm**]: Ease the pain of switch between different Node.js versions.
 - [**pyenv**]: Simple Python version management.
@@ -46,8 +44,6 @@ Copyright © 2015 - 2020 Weihang Lo
 [**IPython**]: https://ipython.org
 [**Neovim**]: https://neovim.io
 [**Starship**]: https://starship.rs
-[**Tern**]: https://ternjs.net
-[**XVim**]: http://xvim.org
 [**iTerm2**]: https://www.iterm2.com
 [**nvm**]: https://github.com/creationix/nvm
 [**pyenv**]: https://github.com/pyenv/pyenv
