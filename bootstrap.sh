@@ -52,6 +52,10 @@ install_starship() {
     cargo install starship
 }
 
+install_git_delta() {
+    cargo install git-delta
+}
+
 neovim_replace_vimrc() {
     ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
 }
@@ -134,3 +138,4 @@ confirm "add bash-completion for bm (bookmark manager)" add_bm_completion
 confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
 confirm "install ripgrep, a better grep" install_ripgrep
 confirm "install starship, prompt with sane defaults" install_starship
+confirm "install delta, diff viewer with joy" install_git_delta
