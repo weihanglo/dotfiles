@@ -196,13 +196,14 @@ nnoremap <silent><LocalLeader>t :TagbarToggle<CR>
 " }}}
 
 " YouCompleteMe {{{
-" map to <LocalLeader>K to act like default man.vim's keymapping.
-nnoremap <silent><LocalLeader>K :YcmCompleter GoToDefinition<CR>
+nnoremap <silent><LocalLeader>K :YcmCompleter GoTo<CR>
+nnoremap <silent><LocalLeader>R :YcmCompleter GoToReferences<CR>
+nnoremap <F2> :YcmCompleter RefactorRename<space>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_show_diagnostics_ui = 1
-let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-p>', '<Up>']
+let g:ycm_key_list_select_completion = ['<c-n>']
+let g:ycm_key_list_previous_completion = ['<c-p>']
 let g:ycm_filetype_specific_completion_to_disable = {
     \ 'vim': 1,
     \ 'gitcommit': 1
