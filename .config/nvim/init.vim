@@ -253,6 +253,7 @@ nnoremap <silent><LocalLeader><C-P> :call
 
 " vim-grepper {{{
 let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
+let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
 nnoremap <silent><LocalLeader>g :Grepper<cr>
 " Search opened buffers
