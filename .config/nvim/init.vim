@@ -48,13 +48,6 @@ augroup autoloadview
    autocmd BufWinEnter *.* silent! loadview
 augroup END
 
-" recognize *.md as markdown
-augroup filetype_markdown
-    autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.md setfiletype markdown
-        \ setlocal nofoldenable
-augroup END
-
 " vimL
 augroup filetype_vim
     autocmd!
@@ -90,12 +83,16 @@ cnoreabbrev WA wa
 cnoreabbrev Q q
 cnoreabbrev Q! q!
 cnoreabbrev q1 q!
+cnoreabbrev Q1 q!
 cnoreabbrev qA qa
 cnoreabbrev Qa qa
 cnoreabbrev QA qa
 cnoreabbrev qA! qa!
 cnoreabbrev Qa! qa!
 cnoreabbrev QA! qa!
+cnoreabbrev qA1 qa!
+cnoreabbrev Qa1 qa!
+cnoreabbrev QA1 qa!
 cnoreabbrev Bd bd
 cnoreabbrev BD bd
 cnoreabbrev Bd! bd!
@@ -291,7 +288,6 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#buffer_nr_format = '%s '
-let g:airline#extensions#fzf#enabled = 0
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'

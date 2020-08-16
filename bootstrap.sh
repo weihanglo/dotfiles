@@ -17,7 +17,7 @@ origdir=$HOME/.dotfiles.orig
 files=(
     .bashrc
     .bm.sh
-    .cargo/config
+    .cargo/config.toml
     .config/alacritty/alacritty.yml
     .config/nvim/init.vim
     .config/starship.toml
@@ -26,10 +26,8 @@ files=(
     .inputrc
     .ipython/profile_default/ipython_config.py
     .nvm/default-packages
-    .tern-config
     .tmux.conf
     .vimrc
-    .xvimrc
 )
 
 # --------------------------------------
