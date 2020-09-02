@@ -10,7 +10,7 @@ set expandtab
 set foldmethod=indent
 set foldnestmax=2
 set hidden
-set history=100
+set history=10000
 set hlsearch
 set ignorecase
 set incsearch
@@ -20,11 +20,12 @@ set linebreak
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 set mouse=a
 set nonumber
-set norelativenumber
+set noswapfile
 set nowrap
 set scrolloff=2
 set shiftwidth=4
 set showmatch
+set sidescrolloff=4
 set smartcase
 set smartindent
 set smarttab
@@ -32,8 +33,12 @@ set softtabstop=4
 set splitbelow
 set splitright
 set timeoutlen=500
-set updatetime=1000
-set wildignore+=*.swo,*.swp,*.RData,*~,*.log,*.db,*.sqilte,*__pycache__/*
+set undodir=/tmp/nvim/undo
+set undofile
+set undolevels=10000
+set updatetime=500
+set wildignore+=*.swo,*.swp,*~,*.log,*.db,*.sqilte,*__pycache__/*
+set wildignorecase
 set wildmenu wildmode=longest:full,full
 set winminheight=0
 if has('termguicolors')
@@ -166,7 +171,6 @@ Plug 'dense-analysis/ale'
 " snippets/autocompletions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ycm-core/YouCompleteMe', { 'do':
     \ './install.py --ts-completer --go-completer' }
 
@@ -186,10 +190,6 @@ call plug#end()
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger = '<c-j>'
-" }}}
-
-" Tagbar {{{
-nnoremap <silent><LocalLeader>t :TagbarToggle<CR>
 " }}}
 
 " YouCompleteMe {{{
