@@ -8,6 +8,8 @@ truncation_length = 2
 fish_style_pwd_dir_length = 1
 
 [git_status]
+# Disabled due to terriable performance in large git repos (e.g. rustc)
+disabled = true
 show_sync_count = true
 
 [package]
@@ -20,4 +22,55 @@ disabled = false
 disabled = true
 
 [java]
+disabled = true
+
+[conda]
+disabled = true
+
+[crystal]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[erlang]
+disabled = true
+
+[julia]
+disabled = true
+
+[nim]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[php]
+disabled = true
+
+[ruby]
+disabled = true
+
+[terraform]
+disabled = true
+
+[zig]
+disabled = true
+
+[purescript]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[singularity]
 disabled = true
