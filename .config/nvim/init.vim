@@ -180,7 +180,7 @@ Plug 'sheerun/vim-polyglot'
 " search
 Plug 'junegunn/fzf', {
     \ 'dir': '~/.fzf',
-    \ 'do': './install --all',
+    \ 'do': { -> fzf#install() },
     \ 'on': 'FZF'
     \}
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
