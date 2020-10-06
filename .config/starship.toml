@@ -1,27 +1,6 @@
 add_newline = false
 
-[character]
-use_symbol_for_status = true
-
-[directory]
-truncation_length = 2
-fish_style_pwd_dir_length = 1
-
-[git_status]
-# Disabled due to terriable performance in large git repos (e.g. rustc)
-disabled = true
-show_sync_count = true
-
-[package]
-disabled = true
-
-[kubernetes]
-disabled = false
-
 [aws]
-disabled = true
-
-[java]
 disabled = true
 
 [conda]
@@ -29,6 +8,13 @@ disabled = true
 
 [crystal]
 disabled = true
+
+[dart]
+disabled = true
+
+[directory]
+truncation_length = 2
+fish_style_pwd_dir_length = 1
 
 [dotnet]
 disabled = true
@@ -42,6 +28,20 @@ disabled = true
 [erlang]
 disabled = true
 
+[gcloud]
+disabled = true
+
+[git_status]
+# Disabled due to terriable performance in large git repos (e.g. rustc)
+disabled = true
+show_sync_count = true
+
+[helm]
+disabled = true
+
+[java]
+disabled = true
+
 [julia]
 disabled = true
 
@@ -51,26 +51,35 @@ disabled = true
 [nix_shell]
 disabled = true
 
+[package]
+disabled = true
+
 [ocaml]
+disabled = true
+
+[perl]
 disabled = true
 
 [php]
 disabled = true
 
+[purescript]
+disabled = true
+
 [ruby]
 disabled = true
+
+[singularity]
+disabled = true
+
+[swift]
+disabled = true
+
+[status]
+disabled = false
 
 [terraform]
 disabled = true
 
 [zig]
-disabled = true
-
-[purescript]
-disabled = true
-
-[cmd_duration]
-disabled = true
-
-[singularity]
 disabled = true
