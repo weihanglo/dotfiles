@@ -189,7 +189,16 @@ local on_attach = function(client)
   require'completion'.on_attach(client) 
 end
 
-nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+-- `git clone https://github.com/rust-analyzer/rust-analyzer`
+nvim_lsp.rust_analyzer.setup{ 
+  on_attach = on_attach,
+  settings = {
+    ['rust-analyzer'] = {
+      -- Default 128. Ref: https://git.io/JTczw
+      lruCapacity = 512
+    }
+  }
+}
 
 -- `npm i g typescript-language-server`
 nvim_lsp.tsserver.setup{ on_attach = on_attach }
