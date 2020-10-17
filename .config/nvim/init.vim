@@ -65,6 +65,7 @@ augroup filetype_web
         \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
+
 " Go
 augroup filetype_go
     autocmd!
@@ -123,14 +124,11 @@ endif
 let pipenv_venv_path = system('pipenv --venv')
 if v:shell_error == 0
     let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-    let g:ycm_python_binary_path = venv_path . '/bin/python'
 else
     if !empty(glob('/usr/local/bin/python3'))
         let g:python3_host_prog = '/usr/local/bin/python3'
-        let g:ycm_python_binary_path = '/usr/local/bin/python3'
     else
         let g:python3_host_prog = '/usr/bin/python3'
-        let g:ycm_python_binary_path = '/usr/bin/python3'
     endif
 endif
 
@@ -145,6 +143,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+
+" nvim-lsp
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 
 " user interface
 Plug 'vim-airline/vim-airline'
@@ -162,11 +166,9 @@ Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
 " linter
 Plug 'dense-analysis/ale'
 
-" snippets/autocompletions
+" snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ycm-core/YouCompleteMe', { 'do':
-    \ './install.py --ts-completer --go-completer' }
 
 " filetype
 Plug 'sheerun/vim-polyglot'
@@ -186,29 +188,115 @@ call plug#end()
 let g:UltiSnipsExpandTrigger = '<c-j>'
 " }}}
 
-" YouCompleteMe {{{
-nnoremap <silent><LocalLeader>K :YcmCompleter GoTo<CR>
-nnoremap <silent><LocalLeader>R :YcmCompleter GoToReferences<CR>
-nnoremap <F2> :YcmCompleter RefactorRename<space>
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_key_list_select_completion = ['<c-n>']
-let g:ycm_key_list_previous_completion = ['<c-p>']
-let g:ycm_filetype_specific_completion_to_disable = {
-    \ 'vim': 1,
-    \ 'gitcommit': 1
+" lsp configurations {{{
+lua <<EOF
+local nvim_lsp = require'nvim_lsp'
+
+local on_attach = function(client)
+  -- Better diagnose UI from `nvim-lua/diagnostic-nvim`
+  require'diagnostic'.on_attach(client)
+  -- Auto-completion functionality from `nvim-lua/completion-nvim`
+  require'completion'.on_attach(client) 
+end
+
+nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+nvim_lsp.tsserver.setup({ on_attach=on_attach })
+nvim_lsp.pyls.setup({ on_attach=on_attach })
+EOF
+
+" Show virtual text for diagnoses
+let g:diagnostic_enable_virtual_text = 1
+" Delay showing virtual text while inserting
+let g:diagnostic_insert_delay = 1
+
+" Support snippets completions
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_sorting = 'none'
+" NOTE: fuzzy + ignore_case may be a little imprecise
+let g:completion_matching_strategy_list = ['exact', 'fuzzy']
+let g:completion_matching_ignore_case = 1
+" CompletionItemKind from https://bit.ly/343efwm
+" 100 -> none
+" 90 -> property
+" 80 -> declaration
+" 70 -> variables/values, keywords
+" 50 -> file systems
+" 40 -> UltiSnips
+" 30 -> misc.
+let g:completion_items_priority = {
+    \    'Method': 90,
+    \    'Constructor': 90,
+    \    'Field': 90,
+    \    'Property': 90,
+    \    'Class': 80,
+    \    'Enum': 80,
+    \    'Struct': 80,
+    \    'Unit': 80,
+    \    'Event': 80,
+    \    'Function': 80,
+    \    'EnumMember': 80,
+    \    'Interface': 80,
+    \    'Module': 80,
+    \    'TypeParameter': 80,
+    \    'Variable': 70,
+    \    'Value': 70,
+    \    'Keyword': 70,
+    \    'Constant': 70,
+    \    'Operator': 70,
+    \    'File': 50,
+    \    'Folder': 50,
+    \    'UltiSnips': 40,
+    \    'Buffers': 30,
+    \    'Color': 30,
+    \    'Reference': 30,
+    \    'Snippet': 30,
+    \    'Text': 30,
     \}
-let g:ycm_language_server =
-    \ [
-    \   {
-    \     'name': 'rust',
-    \     'cmdline': ['rust-analyzer'],
-    \     'filetypes': ['rust'],
-    \     'project_root_files': ['Cargo.toml']
-    \   }
-    \ ]
-" }}}"
+
+" Inlay hints (via weihanglo/lsp_extensions.nvim)
+function! ToggleInlayHints()
+    if exists('#InlayHintsCurrentLine#CursorHold')
+        lua require'lsp_extensions'.inlay_hints
+            \ { prefix = ' » ', highlight = "NonText" }
+        augroup InlayHintsCurrentLine
+            autocmd!
+        augroup END
+    else
+        augroup InlayHintsCurrentLine
+            autocmd!
+            autocmd CursorHold,CursorHoldI 
+                \ *.rs
+                \ silent lua require'lsp_extensions'.inlay_hints{
+                \     only_current_line = true,
+                \     prefix = ' » ', 
+                \     highlight = "NonText",
+                \}
+        augroup END
+    endif
+endfunction
+
+nnoremap <LocalLeader>t <cmd>call ToggleInlayHints()<CR>
+" Initialize current lint inlay hints
+call ToggleInlayHints()
+
+" Copy from `:help lsp`
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+
+" Rename malfunctions. Use at your own risk.
+nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> gA  <cmd>lua vim.lsp.buf.code_action()<CR>
+
+" manually trigger completion on Ctrl-Space
+imap <silent> <c-space> <Plug>(completion_trigger)
+" }}}
 
 " ALE {{{
 let g:ale_completion_enabled = 0
