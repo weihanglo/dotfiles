@@ -75,6 +75,15 @@ augroup filetype_go
 augroup END
 " }}}
 
+" Detect python virtualenv. Currently support `pipenv`.
+" Ref: https://duseev.com/articles/vim-python-pipenv/
+function! GetPythonVenvPath()
+    let pipenv_venv_path = system('pipenv --venv')
+    if v:shell_error == 0
+        return substitute(pipenv_venv_path, '\n', '', '')
+    endif
+endfunction
+
 " Key mapping {{{
 " map localleader if necessary
 let maplocalleader = ','
@@ -111,27 +120,6 @@ vnoremap J <cmd>m '>+1<CR>gv=gv
 
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
-" }}}
-
-" Neovim Python Setup {{{
-if !empty(glob('/usr/local/bin/python'))
-    let g:python_host_prog = '/usr/local/bin/python'
-else
-    let g:python_host_prog = '/usr/bin/python'
-endif
-
-" Reference: https://duseev.com/articles/vim-python-pipenv/
-let pipenv_venv_path = system('pipenv --venv')
-if v:shell_error == 0
-    let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-else
-    if !empty(glob('/usr/local/bin/python3'))
-        let g:python3_host_prog = '/usr/local/bin/python3'
-    else
-        let g:python3_host_prog = '/usr/bin/python3'
-    endif
-endif
-
 " }}}
 
 " Vim-plug {{{
@@ -201,7 +189,20 @@ end
 
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
 nvim_lsp.tsserver.setup({ on_attach=on_attach })
-nvim_lsp.pyls.setup({ on_attach=on_attach })
+
+-- `pip install 'python-language-server[all]'`
+nvim_lsp.pyls.setup{
+  on_attach = on_attach,
+  settings = {
+    pyls = {
+      plugins = {
+        jedi = { 
+          environment = vim.fn.eval('GetPythonVenvPath()') 
+        }
+      }
+    }
+  }
+}
 EOF
 
 " Show virtual text for diagnoses
