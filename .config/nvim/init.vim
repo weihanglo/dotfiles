@@ -152,7 +152,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
 
 " linter
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale', { 'for': 
+    \ ['javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 
+    \ 'typescriptreact', 'typescript.tsx'] }
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -188,7 +190,9 @@ local on_attach = function(client)
 end
 
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
-nvim_lsp.tsserver.setup({ on_attach=on_attach })
+
+-- `npm i g typescript-language-server`
+nvim_lsp.tsserver.setup{ on_attach = on_attach }
 
 -- `pip install 'python-language-server[all]'`
 nvim_lsp.pyls.setup{
