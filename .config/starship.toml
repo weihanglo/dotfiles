@@ -75,9 +75,6 @@ disabled = true
 [swift]
 disabled = true
 
-[status]
-disabled = false
-
 [terraform]
 disabled = true
 
