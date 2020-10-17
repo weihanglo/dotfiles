@@ -3,7 +3,7 @@ set autoindent
 set backspace=indent,eol,start
 set clipboard+=unnamed,unnamedplus
 set colorcolumn=80
-set completeopt=menu,menuone,preview,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
 set cursorline
 set dictionary+=/usr/share/dict/words
 set expandtab
@@ -26,12 +26,14 @@ set scrolloff=2
 set shiftwidth=4
 set showmatch
 set sidescrolloff=4
+set shortmess+=c
 set smartcase
 set smartindent
 set smarttab
 set softtabstop=4
 set splitbelow
 set splitright
+set termguicolors
 set timeoutlen=500
 set undodir=/tmp/nvim/undo
 set undofile
@@ -41,9 +43,6 @@ set wildignore+=*.swo,*.swp,*~,*.log,*.db,*.sqilte,*__pycache__/*
 set wildignorecase
 set wildmenu wildmode=longest:full,full
 set winminheight=0
-if has('termguicolors')
-    set termguicolors
-endif
 " }}}
 
 " Filetype {{{
@@ -106,8 +105,8 @@ cnoreabbrev Nohl nohl
 cnoreabbrev NOhl nohl
 
 " Move visual block
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap J :m '>+1<CR>gv=gv
+vnoremap K <cmd>m '<-2<CR>gv=gv
+vnoremap J <cmd>m '>+1<CR>gv=gv
 
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
@@ -138,11 +137,6 @@ endif
 " }}}
 
 " Vim-plug {{{
-" if using Vim
-if !has('nvim')
-    set runtimepath+=~/.config/nvim/
-endif
-
 " auto install vim-plug.vim
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -217,7 +211,6 @@ let g:ycm_language_server =
 " }}}"
 
 " ALE {{{
-" Enable completion where available.
 let g:ale_completion_enabled = 0
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
@@ -237,13 +230,13 @@ let g:ale_fixers = {
 " }}}
 
 " NERDTree {{{
-nnoremap <silent><LocalLeader>n :NERDTreeToggle<CR>
-nnoremap <silent><LocalLeader>c :bp\|bd #<CR>
+nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<CR>
+nnoremap <silent> <LocalLeader>c <cmd>bp<bar>bd #<CR>
 " }}}
 
 " FZF {{{
 " Use system's default options.
-nnoremap <silent><c-p> :FZF<CR>
+nnoremap <silent> <c-p> <cmd>FZF<CR>
 " Do not ignore ignores!
 nnoremap <silent><LocalLeader><C-P> :call
     \ fzf#run({'source': 'rg --files -u'})<CR>
@@ -253,11 +246,11 @@ nnoremap <silent><LocalLeader><C-P> :call
 let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
-nnoremap <silent><LocalLeader>g :Grepper<cr>
+nnoremap <silent> <LocalLeader>g <cmd>Grepper<cr>
 " Search opened buffers
-nnoremap <silent><LocalLeader>G :Grepper -buffers<cr>
+nnoremap <silent> <LocalLeader>G <cmd>Grepper -buffers<cr>
 " Search the word under the cursor
-nnoremap <silent><LocalLeader>g* :Grepper -cword -noprompt<cr>
+nnoremap <silent> <LocalLeader>g* <cmd>Grepper -cword -noprompt<cr>
 " Search with operators
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
