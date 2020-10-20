@@ -47,7 +47,7 @@ font:
     style: Italic
   bold_italic:
     family: Fira Code
-  size: 20
+  size: 18
 
 # Background opacity
 background_opacity: 0.8
