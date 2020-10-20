@@ -125,6 +125,7 @@ Plug 'nvim-lua/diagnostic-nvim'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 
 " user interface
+Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
@@ -334,6 +335,10 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger = '<c-j>'
+" }}}
+
+" Startify {{{
+let g:startify_change_to_vcs_root = 1
 " }}}
 
 " ALE {{{
