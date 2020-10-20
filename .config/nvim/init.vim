@@ -342,8 +342,6 @@ let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '.'
 let g:ale_linters = {
     \   'javascript': ['eslint'],
     \   'typescript': ['eslint', 'tsserver', 'typecheck'],
@@ -364,7 +362,7 @@ nnoremap <silent> <LocalLeader>c <cmd>bp<bar>bd #<CR>
 " Use system's default options.
 nnoremap <silent> <c-p> <cmd>FZF<CR>
 " Do not ignore ignores!
-nnoremap <silent><LocalLeader><C-P> :call
+nnoremap <silent> <LocalLeader><c-p> :call
     \ fzf#run({'source': 'rg --files -u'})<CR>
 " }}}
 
@@ -384,25 +382,11 @@ xmap gs <plug>(GrepperOperator)
 
 " Airline {{{
 " theme
-let g:airline_powerline_fonts = 0
-let g:airline_left_sep = '»'
-let g:airline_left_sep = ' '
-let g:airline_right_sep = '«'
-let g:airline_right_sep = ' '
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.maxlinenr = '☰'
-let g:airline_symbols.branch = ''
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline_theme = 'jellybeans'
 
-" integration
+" extensions
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
