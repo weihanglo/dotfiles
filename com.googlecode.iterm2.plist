@@ -710,13 +710,13 @@
 			<key>Name</key>
 			<string>weihanglo</string>
 			<key>Non Ascii Font</key>
-			<string>FiraCode-Regular 16</string>
+			<string>FiraCode-Regular 20</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>FiraCode-Regular 20</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Option Key Sends</key>
@@ -914,7 +914,7 @@
 	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
-	<true/>
+	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>1</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
