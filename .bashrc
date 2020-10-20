@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 5.0   #
 #            by Weihang Lo             #
-#              Nov. 2019               #
+#              Oct. 2020               #
 #--------------------------------------#
 
 # Source global definitions
@@ -14,8 +14,6 @@
 #---------------------------------------
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
 alias ls='exa'
 alias ll='exa -lhgF --git'
 
@@ -36,7 +34,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Bookmark manager '.bm.bash'
 export BOOKMARKPATH="$HOME/.bookmarks"
-[ -f $HOME/.bm.sh ] && . $HOME/.bm.sh
+[[ -f "$HOME/.bm.sh" ]] && . "$HOME/.bm.sh"
 
 # EDITOR and VISUAL
 export VISUAL=nvim EDITOR=nvim
@@ -48,13 +46,15 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 export PROMPT_COMMAND='history -a'
 
 # Bash completion ----------------------
-if [[ $(uname) == "Darwin" ]]; then
-    export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-    [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && \
-    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-else
-    [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
+if [[ -n "$PS1" ]]; then
+    if [[ $(uname) == "Darwin" ]]; then
+        export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+        [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && \
+        . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+    else
+        [[ -f /usr/share/bash-completion/bash_completion ]] && \
+        . /usr/share/bash-completion/bash_completion
+    fi
 fi
 
 # Ruby GEM_PATH ------------------------
@@ -118,19 +118,12 @@ source "$HOME/.cargo/env"
 # Just launch the starship!!! (https://starship.rs/)
 eval "$(starship init bash)"
 
-#-------------------
+#---------------------------------------
 # Miscellaneous
-#-------------------
+#---------------------------------------
 
 # FZF default configs
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# macOS local
-if [[ $(uname) == "Darwin" ]]; then
-    # alias ls='ls -G'
-    export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
-fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
