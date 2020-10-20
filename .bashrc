@@ -57,15 +57,12 @@ else
     . /usr/share/bash-completion/bash_completion
 fi
 
-# RUST ---------------------------------
-source "$HOME/.cargo/env"
-
 # Ruby GEM_PATH ------------------------
 export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
 
 ## Golang environment ------------------
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
 
 # Node.js environment configuration ----
@@ -87,7 +84,7 @@ __find_node_globals() {
     if [ ! -s $default_alias ]; then
         return
     fi
-    default=`cat $default_alias`
+    default=`\cat $default_alias`
     if [ "$default" = 'system' ]; then
         return
     fi
@@ -105,11 +102,14 @@ __find_node_globals() {
 
 __find_node_globals # Must load after bash completions.
 
-# Python3 configurations ---------------
+# Python -------------------------------
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 source <(pyenv init -)
+
+# RUST ---------------------------------
+source "$HOME/.cargo/env"
 
 #---------------------------------------
 # Enhanced prompt
