@@ -101,8 +101,8 @@ cnoreabbrev Nohl nohl
 cnoreabbrev NOhl nohl
 
 " Move visual block
-vnoremap K <cmd>m '<-2<CR>gv=gv
-vnoremap J <cmd>m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
 
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
