@@ -23,6 +23,7 @@ set nonumber
 set noswapfile
 set nowrap
 set pumheight=15
+set pumblend=25
 set scrolloff=2
 set shiftwidth=4
 set shortmess+=c
@@ -74,15 +75,6 @@ augroup FiletypeGo
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 augroup END
 " }}}
-
-" Detect python virtualenv. Currently support `pipenv`.
-" Ref: https://duseev.com/articles/vim-python-pipenv/
-function! GetPythonVenvPath()
-    let pipenv_venv_path = system('pipenv --venv')
-    if v:shell_error == 0
-        return substitute(pipenv_venv_path, '\n', '', '')
-    endif
-endfunction
 
 " Key mapping {{{
 " map localleader if necessary
@@ -175,6 +167,16 @@ call plug#end()
 " }}}
 
 " LSP configurations {{{
+
+" Detect python virtualenv. Currently support `pipenv`.
+" Ref: https://duseev.com/articles/vim-python-pipenv/
+function! GetPythonVenvPath()
+    let pipenv_venv_path = system('pipenv --venv')
+    if v:shell_error == 0
+        return substitute(pipenv_venv_path, '\n', '', '')
+    endif
+endfunction
+
 lua <<EOF
 local nvim_lsp = require'nvim_lsp'
 
@@ -266,6 +268,7 @@ let g:completion_items_priority = {
     \    'Text': 30,
     \}
 
+" List all filetype that is enabled omnifunc with lsp.
 augroup LspCompletionOmnifunc
     autocmd!
     autocmd FileType go,rust,python,javascript,typescript
@@ -277,15 +280,12 @@ function! LspRestart()
    lua vim.lsp.stop_client(vim.lsp.get_active_clients())
    edit
 endfunction
-command! LspRestart call LspRestart()
-command! LspInfo lua print(vim.inspect(vim.lsp.buf_get_clients()))
-command! LspCodeAction lua vim.lsp.buf.code_action()
-command! LspRename lua vim.lsp.buf.rename()
 
 " Inlay hints (via weihanglo/lsp_extensions.nvim)
-function! LspToggleInlayHints()
+" Can toggle between current line/all
+function! LspInlayHints()
     if exists('#InlayHintsCurrentLine#CursorHold')
-        lua require'lsp_extensions'.inlay_hints
+        silent lua require'lsp_extensions'.inlay_hints
             \ { prefix = ' » ', highlight = "NonText" }
         augroup LspInlayHintsCurrentLine
             autocmd!
@@ -303,26 +303,35 @@ function! LspToggleInlayHints()
         augroup END
     endif
 endfunction
-command! LspToggleInlayHints call LspToggleInlayHints()
 " Initialize current lint inlay hints
-LspToggleInlayHints
+call LspInlayHints()
 
-nnoremap <LocalLeader>t <cmd>LspToggleInlayHints<CR>
+" LspDeclaration seems having conflicts with airline....
+command! LspCodeAction       lua vim.lsp.buf.code_action()
+command! LspDeclaratio       lua vim.lsp.buf.declaration()
+command! LspDefinition       lua vim.lsp.buf.definition()
+command! LspDocumentSymbol   lua vim.lsp.buf.document_symbol()
+command! LspHover            lua vim.lsp.buf.hover()
+command! LspImplementation   lua vim.lsp.buf.implementation()
+command! LspIncomingCalls    lua vim.lsp.buf.incoming_calls()
+command! LspInfo             lua print(vim.inspect(vim.lsp.buf_get_clients()))
+command! LspInlayHints       call LspInlayHints()
+command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
+command! LspReferences       lua vim.lsp.buf.references()
+command! LspRename           lua vim.lsp.buf.rename()
+command! LspRestart          call LspRestart()
+command! LspServerReady      lua vim.lsp.buf.server_ready()
+command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
+command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
+command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
 
-" Copy from `:help lsp`
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-
+nnoremap <silent> <LocalLeader>t       <cmd>LspInlayHints<CR>
+nnoremap <silent> <c-]>                <cmd>LspDefinition<CR>
+nnoremap <silent> K                    <cmd>LspHover<CR>
+nnoremap <silent> <c-k>                <cmd>LspSignatureHelp<CR>
+nnoremap <silent> <LocalLeader><space> <cmd>LspCodeAction<CR>
 " Rename malfunctions. Use at your own risk.
-nnoremap <silent> <F2>  LspRename
-nnoremap <silent> gA    LspCodeAction
+nnoremap <silent> <F2> LspRename
 
 " manually trigger completion on Ctrl-Space
 imap <silent> <c-space> <Plug>(completion_trigger)
