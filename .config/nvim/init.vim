@@ -48,13 +48,7 @@ set winminheight=0
 " }}}
 
 " Filetype {{{
-" auto load view if exists
-augroup AutoloadView
-   autocmd!
-   autocmd BufWinEnter *.* silent! loadview
-augroup END
-
-" vimL
+" vimscript
 augroup FiletypeVim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
@@ -138,6 +132,7 @@ Plug 'edkolev/tmuxline.vim'
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mg979/vim-visual-multi'
+Plug 'troydm/zoomwintab.vim'
 
 " scm
 Plug 'airblade/vim-gitgutter'
@@ -434,6 +429,12 @@ let g:tmuxline_preset.z = '#H'
 let g:tmuxline_preset.options = { 'status-justify' : 'left'}
 " }}}
 
-" {{{ vim-polyglot
-let g:vim_markdown_conceal = 0
+" zoomwintab.vim {{{
+let g:zoomwintab_remap = 0
+nnoremap <LocalLeader>z <cmd>ZoomWinTabToggle<CR>
+nnoremap <c-w>z         <cmd>ZoomWinTabToggle<CR>
+nnoremap <c-w><c-z>     <cmd>ZoomWinTabToggle<CR>
+tnoremap <LocalLeader>z <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
+tnoremap <c-w>z         <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
+tnoremap <c-w><c-z>     <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
 " }}}
