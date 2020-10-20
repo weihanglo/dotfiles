@@ -22,11 +22,12 @@ set mouse=a
 set nonumber
 set noswapfile
 set nowrap
+set pumheight=15
 set scrolloff=2
 set shiftwidth=4
+set shortmess+=c
 set showmatch
 set sidescrolloff=4
-set shortmess+=c
 set smartcase
 set smartindent
 set smarttab
@@ -69,8 +70,7 @@ augroup END
 " Go
 augroup FiletypeGo
     autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead
-        \ *.{go}
+    autocmd FileType go
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 augroup END
 " }}}
@@ -185,7 +185,7 @@ local on_attach = function(client)
   require'completion'.on_attach(client) 
 end
 
--- `git clone https://github.com/rust-analyzer/rust-analyzer`
+-- `git clone https://github.com/rust-analyzer/rust-analyzer` and build!
 nvim_lsp.rust_analyzer.setup{ 
   on_attach = on_attach,
   settings = {
@@ -199,7 +199,10 @@ nvim_lsp.rust_analyzer.setup{
 -- `npm i g typescript-language-server`
 nvim_lsp.tsserver.setup{ on_attach = on_attach }
 
--- `pip install 'python-language-server[all]'`
+-- `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
+nvim_lsp.gopls.setup{}
+
+-- `python3 -m pip install 'python-language-server[all]'`
 nvim_lsp.pyls.setup{
   on_attach = on_attach,
   settings = {
@@ -221,7 +224,7 @@ let g:diagnostic_insert_delay = 1
 
 " Support snippets completions
 let g:completion_enable_snippet = 'UltiSnips'
-let g:completion_sorting = 'none'
+"let g:completion_sorting = 'none'
 " NOTE: fuzzy + ignore_case may be a little imprecise
 let g:completion_matching_strategy_list = ['exact', 'fuzzy']
 let g:completion_matching_ignore_case = 1
@@ -263,6 +266,12 @@ let g:completion_items_priority = {
     \    'Text': 30,
     \}
 
+augroup LspCompletionOmnifunc
+    autocmd!
+    autocmd FileType go,rust,python,javascript,typescript
+        \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
+augroup END
+
 " Convenient custom commands
 function! LspRestart()
    lua vim.lsp.stop_client(vim.lsp.get_active_clients())
@@ -278,11 +287,11 @@ function! LspToggleInlayHints()
     if exists('#InlayHintsCurrentLine#CursorHold')
         lua require'lsp_extensions'.inlay_hints
             \ { prefix = ' » ', highlight = "NonText" }
-        augroup InlayHintsCurrentLine
+        augroup LspInlayHintsCurrentLine
             autocmd!
         augroup END
     else
-        augroup InlayHintsCurrentLine
+        augroup LspInlayHintsCurrentLine
             autocmd!
             autocmd CursorHold,CursorHoldI 
                 \ *.rs
@@ -295,10 +304,10 @@ function! LspToggleInlayHints()
     endif
 endfunction
 command! LspToggleInlayHints call LspToggleInlayHints()
-
-nnoremap <LocalLeader>t <cmd>LspToggleInlayHints<CR>
 " Initialize current lint inlay hints
 LspToggleInlayHints
+
+nnoremap <LocalLeader>t <cmd>LspToggleInlayHints<CR>
 
 " Copy from `:help lsp`
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
