@@ -174,11 +174,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 call plug#end()
 " }}}
 
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger = '<c-j>'
-" }}}
-
-" lsp configurations {{{
+" LSP configurations {{{
 lua <<EOF
 local nvim_lsp = require'nvim_lsp'
 
@@ -267,8 +263,18 @@ let g:completion_items_priority = {
     \    'Text': 30,
     \}
 
+" Convenient custom commands
+function! LspRestart()
+   lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+   edit
+endfunction
+command! LspRestart call LspRestart()
+command! LspInfo lua print(vim.inspect(vim.lsp.buf_get_clients()))
+command! LspCodeAction lua vim.lsp.buf.code_action()
+command! LspRename lua vim.lsp.buf.rename()
+
 " Inlay hints (via weihanglo/lsp_extensions.nvim)
-function! ToggleInlayHints()
+function! LspToggleInlayHints()
     if exists('#InlayHintsCurrentLine#CursorHold')
         lua require'lsp_extensions'.inlay_hints
             \ { prefix = ' » ', highlight = "NonText" }
@@ -288,10 +294,11 @@ function! ToggleInlayHints()
         augroup END
     endif
 endfunction
+command! LspToggleInlayHints call LspToggleInlayHints()
 
-nnoremap <LocalLeader>t <cmd>call ToggleInlayHints()<CR>
+nnoremap <LocalLeader>t <cmd>LspToggleInlayHints<CR>
 " Initialize current lint inlay hints
-call ToggleInlayHints()
+LspToggleInlayHints
 
 " Copy from `:help lsp`
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -305,11 +312,15 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 " Rename malfunctions. Use at your own risk.
-nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> gA  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <F2>  LspRename
+nnoremap <silent> gA    LspCodeAction
 
 " manually trigger completion on Ctrl-Space
 imap <silent> <c-space> <Plug>(completion_trigger)
+" }}}
+
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger = '<c-j>'
 " }}}
 
 " ALE {{{
