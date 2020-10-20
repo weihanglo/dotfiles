@@ -47,19 +47,19 @@ set winminheight=0
 
 " Filetype {{{
 " auto load view if exists
-augroup autoloadview
+augroup AutoloadView
    autocmd!
    autocmd BufWinEnter *.* silent! loadview
 augroup END
 
 " vimL
-augroup filetype_vim
+augroup FiletypeVim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
 " for web development
-augroup filetype_web
+augroup FiletypeWeb
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead
         \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
@@ -67,7 +67,7 @@ augroup filetype_web
 augroup END
 
 " Go
-augroup filetype_go
+augroup FiletypeGo
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead
         \ *.{go}
