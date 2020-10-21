@@ -184,16 +184,18 @@ endfunction
 lua <<EOF
 local nvim_lsp = require'nvim_lsp'
 
-local on_attach = function(client)
-  -- Better diagnose UI from `nvim-lua/diagnostic-nvim`
-  require'diagnostic'.on_attach(client)
-  -- Auto-completion functionality from `nvim-lua/completion-nvim`
-  require'completion'.on_attach(client) 
+local make_on_attach = function(comp, diag)
+  return function(client)
+    -- Auto-completion functionality from `nvim-lua/completion-nvim`
+    require'completion'.on_attach(comp)
+    -- Better diagnose UI from `nvim-lua/diagnostic-nvim`
+    require'diagnostic'.on_attach(diag)
+  end
 end
 
 -- `git clone https://github.com/rust-analyzer/rust-analyzer` and build!
-nvim_lsp.rust_analyzer.setup{ 
-  on_attach = on_attach,
+nvim_lsp.rust_analyzer.setup{
+  on_attach = make_on_attach(),
   settings = {
     ['rust-analyzer'] = {
       -- Default 128. Ref: https://git.io/JTczw
@@ -203,14 +205,14 @@ nvim_lsp.rust_analyzer.setup{
 }
 
 -- `npm i g typescript-language-server`
-nvim_lsp.tsserver.setup{ on_attach = on_attach }
+nvim_lsp.tsserver.setup{ on_attach = make_on_attach({ sorting = "alphabet" }) }
 
 -- `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
-nvim_lsp.gopls.setup{}
+nvim_lsp.gopls.setup{ on_attach = make_on_attach() }
 
 -- `python3 -m pip install 'python-language-server[all]'`
 nvim_lsp.pyls.setup{
-  on_attach = on_attach,
+  on_attach = make_on_attach(),
   settings = {
     pyls = {
       plugins = {
@@ -230,7 +232,7 @@ let g:diagnostic_insert_delay = 1
 
 " Support snippets completions
 let g:completion_enable_snippet = 'UltiSnips'
-"let g:completion_sorting = 'none'
+let g:completion_sorting = 'none'
 " NOTE: fuzzy + ignore_case may be a little imprecise
 let g:completion_matching_strategy_list = ['exact', 'fuzzy']
 let g:completion_matching_ignore_case = 1
@@ -243,33 +245,33 @@ let g:completion_matching_ignore_case = 1
 " 40 -> UltiSnips
 " 30 -> misc.
 let g:completion_items_priority = {
-    \    'Method': 90,
-    \    'Constructor': 90,
-    \    'Field': 90,
-    \    'Property': 90,
-    \    'Class': 80,
-    \    'Enum': 80,
-    \    'Struct': 80,
-    \    'Unit': 80,
-    \    'Event': 80,
-    \    'Function': 80,
-    \    'EnumMember': 80,
-    \    'Interface': 80,
-    \    'Module': 80,
-    \    'TypeParameter': 80,
-    \    'Variable': 70,
-    \    'Value': 70,
-    \    'Keyword': 70,
-    \    'Constant': 70,
-    \    'Operator': 70,
-    \    'File': 50,
-    \    'Folder': 50,
-    \    'UltiSnips': 40,
-    \    'Buffers': 30,
-    \    'Color': 30,
-    \    'Reference': 30,
-    \    'Snippet': 30,
-    \    'Text': 30,
+    \ 'Method': 90,
+    \ 'Constructor': 90,
+    \ 'Field': 90,
+    \ 'Property': 90,
+    \ 'Class': 80,
+    \ 'Enum': 80,
+    \ 'Struct': 80,
+    \ 'Unit': 80,
+    \ 'Event': 80,
+    \ 'Function': 80,
+    \ 'EnumMember': 80,
+    \ 'Interface': 80,
+    \ 'Module': 80,
+    \ 'TypeParameter': 80,
+    \ 'Variable': 70,
+    \ 'Value': 70,
+    \ 'Keyword': 70,
+    \ 'Constant': 70,
+    \ 'Operator': 70,
+    \ 'File': 50,
+    \ 'Folder': 50,
+    \ 'UltiSnips': 40,
+    \ 'Buffers': 30,
+    \ 'Color': 30,
+    \ 'Reference': 30,
+    \ 'Snippet': 30,
+    \ 'Text': 30,
     \}
 
 " List all filetype that is enabled omnifunc with lsp.
