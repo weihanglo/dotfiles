@@ -46,23 +46,12 @@ set winminheight=0
 " }}}
 
 " Filetype {{{
-" vimscript
-augroup FiletypeVim
+augroup CustomFiletypeCmd
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
-augroup END
-
-" for web development
-augroup FiletypeWeb
-    autocmd!
     autocmd BufNewFile,BufFilePre,BufRead
         \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
-augroup END
-
-" Go
-augroup FiletypeGo
-    autocmd!
     autocmd FileType go
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 augroup END
