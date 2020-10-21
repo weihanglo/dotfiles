@@ -70,7 +70,7 @@ augroup FiletypeGo
 augroup END
 " }}}
 
-" Key mapping {{{
+" Genernal key mappings {{{
 " map localleader if necessary
 let maplocalleader = ','
 
@@ -106,6 +106,14 @@ vnoremap J :m '>+1<CR>gv=gv
 
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
+
+" Launch tig and expand to fullscreen!
+function! Tig()
+    terminal tig
+    ZoomWinTabToggle
+    startinsert
+endfunction
+command! Tig call Tig()
 " }}}
 
 " Vim-plug {{{
