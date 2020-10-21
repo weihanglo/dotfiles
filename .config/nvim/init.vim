@@ -140,17 +140,17 @@ Plug 'edkolev/tmuxline.vim'
 
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'mg979/vim-visual-multi'
-Plug 'troydm/zoomwintab.vim'
+Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
+Plug 'mg979/vim-visual-multi', { 'on': ['<plug>(VM-Add-Cursor-Down)',
+    \ '<plug>(VM-Find-Under)', '<plug>(VM-Find-Under)'] }
 
 " scm
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
 
 " linter
-Plug 'dense-analysis/ale', { 'for': 
-    \ ['javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 
-    \ 'typescriptreact', 'typescript.tsx'] }
+Plug 'dense-analysis/ale', { 'for': ['javascript', 'javascriptreact',
+    \ 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'] }
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -160,12 +160,9 @@ Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 
 " search
-Plug 'junegunn/fzf', {
-    \ 'dir': '~/.fzf',
-    \ 'do': { -> fzf#install() },
-    \ 'on': 'FZF'
-    \}
 let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands']
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() },
+    \ 'on': b:fzf_on }
 Plug 'junegunn/fzf.vim', { 'on': b:fzf_on }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
