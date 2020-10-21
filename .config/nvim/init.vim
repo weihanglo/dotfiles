@@ -23,7 +23,7 @@ set nonumber
 set noswapfile
 set nowrap
 set pumheight=15
-set pumblend=25
+set pumblend=15
 set scrolloff=2
 set shiftwidth=4
 set shortmess+=c
@@ -138,6 +138,7 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
+Plug 'rakr/vim-one'
 
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -168,6 +169,13 @@ Plug 'junegunn/fzf.vim', { 'on': b:fzf_on }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 call plug#end()
+" }}}
+
+" colorscheme {{{
+let g:one_allow_italics = 1 
+colorscheme one
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
 " }}}
 
 " LSP configurations {{{
