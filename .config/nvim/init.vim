@@ -131,6 +131,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
+Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!', 'Vista!!'] }
 
 " user interface
 Plug 'mhinz/vim-startify'
@@ -404,6 +405,7 @@ let g:airline_theme = 'jellybeans'
 
 " extensions
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#vista#enabled = 0
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
@@ -424,6 +426,10 @@ let g:tmuxline_preset.win = ['#F#I', '#W']
 let g:tmuxline_preset.y = ['%R', '%b %d']
 let g:tmuxline_preset.z = '#H'
 let g:tmuxline_preset.options = { 'status-justify' : 'left'}
+" }}}
+
+" Vista.vim {{{
+let g:vista_default_executive = 'nvim_lsp'
 " }}}
 
 " zoomwintab.vim {{{
