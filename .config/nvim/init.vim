@@ -165,6 +165,8 @@ Plug 'junegunn/fzf', {
     \ 'do': { -> fzf#install() },
     \ 'on': 'FZF'
     \}
+let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands']
+Plug 'junegunn/fzf.vim', { 'on': b:fzf_on }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 call plug#end()
@@ -375,9 +377,11 @@ nnoremap <silent> <LocalLeader>c <cmd>bp<bar>bd #<CR>
 
 " FZF {{{
 " Use system's default options.
-nnoremap <silent> <c-p> <cmd>FZF<CR>
+nnoremap <silent> <c-s-p>            <cmd>Commands<CR>
+nnoremap <silent> <LocalLeader>b     <cmd>Buffers<CR>
+nnoremap <silent> <c-p>              <cmd>Files<CR>
 " Do not ignore ignores!
-nnoremap <silent> <LocalLeader><c-p> :call
+nnoremap <silent> <LocalLeader><c-p> <cmd>call
     \ fzf#run({'source': 'rg --files -u'})<CR>
 " }}}
 
@@ -403,9 +407,6 @@ let g:airline_theme = 'jellybeans'
 
 " extensions
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#buffer_nr_format = '%s '
 
 " auto-generate snapshots
 let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
