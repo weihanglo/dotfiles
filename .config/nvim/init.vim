@@ -60,6 +60,13 @@ augroup FiletypeDetectPlus
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
     " auto rustfmt
     autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()
+    " inlay hints for rust
+    autocmd CursorHold,CursorHoldI *.rs
+        \ silent lua require'lsp_extensions'.inlay_hints{
+        \     only_current_line = true,
+        \     prefix = ' » ',
+        \     highlight = "NonText",
+        \}
 augroup END
 
 augroup TerminalSettings
@@ -216,31 +223,6 @@ let g:completion_items_priority = {
     \ 'Text': 30,
     \}
 
-" Inlay hints (via weihanglo/lsp_extensions.nvim)
-" Can toggle between current line/all
-function! LspInlayHints()
-    if exists('#LspInlayHintsCurrentLine#CursorHold')
-        silent lua require'lsp_extensions'.inlay_hints
-            \ { prefix = ' » ', highlight = "NonText" }
-        augroup LspInlayHintsCurrentLine
-            autocmd!
-        augroup END
-    else
-        augroup LspInlayHintsCurrentLine
-            autocmd!
-            autocmd CursorHold,CursorHoldI
-                \ *.rs
-                \ silent lua require'lsp_extensions'.inlay_hints{
-                \     only_current_line = true,
-                \     prefix = ' » ',
-                \     highlight = "NonText",
-                \}
-        augroup END
-    endif
-endfunction
-" Initialize current lint inlay hints
-call LspInlayHints()
-
 " LspDeclaration seems having conflicts with airline....
 command! LspCodeAction       lua vim.lsp.buf.code_action()
 command! LspDeclaratio       lua vim.lsp.buf.declaration()
@@ -250,7 +232,6 @@ command! LspHover            lua vim.lsp.buf.hover()
 command! LspImplementation   lua vim.lsp.buf.implementation()
 command! LspIncomingCalls    lua vim.lsp.buf.incoming_calls()
 command! LspInfo             lua print(vim.inspect(vim.lsp.buf_get_clients()))
-command! LspInlayHints       call LspInlayHints()
 command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
 command! LspReferences       lua vim.lsp.buf.references()
 command! LspRename           lua vim.lsp.buf.rename()
