@@ -89,6 +89,14 @@ M.pyls_setup = function()
   end)
 end
 
+--- lua-language-server setup.
+-- `:LspInstall sumneko_lua`
+--
+-- Ref: https://github.com/sumneko/lua-language-server
+M.sumneko_lua_setup = function()
+  nvim_lsp.sumneko_lua.setup{}
+end
+
 --- Setup all language servers from above configurations.
 M.setup = function()
   vim.schedule(function()
@@ -96,6 +104,7 @@ M.setup = function()
     M.gopls_setup()
     M.tsserver_setup()
     M.pyls_setup()
+    M.sumneko_lua_setup()
   end)
 end
 
