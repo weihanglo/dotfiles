@@ -20,6 +20,7 @@ files=(
     .cargo/config.toml
     .config/alacritty/alacritty.yml
     .config/nvim/init.vim
+    .config/nvim/lua
     .config/starship.toml
     .gitconfig
     .gitignore
@@ -92,15 +93,15 @@ echo "done"
 # Symlink files
 for file in ${files[@]}; do
     echo "$file"
-    echo -e "\tMoving $file to $origdir"
+    echo -e "\tMoving $file to $origdir/$file"
     if [[ -z "$file" ]]; then
         echo -e "No file $file found"
         return
     fi
-    mkdir -p $HOME/$(dirname $file)
+    mkdir -p "$HOME/$(dirname $file)"
     mv $HOME/$file $origdir
     echo -e "\tSymlinking to $file in $dir"
-    ln -is $dir/$file $HOME/$file
+    ln -is "$dir/$file" "$HOME/$file"
 done
 
 # --------------------------------------
