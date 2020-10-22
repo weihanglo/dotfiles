@@ -46,14 +46,18 @@ set winminheight=0
 " }}}
 
 " Filetype {{{
-augroup CustomFiletypeCmd
+augroup FiletypeDetectPlus
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
+    " two space indent for web developing
     autocmd BufNewFile,BufFilePre,BufRead
         \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    " go use tab
     autocmd FileType go
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
+    " auto rustfmt
+    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()
 augroup END
 " }}}
 
