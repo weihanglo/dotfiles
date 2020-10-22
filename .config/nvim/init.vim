@@ -65,6 +65,13 @@ augroup TerminalSettings
     autocmd TermOpen term://* startinsert
     autocmd TermClose term://*:tig bd!
 augroup END
+
+" List all filetype that is enabled omnifunc with lsp.
+augroup lspcompletionOmnifunc
+    autocmd!
+    autocmd FileType go,rust,python,javascript,typescript,lua
+        \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
+augroup END
 " }}}
 
 " Genernal key mappings {{{
@@ -228,23 +235,10 @@ let g:completion_items_priority = {
     \ 'Text': 30,
     \}
 
-" List all filetype that is enabled omnifunc with lsp.
-augroup LspCompletionOmnifunc
-    autocmd!
-    autocmd FileType go,rust,python,javascript,typescript
-        \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
-augroup END
-
-" Convenient custom commands
-function! LspRestart()
-   lua vim.lsp.stop_client(vim.lsp.get_active_clients())
-   edit
-endfunction
-
 " Inlay hints (via weihanglo/lsp_extensions.nvim)
 " Can toggle between current line/all
 function! LspInlayHints()
-    if exists('#InlayHintsCurrentLine#CursorHold')
+    if exists('#LspInlayHintsCurrentLine#CursorHold')
         silent lua require'lsp_extensions'.inlay_hints
             \ { prefix = ' » ', highlight = "NonText" }
         augroup LspInlayHintsCurrentLine
@@ -253,11 +247,11 @@ function! LspInlayHints()
     else
         augroup LspInlayHintsCurrentLine
             autocmd!
-            autocmd CursorHold,CursorHoldI 
+            autocmd CursorHold,CursorHoldI
                 \ *.rs
                 \ silent lua require'lsp_extensions'.inlay_hints{
                 \     only_current_line = true,
-                \     prefix = ' » ', 
+                \     prefix = ' » ',
                 \     highlight = "NonText",
                 \}
         augroup END
@@ -279,8 +273,8 @@ command! LspInlayHints       call LspInlayHints()
 command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
 command! LspReferences       lua vim.lsp.buf.references()
 command! LspRename           lua vim.lsp.buf.rename()
-command! LspRestart          call LspRestart()
-command! LspServerReady      lua vim.lsp.buf.server_ready()
+command! LspRestart          lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+command! LspServerReady      lua print(vim.lsp.buf.server_ready())
 command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
 command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
 command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
@@ -290,11 +284,11 @@ nnoremap <silent> <c-]>                <cmd>LspDefinition<CR>
 nnoremap <silent> K                    <cmd>LspHover<CR>
 nnoremap <silent> <c-k>                <cmd>LspSignatureHelp<CR>
 nnoremap <silent> <LocalLeader><space> <cmd>LspCodeAction<CR>
-" Rename malfunctions. Use at your own risk.
-nnoremap <silent> <F2> LspRename
+" Rename sometimes malfunctions. Use at your own risk.
+nnoremap <silent> <F2>                 <cmd>LspRename<CR>
 
 " manually trigger completion on Ctrl-Space
-imap <silent> <c-space> <Plug>(completion_trigger)
+imap     <silent> <c-space>            <plug>(completion_trigger)
 " }}}
 
 " UltiSnips {{{
