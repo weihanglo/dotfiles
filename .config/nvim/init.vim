@@ -16,6 +16,7 @@ set lazyredraw
 set linebreak
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 set mouse=a
+set nofoldenable
 set nonumber
 set noswapfile
 set nowrap
@@ -25,6 +26,7 @@ set scrolloff=2
 set shiftwidth=4
 set shortmess+=c
 set showmatch
+set showtabline=0
 set sidescrolloff=4
 set smartcase
 set smartindent
@@ -177,7 +179,7 @@ call plug#end()
 " }}}
 
 " colorscheme {{{
-let g:one_allow_italics = 1 
+let g:one_allow_italics = 1
 colorscheme one
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
@@ -347,12 +349,9 @@ xmap gs <plug>(GrepperOperator)
 
 " Airline {{{
 " theme
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
 let g:airline_theme = 'jellybeans'
 
 " extensions
-let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#vista#enabled = 0
 
 " auto-generate snapshots
