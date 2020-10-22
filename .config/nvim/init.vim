@@ -76,9 +76,10 @@ augroup TerminalSettings
 augroup END
 
 " List all filetype that is enabled omnifunc with lsp.
-augroup lspcompletionOmnifunc
+augroup LspCompletionOmnifunc
     autocmd!
-    autocmd FileType go,rust,python,javascript,typescript,lua
+    autocmd FileType
+        \ go,rust,python,javascript,typescript,lua
         \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
 " }}}
@@ -271,15 +272,12 @@ let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-    \   'javascript': ['eslint'],
-    \   'typescript': ['eslint', 'tsserver', 'typecheck'],
-    \   'python': ['flake8', 'pylint']
-    \}
-let g:ale_fixers = {
-    \   'javascript': ['eslint'],
-    \   'typescript': ['eslint', 'tsserver', 'typecheck']
-    \}
+let g:ale_linters = {}
+let g:ale_linters.javascript = ['eslint']
+let g:ale_linters.typescript = ['eslint', 'tsserver', 'typecheck']
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.typescript = ['eslint', 'tsserver', 'typecheck']
 " }}}
 
 " NERDTree {{{
