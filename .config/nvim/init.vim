@@ -59,6 +59,12 @@ augroup FiletypeDetectPlus
     " auto rustfmt
     autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()
 augroup END
+
+augroup TerminalSettings
+    autocmd!
+    autocmd TermOpen term://* startinsert
+    autocmd TermClose term://*:tig bd!
+augroup END
 " }}}
 
 " Genernal key mappings {{{
@@ -100,6 +106,7 @@ vnoremap // y/<C-R>"<CR>
 
 " Launch tig and expand to fullscreen!
 function! Tig()
+    tabedit
     terminal tig
     ZoomWinTabToggle
     startinsert
