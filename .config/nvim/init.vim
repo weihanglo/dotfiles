@@ -124,16 +124,21 @@ Plug 'rakr/vim-one'
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
-Plug 'mg979/vim-visual-multi', { 'on': ['<plug>(VM-Add-Cursor-Down)',
-    \ '<plug>(VM-Find-Under)', '<plug>(VM-Find-Under)'] }
+Plug 'mg979/vim-visual-multi'
 
 " scm
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
 
 " linter
-Plug 'dense-analysis/ale', { 'for': ['javascript', 'javascriptreact',
-    \ 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'] }
+Plug 'dense-analysis/ale', { 'for': [
+    \ 'javascript', 
+    \ 'javascriptreact',
+    \ 'javascript.jsx', 
+    \ 'typescript', 
+    \ 'typescriptreact', 
+    \ 'typescript.tsx'
+    \] }
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -271,6 +276,10 @@ imap     <silent> <c-space>            <plug>(completion_trigger)
 let g:UltiSnipsExpandTrigger = '<c-j>'
 " }}}
 
+" Vim-Visual-Multi {{{
+let g:VM_mouse_mappings = 1
+" }}}
+
 " Startify {{{
 let g:startify_change_to_vcs_root = 1
 " }}}
@@ -304,7 +313,7 @@ nnoremap <silent> <LocalLeader>b     <cmd>Buffers<CR>
 nnoremap <silent> <c-p>              <cmd>Files<CR>
 " Do not ignore ignores!
 nnoremap <silent> <LocalLeader><c-p> <cmd>call
-    \ fzf#run({'source': 'rg --files -u'})<CR>
+    \ fzf#run({'source': 'rg --files -uu --iglob !.git'})<CR>
 " }}}
 
 " vim-grepper {{{
