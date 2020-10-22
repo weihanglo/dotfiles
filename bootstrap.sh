@@ -19,6 +19,7 @@ files=(
     .bm.sh
     .cargo/config.toml
     .config/alacritty/alacritty.yml
+    .config/nvim/autoload/taiwanese_proverbs.vim
     .config/nvim/init.vim
     .config/nvim/lua
     .config/starship.toml
@@ -36,11 +37,11 @@ files=(
 # --------------------------------------
 
 install_neovim() {
-    brew install neovim
+    brew install neovim || brew upgrade neovim 
 }
 
 install_nvim_python() {
-    pip3 install neovim pynvim
+    pip3 install -U neovim pynvim
 }
 
 install_ripgrep() {

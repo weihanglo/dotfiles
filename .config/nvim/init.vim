@@ -140,11 +140,11 @@ Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
 
 " linter
 Plug 'dense-analysis/ale', { 'for': [
-    \ 'javascript', 
+    \ 'javascript',
     \ 'javascriptreact',
-    \ 'javascript.jsx', 
-    \ 'typescript', 
-    \ 'typescriptreact', 
+    \ 'javascript.jsx',
+    \ 'typescript',
+    \ 'typescriptreact',
     \ 'typescript.tsx'
     \] }
 
@@ -264,6 +264,13 @@ let g:VM_mouse_mappings = 1
 
 " Startify {{{
 let g:startify_change_to_vcs_root = 1
+let g:startify_custom_header_quotes = taiwanese_proverbs#predefined()
+let g:startify_enable_special = 0
+let g:startify_fortune_use_unicode = 1
+let g:startify_padding_left = 7
+let g:startify_relative_path = 1
+let g:startify_update_oldfiles = 1
+let g:startify_files_number = 7
 " }}}
 
 " ALE {{{

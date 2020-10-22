@@ -50,7 +50,7 @@ font:
   size: 20
 
 # Background opacity
-background_opacity: 0.8
+background_opacity: 1.0
 
 # Live config reload (changes require restart)
 live_config_reload: true
