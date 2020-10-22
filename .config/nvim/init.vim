@@ -136,7 +136,7 @@ Plug 'mg979/vim-visual-multi'
 
 " scm
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G'] }
+Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G', 'GDiff'] }
 
 " linter
 Plug 'dense-analysis/ale', { 'for': [
@@ -156,9 +156,8 @@ Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 
 " search
-let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands']
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() },
-    \ 'on': b:fzf_on }
+let b:fzf_on = ['Files', 'Buffers', 'Commands', 'Rg', 'BCommits', 'Maps']
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim', { 'on': b:fzf_on }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
@@ -300,7 +299,7 @@ nnoremap <silent> <LocalLeader>b     <cmd>Buffers<CR>
 nnoremap <silent> <c-p>              <cmd>Files<CR>
 " Do not ignore ignores!
 nnoremap <silent> <LocalLeader><c-p> <cmd>call
-    \ fzf#run({'source': 'rg --files -uu --iglob !.git'})<CR>
+    \ fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<CR>
 " }}}
 
 " vim-grepper {{{
