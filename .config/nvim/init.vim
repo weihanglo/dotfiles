@@ -166,7 +166,7 @@ hi! NonText ctermbg=NONE guibg=NONE
 " }}}
 
 " LSP configurations {{{
-lua vim.schedule(require'language_server'.setup)
+lua require'language_server'.setup()
 
 " Show virtual text for diagnoses
 let g:diagnostic_enable_virtual_text = 1

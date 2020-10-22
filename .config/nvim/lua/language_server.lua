@@ -1,5 +1,4 @@
 local vim = vim
-local string = string
 local nvim_lsp = require'nvim_lsp'
 local M = {}
 
@@ -46,16 +45,27 @@ M.gopls_setup = function()
   nvim_lsp.gopls.setup{ on_attach = make_on_attach() }
 end
 
---- Return python virtualenv path for current working directory.
+--- Asynchorounsly get python virtualenv path for current working directory.
 -- Currently support: `pipenv`.
 --
--- Ref: https://duseev.com/articles/vim-python-pipenv/
-local get_python_venv_path = function()
-  local pipenv_venv_path = vim.fn.system('pipenv --venv')
-  if vim.v.shell_error == 0 then
-    local venv_path = string.gsub(pipenv_venv_path, '%s+$', '')
-    return venv_path
+-- This is done by neovim job-control system. See `:h job-control`.
+local get_python_venv_path = function(callback)
+  local on_event = function(job_id, data, event)
+    if event == 'stdout' then
+      -- Leading and trailing elements would contains gibberish whitespaces.
+      callback(data[1])
+    end
   end
+  local job_id = vim.fn.jobstart(
+    'python -m pipenv --venv',
+    {
+      on_exit = on_event,
+      on_stdout = on_event,
+      on_stderr = on_event,
+      stdout_buffered = true,
+      stderr_buffered = true,
+    }
+  )
 end
 
 --- Python Language Server setup.
@@ -63,26 +73,30 @@ end
 --
 -- Ref: https://github.com/palantir/python-language-server
 M.pyls_setup = function()
-  nvim_lsp.pyls.setup{
-    on_attach = make_on_attach(),
-    settings = {
-      pyls = {
-        plugins = {
-          jedi = {
-            environment = get_python_venv_path()
+  get_python_venv_path(function(venv_path)
+    nvim_lsp.pyls.setup{
+      on_attach = make_on_attach(),
+      settings = {
+        pyls = {
+          plugins = {
+            jedi = {
+              environment = venv_path
+            }
           }
         }
       }
     }
-  }
+  end)
 end
 
 --- Setup all language servers from above configurations.
 M.setup = function()
-  M.rust_analyzer_setup()
-  M.gopls_setup()
-  M.tsserver_setup()
-  M.pyls_setup()
+  vim.schedule(function()
+    M.rust_analyzer_setup()
+    M.gopls_setup()
+    M.tsserver_setup()
+    M.pyls_setup()
+  end)
 end
 
 return M
