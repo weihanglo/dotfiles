@@ -80,32 +80,6 @@ augroup END
 " map localleader if necessary
 let maplocalleader = ','
 
-cnoreabbrev W w
-cnoreabbrev W! w!
-cnoreabbrev Wq wq
-cnoreabbrev WQ wq
-cnoreabbrev Wa wa
-cnoreabbrev WA wa
-cnoreabbrev Q q
-cnoreabbrev Q! q!
-cnoreabbrev q1 q!
-cnoreabbrev Q1 q!
-cnoreabbrev qA qa
-cnoreabbrev Qa qa
-cnoreabbrev QA qa
-cnoreabbrev qA! qa!
-cnoreabbrev Qa! qa!
-cnoreabbrev QA! qa!
-cnoreabbrev qA1 qa!
-cnoreabbrev Qa1 qa!
-cnoreabbrev QA1 qa!
-cnoreabbrev Bd bd
-cnoreabbrev BD bd
-cnoreabbrev Bd! bd!
-cnoreabbrev BD! bd!
-cnoreabbrev Nohl nohl
-cnoreabbrev NOhl nohl
-
 " Move visual block
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
