@@ -21,7 +21,7 @@ files=(
     .config/alacritty/alacritty.yml
     .config/nvim/autoload/taiwanese_proverbs.vim
     .config/nvim/init.vim
-    .config/nvim/lua
+    .config/nvim/lua/language_server.lua
     .config/starship.toml
     .gitconfig
     .gitignore
@@ -100,7 +100,8 @@ for file in ${files[@]}; do
         return
     fi
     mkdir -p "$HOME/$(dirname $file)"
-    mv $HOME/$file $origdir
+    mkdir -p "$origdir/$(dirname $file)"
+    mv "$HOME/$file" "$origdir/$file"
     echo -e "\tSymlinking to $file in $dir"
     ln -is "$dir/$file" "$HOME/$file"
 done
