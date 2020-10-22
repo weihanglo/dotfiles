@@ -166,59 +166,7 @@ hi! NonText ctermbg=NONE guibg=NONE
 " }}}
 
 " LSP configurations {{{
-
-" Detect python virtualenv. Currently support `pipenv`.
-" Ref: https://duseev.com/articles/vim-python-pipenv/
-function! GetPythonVenvPath()
-    let pipenv_venv_path = system('pipenv --venv')
-    if v:shell_error == 0
-        return substitute(pipenv_venv_path, '\n', '', '')
-    endif
-endfunction
-
-lua <<EOF
-local nvim_lsp = require'nvim_lsp'
-
-local make_on_attach = function(comp, diag)
-  return function(client)
-    -- Auto-completion functionality from `nvim-lua/completion-nvim`
-    require'completion'.on_attach(comp)
-    -- Better diagnose UI from `nvim-lua/diagnostic-nvim`
-    require'diagnostic'.on_attach(diag)
-  end
-end
-
--- `git clone https://github.com/rust-analyzer/rust-analyzer` and build!
-nvim_lsp.rust_analyzer.setup{
-  on_attach = make_on_attach(),
-  settings = {
-    ['rust-analyzer'] = {
-      -- Default 128. Ref: https://git.io/JTczw
-      lruCapacity = 512
-    }
-  }
-}
-
--- `npm i g typescript-language-server`
-nvim_lsp.tsserver.setup{ on_attach = make_on_attach({ sorting = "alphabet" }) }
-
--- `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
-nvim_lsp.gopls.setup{ on_attach = make_on_attach() }
-
--- `python3 -m pip install 'python-language-server[all]'`
-nvim_lsp.pyls.setup{
-  on_attach = make_on_attach(),
-  settings = {
-    pyls = {
-      plugins = {
-        jedi = { 
-          environment = vim.fn.eval('GetPythonVenvPath()') 
-        }
-      }
-    }
-  }
-}
-EOF
+lua vim.schedule(require'language_server'.setup)
 
 " Show virtual text for diagnoses
 let g:diagnostic_enable_virtual_text = 1
