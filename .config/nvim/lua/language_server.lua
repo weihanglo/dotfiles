@@ -3,7 +3,7 @@ local nvim_lsp = require'nvim_lsp'
 local M = {}
 
 local make_on_attach = function(comp, diag)
-  return function(client)
+  return function(_)
     -- Auto-completion functionality from `nvim-lua/completion-nvim`
     require'completion'.on_attach(comp)
     -- Better diagnose UI from `nvim-lua/diagnostic-nvim`
@@ -50,13 +50,13 @@ end
 --
 -- This is done by neovim job-control system. See `:h job-control`.
 local get_python_venv_path = function(callback)
-  local on_event = function(job_id, data, event)
+  local on_event = function(_, data, event)
     if event == 'stdout' then
-      -- Leading and trailing elements would contains gibberish whitespaces.
+      -- Here are gibberish leading and trailing whitespace elements.
       callback(data[1])
     end
   end
-  local job_id = vim.fn.jobstart(
+  vim.fn.jobstart(
     'python -m pipenv --venv',
     {
       on_exit = on_event,
