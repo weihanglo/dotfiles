@@ -99,13 +99,11 @@ end
 
 --- Setup all language servers from above configurations.
 M.setup = function()
-  vim.schedule(function()
-    M.rust_analyzer_setup()
-    M.gopls_setup()
-    M.tsserver_setup()
-    M.pyls_setup()
-    M.sumneko_lua_setup()
-  end)
+  M.rust_analyzer_setup()
+  M.gopls_setup()
+  M.tsserver_setup()
+  M.pyls_setup()
+  M.sumneko_lua_setup()
 end
 
 return M
