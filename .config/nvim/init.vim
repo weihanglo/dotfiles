@@ -39,7 +39,7 @@ set termguicolors
 set timeoutlen=500
 set undodir=/tmp/nvim/undo
 set undofile
-set undolevels=5000
+set undolevels=10000
 set updatetime=350
 set wildignore+=*.swo,*.swp,*~,*.log,*.db,*.sqilte,*__pycache__/*
 set wildignorecase
