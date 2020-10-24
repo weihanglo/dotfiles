@@ -82,6 +82,11 @@ augroup LspCompletionOmnifunc
         \ go,rust,python,javascript,typescript,lua
         \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
+augroup ModeChanges
+    autocmd!
+    autocmd InsertEnter,TermEnter * Tmuxline lightline_insert
+    autocmd VimLeavePre,InsertLeave,TermLeave * Tmuxline lightline_visual
+augroup END
 " }}}
 
 " Genernal key mappings {{{
@@ -124,9 +129,8 @@ Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!', 'Vista!!'] }
 
 " user interface
 Plug 'mhinz/vim-startify'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'edkolev/tmuxline.vim', { 'on': ['Tmuxline', 'TmuxlineSnapshot'] }
 Plug 'rakr/vim-one'
 
 " fast moves
@@ -223,9 +227,8 @@ let g:completion_items_priority = {
     \ 'Text': 30,
     \}
 
-" LspDeclaration seems having conflicts with airline....
 command! LspCodeAction       lua vim.lsp.buf.code_action()
-command! LspDeclaratio       lua vim.lsp.buf.declaration()
+command! LspDeclaration      lua vim.lsp.buf.declaration()
 command! LspDefinition       lua vim.lsp.buf.definition()
 command! LspDocumentSymbol   lua vim.lsp.buf.document_symbol()
 command! LspHover            lua vim.lsp.buf.hover()
@@ -320,32 +323,14 @@ nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 " }}}
 
-" Airline {{{
-" theme
-let g:airline_theme = 'jellybeans'
-
-" extensions
-let g:airline#extensions#vista#enabled = 0
-
-" auto-generate snapshots
-let g:airline#extensions#tmuxline#snapshot_file = '~/.tmuxline'
-" }}}
+" Lightline {{{
+let g:lightline = {}
+let g:lightline.colorscheme = 'one'
+let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 " Tmuxline {{{
 let g:tmuxline_powerline_separators = 0
-let g:tmuxline_separators = {}
-let g:tmuxline_separators.left = ''
-let g:tmuxline_separators.left_alt = ''
-let g:tmuxline_separators.right = ''
-let g:tmuxline_separators.right_alt = ''
-let g:tmuxline_separators.space = ' '
-let g:tmuxline_preset = {}
-let g:tmuxline_preset.a = '#S'
-let g:tmuxline_preset.cwin = ['#F#I', '#W']
-let g:tmuxline_preset.win = ['#F#I', '#W']
-let g:tmuxline_preset.y = ['%R', '%b %d']
-let g:tmuxline_preset.z = '#H'
-let g:tmuxline_preset.options = { 'status-justify' : 'left'}
+let g:tmuxline_preset = 'minimal'
 " }}}
 
 " Vista.vim {{{
