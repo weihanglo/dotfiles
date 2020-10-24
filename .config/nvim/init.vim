@@ -69,10 +69,12 @@ augroup FiletypeDetectPlus
         \}
 augroup END
 
-augroup TerminalSettings
+augroup ModeChanges
     autocmd!
     autocmd TermOpen * startinsert
-    autocmd TermClose term://*:tig bd!
+    autocmd TermClose term://*:tig* bd!
+    autocmd InsertEnter,TermEnter * Tmuxline lightline_insert
+    autocmd VimLeavePre,InsertLeave,TermLeave * Tmuxline lightline_visual
 augroup END
 
 " List all filetype that is enabled omnifunc with lsp.
@@ -81,11 +83,6 @@ augroup LspCompletionOmnifunc
     autocmd FileType
         \ go,rust,python,javascript,typescript,lua
         \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
-augroup END
-augroup ModeChanges
-    autocmd!
-    autocmd InsertEnter,TermEnter * Tmuxline lightline_insert
-    autocmd VimLeavePre,InsertLeave,TermLeave * Tmuxline lightline_visual
 augroup END
 " }}}
 
@@ -100,8 +97,16 @@ vnoremap J :m '>+1<CR>gv=gv
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
 
-" Launch tig
-command! Tig tabedit|terminal tig
+" git and tig
+function! Tig(args) abort
+    let args = expandcmd(a:args)
+    tabedit
+    execute 'terminal tig ' . args
+endfunction
+command! -narg=* Tig call Tig(<q-args>)
+command! -narg=* Git tabedit|execute 'terminal git ' . <q-args>
+command! -narg=* G execute 'Git ' . <q-args>
+command! Gblame execute 'Tig blame % +' . line('.')
 " }}}
 
 " Vim-plug {{{
@@ -131,9 +136,8 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
 Plug 'mg979/vim-visual-multi'
 
-" scm
+" vcs
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G', 'GDiff'] }
 
 " linter
 Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
@@ -235,7 +239,7 @@ nnoremap <silent> <c-]>                 <cmd>LspDefinition<CR>
 nnoremap <silent> K                     <cmd>LspHover<CR>
 nnoremap <silent> <c-k>                 <cmd>LspSignatureHelp<CR>
 nnoremap <silent> <LocalLeader><space>  <cmd>LspCodeAction<CR>
-" Rename sometimes malfunctions. Use at your own risk.
+" NOTE: Rename sometimes malfunctions. Use at your own risk.
 nnoremap <silent> <F2>                  <cmd>LspRename<CR>
 
 " manually trigger completion on Ctrl-Space
@@ -244,6 +248,12 @@ imap     <silent> <c-space>             <plug>(completion_trigger)
 " Jump between diagnostics.
 nnoremap <silent> ]e                    NextDiagnosticCycle
 nnoremap <silent> [e                    PrevDiagnosticCycle
+" }}}
+
+" vim-gitgutter {{{
+let g:gitgutter_map_keys = 0
+nmap <silent> ]c                    <plug>(GitGutterNextHunk)
+nmap <silent> [c                    <plug>(GitGutterPrevHunk)
 " }}}
 
 " UltiSnips {{{
@@ -282,13 +292,13 @@ let g:ale_fixers.typescript = ['eslint', 'tsserver', 'typecheck']
 
 " NERDTree {{{
 nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<CR>
-nnoremap <silent> <LocalLeader>c <cmd>bp<bar>bd #<CR>
+nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
 " }}}
 
 " FZF {{{
 " Use system's default options.
-nnoremap <silent> <c-s-p>            <cmd>Commands<CR>
 nnoremap <silent> <LocalLeader>b     <cmd>Buffers<CR>
+nnoremap <silent> <LocalLeader>c     <cmd>Commands<CR>
 nnoremap <silent> <c-p>              <cmd>Files<CR>
 nnoremap <silent> <LocalLeader><c-p> <cmd>call fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<CR>
 " }}}
