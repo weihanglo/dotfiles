@@ -241,16 +241,20 @@ command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
 command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
 command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
 
-nnoremap <silent> <LocalLeader>t       <cmd>LspInlayHints<CR>
-nnoremap <silent> <c-]>                <cmd>LspDefinition<CR>
-nnoremap <silent> K                    <cmd>LspHover<CR>
-nnoremap <silent> <c-k>                <cmd>LspSignatureHelp<CR>
-nnoremap <silent> <LocalLeader><space> <cmd>LspCodeAction<CR>
+nnoremap <silent> <LocalLeader>t        <cmd>LspInlayHints<CR>
+nnoremap <silent> <c-]>                 <cmd>LspDefinition<CR>
+nnoremap <silent> K                     <cmd>LspHover<CR>
+nnoremap <silent> <c-k>                 <cmd>LspSignatureHelp<CR>
+nnoremap <silent> <LocalLeader><space>  <cmd>LspCodeAction<CR>
 " Rename sometimes malfunctions. Use at your own risk.
-nnoremap <silent> <F2>                 <cmd>LspRename<CR>
+nnoremap <silent> <F2>                  <cmd>LspRename<CR>
 
 " manually trigger completion on Ctrl-Space
-imap     <silent> <c-space>            <plug>(completion_trigger)
+imap     <silent> <c-space>             <plug>(completion_trigger)
+
+" Jump between diagnostics.
+nnoremap <silent> ]e                    NextDiagnosticCycle
+nnoremap <silent> [e                    PrevDiagnosticCycle
 " }}}
 
 " UltiSnips {{{
