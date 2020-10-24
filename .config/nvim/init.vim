@@ -215,6 +215,15 @@ let g:completion_items_priority = {
     \ 'Text': 30,
     \}
 
+function! LspRestart(force) abort
+lua << EOF
+    if not vim.lsp.buf.server_ready() or vim.fn.nvim_eval('a:force') then
+        vim.lsp.stop_client(vim.lsp.get_active_clients())
+    end
+EOF
+    edit
+endfunction
+
 command! LspCodeAction       lua vim.lsp.buf.code_action()
 command! LspDeclaration      lua vim.lsp.buf.declaration()
 command! LspDefinition       lua vim.lsp.buf.definition()
@@ -226,7 +235,7 @@ command! LspInfo             lua print(vim.inspect(vim.lsp.buf_get_clients()))
 command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
 command! LspReferences       lua vim.lsp.buf.references()
 command! LspRename           lua vim.lsp.buf.rename()
-command! LspRestart          execute 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())'|edit
+command! -bang LspRestart    call LspRestart(<bang>0)
 command! LspServerReady      lua print(vim.lsp.buf.server_ready())
 command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
 command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
@@ -249,8 +258,8 @@ nnoremap <silent> [e                    PrevDiagnosticCycle
 
 " vim-gitgutter {{{
 let g:gitgutter_map_keys = 0
-nmap <silent> ]c                    <plug>(GitGutterNextHunk)
-nmap <silent> [c                    <plug>(GitGutterPrevHunk)
+nmap <silent> ]c                        <plug>(GitGutterNextHunk)
+nmap <silent> [c                        <plug>(GitGutterPrevHunk)
 " }}}
 
 " UltiSnips {{{
