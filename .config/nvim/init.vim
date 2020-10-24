@@ -71,8 +71,8 @@ augroup ModeChanges
     autocmd!
     autocmd TermOpen * startinsert
     autocmd TermClose term://*:tig* bd!
-    autocmd InsertEnter,TermEnter * Tmuxline lightline_insert
-    autocmd VimLeavePre,InsertLeave,TermLeave * Tmuxline lightline_visual
+    autocmd InsertEnter,TermEnter * silent! Tmuxline lightline_insert
+    autocmd VimLeavePre,InsertLeave,TermLeave * silent! Tmuxline lightline_visual
 augroup END
 
 " List all filetype that is enabled omnifunc with lsp.
