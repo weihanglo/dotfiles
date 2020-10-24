@@ -97,6 +97,16 @@ M.sumneko_lua_setup = function()
   nvim_lsp.sumneko_lua.setup{}
 end
 
+--- cland setup.
+-- Installation guide [1].
+-- Note that clangd relies on a JSON compilation database[2].
+--
+-- [1]: https://clangd.llvm.org/installation.html
+-- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
+M.clangd_setup = function()
+  nvim_lsp.clangd.setup{}
+end
+
 --- Setup all language servers from above configurations.
 M.setup = function()
   M.rust_analyzer_setup()
@@ -104,6 +114,7 @@ M.setup = function()
   M.tsserver_setup()
   M.pyls_setup()
   M.sumneko_lua_setup()
+  M.clangd_setup()
 end
 
 return M
