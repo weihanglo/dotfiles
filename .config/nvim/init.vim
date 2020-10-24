@@ -63,15 +63,15 @@ augroup FiletypeDetectPlus
     " inlay hints for rust
     autocmd CursorHold,CursorHoldI *.rs
         \ silent lua require'lsp_extensions'.inlay_hints{
-        \     only_current_line = true,
-        \     prefix = ' » ',
-        \     highlight = "NonText",
+        \  only_current_line = true,
+        \  prefix = ' » ',
+        \  highlight = "NonText",
         \}
 augroup END
 
 augroup TerminalSettings
     autocmd!
-    autocmd TermOpen term://* startinsert
+    autocmd TermOpen * startinsert
     autocmd TermClose term://*:tig bd!
 augroup END
 
@@ -100,14 +100,8 @@ vnoremap J :m '>+1<CR>gv=gv
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
 
-" Launch tig and expand to fullscreen!
-function! Tig()
-    tabedit
-    terminal tig
-    ZoomWinTabToggle
-    startinsert
-endfunction
-command! Tig call Tig()
+" Launch tig
+command! Tig tabedit|terminal tig
 " }}}
 
 " Vim-plug {{{
@@ -119,7 +113,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-
 " nvim-lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -143,14 +136,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', { 'on': ['Git', 'Gblame', 'G', 'GDiff'] }
 
 " linter
-Plug 'dense-analysis/ale', { 'for': [
-    \ 'javascript',
-    \ 'javascriptreact',
-    \ 'javascript.jsx',
-    \ 'typescript',
-    \ 'typescriptreact',
-    \ 'typescript.tsx'
-    \] }
+Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -276,7 +262,7 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_padding_left = 7
 let g:startify_relative_path = 1
 let g:startify_update_oldfiles = 1
-let g:startify_files_number = 7
+let g:startify_files_number = 8
 " }}}
 
 " ALE {{{
@@ -304,9 +290,7 @@ nnoremap <silent> <LocalLeader>c <cmd>bp<bar>bd #<CR>
 nnoremap <silent> <c-s-p>            <cmd>Commands<CR>
 nnoremap <silent> <LocalLeader>b     <cmd>Buffers<CR>
 nnoremap <silent> <c-p>              <cmd>Files<CR>
-" Do not ignore ignores!
-nnoremap <silent> <LocalLeader><c-p> <cmd>call
-    \ fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<CR>
+nnoremap <silent> <LocalLeader><c-p> <cmd>call fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<CR>
 " }}}
 
 " vim-grepper {{{
