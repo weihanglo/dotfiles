@@ -58,8 +58,6 @@ augroup FiletypeDetectPlus
     " go use tab
     autocmd FileType go
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
-    " auto rustfmt
-    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()
     " inlay hints for rust
     autocmd CursorHold,CursorHoldI *.rs
         \ silent lua require'lsp_extensions'.inlay_hints{
@@ -81,7 +79,7 @@ augroup END
 augroup LspCompletionOmnifunc
     autocmd!
     autocmd FileType
-        \ go,rust,python,javascript,typescript,lua
+        \ go,rust,python,javascript,typescript,lua,c,cpp,objc,objcpp
         \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
 " }}}
@@ -161,7 +159,7 @@ call plug#end()
 " colorscheme {{{
 let g:one_allow_italics = 1
 colorscheme one
-hi! Normal ctermbg=NONE guibg=NONE
+hi! Normal  ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
 " }}}
 
@@ -228,13 +226,12 @@ command! LspInfo             lua print(vim.inspect(vim.lsp.buf_get_clients()))
 command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
 command! LspReferences       lua vim.lsp.buf.references()
 command! LspRename           lua vim.lsp.buf.rename()
-command! LspRestart          lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+command! LspRestart          execute 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())'|edit
 command! LspServerReady      lua print(vim.lsp.buf.server_ready())
 command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
 command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
 command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
 
-nnoremap <silent> <LocalLeader>t        <cmd>LspInlayHints<CR>
 nnoremap <silent> <c-]>                 <cmd>LspDefinition<CR>
 nnoremap <silent> K                     <cmd>LspHover<CR>
 nnoremap <silent> <c-k>                 <cmd>LspSignatureHelp<CR>
