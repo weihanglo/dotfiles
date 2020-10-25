@@ -24,6 +24,9 @@ alias ipy='ipython3'
 #---------------------------------------
 # Environment variables and configs
 #---------------------------------------
+# Default shell to bash
+export SHELL=bash
+
 # LESS pager
 export LESS="isFMRX"
 
