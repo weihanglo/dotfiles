@@ -61,7 +61,7 @@ export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
 
 # Node.js environment configuration ----
-eval "$(fnm env --multi)"
+eval "$(fnm env)"
 
 # Python -------------------------------
 export PYENV_ROOT="$HOME/.pyenv"
@@ -85,5 +85,6 @@ eval "$(starship init bash)"
 
 # FZF default configs
 export FZF_DEFAULT_COMMAND='rg --files --smart-case'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

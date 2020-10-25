@@ -61,11 +61,15 @@ set -gx fish_user_paths "$GEM_HOME/bin" $fish_user_paths
 set -gx GOPATH "$HOME/.go"
 set -gx fish_user_paths "$GOPATH/bin" $fish_user_paths
 
+# Node.js
+fnm env | source
+
 # Python
 set -gx PYENV_ROOT "$HOME/.pyenv"
 set -gx fish_user_paths "$PYENV_ROOT/bin" "$fish_user_paths"
 set -gx PIPENV_PYTHON "$PYENV_ROOT/shims/python"
 pyenv init - | source
+
 
 # RUST
 set -gx fish_user_paths "$HOME/.cargo/bin" $fish_user_paths
@@ -74,5 +78,6 @@ set -gx fish_user_paths "$HOME/.cargo/bin" $fish_user_paths
 starship init fish | source
 
 # FZF default configs
-set FZF_DEFAULT_COMMAND "rg --files --smart-case"
-set PATH $PATH "$HOME/.fzf/bin"
+set -gx FZF_DEFAULT_COMMAND "rg --files --smart-case"
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx fish_user_paths $fish_user_paths "$HOME/.fzf/bin"
