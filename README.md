@@ -21,7 +21,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.
-- [**nvm**]: Ease the pain of switch between different Node.js versions.
+- [**fnm**]: Ease the pain of sourcing nvm.
 - [**pyenv**]: Simple Python version management.
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
 - [**Starship**]: Cross-shell prompt with sane defaults.
@@ -46,7 +46,7 @@ Copyright © 2015 - 2020 Weihang Lo
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
 [**kitty**]: https://sw.kovidgoyal.net/kitty/
 [**Neovim**]: https://neovim.io
-[**nvm**]: https://github.com/creationix/nvm
+[**fnm**]: https://github.com/Schniz/fnm
 [**pyenv**]: https://github.com/pyenv/pyenv
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
 [**Starship**]: https://starship.rs
