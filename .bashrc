@@ -12,8 +12,6 @@
 #---------------------------------------
 # User specific aliases and functions
 #---------------------------------------
-alias ..='cd ..'
-alias ...='cd ../..'
 alias ls='exa'
 alias ll='exa -lhgF --git'
 
