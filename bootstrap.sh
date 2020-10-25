@@ -2,7 +2,7 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Oct. 2017               #
+#              Oct. 2020               #
 #--------------------------------------#
 
 # Define source and backup directory
@@ -58,17 +58,6 @@ install_git_delta() {
 
 neovim_replace_vimrc() {
     ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
-}
-
-add_bm_completion() {
-    if [[ $(uname) == 'Darwin' ]]; then
-        [ -d $(brew --prefix)/etc/bash_completion.d ] && \
-        ln -is $HOME/.bm.sh \
-            "$(brew --prefix)/etc/bash_completion.d/bm.sh"
-    else
-        [[ ${PS1} && -d /etc/bash_completion.d ]] && \
-        ln -is $HOME/.bm.sh /etc/bash_completion.d/bm.sh
-    fi
 }
 
 install_tmux_package_manager() {
@@ -135,7 +124,6 @@ if [[ $(uname) == 'Darwin' ]]; then
 fi
 
 confirm "replace .vimrc by neovim's init.vim" neovim_replace_vimrc
-confirm "add bash-completion for bm (bookmark manager)" add_bm_completion
 confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
 confirm "install ripgrep, a better grep" install_ripgrep
 confirm "install starship, prompt with sane defaults" install_starship

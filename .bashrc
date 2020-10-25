@@ -32,10 +32,6 @@ export LESS="isFMRX"
 # Aditional PATHs
 export PATH="$HOME/.local/bin:$PATH"
 
-# Bookmark manager '.bm.bash'
-export BOOKMARKPATH="$HOME/.bookmarks"
-[[ -f "$HOME/.bm.sh" ]] && . "$HOME/.bm.sh"
-
 # EDITOR and VISUAL
 export VISUAL=nvim EDITOR=nvim
 
