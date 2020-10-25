@@ -11,7 +11,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 
 ## Tools We Love
 
-- [**Alacritty**]: Maybe the fastest terminal emulator ever!
+- [**Alacritty**]: Maybe the fastest terminal emulator ever.
 - [**bat**]: A cat(1) clone with wings.
 - [**delta**]: Enjoyable diff viewer.
 - [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
@@ -19,6 +19,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**IPython**]: A must-have for a python lover.
 - [**iTerm2**]: Feature-rich terminal emulator on macOS.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
+- [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.
 - [**nvm**]: Ease the pain of switch between different Node.js versions.
 - [**pyenv**]: Simple Python version management.
@@ -43,6 +44,7 @@ Copyright © 2015 - 2020 Weihang Lo
 [**IPython**]: https://ipython.org
 [**iTerm2**]: https://www.iterm2.com
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
+[**kitty**]: https://sw.kovidgoyal.net/kitty/
 [**Neovim**]: https://neovim.io
 [**nvm**]: https://github.com/creationix/nvm
 [**pyenv**]: https://github.com/pyenv/pyenv

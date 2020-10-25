@@ -19,6 +19,7 @@ files=(
     .bm.sh
     .cargo/config.toml
     .config/alacritty/alacritty.yml
+    .config/kitty/kitty.conf
     .config/nvim/autoload/taiwanese_proverbs.vim
     .config/nvim/init.vim
     .config/nvim/lua/language_server.lua
