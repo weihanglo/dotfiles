@@ -117,7 +117,7 @@ eval "$(starship init bash)"
 #---------------------------------------
 
 # FZF default configs
-export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_COMMAND='rg --files --smart-case'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
