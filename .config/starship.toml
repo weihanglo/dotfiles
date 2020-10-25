@@ -3,6 +3,9 @@ add_newline = false
 [aws]
 disabled = true
 
+[cmake]
+disabled = true
+
 [conda]
 disabled = true
 
@@ -31,10 +34,15 @@ disabled = true
 [gcloud]
 disabled = true
 
+[git_branch]
+format = '[$symbol$branch]($style) '
+
 [git_status]
 # Disabled due to terriable performance in large git repos (e.g. rustc)
 disabled = true
-show_sync_count = true
+
+[golang]
+format = "[$symbol$version]($style) "
 
 [helm]
 disabled = true
@@ -51,10 +59,16 @@ disabled = true
 [nix_shell]
 disabled = true
 
+[nodejs]
+format = "[$symbol$version]($style) "
+
 [package]
 disabled = true
 
 [ocaml]
+disabled = true
+
+[openstack]
 disabled = true
 
 [perl]
@@ -66,8 +80,14 @@ disabled = true
 [purescript]
 disabled = true
 
+[python]
+format = "[$symbol$version]($style) "
+
 [ruby]
 disabled = true
+
+[rust]
+format = "[$symbol$version]($style) "
 
 [singularity]
 disabled = true
