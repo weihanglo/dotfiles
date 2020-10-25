@@ -19,8 +19,6 @@ alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias tree='exa -TF --group-directories-first'
 alias cat='bat'
 
-alias ipy='ipython3'
-
 #---------------------------------------
 # Environment variables and configs
 #---------------------------------------
@@ -121,6 +119,5 @@ eval "$(starship init bash)"
 
 # FZF default configs
 export FZF_DEFAULT_COMMAND='rg --files --smart-case'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
