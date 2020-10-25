@@ -12,12 +12,11 @@
 #---------------------------------------
 # User specific aliases and functions
 #---------------------------------------
-alias ls='exa'
+alias cat='bat'
 alias ll='exa -lhgF --git'
-
+alias ls='exa'
 alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
 alias tree='exa -TF --group-directories-first'
-alias cat='bat'
 
 #---------------------------------------
 # Environment variables and configs
@@ -36,8 +35,9 @@ export VISUAL=nvim EDITOR=nvim
 
 # History setting ----------------------
 export HISTSIZE=
+export HISTFILESIZE=
 export HISTCONTROL="erasedups:ignoreboth"
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
+export HISTIGNORE="&:[ ]*:exit:ls*:cd*:git*:tig*:nvim"
 export PROMPT_COMMAND='history -a'
 
 # Bash completion ----------------------
