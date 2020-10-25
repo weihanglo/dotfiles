@@ -15,13 +15,14 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**bat**]: A cat(1) clone with wings.
 - [**delta**]: Enjoyable diff viewer.
 - [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
+- [**fish**]: Kitty need fish.
+- [**fnm**]: Ease the pain of sourcing nvm.
 - [**FZF**]: Fuzzy finder goes rock.
 - [**IPython**]: A must-have for a python lover.
 - [**iTerm2**]: Feature-rich terminal emulator on macOS.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.
-- [**fnm**]: Ease the pain of sourcing nvm.
 - [**pyenv**]: Simple Python version management.
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
 - [**Starship**]: Cross-shell prompt with sane defaults.
@@ -40,13 +41,14 @@ Copyright © 2015 - 2020 Weihang Lo
 [**bat**]: https://github.com/sharkdp/bat
 [**delta**]: https://github.com/dandavison/delta
 [**exa**]: https://the.exa.website/
+[**fish**]: https://fishshell.com/
+[**fnm**]: https://github.com/Schniz/fnm
 [**FZF**]: https://github.com/junegunn/fzf
 [**IPython**]: https://ipython.org
 [**iTerm2**]: https://www.iterm2.com
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
 [**kitty**]: https://sw.kovidgoyal.net/kitty/
 [**Neovim**]: https://neovim.io
-[**fnm**]: https://github.com/Schniz/fnm
 [**pyenv**]: https://github.com/pyenv/pyenv
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
 [**Starship**]: https://starship.rs

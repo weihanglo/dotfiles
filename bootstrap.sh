@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
@@ -19,6 +19,7 @@ files=(
     .bm.sh
     .cargo/config.toml
     .config/alacritty/alacritty.yml
+    .config/fish/config.fish
     .config/kitty/kitty.conf
     .config/nvim/autoload/taiwanese_proverbs.vim
     .config/nvim/init.vim

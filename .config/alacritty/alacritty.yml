@@ -62,3 +62,4 @@ selection:
 
 key_bindings:
   - { key: Space, mods: Control, chars: "\x00" }
+  - { key: E,     mods: Alt,     chars: "\ee" } # for fish edit_command_buffer
