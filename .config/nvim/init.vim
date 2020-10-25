@@ -252,8 +252,8 @@ nnoremap <silent> <F2>                  <cmd>LspRename<CR>
 imap     <silent> <c-space>             <plug>(completion_trigger)
 
 " Jump between diagnostics.
-nnoremap <silent> ]e                    NextDiagnosticCycle
-nnoremap <silent> [e                    PrevDiagnosticCycle
+nnoremap <silent> ]e                    <cmd>NextDiagnosticCycle<CR>
+nnoremap <silent> [e                    <cmd>PrevDiagnosticCycle<CR>
 " }}}
 
 " vim-gitgutter {{{
