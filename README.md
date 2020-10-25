@@ -18,6 +18,7 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**FZF**]: Fuzzy finder goes rock.
 - [**IPython**]: A must-have for a python lover.
 - [**iTerm2**]: Feature-rich terminal emulator on macOS.
+- [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**Neovim**]: Next-generation Vim. Required.
 - [**nvm**]: Ease the pain of switch between different Node.js versions.
 - [**pyenv**]: Simple Python version management.
@@ -40,10 +41,11 @@ Copyright © 2015 - 2020 Weihang Lo
 [**exa**]: https://the.exa.website/
 [**FZF**]: https://github.com/junegunn/fzf
 [**IPython**]: https://ipython.org
-[**Neovim**]: https://neovim.io
-[**Starship**]: https://starship.rs
 [**iTerm2**]: https://www.iterm2.com
+[**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
+[**Neovim**]: https://neovim.io
 [**nvm**]: https://github.com/creationix/nvm
 [**pyenv**]: https://github.com/pyenv/pyenv
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
+[**Starship**]: https://starship.rs
 [**tmux**]: https://tmux.github.io
