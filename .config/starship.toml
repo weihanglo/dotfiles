@@ -28,6 +28,10 @@ disabled = true
 [elm]
 disabled = true
 
+[env_var]
+variable = '__PRIVATE_MODE'
+format = '$env_value '
+
 [erlang]
 disabled = true
 

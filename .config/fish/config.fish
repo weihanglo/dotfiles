@@ -63,3 +63,8 @@ end
 # ------------------------------------------------------------------------------
 # Commands that always run for all sessions go below.
 # ------------------------------------------------------------------------------
+
+# A ninja in starship!
+if test $fish_private_mode
+    set -x __PRIVATE_MODE 🥷🏾
+end
