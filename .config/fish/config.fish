@@ -18,6 +18,8 @@ if status is-login
     # EDITOR and VISUAL
     set -gx EDITOR nvim
     set -gx VISUAL nvim 
+    # Set locale
+    set -gx LC_ALL en_US.UTF-8
 
     # Aditional PATHs
     set -agx PATH $HOME/.local/bin
