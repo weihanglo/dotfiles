@@ -6,13 +6,14 @@
 #              Oct. 2020               #
 #--------------------------------------#
 
+# Default shell to fish
+set -gx SHELL fish
+
 # ------------------------------------------------------------------------------
 # Run for login shell.
 # ------------------------------------------------------------------------------
 
 if status is-login
-    # Default shell to fish
-    set -gx SHELL fish
     # LESS pager. More power.
     set -gx LESS isFMRX
     # EDITOR and VISUAL
@@ -21,11 +22,10 @@ if status is-login
     # Set locale
     set -gx LC_ALL en_US.UTF-8
 
-    # Aditional PATHs
+    # Additional PATHs
     set -agx PATH $HOME/.local/bin
     # FZF
     set -gx FZF_DEFAULT_COMMAND "rg --files --smart-case"
-    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
     set -pgx PATH $HOME/.fzf/bin
     # Ruby
     set -gx GEM_HOME $HOME/.gem
@@ -51,11 +51,11 @@ end
 # ------------------------------------------------------------------------------
 
 if status is-interactive
-    alias ls="exa"
+    alias cat="bat"
     alias ll="exa -lhgF --git"
+    alias ls="exa"
     alias ports="lsof -PiTCP -sTCP:LISTEN"
     alias tree="exa -TF --group-directories-first"
-    alias cat="bat"
     # Customizable prompt
     starship init fish | source
 end
