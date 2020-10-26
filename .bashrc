@@ -6,85 +6,77 @@
 #              Oct. 2020               #
 #--------------------------------------#
 
-# Source global definitions
-[[ -f /etc/bashrc ]] && . /etc/bashrc
-
-#---------------------------------------
-# User specific aliases and functions
-#---------------------------------------
-alias cat='bat'
-alias ll='exa -lhgF --git'
-alias ls='exa'
-alias ports='lsof -PiTCP -sTCP:LISTEN'     # add sudo if needed
-alias tree='exa -TF --group-directories-first'
-
-#---------------------------------------
-# Environment variables and configs
-#---------------------------------------
 # Default shell to bash
 export SHELL=bash
-
-# LESS pager
-export LESS="isFMRX"
-
-# Aditional PATHs
-export PATH="$HOME/.local/bin:$PATH"
-
-# EDITOR and VISUAL
-export VISUAL=nvim EDITOR=nvim
-
-# History setting ----------------------
+# History settings (prepare earlily to avoid history corrupttion)
 export HISTSIZE=
 export HISTFILESIZE=
 export HISTCONTROL="erasedups:ignoreboth"
 export HISTIGNORE="&:[ ]*:exit:ls*:cd*:git*:tig*:nvim"
 export PROMPT_COMMAND='history -a'
 
-# Bash completion ----------------------
-if [[ -n "$PS1" ]]; then
-    if [[ $(uname) == "Darwin" ]]; then
-        export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-        [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && \
-        . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-    else
-        [[ -f /usr/share/bash-completion/bash_completion ]] && \
-        . /usr/share/bash-completion/bash_completion
+# ------------------------------------------------------------------------------
+# Run for login shell.
+# ------------------------------------------------------------------------------
+
+shopt -q login_shell
+if [[ $? -eq 0 ]]; then
+    # LESS pager. More power.
+    export LESS=isFMRX
+    # EDITOR and VISUAL
+    export VISUAL=nvim EDITOR=nvim
+    export LC_ALL=en_US.UTF-8
+
+    # Additional PATHs
+    export PATH="$HOME/.local/bin:$PATH"
+    export FZF_DEFAULT_COMMAND='rg --files --smart-case'
+    # Ruby
+    export GEM_HOME="$HOME/.gem"
+    export PATH="$GEM_HOME/bin:$PATH"
+    ## Golang
+    export GOPATH="$HOME/go"
+    export PATH="$GOPATH/bin:$PATH"
+    # Python
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    # Rust
+    export PATH="$HOME/.cargo/bin:$PATH"
+
+    # Load `fnm` once and for all
+    eval "$(fnm env)"
+    # Load `pyenv` once and for all
+    source <(pyenv init -)
+fi
+
+# ------------------------------------------------------------------------------
+# Load only for interative shell.
+# ------------------------------------------------------------------------------
+
+if [[ $- == *i* ]]; then
+    alias cat='bat'
+    alias ll='exa -lhgF --git'
+    alias ls='exa'
+    alias ports='lsof -PiTCP -sTCP:LISTEN'
+    alias tree='exa -TF --group-directories-first'
+    # Customizable prompt
+    eval "$(starship init bash)"
+
+    # Bash completion
+    if [[ -n "$PS1" ]]; then
+        if [[ $(uname) == "Darwin" ]]; then
+            export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+            [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && \
+            . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+        else
+            [[ -f /usr/share/bash-completion/bash_completion ]] && \
+            . /usr/share/bash-completion/bash_completion
+        fi
     fi
 fi
 
-# Ruby GEM_PATH ------------------------
-export GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/bin:$PATH"
-
-## Golang environment ------------------
-export GOPATH="$HOME/.go"
-export PATH="$GOPATH/bin:$PATH"
-
-# Node.js environment configuration ----
-eval "$(fnm env)"
-
-# Python -------------------------------
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
-source <(pyenv init -)
-
-# RUST ---------------------------------
-source "$HOME/.cargo/env"
-
-#---------------------------------------
-# Enhanced prompt
-#---------------------------------------
-
-# Just launch the starship!!! (https://starship.rs/)
-eval "$(starship init bash)"
-
-#---------------------------------------
-# Miscellaneous
-#---------------------------------------
-
-# FZF default configs
-export FZF_DEFAULT_COMMAND='rg --files --smart-case'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# ------------------------------------------------------------------------------
+# Commands that always run for all sessions go below.
+# ------------------------------------------------------------------------------
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
