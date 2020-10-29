@@ -38,13 +38,13 @@ draw_bold_text_with_bright_colors: true
 font:
   normal:
     family: JetBrains Mono
-    style: Semi Light
+    style: ExtraLight
   bold:
     family: JetBrains Mono
     style: Bold
   italic:
     family: JetBrains Mono
-    style: Semi Light Italic
+    style: ExtraLight Italic
   bold_italic:
     family: JetBrains Mono 
     style: Bold Italic
