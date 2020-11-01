@@ -3,6 +3,7 @@ set autoindent
 set clipboard+=unnamed,unnamedplus
 set colorcolumn=80
 set completeopt=menuone,noinsert,noselect
+set cursorline
 set dictionary+=/usr/share/dict/words
 set expandtab
 set foldmethod=indent
@@ -65,6 +66,8 @@ augroup FiletypeDetectPlus
         \  prefix = ' » ',
         \  highlight = "NonText",
         \}
+    autocmd InsertLeave,WinEnter * setlocal cursorline
+    autocmd InsertEnter,WinLeave * setlocal nocursorline
 augroup END
 
 augroup ModeChanges
