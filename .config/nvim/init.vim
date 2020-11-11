@@ -298,10 +298,8 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_custom_header_quotes = taiwanese_proverbs#predefined()
 let g:startify_enable_special = 0
 let g:startify_fortune_use_unicode = 1
-let g:startify_padding_left = 7
 let g:startify_relative_path = 1
 let g:startify_update_oldfiles = 1
-let g:startify_files_number = 8
 " }}}
 
 " ALE {{{
@@ -367,8 +365,6 @@ nnoremap <localLeader>t <cmd>Vista!!<CR>
 let g:zoomwintab_remap = 0
 nnoremap <LocalLeader>z <cmd>ZoomWinTabToggle<CR>
 nnoremap <c-w>z         <cmd>ZoomWinTabToggle<CR>
-nnoremap <c-w><c-z>     <cmd>ZoomWinTabToggle<CR>
 tnoremap <LocalLeader>z <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
 tnoremap <c-w>z         <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
-tnoremap <c-w><c-z>     <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
 " }}}
