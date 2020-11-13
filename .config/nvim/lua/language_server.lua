@@ -2,12 +2,10 @@ local vim = vim
 local nvim_lsp = require'nvim_lsp'
 local M = {}
 
-local make_on_attach = function(comp, diag)
+local make_on_attach = function(comp)
   return function(_)
     -- Auto-completion functionality from `nvim-lua/completion-nvim`
     require'completion'.on_attach(comp)
-    -- Better diagnose UI from `nvim-lua/diagnostic-nvim`
-    require'diagnostic'.on_attach(diag)
   end
 end
 

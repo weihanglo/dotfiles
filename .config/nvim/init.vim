@@ -122,7 +122,6 @@ call plug#begin('~/.config/nvim/plugged')
 " nvim-lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!', 'Vista!!'] }
 
@@ -151,7 +150,7 @@ Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 
 " search
-let b:fzf_on = ['Files', 'GitFiles', 'Buffers', 'Commands', 'Rg', 'BCommits', 'Maps']
+let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands', 'Rg', 'BCommits', 'Maps']
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim', { 'on': b:fzf_on }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
@@ -275,8 +274,8 @@ nnoremap <silent> <F2>                  <cmd>LspRename<CR>
 imap     <silent> <c-space>             <plug>(completion_trigger)
 
 " Jump between diagnostics.
-nnoremap <silent> ]e                    <cmd>NextDiagnosticCycle<CR>
-nnoremap <silent> [e                    <cmd>PrevDiagnosticCycle<CR>
+nnoremap <silent> ]e                    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> [e                    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 " }}}
 
 " vim-gitgutter {{{
