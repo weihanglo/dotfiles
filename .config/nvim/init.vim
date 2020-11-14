@@ -106,7 +106,6 @@ function! Tig(args) abort
 endfunction
 command! -narg=* Tig call Tig(<q-args>)
 command! -narg=* Git tabedit|execute 'terminal git ' . <q-args>
-command! -narg=* G execute 'Git ' . <q-args>
 command! Gblame execute 'Tig blame % +' . line('.')
 " }}}
 
@@ -129,7 +128,7 @@ Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!', 'Vista!!'] }
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim', { 'on': ['Tmuxline', 'TmuxlineSnapshot'] }
-Plug 'rakr/vim-one'
+Plug 'sainnhe/gruvbox-material'
 
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -148,6 +147,7 @@ Plug 'honza/vim-snippets'
 
 " filetype
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " search
 let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands', 'Rg', 'BCommits', 'Maps']
@@ -159,10 +159,15 @@ call plug#end()
 " }}}
 
 " colorscheme {{{
-let g:one_allow_italics = 1
-colorscheme one
-hi! Normal  ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_transparent_background = 1
+colorscheme gruvbox-material
+"hi! Normal  ctermbg=NONE guibg=NONE
+"hi! NonText ctermbg=NONE guibg=NONE
+"hi! EndOFBuffer ctermbg=NONE guibg=NONE
 " }}}
 
 " LSP configurations {{{
@@ -278,6 +283,17 @@ nnoremap <silent> ]e                    <cmd>lua vim.lsp.diagnostic.goto_next()<
 nnoremap <silent> [e                    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 " }}}
 
+" nvim-treesitter {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
+  indent = { enabled = true },
+}
+EOF
+" }}}
+
 " vim-gitgutter {{{
 let g:gitgutter_map_keys = 0
 nmap <silent> ]c                        <plug>(GitGutterNextHunk)
@@ -345,7 +361,7 @@ xmap gs <plug>(GrepperOperator)
 
 " Lightline {{{
 let g:lightline = {}
-let g:lightline.colorscheme = 'one'
+let g:lightline.colorscheme = 'gruvbox_material'
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 " Tmuxline {{{
