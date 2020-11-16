@@ -1,5 +1,5 @@
 local vim = vim
-local nvim_lsp = require'nvim_lsp'
+local lspconfig = require'lspconfig'
 local M = {}
 
 local make_on_attach = function(comp)
@@ -14,7 +14,7 @@ end
 --
 -- Ref: https://github.com/rust-analyzer/rust-analyzer
 M.rust_analyzer_setup = function()
-  nvim_lsp.rust_analyzer.setup{
+  lspconfig.rust_analyzer.setup{
     on_attach = make_on_attach(),
     settings = {
       ['rust-analyzer'] = {
@@ -30,7 +30,7 @@ end
 --
 -- Ref: https://github.com/theia-ide/typescript-language-server
 M.tsserver_setup = function()
-  nvim_lsp.tsserver.setup{
+  lspconfig.tsserver.setup{
     on_attach = make_on_attach({ sorting = "alphabet" })
   }
 end
@@ -40,7 +40,7 @@ end
 --
 -- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 M.gopls_setup = function()
-  nvim_lsp.gopls.setup{ on_attach = make_on_attach() }
+  lspconfig.gopls.setup{ on_attach = make_on_attach() }
 end
 
 --- Asynchorounsly get python virtualenv path for current working directory.
@@ -72,7 +72,7 @@ end
 -- Ref: https://github.com/palantir/python-language-server
 M.pyls_setup = function()
   get_python_venv_path(function(venv_path)
-    nvim_lsp.pyls.setup{
+    lspconfig.pyls.setup{
       on_attach = make_on_attach(),
       settings = {
         pyls = {
@@ -92,7 +92,7 @@ end
 --
 -- Ref: https://github.com/sumneko/lua-language-server
 M.sumneko_lua_setup = function()
-  nvim_lsp.sumneko_lua.setup{}
+  lspconfig.sumneko_lua.setup{}
 end
 
 --- cland setup.
@@ -102,7 +102,7 @@ end
 -- [1]: https://clangd.llvm.org/installation.html
 -- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
 M.clangd_setup = function()
-  nvim_lsp.clangd.setup{}
+  lspconfig.clangd.setup{}
 end
 
 --- Setup all language servers from above configurations.
