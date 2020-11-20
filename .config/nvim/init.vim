@@ -122,7 +122,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
-Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!', 'Vista!!'] }
+Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 
 " user interface
 Plug 'itchyny/lightline.vim'
@@ -139,10 +139,6 @@ Plug 'airblade/vim-gitgutter'
 
 " linter
 Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
-
-" snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 " filetype
 Plug 'sheerun/vim-polyglot'
@@ -178,7 +174,6 @@ let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_insert_delay = 1
 
 " Support snippets completions
-let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_sorting = 'none'
 let g:completion_auto_change_source = 1
 let g:completion_enable_fuzzy_match = 1
@@ -235,7 +230,6 @@ let g:completion_customize_lsp_label = {
     \ 'Struct': 'S',
     \ 'Text': 'Text',
     \ 'TypeParameter': 'TyPar',
-    \ 'UltiSnips': 'Snip',
     \ 'Unit': 'E',
     \ 'Value': 'Val',
     \ 'Variable': 'Var',
@@ -297,10 +291,6 @@ EOF
 let g:gitgutter_map_keys = 0
 nmap <silent> ]c                        <plug>(GitGutterNextHunk)
 nmap <silent> [c                        <plug>(GitGutterPrevHunk)
-" }}}
-
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger = '<c-j>'
 " }}}
 
 " Vim-Visual-Multi {{{
