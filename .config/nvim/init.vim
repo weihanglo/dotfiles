@@ -125,7 +125,6 @@ Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!', 'Vista!!'] }
 
 " user interface
-Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim', { 'on': ['Tmuxline', 'TmuxlineSnapshot'] }
 Plug 'sainnhe/gruvbox-material'
@@ -306,15 +305,6 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 
 " Vim-Visual-Multi {{{
 let g:VM_mouse_mappings = 1
-" }}}
-
-" Startify {{{
-let g:startify_change_to_vcs_root = 1
-let g:startify_custom_header_quotes = taiwanese_proverbs#predefined()
-let g:startify_enable_special = 0
-let g:startify_fortune_use_unicode = 1
-let g:startify_relative_path = 1
-let g:startify_update_oldfiles = 1
 " }}}
 
 " ALE {{{
