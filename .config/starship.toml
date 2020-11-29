@@ -57,6 +57,9 @@ disabled = true
 [julia]
 disabled = true
 
+[lua]
+format = "[$symbol$version]($style) "
+
 [nim]
 disabled = true
 
