@@ -15,7 +15,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>BadgeFont</key>
-	<string>Fire Code</string>
+	<string>JetBrains Mono</string>
 	<key>CheckTestRelease</key>
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
@@ -1457,7 +1457,7 @@
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
-	<false/>
+	<true/>
 	<key>TmuxDashboardLimit</key>
 	<integer>5</integer>
 	<key>ToolbeltTools</key>
