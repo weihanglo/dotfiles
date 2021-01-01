@@ -44,9 +44,11 @@ if [[ $? -eq 0 ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 
     # Load `fnm` once and for all
-    eval "$(fnm env)"
+    source <(fnm env)
     # Load `pyenv` once and for all
     source <(pyenv init -)
+    # Load `rbenv` once and for all
+    source <(rbenv init -)
 fi
 
 # ------------------------------------------------------------------------------

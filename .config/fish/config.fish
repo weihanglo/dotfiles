@@ -44,6 +44,8 @@ if status is-login
     fnm env | source
     # Load `pyenv` once and for all
     pyenv init - | source
+    # Load `rbenv` once and for all
+    rbenv init - | source
 end
 
 # ------------------------------------------------------------------------------
