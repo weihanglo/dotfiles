@@ -23,6 +23,7 @@
 	interactive = true
 [diff]
 	tool = nvim
+	colorMoved = default
 [difftool]
 	prompt = true
 [difftool "nvim"]
@@ -48,4 +49,4 @@
 [pull]
 	ff = only
 [delta]
-	features = side-by-side line-numbers decorations
+	line-numbers = true
