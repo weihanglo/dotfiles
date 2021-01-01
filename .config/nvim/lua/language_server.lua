@@ -105,6 +105,14 @@ M.clangd_setup = function()
   lspconfig.clangd.setup{}
 end
 
+--- Solargraph setup.
+-- `gem install solargraph`
+--
+-- Ref: https://github.com/castwide/solargraph
+M.solargraph_setup = function()
+  lspconfig.solargraph.setup{}
+end
+
 --- Setup all language servers from above configurations.
 M.setup = function()
   M.rust_analyzer_setup()
@@ -113,6 +121,7 @@ M.setup = function()
   M.pyls_setup()
   M.sumneko_lua_setup()
   M.clangd_setup()
+  M.solargraph_setup()
 end
 
 return M
