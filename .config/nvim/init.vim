@@ -175,6 +175,7 @@ let g:diagnostic_insert_delay = 1
 let g:completion_sorting = 'none'
 let g:completion_auto_change_source = 1
 let g:completion_enable_fuzzy_match = 1
+let g:completion_matching_strategy_list = ['exact', 'substring']
 let g:completion_abbr_length = 50
 let g:completion_menu_length = 30
 " CompletionItemKind from https://bit.ly/343efwm
