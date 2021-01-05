@@ -140,7 +140,7 @@ Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
 
 " filetype
 Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
 let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands', 'Rg', 'BCommits', 'Maps']
