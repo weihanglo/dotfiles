@@ -358,7 +358,6 @@ let g:tmuxline_preset = 'minimal'
 " Vista.vim {{{
 let g:vista_default_executive = 'nvim_lsp'
 let g:vista#renderer#enable_icon = 0
-let g:vista_no_mappings = 1
 nnoremap <localLeader>t <cmd>Vista!!<CR>
 " }}}
 
