@@ -50,3 +50,5 @@
 	ff = only
 [delta]
 	line-numbers = true
+[init]
+	defaultBranch = main
