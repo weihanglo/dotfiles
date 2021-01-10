@@ -83,13 +83,6 @@ augroup LspCompletionOmnifunc
         \ go,rust,python,javascript,typescript,lua,c,cpp,objc,objcpp
         \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
-
-" Highlight the symbol under the cursor position.
-augroup LspHighlightSymbolUnderCursor
-    autocmd!
-    autocmd CursorHold,CursorHoldI * lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved            * lua vim.lsp.buf.clear_references()
-augroup END
 " }}}
 
 " Genernal key mappings {{{
@@ -128,6 +121,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
+Plug 'RRethy/vim-illuminate'
 
 " user interface
 Plug 'itchyny/lightline.vim'

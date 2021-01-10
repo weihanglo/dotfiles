@@ -3,9 +3,11 @@ local lspconfig = require'lspconfig'
 local M = {}
 
 local make_on_attach = function(comp)
-  return function(_)
+  return function(client)
     -- Auto-completion functionality from `nvim-lua/completion-nvim`
     require'completion'.on_attach(comp)
+    -- Auto-highlighting symbols under the cursor from `RRethy/vim-illuminate`
+    require'illuminate'.on_attach(client)
   end
 end
 
