@@ -731,7 +731,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>1.6478095555718442</real>
+			<real>4.4245228658921967</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1334,7 +1334,7 @@
 			<key>Thin Strokes</key>
 			<integer>1</integer>
 			<key>Transparency</key>
-			<real>0.25253933993252842</real>
+			<real>0.31279152152464562</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unicode Version</key>
