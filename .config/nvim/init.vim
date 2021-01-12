@@ -144,9 +144,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
-let b:fzf_on = ['Files', 'GFiles', 'Buffers', 'Commands', 'Rg', 'BCommits', 'Maps']
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim', { 'on': b:fzf_on }
+Plug 'nvim-lua/popup.nvim', { 'on': 'Telescope' }
+Plug 'nvim-lua/plenary.nvim', { 'on': 'Telescope' }
+Plug 'nvim-telescope/telescope.nvim', { 'on': 'Telescope' }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 call plug#end()
@@ -317,23 +317,21 @@ nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<CR>
 nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
 " }}}
 
-" FZF {{{
-" Use system's default options.
-nnoremap <silent> <LocalLeader>b     <cmd>Buffers<CR>
-nnoremap <silent> <LocalLeader>c     <cmd>Commands<CR>
-nnoremap <silent> <c-p>              <cmd>Files<CR>
-nnoremap <silent> <LocalLeader><c-p> <cmd>call fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<CR>
+" telescope.vim {{{
+nnoremap <silent> <LocalLeader>b     <cmd>Telescope buffers<CR>
+nnoremap <silent> <LocalLeader>c     <cmd>Telescope commands<CR>
+nnoremap <silent> <c-p>              <cmd>Telescope find_files<CR>
+nnoremap <silent> <LocalLeader><c-p> <cmd>Telescope find_files find_command=rg,--files,-uu,--glob,!.git<CR>
+nnoremap <silent> <LocalLeader>G     <cmd>Telescope live_grep<CR>
 " }}}
 
 " vim-grepper {{{
 let g:grepper = { 'tools': ['rg', 'grep', 'git'] }
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 " Search working directory
-nnoremap <silent> <LocalLeader>g <cmd>Grepper<cr>
-" Search opened buffers
-nnoremap <silent> <LocalLeader>G <cmd>Grepper -buffers<cr>
+nnoremap <silent> <LocalLeader>g     <cmd>Grepper<CR>
 " Search the word under the cursor
-nnoremap <silent> <LocalLeader>g* <cmd>Grepper -cword -noprompt<cr>
+nnoremap <silent> <LocalLeader>*     <cmd>Grepper -cword -noprompt<CR>
 " Search with operators
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
