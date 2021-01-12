@@ -321,7 +321,7 @@ nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
 nnoremap <silent> <LocalLeader>b     <cmd>Telescope buffers<CR>
 nnoremap <silent> <LocalLeader>c     <cmd>Telescope commands<CR>
 nnoremap <silent> <c-p>              <cmd>Telescope find_files<CR>
-nnoremap <silent> <LocalLeader><c-p> <cmd>Telescope find_files find_command=rg,--files,-uu,--glob,!.git<CR>
+nnoremap <silent> <LocalLeader><c-p> <cmd>Telescope find_files find_command=rg,-S,--files,-uu,--glob,!.git<CR>
 nnoremap <silent> <LocalLeader>G     <cmd>Telescope live_grep<CR>
 " }}}
 
