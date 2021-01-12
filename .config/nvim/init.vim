@@ -166,126 +166,15 @@ colorscheme gruvbox-material
 " }}}
 
 " LSP configurations {{{
-lua require'language_server'.setup()
-
-" Show virtual text for diagnoses
-let g:diagnostic_enable_virtual_text = 1
-" Delay showing virtual text while inserting
-let g:diagnostic_insert_delay = 1
-
-" Support snippets completions
-let g:completion_sorting = 'none'
-let g:completion_auto_change_source = 1
-let g:completion_enable_fuzzy_match = 1
-let g:completion_matching_strategy_list = ['exact', 'substring']
-let g:completion_abbr_length = 50
-let g:completion_menu_length = 30
-" CompletionItemKind from https://bit.ly/343efwm
-" 100 -> none
-" 90 -> property
-" 80 -> declaration
-" 70 -> variables/values, keywords
-" 50 -> Snips
-" 40 -> misc.
-let g:completion_items_priority = {
-    \ 'Mtd': 90,
-    \ 'Fd': 90,
-    \ 'Cls': 80,
-    \ 'E': 80,
-    \ 'S': 80,
-    \ 'Evt': 80,
-    \ 'Fn': 80,
-    \ 'I': 80,
-    \ 'Mod': 80,
-    \ 'TyPar': 80,
-    \ 'Var': 70,
-    \ 'Val': 70,
-    \ 'Kw': 70,
-    \ 'Cnst': 70,
-    \ 'Op': 70,
-    \ 'Snip': 50,
-    \ 'Ref': 40,
-    \ 'Text': 0,
-    \}
-let g:completion_customize_lsp_label = {
-    \ 'Buffers': 'Buf',
-    \ 'Class': 'Cls',
-    \ 'Color': 'Clr',
-    \ 'Constant': 'Cnst',
-    \ 'Constructor': 'Fn',
-    \ 'Enum': 'E',
-    \ 'EnumMember': 'E',
-    \ 'Event': 'Evt',
-    \ 'Field': 'Fd',
-    \ 'File': 'File',
-    \ 'Folder': 'Dir',
-    \ 'Function': 'Fn',
-    \ 'Interface': 'I',
-    \ 'Keyword': 'Kw',
-    \ 'Method': 'Mtd',
-    \ 'Module': 'Mod',
-    \ 'Operator': 'Op',
-    \ 'Property': 'Fd',
-    \ 'Reference': 'Ref',
-    \ 'Snippet': 'Snip',
-    \ 'Struct': 'S',
-    \ 'Text': 'Text',
-    \ 'TypeParameter': 'TyPar',
-    \ 'Unit': 'E',
-    \ 'Value': 'Val',
-    \ 'Variable': 'Var',
-    \}
-
-function! LspRestart(force) abort
-lua << EOF
-    if not vim.lsp.buf.server_ready() or vim.fn.nvim_eval('a:force') then
-        vim.lsp.stop_client(vim.lsp.get_active_clients())
-    end
-EOF
-    edit
-endfunction
-
-command! LspCodeAction       lua vim.lsp.buf.code_action()
-command! LspDeclaration      lua vim.lsp.buf.declaration()
-command! LspDefinition       lua vim.lsp.buf.definition()
-command! LspDocumentSymbol   lua vim.lsp.buf.document_symbol()
-command! LspHover            lua vim.lsp.buf.hover()
-command! LspImplementation   lua vim.lsp.buf.implementation()
-command! LspIncomingCalls    lua vim.lsp.buf.incoming_calls()
-command! LspInfo             lua print(vim.inspect(vim.lsp.buf_get_clients()))
-command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
-command! LspReferences       lua vim.lsp.buf.references()
-command! LspRename           lua vim.lsp.buf.rename()
-command! -bang LspRestart    call LspRestart(<bang>0)
-command! LspServerReady      lua print(vim.lsp.buf.server_ready())
-command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
-command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
-command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
-
-nnoremap <silent> <c-]>                 <cmd>LspDefinition<CR>
-nnoremap <silent> K                     <cmd>LspHover<CR>
-nnoremap <silent> <c-k>                 <cmd>LspSignatureHelp<CR>
-nnoremap <silent> <LocalLeader><space>  <cmd>LspCodeAction<CR>
-" NOTE: Rename sometimes malfunctions. Use at your own risk.
-nnoremap <silent> <F2>                  <cmd>LspRename<CR>
-
-" manually trigger completion on Ctrl-Space
-imap     <silent> <c-space>             <plug>(completion_trigger)
-
-" Jump between diagnostics.
-nnoremap <silent> ]e                    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> [e                    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+lua require'lsp'.setup()
 " }}}
 
 " nvim-treesitter {{{
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = { enable = true },
-  incremental_selection = { enable = true },
-  indent = { enabled = true },
-}
-EOF
+lua require'ext'.nvim_treesitter_setup()
+" }}}
+
+" telescope.nvim {{{
+lua require'ext'.telescope_setup()
 " }}}
 
 " vim-gitgutter {{{
@@ -316,23 +205,6 @@ let g:ale_fixers.typescript = ['eslint', 'tsserver', 'typecheck']
 " NERDTree {{{
 nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<CR>
 nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
-" }}}
-
-" telescope.vim {{{
-lua << EOF
-require'telescope'.setup{
-  defaults = {
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-  }
-}
-EOF
-nnoremap <silent> <LocalLeader>b     <cmd>Telescope buffers<CR>
-nnoremap <silent> <LocalLeader>c     <cmd>Telescope commands<CR>
-nnoremap <silent> <c-p>              <cmd>Telescope find_files<CR>
-nnoremap <silent> <LocalLeader><c-p> <cmd>Telescope find_files find_command=rg,-S,--files,-uu,--glob,!.git<CR>
-nnoremap <silent> <LocalLeader>G     <cmd>Telescope live_grep<CR>
 " }}}
 
 " vim-grepper {{{

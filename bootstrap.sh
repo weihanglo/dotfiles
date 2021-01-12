@@ -2,7 +2,7 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Oct. 2020               #
+#              Jan. 2021               #
 #--------------------------------------#
 
 # Define source and backup directory
@@ -22,7 +22,8 @@ files=(
     .config/fish/config.fish
     .config/kitty/kitty.conf
     .config/nvim/init.vim
-    .config/nvim/lua/language_server.lua
+    .config/nvim/lua/ext.lua
+    .config/nvim/lua/lsp.lua
     .config/starship.toml
     .gitconfig
     .gitignore
