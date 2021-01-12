@@ -144,9 +144,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
-Plug 'nvim-lua/popup.nvim', { 'on': 'Telescope' }
-Plug 'nvim-lua/plenary.nvim', { 'on': 'Telescope' }
-Plug 'nvim-telescope/telescope.nvim', { 'on': 'Telescope' }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 call plug#end()
@@ -318,6 +319,15 @@ nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
 " }}}
 
 " telescope.vim {{{
+lua << EOF
+require'telescope'.setup{
+  defaults = {
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+  }
+}
+EOF
 nnoremap <silent> <LocalLeader>b     <cmd>Telescope buffers<CR>
 nnoremap <silent> <LocalLeader>c     <cmd>Telescope commands<CR>
 nnoremap <silent> <c-p>              <cmd>Telescope find_files<CR>
