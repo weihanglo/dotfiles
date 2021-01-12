@@ -16,6 +16,12 @@ end
 --
 -- Ref: https://github.com/rust-analyzer/rust-analyzer
 M.rust_analyzer_setup = function()
+  -- inlay hints for rust
+  vim.api.nvim_exec([[
+augroup RustInlayHinto
+  autocmd CursorHold,CursorHoldI *.rs silent lua require'lsp_extensions'.inlay_hints{ only_current_line = true, prefix = ' » ', highlight = "NonText" }
+augroup END
+  ]], false)
   lspconfig.rust_analyzer.setup{
     on_attach = make_on_attach(),
     settings = {
@@ -250,6 +256,14 @@ M.setup = function()
   M.sumneko_lua_setup()
   M.clangd_setup()
   M.solargraph_setup()
+
+  -- List all filetype that is enabled omnifunc with lsp.
+  vim.api.nvim_exec([[
+augroup LspCompletionOmnifunc
+    autocmd!
+    autocmd FileType go,rust,python,javascript,typescript,lua,c,cpp,objc,objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+augroup END
+  ]], false)
 end
 
 return M

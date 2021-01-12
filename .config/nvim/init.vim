@@ -59,13 +59,6 @@ augroup FiletypeDetectPlus
     " go use tab
     autocmd FileType go
         \ setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
-    " inlay hints for rust
-    autocmd CursorHold,CursorHoldI *.rs
-        \ silent lua require'lsp_extensions'.inlay_hints{
-        \  only_current_line = true,
-        \  prefix = ' » ',
-        \  highlight = "NonText",
-        \}
     autocmd InsertLeave,WinEnter * setlocal cursorline
     autocmd InsertEnter,WinLeave * setlocal nocursorline
 augroup END
@@ -74,14 +67,6 @@ augroup ModeChanges
     autocmd!
     autocmd TermOpen * startinsert
     autocmd TermClose term://*:tig* bd!
-augroup END
-
-" List all filetype that is enabled omnifunc with lsp.
-augroup LspCompletionOmnifunc
-    autocmd!
-    autocmd FileType
-        \ go,rust,python,javascript,typescript,lua,c,cpp,objc,objcpp
-        \ setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
 " }}}
 
