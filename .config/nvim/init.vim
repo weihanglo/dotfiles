@@ -129,10 +129,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-symbols.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim', { 'on': ['Files', 'GFiles', 'Buffers', 'Commands', 'Rg'] }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 call plug#end()
@@ -156,10 +154,6 @@ lua require'lsp'.setup()
 
 " nvim-treesitter {{{
 lua require'ext'.nvim_treesitter_setup()
-" }}}
-
-" telescope.nvim {{{
-lua require'ext'.telescope_setup()
 " }}}
 
 " vim-gitgutter {{{
@@ -190,6 +184,14 @@ let g:ale_fixers.typescript = ['eslint', 'tsserver', 'typecheck']
 " NERDTree {{{
 nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<CR>
 nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
+" }}}
+
+" FZF {{{
+nnoremap <silent> <LocalLeader>b     <cmd>Buffers<cr>
+nnoremap <silent> <LocalLeader>c     <cmd>Commands<cr>
+nnoremap <silent> <c-p>              <cmd>Files<cr>
+nnoremap <silent> <LocalLeader><c-p> <cmd>call fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<cr>
+nnoremap <silent> <LocalLeader>G     <cmd>Rg<CR>
 " }}}
 
 " vim-grepper {{{
