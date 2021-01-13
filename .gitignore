@@ -11,22 +11,9 @@ __pycache__
 .DS_Store
 
 node_modules
-npm-debug.log
 
 #-------------------
 # Editor
 #-------------------
 .vscode
 .idea
-
-#-------------------
-# XCode, iOS dev
-#-------------------
-*.moved-aside
-*.xcuserstate
-*.xcscmblueprint
-*.xcworkspacedata
-xcuserdata
-DerivedData
-Pods
-Carthage
