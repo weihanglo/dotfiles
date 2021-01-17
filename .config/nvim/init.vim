@@ -130,7 +130,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim', { 'on': ['Files', 'GFiles', 'Buffers', 'Commands', 'Rg'] }
+Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 call plug#end()
@@ -187,10 +187,11 @@ nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
 " }}}
 
 " FZF {{{
+command! -bang -nargs=? -complete=dir AllFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'rg --files --smart-case -uu --glob !.git'}), <bang>0)
 nnoremap <silent> <LocalLeader>b     <cmd>Buffers<cr>
 nnoremap <silent> <LocalLeader>c     <cmd>Commands<cr>
 nnoremap <silent> <c-p>              <cmd>Files<cr>
-nnoremap <silent> <LocalLeader><c-p> <cmd>call fzf#run({'source': 'rg --files -uu --glob !.git', 'sink': 'edit'})<cr>
+nnoremap <silent> <LocalLeader><c-p> <cmd>AllFiles<cr>
 nnoremap <silent> <LocalLeader>G     <cmd>Rg<CR>
 " }}}
 
