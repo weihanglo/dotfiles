@@ -204,6 +204,7 @@ M.keymaps_setup = function()
   map('n', 'K',                     '<cmd>LspHover<cr>', opts)
   map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
   map('n', '<LocalLeader><space>',  '<cmd>LspCodeAction<cr>', opts)
+  map('n', '<f12>',                 '<cmd>LspReferences<cr>', opts)
   -- NOTE: Rename sometimes malfunctions. Use at your own risk.
   map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
   -- Manually trigger completion on Ctrl-Space
