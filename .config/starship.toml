@@ -57,6 +57,9 @@ disabled = true
 [julia]
 disabled = true
 
+[kotlin]
+disabled = true
+
 [lua]
 format = "[$symbol$version]($style) "
 
@@ -69,13 +72,13 @@ disabled = true
 [nodejs]
 format = "[$symbol$version]($style) "
 
-[package]
-disabled = true
-
 [ocaml]
 disabled = true
 
 [openstack]
+disabled = true
+
+[package]
 disabled = true
 
 [perl]
