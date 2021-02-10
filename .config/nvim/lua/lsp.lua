@@ -258,11 +258,13 @@ M.setup = function()
   M.clangd_setup()
   M.solargraph_setup()
 
-  -- List all filetype that is enabled omnifunc with lsp.
+  -- * List all filetype that is enabled omnifunc with lsp.
+  -- * Show light bulb if any code action available.
   vim.api.nvim_exec([[
-augroup LspCompletionOmnifunc
+augroup LspAutoCommands
     autocmd!
     autocmd FileType go,rust,python,javascript,typescript,lua,c,cpp,objc,objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 augroup END
   ]], false)
 end

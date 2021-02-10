@@ -107,6 +107,7 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 Plug 'RRethy/vim-illuminate'
+Plug 'kosayoda/nvim-lightbulb'
 
 " user interface
 Plug 'itchyny/lightline.vim'
