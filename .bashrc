@@ -49,6 +49,8 @@ if [[ $? -eq 0 ]]; then
     source <(pyenv init -)
     # Load `rbenv` once and for all
     source <(rbenv init -)
+    # Local `opam` once and for all
+    source <(opam env)
 fi
 
 # ------------------------------------------------------------------------------

@@ -73,7 +73,7 @@ disabled = true
 format = "[$symbol$version]($style) "
 
 [ocaml]
-disabled = true
+format = "[$symbol$version]($style) "
 
 [openstack]
 disabled = true

@@ -46,6 +46,8 @@ if status is-login
     pyenv init - | source
     # Load `rbenv` once and for all
     rbenv init - | source
+    # Load `opam` once and for all
+    opam env | source
 end
 
 # ------------------------------------------------------------------------------
