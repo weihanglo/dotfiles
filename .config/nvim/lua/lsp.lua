@@ -127,6 +127,17 @@ M.solargraph_setup = function()
   }
 end
 
+
+--- OCaml-LSP setup.
+-- `opam install ocaml-lsp-server`
+--
+-- Ref: https://github.com/ocaml/ocaml-lsp
+M.ocamllsp_setup = function()
+  lspconfig.ocamllsp.setup{
+    on_attach = make_on_attach(),
+  }
+end
+
 M.variables_setup = function()
   -- Show virtual text for diagnoses
   vim.g.diagnostic_enable_virtual_text = 1
@@ -257,6 +268,7 @@ M.setup = function()
   M.sumneko_lua_setup()
   M.clangd_setup()
   M.solargraph_setup()
+  M.ocamllsp_setup()
 
   -- * List all filetype that is enabled omnifunc with lsp.
   -- * Show light bulb if any code action available.
