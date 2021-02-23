@@ -197,7 +197,9 @@ nnoremap <silent> <LocalLeader>G     <cmd>Rg<CR>
 " }}}
 
 " vim-grepper {{{
-let g:grepper = { 'tools': ['rg', 'grep', 'git', 'fixed'] }
+let g:grepper = {}
+let g:grepper.prompt_quote = 1
+let g:grepper.tools = ['rg', 'grep', 'git', 'fixed']
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 let g:grepper.fixed = { 'grepprg': 'rg -HS --no-heading --vimgrep --fixed-strings' }
 " Search working directory
