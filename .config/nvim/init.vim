@@ -199,11 +199,11 @@ nnoremap <silent> <LocalLeader>G     <cmd>Rg<CR>
 " vim-grepper {{{
 let g:grepper = {}
 let g:grepper.prompt_quote = 1
-let g:grepper.tools = ['rg', 'grep', 'git', 'fixed']
+let g:grepper.tools = ['rg', 'fixed', 'grep', 'git']
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 let g:grepper.fixed = { 'grepprg': 'rg -HS --no-heading --vimgrep --fixed-strings' }
 " Search working directory
-nnoremap <silent> <LocalLeader>g     <cmd>Grepper -tool fixed<CR>
+nnoremap <silent> <LocalLeader>g     <cmd>Grepper -tool rg<CR>
 " Search the word under the cursor
 nnoremap <silent> <LocalLeader>*     <cmd>Grepper -tool rg -cword -noprompt<CR>
 " Search with operators
