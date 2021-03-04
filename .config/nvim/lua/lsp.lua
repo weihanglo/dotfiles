@@ -2,13 +2,26 @@ local vim = vim
 local lspconfig = require'lspconfig'
 local M = {}
 
-local make_on_attach = function(comp)
-  return function(client)
-    -- Auto-completion functionality from `nvim-lua/completion-nvim`
-    require'completion'.on_attach(comp)
-    -- Auto-highlighting symbols under the cursor from `RRethy/vim-illuminate`
-    require'illuminate'.on_attach(client)
-  end
+local on_attach = function(client)
+  -- Auto-completion functionality from `hrsh7th/nvim-compe`
+  -- This will setup with buffers attached with LSP clients.
+  require'compe'.setup {
+    source = {
+      path = true;
+      buffer = true;
+      tags = true;
+      spell = true;
+      calc = true;
+      omni = true;
+      nvim_lsp = true;
+      nvim_lua = true;
+      vsnip = true;
+      treesitter = true;
+    };
+  }
+
+  -- Auto-highlighting symbols under the cursor from `RRethy/vim-illuminate`
+  require'illuminate'.on_attach(client)
 end
 
 --- Rust Analyzer setup.
@@ -22,8 +35,14 @@ augroup RustInlayHinto
   autocmd CursorHold,CursorHoldI *.rs silent lua require'lsp_extensions'.inlay_hints{ only_current_line = true, prefix = ' » ', highlight = "NonText" }
 augroup END
   ]], false)
+
+  -- LSP snippet. Ref: https://git.io/Jqf0c
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
   lspconfig.rust_analyzer.setup{
-    on_attach = make_on_attach(),
+    capabilities = capabilities,
+    on_attach = on_attach,
     settings = {
       ['rust-analyzer'] = {
         -- Default 128. Ref: https://git.io/JTczw
@@ -39,7 +58,7 @@ end
 -- Ref: https://github.com/theia-ide/typescript-language-server
 M.tsserver_setup = function()
   lspconfig.tsserver.setup{
-    on_attach = make_on_attach({ sorting = 'alphabet' })
+    on_attach = on_attach
   }
 end
 
@@ -48,7 +67,7 @@ end
 --
 -- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 M.gopls_setup = function()
-  lspconfig.gopls.setup{ on_attach = make_on_attach() }
+  lspconfig.gopls.setup{ on_attach = on_attach }
 end
 
 --- Asynchorounsly get python virtualenv path for current working directory.
@@ -81,7 +100,7 @@ end
 M.pyls_setup = function()
   get_python_venv_path(function(venv_path)
     lspconfig.pyls.setup{
-      on_attach = make_on_attach(),
+      on_attach = on_attach,
       settings = {
         pyls = {
           plugins = {
@@ -101,7 +120,7 @@ end
 -- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 M.sumneko_lua_setup = function()
   lspconfig.sumneko_lua.setup{
-    on_attach = make_on_attach(),
+    on_attach = on_attach,
   }
 end
 
@@ -113,7 +132,7 @@ end
 -- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
 M.clangd_setup = function()
   lspconfig.clangd.setup{
-    on_attach = make_on_attach(),
+    on_attach = on_attach,
   }
 end
 
@@ -123,7 +142,7 @@ end
 -- Ref: https://github.com/castwide/solargraph
 M.solargraph_setup = function()
   lspconfig.solargraph.setup{
-    on_attach = make_on_attach(),
+    on_attach = on_attach,
   }
 end
 
@@ -134,7 +153,7 @@ end
 -- Ref: https://github.com/ocaml/ocaml-lsp
 M.ocamllsp_setup = function()
   lspconfig.ocamllsp.setup{
-    on_attach = make_on_attach(),
+    on_attach = on_attach,
   }
 end
 
@@ -143,68 +162,6 @@ M.variables_setup = function()
   vim.g.diagnostic_enable_virtual_text = 1
   -- Delay showing virtual text while inserting
   vim.g.diagnostic_insert_delay = 1
-  -- Support snippets completions
-  vim.g.completion_sorting = 'none'
-  vim.g.completion_auto_change_source = 1
-  vim.g.completion_enable_fuzzy_match = 1
-  vim.g.completion_matching_strategy_list = {'exact', 'substring'}
-  vim.g.completion_abbr_length = 50
-  vim.g.completion_menu_length = 30
-  -- CompletionItemKind from https://bit.ly/343efwm
-  -- 100 -> none
-  -- 90 -> property
-  -- 80 -> declaration
-  -- 70 -> variables/values, keywords
-  -- 50 -> Snips
-  -- 40 -> misc.
-  vim.g.completion_items_priority = {
-    Mtd = 90,
-    Fd = 90,
-    Cls = 80,
-    E = 80,
-    S = 80,
-    Evt = 80,
-    Fn = 80,
-    I = 80,
-    Mod = 80,
-    TyPar = 80,
-    Var = 70,
-    Val = 70,
-    Kw = 70,
-    Cnst = 70,
-    Op = 70,
-    Snip = 50,
-    Ref = 40,
-    Text = 0,
-  }
-  vim.g.completion_customize_lsp_label = {
-    Buffers = 'Buf',
-    Class = 'Cls',
-    Color = 'Clr',
-    Constant = 'Cnst',
-    Constructor = 'Fn',
-    Enum = 'E',
-    EnumMember = 'E',
-    Event = 'Evt',
-    Field = 'Fd',
-    File = 'File',
-    Folder = 'Dir',
-    Function = 'Fn',
-    Interface = 'I',
-    Keyword = 'Kw',
-    Method = 'Mtd',
-    Module = 'Mod',
-    Operator = 'Op',
-    Property = 'Fd',
-    Reference = 'Ref',
-    Snippet = 'Snip',
-    Struct = 'S',
-    Text = 'Text',
-    TypeParameter = 'TyPar',
-    Unit = 'E',
-    Value = 'Val',
-    Variable = 'Var',
-  }
 end
 
 --- Vim keymaps setup
@@ -216,10 +173,9 @@ M.keymaps_setup = function()
   map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
   map('n', '<LocalLeader><space>',  '<cmd>LspCodeAction<cr>', opts)
   map('n', '<f12>',                 '<cmd>LspReferences<cr>', opts)
-  -- NOTE: Rename sometimes malfunctions. Use at your own risk.
   map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
   -- Manually trigger completion on Ctrl-Space
-  map('i', '<c-space>',             '<plug>(completion_trigger)', {silent = true})
+  map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
   -- Jump between diagnostics.
   map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)

@@ -103,7 +103,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 " nvim-lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 Plug 'RRethy/vim-illuminate'
