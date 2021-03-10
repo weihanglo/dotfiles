@@ -31,7 +31,7 @@ end
 M.rust_analyzer_setup = function()
   -- inlay hints for rust
   vim.api.nvim_exec([[
-augroup RustInlayHinto
+augroup RustInlayHint
   autocmd CursorHold,CursorHoldI *.rs silent lua require'lsp_extensions'.inlay_hints{ only_current_line = true, prefix = ' » ', highlight = "NonText" }
 augroup END
   ]], false)
@@ -217,11 +217,12 @@ M.setup = function()
   M.variables_setup()
   M.commands_setup()
   M.keymaps_setup()
+
   M.rust_analyzer_setup()
-  -- M.gopls_setup()
+  M.gopls_setup()
   M.tsserver_setup()
   M.pyls_setup()
-  -- M.sumneko_lua_setup()
+  M.sumneko_lua_setup()
   M.clangd_setup()
   M.solargraph_setup()
   M.ocamllsp_setup()
@@ -231,8 +232,8 @@ M.setup = function()
   vim.api.nvim_exec([[
 augroup LspAutoCommands
     autocmd!
-    autocmd FileType go,rust,python,javascript,typescript,lua,c,cpp,objc,objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+    autocmd FileType go,rust,ruby,python,javascript,typescript,lua,c,cpp,objc,objcpp,ocaml setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd CursorHold,CursorHoldI *.{go,rs,rb,py,js,jsx,ts,tsx,lua,c,h,cpp,hpp,ml} lua require'nvim-lightbulb'.update_lightbulb()
 augroup END
   ]], false)
 end
