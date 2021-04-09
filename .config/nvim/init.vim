@@ -125,7 +125,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
 
 " filetype
-Plug 'sheerun/vim-polyglot'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
