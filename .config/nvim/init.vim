@@ -106,7 +106,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
-Plug 'RRethy/vim-illuminate'
 Plug 'kosayoda/nvim-lightbulb'
 
 " user interface

@@ -2,7 +2,7 @@ local vim = vim
 local lspconfig = require'lspconfig'
 local M = {}
 
-local on_attach = function(client)
+local on_attach = function()
   -- Auto-completion functionality from `hrsh7th/nvim-compe`
   -- This will setup with buffers attached with LSP clients.
   require'compe'.setup {
@@ -19,9 +19,6 @@ local on_attach = function(client)
       treesitter = true;
     };
   }
-
-  -- Auto-highlighting symbols under the cursor from `RRethy/vim-illuminate`
-  require'illuminate'.on_attach(client)
 end
 
 --- Rust Analyzer setup.
@@ -118,7 +115,7 @@ end
 -- `git clone https://github.com/sumneko/lua-language-server` and build!
 --
 -- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
--- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/sumneko_lua.lua#L25-L65
+-- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
 M.sumneko_lua_setup = function()
   local system_name
   if vim.fn.has("mac") == 1 then
