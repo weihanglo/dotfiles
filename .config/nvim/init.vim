@@ -7,7 +7,7 @@ set cursorline
 set dictionary+=/usr/share/dict/words
 set expandtab
 set foldmethod=indent
-set foldnestmax=2
+set foldnestmax=5
 set hidden
 set history=10000
 set hlsearch
@@ -132,6 +132,9 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+
+" registers
+Plug 'weihanglo/registers.nvim', { 'branch': 'feat/unify-command', 'on': 'Registers' }
 
 call plug#end()
 " }}}
