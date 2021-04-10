@@ -134,7 +134,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " registers
-Plug 'weihanglo/registers.nvim', { 'branch': 'feat/unify-command', 'on': 'Registers' }
+Plug 'tversteeg/registers.nvim', { 'on': 'Registers' }
 
 call plug#end()
 " }}}
