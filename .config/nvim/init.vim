@@ -81,6 +81,9 @@ vnoremap J :m '>+1<CR>gv=gv
 " Highlight visual selected text
 vnoremap // y/<C-R>"<CR>
 
+" Highlight clear
+nnoremap \\ <cmd>nohl<cr>
+
 " git and tig
 function! Tig(args) abort
     let args = expandcmd(a:args)
@@ -101,17 +104,17 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+" user interface
+Plug 'itchyny/lightline.vim'
+Plug 'edkolev/tmuxline.vim', { 'on': ['Tmuxline', 'TmuxlineSnapshot'] }
+Plug 'sainnhe/gruvbox-material'
+
 " nvim-lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 Plug 'kosayoda/nvim-lightbulb'
-
-" user interface
-Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim', { 'on': ['Tmuxline', 'TmuxlineSnapshot'] }
-Plug 'sainnhe/gruvbox-material'
 
 " fast moves
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
