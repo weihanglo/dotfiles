@@ -122,7 +122,7 @@ Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
 Plug 'mg979/vim-visual-multi'
 
 " vcs
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', { 'on': ['<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'] }
 
 " linter
 Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
