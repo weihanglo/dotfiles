@@ -91,7 +91,7 @@ function! Tig(args) abort
     execute 'terminal tig ' . args
 endfunction
 command! -narg=* Tig call Tig(<q-args>)
-command! -narg=* Git tabedit|execute 'terminal git ' . <q-args>
+command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
 command! Gblame execute 'Tig blame % +' . line('.')
 " }}}
 
