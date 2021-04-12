@@ -75,11 +75,11 @@ augroup END
 let maplocalleader = ','
 
 " Move visual block
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+vnoremap J :m '>+1<cr>gv=gv
 
 " Highlight visual selected text
-vnoremap // y/<C-R>"<CR>
+vnoremap // y/<C-R>"<cr>
 
 " Highlight clear
 nnoremap \\ <cmd>nohl<cr>
@@ -188,8 +188,8 @@ let g:ale_fixers.typescript = ['eslint', 'tsserver', 'typecheck']
 " }}}
 
 " NERDTree {{{
-nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<CR>
-nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<CR>
+nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<cr>
+nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<cr>
 " }}}
 
 " FZF {{{
@@ -198,7 +198,7 @@ nnoremap <silent> <LocalLeader>b     <cmd>Buffers<cr>
 nnoremap <silent> <LocalLeader>c     <cmd>Commands<cr>
 nnoremap <silent> <c-p>              <cmd>Files<cr>
 nnoremap <silent> <LocalLeader><c-p> <cmd>AllFiles<cr>
-nnoremap <silent> <LocalLeader>G     <cmd>Rg<CR>
+nnoremap <silent> <LocalLeader>G     <cmd>Rg<cr>
 " }}}
 
 " vim-grepper {{{
@@ -208,9 +208,9 @@ let g:grepper.tools = ['rg', 'fixed', 'grep', 'git']
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 let g:grepper.fixed = { 'grepprg': 'rg -HS --no-heading --vimgrep --fixed-strings' }
 " Search working directory
-nnoremap <silent> <LocalLeader>g     <cmd>Grepper -tool rg<CR>
+nnoremap <silent> <LocalLeader>g     <cmd>Grepper -tool rg<cr>
 " Search the word under the cursor
-nnoremap <silent> <LocalLeader>*     <cmd>Grepper -tool rg -cword -noprompt<CR>
+nnoremap <silent> <LocalLeader>*     <cmd>Grepper -tool rg -cword -noprompt<cr>
 " Search with operators
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
@@ -229,13 +229,13 @@ let g:tmuxline_preset = 'minimal'
 " Vista.vim {{{
 let g:vista_default_executive = 'nvim_lsp'
 let g:vista#renderer#enable_icon = 0
-nnoremap <localLeader>t <cmd>Vista!!<CR>
+nnoremap <localLeader>t <cmd>Vista!!<cr>
 " }}}
 
 " zoomwintab.vim {{{
 let g:zoomwintab_remap = 0
-nnoremap <LocalLeader>z <cmd>ZoomWinTabToggle<CR>
-nnoremap <c-w>z         <cmd>ZoomWinTabToggle<CR>
-tnoremap <LocalLeader>z <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
-tnoremap <c-w>z         <c-\><c-n><cmd>ZoomWinTabToggle<CR><cmd>startinsert<CR>
+nnoremap <LocalLeader>z <cmd>ZoomWinTabToggle<cr>
+nnoremap <c-w>z         <cmd>ZoomWinTabToggle<cr>
+tnoremap <LocalLeader>z <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
+tnoremap <c-w>z         <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
 " }}}
