@@ -136,6 +136,9 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " registers
 Plug 'tversteeg/registers.nvim', { 'on': 'Registers' }
 
+" profiling startup time
+Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
+
 call plug#end()
 " }}}
 
