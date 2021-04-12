@@ -79,7 +79,7 @@ vnoremap K :m '<-2<cr>gv=gv
 vnoremap J :m '>+1<cr>gv=gv
 
 " Highlight visual selected text
-vnoremap // y/<C-R>"<cr>
+vnoremap // y/<c-r>"<cr>
 
 " Highlight clear
 nnoremap \\ <cmd>nohl<cr>
@@ -124,9 +124,6 @@ Plug 'mg979/vim-visual-multi'
 " vcs
 Plug 'airblade/vim-gitgutter', { 'on': ['<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'] }
 
-" linter
-Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript'] }
-
 " filetype
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -170,21 +167,6 @@ nmap <silent> [c                        <plug>(GitGutterPrevHunk)
 
 " Vim-Visual-Multi {{{
 let g:VM_mouse_mappings = 1
-" }}}
-
-" ALE {{{
-let g:ale_completion_enabled = 0
-let g:ale_lint_delay = 1000
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {}
-let g:ale_linters.javascript = ['eslint']
-let g:ale_linters.typescript = ['eslint', 'tsserver', 'typecheck']
-let g:ale_fix_on_save = 0
-let g:ale_fixers = {}
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_fixers.typescript = ['eslint', 'tsserver', 'typecheck']
 " }}}
 
 " NERDTree {{{
