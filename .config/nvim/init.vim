@@ -108,14 +108,6 @@ colorscheme gruvbox-material
 "hi! EndOFBuffer ctermbg=NONE guibg=NONE
 " }}}
 
-" LSP configurations {{{
-lua require'lsp'.setup()
-" }}}
-
-" nvim-treesitter {{{
-lua require'ext'.nvim_treesitter_setup()
-" }}}
-
 " vim-gitgutter {{{
 let g:gitgutter_map_keys = 0
 nmap <silent> ]c                        <plug>(GitGutterNextHunk)

@@ -15,33 +15,48 @@ return require'packer'.startup(function(use)
 
   -- user interface
   use {'itchyny/lightline.vim'}
-  use {'edkolev/tmuxline.vim', cmd = {'Tmuxline', 'TmuxlineSnapshot'}}
   use {'sainnhe/gruvbox-material'}
+  use {'edkolev/tmuxline.vim', opt = true}
 
   -- nvim-lsp
-  use {'neovim/nvim-lspconfig'}
-  use {'hrsh7th/nvim-compe'}
-  use {'weihanglo/lsp_extensions.nvim', branch = 'customized'}
+  use {
+    'neovim/nvim-lspconfig',
+    event = {'BufNew'},
+    wants = {
+        'nvim-compe',
+        'lsp_extensions.nvim',
+        'nvim-lightbulb',
+        'vim-visual-multi',
+        'nvim-treesitter'
+    },
+    config = function() require'lsp'.setup() end,
+  }
+  use {'hrsh7th/nvim-compe', opt = true}
+  use {'weihanglo/lsp_extensions.nvim', opt = true, branch = 'customized'}
+  use {'kosayoda/nvim-lightbulb', opt = true}
   use {'liuchengxu/vista.vim', cmd = 'Vista'}
-  use {'kosayoda/nvim-lightbulb'}
 
   -- fast moves
-  use {'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle'}
   use {'kyazdani42/nvim-tree.lua'}
-  use {'mg979/vim-visual-multi'}
+  use {'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle'}
+  use {'mg979/vim-visual-multi', opt = true}
 
   -- vcs
   use {'airblade/vim-gitgutter', keys = {'<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'}}
 
   -- filetype
-  use {'rust-lang/rust.vim', ft = 'rust'}
-  use {'elixir-editors/vim-elixir', ft = 'elixir'}
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use {'rust-lang/rust.vim', ft = 'rust', wants = 'nvim-treesitter'}
+  use {'elixir-editors/vim-elixir', ft = 'elixir', wants = 'nvim-treesitter'}
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    opt = true,
+    config = function() require'ext'.nvim_treesitter_setup() end,
+  }
 
   -- search
-  use {'weihanglo/telescope.nvim',
+  use {
+    'weihanglo/telescope.nvim',
     cmd = 'Telescope',
-    -- Ref: https://github.com/wbthomason/packer.nvim/pull/279
     wants = {'popup.nvim', 'plenary.nvim'},
     requires = {
       {'nvim-lua/popup.nvim', opt = true},
