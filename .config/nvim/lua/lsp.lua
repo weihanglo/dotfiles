@@ -117,21 +117,21 @@ end
 -- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 -- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
 M.sumneko_lua_setup = function()
-  local system_name
+  local sys
   if vim.fn.has("mac") == 1 then
-    system_name = "macOS"
+    sys = "macOS"
   elseif vim.fn.has("unix") == 1 then
-    system_name = "Linux"
+    sys = "Linux"
   elseif vim.fn.has('win32') == 1 then
-    system_name = "Windows"
+    sys = "Windows"
   else
     print("Unsupported system for sumneko")
   end
-  local sumneko_root_path = vim.fn.expand('~')..'/wd/quick-dirty/lua-language-server'
-  local sumneko_binary = sumneko_root_path..'/bin/'..system_name..'/lua-language-server'
+  local sumneko_root_path = vim.fn.stdpath('data') .. '/lss/lua-language-server'
+  local sumneko_binary = sumneko_root_path .. '/bin/' .. sys .. '/lua-language-server'
   lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
-    cmd = {sumneko_binary, '-E', sumneko_root_path..'/main.lua'};
+    cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'};
     settings = {
       Lua = {
         runtime = {
