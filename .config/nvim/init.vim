@@ -130,6 +130,7 @@ Plug 'airblade/vim-gitgutter', { 'on': ['<plug>(GitGutterNextHunk)', '<plug>(Git
 
 " filetype
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search

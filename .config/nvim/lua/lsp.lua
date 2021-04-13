@@ -185,6 +185,32 @@ M.ocamllsp_setup = function()
   }
 end
 
+--- ElixirLS setup.
+--
+-- ```
+-- git clone https://github.com/elixir-lsp/elixir-ls.git`
+-- mix compile
+-- mix elixir_ls.release
+-- ```
+--
+-- Ref: https://github.com/elixir-lsp/elixir-ls
+M.elixirls_setup = function()
+  local ext
+  if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
+    ext = "sh"
+  elseif vim.fn.has('win32') == 1 then
+      ext = "bat"
+  else
+    print("Unsupported system for sumneko")
+  end
+  local elixirls_root_path = vim.fn.stdpath('data') .. '/lss/elixir-ls'
+  local elixirls_binary = elixirls_root_path .. '/release/language_server.' .. ext
+  lspconfig.elixirls.setup{
+    on_attach = on_attach,
+    cmd = {elixirls_binary}
+  }
+end
+
 M.variables_setup = function()
   -- Show virtual text for diagnoses
   vim.g.diagnostic_enable_virtual_text = 1
@@ -202,9 +228,7 @@ M.keymaps_setup = function()
   map('n', '<LocalLeader><space>',  '<cmd>LspCodeAction<cr>', opts)
   map('n', '<f12>',                 '<cmd>LspReferences<cr>', opts)
   map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
-  -- Manually trigger completion on Ctrl-Space
   map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
-  -- Jump between diagnostics.
   map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
 end
@@ -254,14 +278,15 @@ M.setup = function()
   M.clangd_setup()
   M.solargraph_setup()
   M.ocamllsp_setup()
+  M.elixirls_setup()
 
   -- * List all filetype that is enabled omnifunc with lsp.
   -- * Show light bulb if any code action available.
   vim.api.nvim_exec([[
 augroup LspAutoCommands
     autocmd!
-    autocmd FileType go,rust,ruby,python,javascript,typescript,lua,c,cpp,objc,objcpp,ocaml setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd CursorHold,CursorHoldI *.{go,rs,rb,py,js,jsx,ts,tsx,lua,c,h,cpp,hpp,ml} lua require'nvim-lightbulb'.update_lightbulb()
+    autocmd FileType go,rust,ruby,python,javascript,typescript,lua,c,cpp,objc,objcpp,ocaml,elixir,eelixir setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd CursorHold,CursorHoldI *.{go,rs,rb,py,js,jsx,ts,tsx,lua,c,h,cpp,hpp,ml,ex,exs} lua require'nvim-lightbulb'.update_lightbulb()
 augroup END
   ]], false)
 end
