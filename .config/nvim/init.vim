@@ -71,25 +71,17 @@ augroup END
 " }}}
 
 " Genernal key mappings {{{
-" map localleader if necessary
 let maplocalleader = ','
-" netrw default to tree
-let g:netrw_liststyle= 3
-
 " Move visual block
 vnoremap K :m '<-2<cr>gv=gv
 vnoremap J :m '>+1<cr>gv=gv
-
 " Highlight visual selected text
 vnoremap // y/<c-r>"<cr>
-
 " Highlight clear
 nnoremap \\ <cmd>nohl<cr>
-
 " Buffer deletion
 nnoremap <silent> <localleader>d <cmd>bp<bar>bd #<cr>
-
-" git and tig
+" gitui and tig
 function! Tig(args) abort
     let args = expandcmd(a:args)
     tabedit
@@ -123,6 +115,7 @@ Plug 'kosayoda/nvim-lightbulb'
 
 " fast moves
 Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'mg979/vim-visual-multi'
 
 " vcs
@@ -140,7 +133,7 @@ Plug 'weihanglo/telescope.nvim', { 'on': 'Telescope', 'branch': 'feat/commands-t
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " registers
-Plug 'tversteeg/registers.nvim', { 'on': 'Registers' }
+Plug 'tversteeg/registers.nvim'
 
 " profiling startup time
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
@@ -184,8 +177,17 @@ nnoremap <silent> <localleader>c     <cmd>Telescope commands<cr>
 nnoremap <silent> <c-p>              <cmd>Telescope find_files<cr>
 nnoremap <silent> <localleader><c-p> <cmd>Telescope find_files find_command=rg,--files,--smart-case,-uu,--glob,!.git<cr>
 nnoremap <silent> <localleader>G     <cmd>Telescope live_grep<cr>
-nnoremap <silent> <localleader>n     <cmd>Telescope file_browser<cr>
-nnoremap <silent> <localleader>N     <cmd>Telescope file_browser hidden=true<cr>
+" }}}
+
+" nvim-tree.lua {{{
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_ignore = ['.git']
+let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_show_icons = { 'folders': 1 }
+let g:nvim_tree_group_empty = 1
+let g:nvim_tree_icons = { 'folder': {  'default': "▶", 'open': "▼", 'empty': "▷", 'empty_open': "▽", 'symlink': "⇢", 'symlink_open': "⇣" } }
+nnoremap <silent> <localleader>n     <cmd>NvimTreeToggle<cr>
 " }}}
 
 " vim-grepper {{{
