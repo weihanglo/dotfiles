@@ -66,7 +66,7 @@ augroup END
 augroup ModeChanges
     autocmd!
     autocmd TermOpen * startinsert
-    autocmd TermClose term://*:tig* bd!
+    autocmd TermClose term://*:tig*,term://*:gitui* bd!
 augroup END
 " }}}
 
