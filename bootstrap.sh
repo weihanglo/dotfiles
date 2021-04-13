@@ -2,7 +2,7 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Jan. 2021               #
+#              Apr. 2021               #
 #--------------------------------------#
 
 # Define source and backup directory
@@ -16,7 +16,6 @@ origdir=$HOME/.dotfiles.orig
 
 files=(
     .bashrc
-    .bm.sh
     .cargo/config.toml
     .config/alacritty/alacritty.yml
     .config/fish/config.fish
@@ -24,14 +23,13 @@ files=(
     .config/nvim/init.vim
     .config/nvim/lua/ext.lua
     .config/nvim/lua/lsp.lua
+    .config/nvim/lua/plugins.lua
     .config/starship.toml
     .gitconfig
     .gitignore
     .inputrc
     .ipython/profile_default/ipython_config.py
-    .nvm/default-packages
     .tmux.conf
-    .vimrc
 )
 
 # --------------------------------------

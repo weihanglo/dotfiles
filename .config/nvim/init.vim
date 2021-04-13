@@ -92,53 +92,8 @@ command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
 command! Gblame execute 'Tig blame % +' . line('.')
 " }}}
 
-" Vim-plug {{{
-" auto install vim-plug.vim
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-
-call plug#begin('~/.config/nvim/plugged')
-" user interface
-Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim', { 'on': ['Tmuxline', 'TmuxlineSnapshot'] }
-Plug 'sainnhe/gruvbox-material'
-
-" nvim-lsp
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
-Plug 'weihanglo/lsp_extensions.nvim', { 'branch': 'customized' }
-Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
-Plug 'kosayoda/nvim-lightbulb'
-
-" fast moves
-Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'mg979/vim-visual-multi'
-
-" vcs
-Plug 'airblade/vim-gitgutter', { 'on': ['<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'] }
-
-" filetype
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-
-" search
-Plug 'nvim-lua/popup.nvim', { 'on': 'Telescope' }
-Plug 'nvim-lua/plenary.nvim', { 'on': 'Telescope' }
-Plug 'weihanglo/telescope.nvim', { 'on': 'Telescope', 'branch': 'feat/commands-table' }
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-
-" registers
-Plug 'tversteeg/registers.nvim'
-
-" profiling startup time
-Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
-
-call plug#end()
+" packer.nvim {{{
+lua require'plugins'
 " }}}
 
 " colorscheme {{{
@@ -183,7 +138,6 @@ nnoremap <silent> <localleader>G     <cmd>Telescope live_grep<cr>
 let g:nvim_tree_add_trailing = 1
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_ignore = ['.git']
-let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_show_icons = { 'folders': 1 }
 let g:nvim_tree_group_empty = 1
 let g:nvim_tree_icons = { 'folder': {  'default': "▶", 'open': "▼", 'empty': "▷", 'empty_open': "▽", 'symlink': "⇢", 'symlink_open': "⇣" } }
