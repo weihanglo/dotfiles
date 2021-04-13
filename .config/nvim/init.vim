@@ -85,7 +85,7 @@ vnoremap // y/<c-r>"<cr>
 nnoremap \\ <cmd>nohl<cr>
 
 " Buffer deletion
-nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<cr>
+nnoremap <silent> <localleader>d <cmd>bp<bar>bd #<cr>
 
 " git and tig
 function! Tig(args) abort
@@ -176,13 +176,13 @@ let g:VM_mouse_mappings = 1
 " }}}
 
 " telescope.nvim {{{
-nnoremap <silent> <LocalLeader>b     <cmd>Telescope buffers<cr>
-nnoremap <silent> <LocalLeader>c     <cmd>Telescope commands<cr>
+nnoremap <silent> <localleader>b     <cmd>Telescope buffers<cr>
+nnoremap <silent> <localleader>c     <cmd>Telescope commands<cr>
 nnoremap <silent> <c-p>              <cmd>Telescope find_files<cr>
-nnoremap <silent> <LocalLeader><c-p> <cmd>Telescope find_files find_command=rg,--files,--smart-case,-uu,--glob,!.git<cr>
-nnoremap <silent> <LocalLeader>G     <cmd>Telescope live_grep<cr>
-nnoremap <silent> <LocalLeader>n     <cmd>Telescope file_browser<cr>
-nnoremap <silent> <LocalLeader>N     <cmd>Telescope file_browser hidden=true<cr>
+nnoremap <silent> <localleader><c-p> <cmd>Telescope find_files find_command=rg,--files,--smart-case,-uu,--glob,!.git<cr>
+nnoremap <silent> <localleader>G     <cmd>Telescope live_grep<cr>
+nnoremap <silent> <localleader>n     <cmd>Telescope file_browser<cr>
+nnoremap <silent> <localleader>N     <cmd>Telescope file_browser hidden=true<cr>
 " }}}
 
 " vim-grepper {{{
@@ -192,9 +192,9 @@ let g:grepper.tools = ['rg', 'fixed', 'grep', 'git']
 let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
 let g:grepper.fixed = { 'grepprg': 'rg -HS --no-heading --vimgrep --fixed-strings' }
 " Search working directory
-nnoremap <silent> <LocalLeader>g     <cmd>Grepper -tool rg<cr>
+nnoremap <silent> <localleader>g     <cmd>Grepper -tool rg<cr>
 " Search the word under the cursor
-nnoremap <silent> <LocalLeader>*     <cmd>Grepper -tool rg -cword -noprompt<cr>
+nnoremap <silent> <localleader>*     <cmd>Grepper -tool rg -cword -noprompt<cr>
 " Search with operators
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
@@ -218,8 +218,8 @@ nnoremap <localLeader>t <cmd>Vista!!<cr>
 
 " zoomwintab.vim {{{
 let g:zoomwintab_remap = 0
-nnoremap <LocalLeader>z <cmd>ZoomWinTabToggle<cr>
+nnoremap <localleader>z <cmd>ZoomWinTabToggle<cr>
 nnoremap <c-w>z         <cmd>ZoomWinTabToggle<cr>
-tnoremap <LocalLeader>z <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
+tnoremap <localleader>z <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
 tnoremap <c-w>z         <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
 " }}}
