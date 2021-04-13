@@ -22,9 +22,9 @@ local on_attach = function()
 end
 
 --- Rust Analyzer setup.
---`git clone https://github.com/rust-analyzer/rust-analyzer` and build!
---
--- Ref: https://github.com/rust-analyzer/rust-analyzer
+--- `git clone https://github.com/rust-analyzer/rust-analyzer` and build!
+---
+--- Ref: https://github.com/rust-analyzer/rust-analyzer
 M.rust_analyzer_setup = function()
   -- inlay hints for rust
   vim.api.nvim_exec([[
@@ -50,9 +50,9 @@ augroup END
 end
 
 --- TypeScript Language Server setup.
--- `npm i g typescript-language-server`
---
--- Ref: https://github.com/theia-ide/typescript-language-server
+--- `npm i g typescript-language-server`
+---
+--- Ref: https://github.com/theia-ide/typescript-language-server
 M.tsserver_setup = function()
   lspconfig.tsserver.setup{
     on_attach = on_attach
@@ -60,17 +60,17 @@ M.tsserver_setup = function()
 end
 
 --- gopls setup.
--- `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
---
--- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
+--- `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
+---
+--- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 M.gopls_setup = function()
   lspconfig.gopls.setup{ on_attach = on_attach }
 end
 
 --- Asynchorounsly get python virtualenv path for current working directory.
--- Currently support: `pipenv`.
---
--- This is done by neovim job-control system. See `:h job-control`.
+--- Currently support: `pipenv`.
+---
+--- This is done by neovim job-control system. See `:h job-control`.
 local get_python_venv_path = function(callback)
   local on_event = function(_, data, event)
     if event == 'stdout' then
@@ -91,9 +91,9 @@ local get_python_venv_path = function(callback)
 end
 
 --- Python Language Server setup.
--- `python3 -m pip install 'python-language-server[all]'`
---
--- Ref: https://github.com/palantir/python-language-server
+--- `python3 -m pip install 'python-language-server[all]'`
+---
+--- Ref: https://github.com/palantir/python-language-server
 M.pyls_setup = function()
   get_python_venv_path(function(venv_path)
     lspconfig.pyls.setup{
@@ -112,10 +112,10 @@ M.pyls_setup = function()
 end
 
 --- lua-language-server setup.
--- `git clone https://github.com/sumneko/lua-language-server` and build!
---
--- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
--- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
+--- `git clone https://github.com/sumneko/lua-language-server` and build!
+---
+--- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+--- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
 M.sumneko_lua_setup = function()
   local sys
   if vim.fn.has("mac") == 1 then
@@ -153,11 +153,11 @@ M.sumneko_lua_setup = function()
 end
 
 --- cland setup.
--- Installation guide [1].
--- Note that clangd relies on a JSON compilation database[2].
---
--- [1]: https://clangd.llvm.org/installation.html
--- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
+--- Installation guide [1].
+--- Note that clangd relies on a JSON compilation database[2].
+---
+--- [1]: https://clangd.llvm.org/installation.html
+--- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
 M.clangd_setup = function()
   lspconfig.clangd.setup{
     on_attach = on_attach,
@@ -165,9 +165,9 @@ M.clangd_setup = function()
 end
 
 --- Solargraph setup.
--- `gem install solargraph`
---
--- Ref: https://github.com/castwide/solargraph
+--- `gem install solargraph`
+---
+--- Ref: https://github.com/castwide/solargraph
 M.solargraph_setup = function()
   lspconfig.solargraph.setup{
     on_attach = on_attach,
@@ -176,9 +176,9 @@ end
 
 
 --- OCaml-LSP setup.
--- `opam install ocaml-lsp-server`
---
--- Ref: https://github.com/ocaml/ocaml-lsp
+--- `opam install ocaml-lsp-server`
+---
+--- Ref: https://github.com/ocaml/ocaml-lsp
 M.ocamllsp_setup = function()
   lspconfig.ocamllsp.setup{
     on_attach = on_attach,
@@ -186,14 +186,14 @@ M.ocamllsp_setup = function()
 end
 
 --- ElixirLS setup.
---
--- ```
--- git clone https://github.com/elixir-lsp/elixir-ls.git`
--- mix compile
--- mix elixir_ls.release
--- ```
---
--- Ref: https://github.com/elixir-lsp/elixir-ls
+---
+--- ```
+--- git clone https://github.com/elixir-lsp/elixir-ls.git`
+--- mix compile
+--- mix elixir_ls.release
+--- ```
+---
+--- Ref: https://github.com/elixir-lsp/elixir-ls
 M.elixirls_setup = function()
   local ext
   if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
