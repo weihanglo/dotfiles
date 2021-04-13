@@ -84,6 +84,9 @@ vnoremap // y/<c-r>"<cr>
 " Highlight clear
 nnoremap \\ <cmd>nohl<cr>
 
+" Buffer deletion
+nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<cr>
+
 " git and tig
 function! Tig(args) abort
     let args = expandcmd(a:args)
@@ -117,7 +120,6 @@ Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 Plug 'kosayoda/nvim-lightbulb'
 
 " fast moves
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'troydm/zoomwintab.vim', { 'on': 'ZoomWinTabToggle' }
 Plug 'mg979/vim-visual-multi'
 
@@ -129,8 +131,9 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " search
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim', { 'on': 'Telescope' }
+Plug 'nvim-lua/plenary.nvim', { 'on': 'Telescope' }
+Plug 'weihanglo/telescope.nvim', { 'on': 'Telescope', 'branch': 'feat/commands-table' }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " registers
@@ -172,18 +175,14 @@ nmap <silent> [c                        <plug>(GitGutterPrevHunk)
 let g:VM_mouse_mappings = 1
 " }}}
 
-" NERDTree {{{
-nnoremap <silent> <LocalLeader>n <cmd>NERDTreeToggle<cr>
-nnoremap <silent> <LocalLeader>d <cmd>bp<bar>bd #<cr>
-" }}}
-
-" FZF {{{
-command! -bang -nargs=? -complete=dir AllFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'rg --files --smart-case -uu --glob !.git'}), <bang>0)
-nnoremap <silent> <LocalLeader>b     <cmd>Buffers<cr>
-nnoremap <silent> <LocalLeader>c     <cmd>Commands<cr>
-nnoremap <silent> <c-p>              <cmd>Files<cr>
-nnoremap <silent> <LocalLeader><c-p> <cmd>AllFiles<cr>
-nnoremap <silent> <LocalLeader>G     <cmd>Rg<cr>
+" telescope.nvim {{{
+nnoremap <silent> <LocalLeader>b     <cmd>Telescope buffers<cr>
+nnoremap <silent> <LocalLeader>c     <cmd>Telescope commands<cr>
+nnoremap <silent> <c-p>              <cmd>Telescope find_files<cr>
+nnoremap <silent> <LocalLeader><c-p> <cmd>Telescope find_files find_command=rg,--files,--smart-case,-uu,--glob,!.git<cr>
+nnoremap <silent> <LocalLeader>G     <cmd>Telescope live_grep<cr>
+nnoremap <silent> <LocalLeader>n     <cmd>Telescope file_browser<cr>
+nnoremap <silent> <LocalLeader>N     <cmd>Telescope file_browser hidden=true<cr>
 " }}}
 
 " vim-grepper {{{
