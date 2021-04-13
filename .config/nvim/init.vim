@@ -73,6 +73,8 @@ augroup END
 " Genernal key mappings {{{
 " map localleader if necessary
 let maplocalleader = ','
+" netrw default to tree
+let g:netrw_liststyle= 3
 
 " Move visual block
 vnoremap K :m '<-2<cr>gv=gv
