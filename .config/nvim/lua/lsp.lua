@@ -2,7 +2,7 @@ local vim = vim
 local lspconfig = require'lspconfig'
 local M = {}
 
-local on_attach = function()
+local on_attach = function(client, bufnr)
   -- Auto-completion functionality from `hrsh7th/nvim-compe`
   -- This will setup with buffers attached with LSP clients.
   require'compe'.setup {
@@ -19,6 +19,48 @@ local on_attach = function()
       treesitter = true;
     };
   }
+
+  -- Vim commands setup
+  vim.api.nvim_exec([[
+    command! LspCodeAction       lua vim.lsp.buf.code_action()
+    command! LspDeclaration      lua vim.lsp.buf.declaration()
+    command! LspDefinition       lua vim.lsp.buf.definition()
+    command! LspDocumentSymbol   lua vim.lsp.buf.document_symbol()
+    command! LspHover            lua vim.lsp.buf.hover()
+    command! LspImplementation   lua vim.lsp.buf.implementation()
+    command! LspIncomingCalls    lua vim.lsp.buf.incoming_calls()
+    command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
+    command! LspReferences       lua vim.lsp.buf.references()
+    command! LspRename           lua vim.lsp.buf.rename()
+    command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
+    command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
+    command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
+  ]], false)
+
+  -- Vim keymaps setup
+  local map = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local opts = { noremap = true, silent = true }
+  map('n', '<c-]>',                 '<cmd>LspDefinition<cr>', opts)
+  map('n', 'K',                     '<cmd>LspHover<cr>', opts)
+  map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
+  map('n', '<localleader><space>',  '<cmd>LspCodeAction<cr>', opts)
+  map('n', '<f12>',                 '<cmd>LspReferences<cr>', opts)
+  map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
+  map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
+  map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+  map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+
+  -- Vim options setup
+  local opt = function(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Vim autocommands setup
+  vim.api.nvim_exec([[
+    augroup LspAutoCommands
+      autocmd! * <buffer>
+      autocmd CursorHold,CursorHoldI <buffer> lua require'nvim-lightbulb'.update_lightbulb()
+    augroup END
+  ]], false)
 end
 
 --- Rust Analyzer setup.
@@ -26,12 +68,16 @@ end
 ---
 --- Ref: https://github.com/rust-analyzer/rust-analyzer
 M.rust_analyzer_setup = function()
-  -- inlay hints for rust
-  vim.api.nvim_exec([[
-augroup RustInlayHint
-  autocmd CursorHold,CursorHoldI *.rs silent lua require'lsp_extensions'.inlay_hints{ only_current_line = true, prefix = ' » ', highlight = "NonText" }
-augroup END
-  ]], false)
+  -- Inlay hints for rust
+  local rust_on_attach = function(client, bufnr)
+    vim.api.nvim_exec([[
+      augroup RustInlayHint
+        autocmd! * <buffer>
+        autocmd CursorHold,CursorHoldI <buffer> silent lua require'lsp_extensions'.inlay_hints{ only_current_line = true, prefix = ' » ', highlight = "NonText" }
+      augroup END
+    ]], false)
+    on_attach(client, bufnr)
+  end
 
   -- LSP snippet. Ref: https://git.io/Jqf0c
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -39,7 +85,7 @@ augroup END
 
   lspconfig.rust_analyzer.setup{
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = rust_on_attach,
     settings = {
       ['rust-analyzer'] = {
         -- Default 128. Ref: https://git.io/JTczw
@@ -201,7 +247,7 @@ M.elixirls_setup = function()
   elseif vim.fn.has('win32') == 1 then
       ext = "bat"
   else
-    print("Unsupported system for sumneko")
+    print("Unsupported system for elixirls")
   end
   local elixirls_root_path = vim.fn.stdpath('data') .. '/lss/elixir-ls'
   local elixirls_binary = elixirls_root_path .. '/release/language_server.' .. ext
@@ -211,65 +257,14 @@ M.elixirls_setup = function()
   }
 end
 
-M.variables_setup = function()
+--- Setup all language servers from above configurations.
+M.setup = function()
   -- Show virtual text for diagnoses
   vim.g.diagnostic_enable_virtual_text = 1
   -- Delay showing virtual text while inserting
   vim.g.diagnostic_insert_delay = 1
-end
 
---- Vim keymaps setup
-M.keymaps_setup = function()
-  local map = vim.api.nvim_set_keymap
-  local opts = { noremap = true, silent = true }
-  map('n', '<c-]>',                 '<cmd>LspDefinition<cr>', opts)
-  map('n', 'K',                     '<cmd>LspHover<cr>', opts)
-  map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
-  map('n', '<LocalLeader><space>',  '<cmd>LspCodeAction<cr>', opts)
-  map('n', '<f12>',                 '<cmd>LspReferences<cr>', opts)
-  map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
-  map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
-  map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-  map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
-end
-
---- Vim commands setup
-M.commands_setup = function()
-  vim.api.nvim_exec([[
-function! LspRestart(force) abort
-lua << EOF
-    if not vim.lsp.buf.server_ready() or vim.fn.nvim_eval('a:force') then
-        vim.lsp.stop_client(vim.lsp.get_active_clients())
-    end
-EOF
-    edit
-endfunction
-
-command! LspCodeAction       lua vim.lsp.buf.code_action()
-command! LspDeclaration      lua vim.lsp.buf.declaration()
-command! LspDefinition       lua vim.lsp.buf.definition()
-command! LspDocumentSymbol   lua vim.lsp.buf.document_symbol()
-command! LspHover            lua vim.lsp.buf.hover()
-command! LspImplementation   lua vim.lsp.buf.implementation()
-command! LspIncomingCalls    lua vim.lsp.buf.incoming_calls()
-command! LspInfo             lua print(vim.inspect(vim.lsp.buf_get_clients()))
-command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
-command! LspReferences       lua vim.lsp.buf.references()
-command! LspRename           lua vim.lsp.buf.rename()
-command! -bang LspRestart    call LspRestart(<bang>0)
-command! LspServerReady      lua print(vim.lsp.buf.server_ready())
-command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
-command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
-command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
-  ]], false)
-end
-
---- Setup all language servers from above configurations.
-M.setup = function()
-  M.variables_setup()
-  M.commands_setup()
-  M.keymaps_setup()
-
+  -- Language servers setup
   M.rust_analyzer_setup()
   M.gopls_setup()
   M.tsserver_setup()
@@ -279,16 +274,6 @@ M.setup = function()
   M.solargraph_setup()
   M.ocamllsp_setup()
   M.elixirls_setup()
-
-  -- * List all filetype that is enabled omnifunc with lsp.
-  -- * Show light bulb if any code action available.
-  vim.api.nvim_exec([[
-augroup LspAutoCommands
-    autocmd!
-    autocmd FileType go,rust,ruby,python,javascript,typescript,lua,c,cpp,objc,objcpp,ocaml,elixir,eelixir setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd CursorHold,CursorHoldI *.{go,rs,rb,py,js,jsx,ts,tsx,lua,c,h,cpp,hpp,ml,ex,exs} lua require'nvim-lightbulb'.update_lightbulb()
-augroup END
-  ]], false)
 end
 
 return M
