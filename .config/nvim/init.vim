@@ -90,6 +90,8 @@ endfunction
 command! -narg=* Tig call Tig(<q-args>)
 command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
 command! Gblame execute 'Tig blame % +' . line('.')
+" Check highlight group under current cursor
+command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
 " }}}
 
 " packer.nvim {{{
