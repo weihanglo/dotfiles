@@ -21,7 +21,6 @@ files=(
     .config/fish/config.fish
     .config/kitty/kitty.conf
     .config/nvim/init.vim
-    .config/nvim/lua/ext.lua
     .config/nvim/lua/lsp.lua
     .config/nvim/lua/plugins.lua
     .config/starship.toml

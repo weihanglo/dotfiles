@@ -95,7 +95,9 @@ command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
 " }}}
 
 " packer.nvim {{{
-lua require'plugins'
+if has('nvim')
+    lua require'plugins'.load_all()
+endif
 " }}}
 
 " colorscheme {{{
@@ -118,24 +120,6 @@ nmap <silent> [c                        <plug>(GitGutterPrevHunk)
 
 " Vim-Visual-Multi {{{
 let g:VM_mouse_mappings = 1
-" }}}
-
-" telescope.nvim {{{
-nnoremap <silent> <localleader>b     <cmd>Telescope buffers<cr>
-nnoremap <silent> <localleader>c     <cmd>Telescope commands<cr>
-nnoremap <silent> <c-p>              <cmd>Telescope find_files<cr>
-nnoremap <silent> <localleader><c-p> <cmd>Telescope find_files find_command=rg,--files,--smart-case,-uu,--glob,!.git<cr>
-nnoremap <silent> <localleader>G     <cmd>Telescope live_grep<cr>
-" }}}
-
-" nvim-tree.lua {{{
-let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_gitignore = 1
-let g:nvim_tree_ignore = ['.git']
-let g:nvim_tree_show_icons = { 'folders': 1 }
-let g:nvim_tree_group_empty = 1
-let g:nvim_tree_icons = { 'folder': {  'default': "▶", 'open': "▼", 'empty': "▷", 'empty_open': "▽", 'symlink': "⇢", 'symlink_open': "⇣" } }
-nnoremap <silent> <localleader>n     <cmd>NvimTreeToggle<cr>
 " }}}
 
 " vim-grepper {{{
@@ -166,7 +150,7 @@ let g:tmuxline_preset = 'minimal'
 " Vista.vim {{{
 let g:vista_default_executive = 'nvim_lsp'
 let g:vista#renderer#enable_icon = 0
-nnoremap <localLeader>t <cmd>Vista!!<cr>
+nnoremap <localleader>t <cmd>Vista!!<cr>
 " }}}
 
 " zoomwintab.vim {{{
