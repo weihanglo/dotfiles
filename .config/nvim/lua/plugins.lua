@@ -96,14 +96,13 @@ M.load_all = function ()
 
     -- search
     use {
-      'weihanglo/telescope.nvim',
+      'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
       wants = {'popup.nvim', 'plenary.nvim'},
       requires = {
         {'nvim-lua/popup.nvim', opt = true},
         {'nvim-lua/plenary.nvim', opt = true},
       },
-      branch = 'feat/commands-table',
     }
     use {'mhinz/vim-grepper', cmd = 'Grepper', keys = {'<plug>(GrepperOperator)'}}
 
