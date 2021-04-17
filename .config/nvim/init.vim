@@ -122,21 +122,6 @@ nmap <silent> [c                        <plug>(GitGutterPrevHunk)
 let g:VM_mouse_mappings = 1
 " }}}
 
-" vim-grepper {{{
-let g:grepper = {}
-let g:grepper.prompt_quote = 1
-let g:grepper.tools = ['rg', 'fixed', 'grep', 'git']
-let g:grepper.rg = { 'grepprg': 'rg -HS --no-heading --vimgrep' }
-let g:grepper.fixed = { 'grepprg': 'rg -HS --no-heading --vimgrep --fixed-strings' }
-" Search working directory
-nnoremap <silent> <localleader>g     <cmd>Grepper -tool rg<cr>
-" Search the word under the cursor
-nnoremap <silent> <localleader>*     <cmd>Grepper -tool rg -cword -noprompt<cr>
-" Search with operators
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-" }}}
-
 " Lightline {{{
 let g:lightline = {}
 let g:lightline.colorscheme = 'gruvbox_material'

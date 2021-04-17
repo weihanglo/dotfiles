@@ -14,11 +14,16 @@ end
 M.telescope_nvim_setup = function ()
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
+  local unrestricted = ',-uu,--glob,!.git'
+  vim.api.nvim_command('command! GStatus Telescope git_status')
+  vim.api.nvim_command('command! GBcommits Telescope git_bcommits')
   map('n', '<localleader>b',     '<cmd>Telescope buffers<cr>', opts)
   map('n', '<localleader>c',     '<cmd>Telescope commands<cr>', opts)
   map('n', '<c-p>',              '<cmd>Telescope find_files<cr>', opts)
-  map('n', '<localleader><c-p>', '<cmd>Telescope find_files find_command=rg,--files,--smart-case,-uu,--glob,!.git<cr>', opts)
-  map('n', '<localleader>G',     '<cmd>Telescope live_grep<cr>', opts)
+  local find = 'rg,--files,--smart-case'..unrestricted
+  map('n', '<localleader><c-p>', '<cmd>Telescope find_files find_command='..find..'<cr>', opts)
+  map('n', '<localleader>g',     '<cmd>Telescope live_grep<cr>', opts)
+  map('n', '<localleader>*',     '<cmd>Telescope grep_string prompt_prefix=<cword>>\\  <cr>', opts)
 end
 
 --- kyazdani42/nvim-tree.lua
@@ -88,6 +93,7 @@ M.load_all = function ()
     -- filetype
     use {'rust-lang/rust.vim', ft = 'rust', wants = 'nvim-treesitter'}
     use {'elixir-editors/vim-elixir', ft = 'elixir', wants = 'nvim-treesitter'}
+    use {'fatih/vim-go', wants = 'nvim-treesitter'}
     use {
       'nvim-treesitter/nvim-treesitter',
       opt = true,
@@ -104,7 +110,6 @@ M.load_all = function ()
         {'nvim-lua/plenary.nvim', opt = true},
       },
     }
-    use {'mhinz/vim-grepper', cmd = 'Grepper', keys = {'<plug>(GrepperOperator)'}}
 
     -- registers
     use {'tversteeg/registers.nvim'}
