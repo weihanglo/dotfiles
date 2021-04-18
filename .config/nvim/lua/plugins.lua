@@ -23,7 +23,7 @@ M.telescope_nvim_setup = function ()
   local find = 'rg,--files,--smart-case'..unrestricted
   map('n', '<localleader><c-p>', '<cmd>Telescope find_files find_command='..find..'<cr>', opts)
   map('n', '<localleader>g',     '<cmd>Telescope live_grep<cr>', opts)
-  map('n', '<localleader>*',     '<cmd>Telescope grep_string prompt_prefix=<cword>>\\  <cr>', opts)
+  map('n', '<localleader>*',     "<cmd>exec 'Telescope grep_string prompt_prefix='.expand('<cword>').'>\\ '<cr>", opts)
 end
 
 --- kyazdani42/nvim-tree.lua
