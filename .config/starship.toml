@@ -114,6 +114,10 @@ disabled = true
 [terraform]
 disabled = true
 
+[time]
+disabled = false
+format="[$time](dimmed white)"
+
 [vagrant]
 disabled = true
 
