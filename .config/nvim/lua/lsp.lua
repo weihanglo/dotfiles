@@ -40,11 +40,11 @@ local on_attach = function(client, bufnr)
   -- Vim keymaps setup
   local map = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local opts = { noremap = true, silent = true }
-  map('n', '<c-]>',                 '<cmd>LspDefinition<cr>', opts)
+  map('n', '<c-]>',                 '<cmd>Telescope lsp_definitions<cr>', opts)
   map('n', 'K',                     '<cmd>LspHover<cr>', opts)
   map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
   map('n', '<localleader><space>',  '<cmd>LspCodeAction<cr>', opts)
-  map('n', '<f12>',                 '<cmd>LspReferences<cr>', opts)
+  map('n', '<f7>',                  '<cmd>Telescope lsp_references<cr>', opts)
   map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
   map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
   map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
