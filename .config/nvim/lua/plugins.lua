@@ -40,6 +40,13 @@ M.nvim_tree_lua_setup = function ()
   map('n', '<localleader>n', '<cmd>NvimTreeToggle<cr>', opts)
 end
 
+-- akinsho/nvim-toggleterm.lua
+local function nvim_toggleterm_lua_setup()
+  local map = vim.api.nvim_set_keymap
+  local opts = { noremap = true, silent = true }
+  map('n', '<localleader>t', '<cmd>execute v:count1 . "ToggleTerm"<cr>', opts)
+end
+
 --- Load all plugins
 M.load_all = function ()
   -- Auto install packer.nvim
@@ -116,11 +123,18 @@ M.load_all = function ()
 
     -- profiling startup time
     use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
+
+    use {
+      'akinsho/nvim-toggleterm.lua',
+      cmd = 'ToggleTerm',
+      config = function () require'toggleterm'.setup{} end,
+    }
   end)
 
   -- Configure plugins
   M.nvim_tree_lua_setup()
   M.telescope_nvim_setup()
+  nvim_toggleterm_lua_setup()
 end
 
 return M
