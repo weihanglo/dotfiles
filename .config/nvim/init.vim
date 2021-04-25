@@ -132,12 +132,6 @@ let g:tmuxline_powerline_separators = 0
 let g:tmuxline_preset = 'minimal'
 " }}}
 
-" Vista.vim {{{
-let g:vista_default_executive = 'nvim_lsp'
-let g:vista#renderer#enable_icon = 0
-nnoremap <localleader>t <cmd>Vista!!<cr>
-" }}}
-
 " zoomwintab.vim {{{
 let g:zoomwintab_remap = 0
 nnoremap <localleader>z <cmd>ZoomWinTabToggle<cr>

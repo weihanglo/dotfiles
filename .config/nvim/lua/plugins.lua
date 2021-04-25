@@ -87,7 +87,6 @@ M.load_all = function ()
     use {'hrsh7th/nvim-compe', opt = true}
     use {'weihanglo/lsp_extensions.nvim', opt = true, branch = 'customized'}
     use {'kosayoda/nvim-lightbulb', opt = true}
-    use {'liuchengxu/vista.vim', cmd = 'Vista'}
 
     -- fast moves
     use {'kyazdani42/nvim-tree.lua'}
