@@ -3,6 +3,9 @@ add_newline = false
 [aws]
 disabled = true
 
+[battery]
+format = "[🔋$percentage]($style) "
+
 [cmake]
 disabled = true
 
