@@ -122,12 +122,13 @@ disabled = true
 
 [time]
 disabled = false
-format="[$time](dimmed white)"
+format = "[$time](dimmed white)"
 
 [vagrant]
 disabled = true
 
 [vcsh]
 disabled = true
+
 [zig]
 disabled = true
