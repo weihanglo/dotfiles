@@ -15,6 +15,9 @@ disabled = true
 [dart]
 disabled = true
 
+[deno]
+disabled = true
+
 [directory]
 truncation_length = 2
 fish_style_pwd_dir_length = 1
@@ -121,5 +124,7 @@ format="[$time](dimmed white)"
 [vagrant]
 disabled = true
 
+[vcsh]
+disabled = true
 [zig]
 disabled = true
