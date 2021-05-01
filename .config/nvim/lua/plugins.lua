@@ -26,18 +26,11 @@ local function telescope_nvim_setup()
   map('n', '<localleader>*',     "<cmd>exec 'Telescope grep_string prompt_prefix='.expand('<cword>').'>\\ '<cr>", opts)
 end
 
---- kyazdani42/nvim-tree.lua
-M.nvim_tree_lua_setup = function ()
-  local g = vim.api.nvim_set_var
-  g('nvim_tree_add_trailing', 1)
-  g('nvim_tree_gitignore', 1)
-  g('nvim_tree_ignore', {'.git'})
-  g('nvim_tree_show_icons', { folders = 1 })
-  g('nvim_tree_group_empty', 1)
-  g('nvim_tree_icons', { folder = { default = "▶", open = "▼", empty = "▷", empty_open = "▽", symlink = "⇢", symlink_open = "⇣" } })
+--- preservim/nerdtree
+local function nerdtree_setup()
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
-  map('n', '<localleader>n', '<cmd>NvimTreeToggle<cr>', opts)
+  map('n', '<localleader>n', '<cmd>NERDTreeToggle<cr>', opts)
 end
 
 -- akinsho/nvim-toggleterm.lua
@@ -89,7 +82,7 @@ M.load_all = function ()
     use {'kosayoda/nvim-lightbulb', opt = true}
 
     -- fast moves
-    use {'kyazdani42/nvim-tree.lua'}
+    use {'preservim/nerdtree', cmd = 'NERDTreeToggle'}
     use {'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle'}
     use {'mg979/vim-visual-multi', opt = true}
 
@@ -131,7 +124,7 @@ M.load_all = function ()
   end)
 
   -- Configure plugins
-  M.nvim_tree_lua_setup()
+  nerdtree_setup()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
 end
