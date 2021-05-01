@@ -119,7 +119,7 @@ M.load_all = function ()
     use {
       'akinsho/nvim-toggleterm.lua',
       cmd = 'ToggleTerm',
-      config = function () require'toggleterm'.setup{} end,
+      config = function () require'toggleterm'.setup{start_in_insert = false} end,
     }
   end)
 
