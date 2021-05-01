@@ -92,7 +92,7 @@ M.load_all = function ()
     -- filetype
     use {'rust-lang/rust.vim', ft = 'rust', wants = 'nvim-treesitter'}
     use {'elixir-editors/vim-elixir', ft = 'elixir', wants = 'nvim-treesitter'}
-    use {'fatih/vim-go', wants = 'nvim-treesitter'}
+    use {'fatih/vim-go', ft = 'go', wants = 'nvim-treesitter'}
     use {
       'nvim-treesitter/nvim-treesitter',
       opt = true,
