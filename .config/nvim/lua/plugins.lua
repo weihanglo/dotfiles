@@ -1,7 +1,7 @@
 local M = {}
 
 --- nvim-treesitter/nvim-treesitter
-M.nvim_treesitter_setup = function ()
+local function nvim_treesitter_setup()
   return require'nvim-treesitter.configs'.setup{
     ensure_installed = "maintained",
     highlight = { enable = true },
@@ -11,7 +11,7 @@ M.nvim_treesitter_setup = function ()
 end
 
 --- nvim-telescope/telescope.nvim
-M.telescope_nvim_setup = function ()
+local function telescope_nvim_setup()
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
   local unrestricted = ',-uu,--glob,!.git'
@@ -103,7 +103,7 @@ M.load_all = function ()
     use {
       'nvim-treesitter/nvim-treesitter',
       opt = true,
-      config = M.nvim_treesitter_setup,
+      config = nvim_treesitter_setup,
     }
 
     -- search
@@ -132,7 +132,7 @@ M.load_all = function ()
 
   -- Configure plugins
   M.nvim_tree_lua_setup()
-  M.telescope_nvim_setup()
+  telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
 end
 
