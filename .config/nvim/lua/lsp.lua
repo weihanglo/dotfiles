@@ -153,18 +153,22 @@ end
 --- Ref: https://github.com/palantir/python-language-server
 M.pyls_setup = function()
   get_python_venv_path(function(venv_path)
+    local echo = vim.api.nvim_echo
+    local settings = {
+      pyls = { plugins = { jedi = { environment = vim.NIL } } }
+    }
     lspconfig.pyls.setup{
       on_attach = on_attach,
-      settings = {
-        pyls = {
-          plugins = {
-            jedi = {
-              environment = venv_path
-            }
-          }
-        }
-      }
+      settings = settings,
     }
+    if venv_path ~= '' then
+      echo({{'[LSP] set Python venv at'..venv_path, 'WarningMsg'}}, true, {})
+      settings.pyls.plugins.jedi = {
+        environment = venv_path
+      }
+    else
+      echo({{'[LSP] Python venv not found', 'WarningMsg'}}, true, {})
+    end
   end)
 end
 
