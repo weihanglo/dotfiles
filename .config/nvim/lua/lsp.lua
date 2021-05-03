@@ -130,7 +130,7 @@ end
 --- Ref: https://github.com/palantir/python-language-server
 local function pyls_setup()
   --- Asynchorounsly get python virtualenv path for current working directory.
-  --- Currently support: `pipenv`.
+  --- Currently support: `pipenv`, `poetry`.
   ---
   --- This is done by neovim job-control system. See `:h job-control`.
   local function get_python_venv_path(callback)
@@ -140,32 +140,57 @@ local function pyls_setup()
         callback(data[1])
       end
     end
-    vim.fn.jobstart(
-      'python -m pipenv --venv',
-      {
-        on_exit = on_event,
-        on_stdout = on_event,
-        on_stderr = on_event,
-        stdout_buffered = true,
-        stderr_buffered = true,
-      }
-    )
+
+    local cmd = ''
+    local cwd = vim.fn.getcwd()
+    local root = lspconfig.util.root_pattern('pyproject.toml')(cwd)
+    if root then
+      cmd = 'poetry env info -p'
+    end
+
+    if root == '' or root == nil then
+      root = lspconfig.util.root_pattern('Pipfile')(cwd)
+      if root then
+        cmd = 'python -m pipenv --venv'
+      end
+    end
+
+    if root == '' or root == nil then
+      callback('')
+    end
+
+    if cmd ~= '' then
+      vim.fn.jobstart(
+        cmd,
+        {
+          on_exit = on_event,
+          on_stdout = on_event,
+          on_stderr = on_event,
+          stdout_buffered = true,
+          stderr_buffered = true,
+        }
+      )
+    end
   end
 
   get_python_venv_path(function(venv_path)
     local echo = vim.api.nvim_echo
     local settings = {
-      pyls = { plugins = { jedi = { environment = vim.NIL } } }
+      pyls = {
+        plugins = {
+          jedi = { environment = vim.NIL }
+        }
+      }
     }
     lspconfig.pyls.setup{
       on_attach = on_attach,
       settings = settings,
     }
-    if venv_path ~= '' then
-      echo({{'[LSP] set Python venv at'..venv_path, 'WarningMsg'}}, true, {})
-      settings.pyls.plugins.jedi = { environment = venv_path }
-    else
+    if venv_path == '' or venv_path == nil then
       echo({{'[LSP] Python venv not found', 'WarningMsg'}}, true, {})
+    else
+      echo({{'[LSP] set Python virtualenv at '..venv_path, 'WarningMsg'}}, true, {})
+      settings.pyls.plugins.jedi = { environment = venv_path }
     end
   end)
 end
