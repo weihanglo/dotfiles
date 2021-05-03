@@ -2,7 +2,7 @@ local vim = vim
 local lspconfig = require'lspconfig'
 local M = {}
 
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   -- Auto-completion functionality from `hrsh7th/nvim-compe`
   -- This will setup with buffers attached with LSP clients.
   require'compe'.setup {
@@ -78,9 +78,9 @@ end
 --- `git clone https://github.com/rust-analyzer/rust-analyzer` and build!
 ---
 --- Ref: https://github.com/rust-analyzer/rust-analyzer
-M.rust_analyzer_setup = function()
+local function rust_analyzer_setup()
   -- Inlay hints for rust
-  local rust_on_attach = function(client, bufnr)
+  local function rust_on_attach(client, bufnr)
     vim.api.nvim_exec([[
       augroup RustInlayHint
         autocmd! * <buffer>
@@ -110,7 +110,7 @@ end
 --- `npm i g typescript-language-server`
 ---
 --- Ref: https://github.com/theia-ide/typescript-language-server
-M.tsserver_setup = function()
+local function tsserver_setup()
   lspconfig.tsserver.setup{
     on_attach = on_attach
   }
@@ -120,38 +120,38 @@ end
 --- `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
 ---
 --- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
-M.gopls_setup = function()
+local function gopls_setup()
   lspconfig.gopls.setup{ on_attach = on_attach }
-end
-
---- Asynchorounsly get python virtualenv path for current working directory.
---- Currently support: `pipenv`.
----
---- This is done by neovim job-control system. See `:h job-control`.
-local get_python_venv_path = function(callback)
-  local on_event = function(_, data, event)
-    if event == 'stdout' then
-      -- Here are gibberish leading and trailing whitespace elements.
-      callback(data[1])
-    end
-  end
-  vim.fn.jobstart(
-    'python -m pipenv --venv',
-    {
-      on_exit = on_event,
-      on_stdout = on_event,
-      on_stderr = on_event,
-      stdout_buffered = true,
-      stderr_buffered = true,
-    }
-  )
 end
 
 --- Python Language Server setup.
 --- `python3 -m pip install 'python-language-server[all]'`
 ---
 --- Ref: https://github.com/palantir/python-language-server
-M.pyls_setup = function()
+local function pyls_setup()
+  --- Asynchorounsly get python virtualenv path for current working directory.
+  --- Currently support: `pipenv`.
+  ---
+  --- This is done by neovim job-control system. See `:h job-control`.
+  local function get_python_venv_path(callback)
+    local function on_event(_, data, event)
+      if event == 'stdout' then
+        -- Here are gibberish leading and trailing whitespace elements.
+        callback(data[1])
+      end
+    end
+    vim.fn.jobstart(
+      'python -m pipenv --venv',
+      {
+        on_exit = on_event,
+        on_stdout = on_event,
+        on_stderr = on_event,
+        stdout_buffered = true,
+        stderr_buffered = true,
+      }
+    )
+  end
+
   get_python_venv_path(function(venv_path)
     local echo = vim.api.nvim_echo
     local settings = {
@@ -163,9 +163,7 @@ M.pyls_setup = function()
     }
     if venv_path ~= '' then
       echo({{'[LSP] set Python venv at'..venv_path, 'WarningMsg'}}, true, {})
-      settings.pyls.plugins.jedi = {
-        environment = venv_path
-      }
+      settings.pyls.plugins.jedi = { environment = venv_path }
     else
       echo({{'[LSP] Python venv not found', 'WarningMsg'}}, true, {})
     end
@@ -177,7 +175,7 @@ end
 ---
 --- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 --- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
-M.sumneko_lua_setup = function()
+local function sumneko_lua_setup()
   local sys
   if vim.fn.has("mac") == 1 then
     sys = "macOS"
@@ -219,7 +217,7 @@ end
 ---
 --- [1]: https://clangd.llvm.org/installation.html
 --- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
-M.clangd_setup = function()
+local function clangd_setup()
   lspconfig.clangd.setup{
     on_attach = on_attach,
   }
@@ -229,7 +227,7 @@ end
 --- `gem install solargraph`
 ---
 --- Ref: https://github.com/castwide/solargraph
-M.solargraph_setup = function()
+ local function solargraph_setup()
   lspconfig.solargraph.setup{
     on_attach = on_attach,
   }
@@ -240,7 +238,7 @@ end
 --- `opam install ocaml-lsp-server`
 ---
 --- Ref: https://github.com/ocaml/ocaml-lsp
-M.ocamllsp_setup = function()
+local function ocamllsp_setup()
   lspconfig.ocamllsp.setup{
     on_attach = on_attach,
   }
@@ -255,7 +253,7 @@ end
 --- ```
 ---
 --- Ref: https://github.com/elixir-lsp/elixir-ls
-M.elixirls_setup = function()
+local function elixirls_setup()
   local ext
   if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
     ext = "sh"
@@ -280,15 +278,15 @@ M.setup = function()
   vim.g.diagnostic_insert_delay = 1
 
   -- Language servers setup
-  M.rust_analyzer_setup()
-  M.gopls_setup()
-  M.tsserver_setup()
-  M.pyls_setup()
-  M.sumneko_lua_setup()
-  M.clangd_setup()
-  M.solargraph_setup()
-  M.ocamllsp_setup()
-  M.elixirls_setup()
+  rust_analyzer_setup()
+  gopls_setup()
+  tsserver_setup()
+  pyls_setup()
+  sumneko_lua_setup()
+  clangd_setup()
+  solargraph_setup()
+  ocamllsp_setup()
+  elixirls_setup()
 end
 
 return M
