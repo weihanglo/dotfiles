@@ -90,9 +90,7 @@ M.load_all = function ()
     use {'airblade/vim-gitgutter', keys = {'<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'}}
 
     -- filetype
-    use {'rust-lang/rust.vim', ft = 'rust', wants = 'nvim-treesitter'}
-    use {'elixir-editors/vim-elixir', ft = 'elixir', wants = 'nvim-treesitter'}
-    use {'fatih/vim-go', ft = 'go', wants = 'nvim-treesitter'}
+    use {'sheerun/vim-polyglot', event = {'BufNew'}}
     use {
       'nvim-treesitter/nvim-treesitter',
       opt = true,
@@ -127,6 +125,8 @@ M.load_all = function ()
   nerdtree_setup()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
+  -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
+  vim.g.no_ocaml_maps = true
 end
 
 return M
