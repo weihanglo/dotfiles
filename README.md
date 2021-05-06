@@ -6,7 +6,7 @@ Just clone and run script!
 
 ```bash
 git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
-. ~/.dotfiles/bootstrap.sh
+source ~/.dotfiles/bootstrap.sh
 ```
 
 ## Tools We Love
@@ -34,7 +34,7 @@ Feel free to create an issue or pull request!
 
 [The MIT License (MIT)](LICENSE)
 
-Copyright © 2015 - 2020 Weihang Lo
+Copyright © 2015 - 2021 Weihang Lo
 
 [**Alacritty**]: https://github.com/jwilm/alacritty
 [**bat**]: https://github.com/sharkdp/bat
