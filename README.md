@@ -19,7 +19,6 @@ git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
 - [**fnm**]: Ease the pain of sourcing nvm.
 - [**FZF**]: Fuzzy finder goes rock.
 - [**IPython**]: A must-have for a python lover.
-- [**iTerm2**]: Feature-rich terminal emulator on macOS.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.
@@ -45,7 +44,6 @@ Copyright © 2015 - 2020 Weihang Lo
 [**fnm**]: https://github.com/Schniz/fnm
 [**FZF**]: https://github.com/junegunn/fzf
 [**IPython**]: https://ipython.org
-[**iTerm2**]: https://www.iterm2.com
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
 [**kitty**]: https://sw.kovidgoyal.net/kitty/
 [**Neovim**]: https://neovim.io
