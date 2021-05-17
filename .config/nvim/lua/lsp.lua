@@ -6,6 +6,7 @@ local function on_attach(client, bufnr)
   -- Auto-completion functionality from `hrsh7th/nvim-compe`
   -- This will setup with buffers attached with LSP clients.
   require'compe'.setup {
+    preselect = 'disable',
     source = {
       path = true,
       buffer = true,
@@ -16,7 +17,7 @@ local function on_attach(client, bufnr)
       nvim_lsp = true,
       nvim_lua = true,
       vsnip = true,
-    };
+    },
   }
 
   -- Vim commands setup
