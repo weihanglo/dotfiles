@@ -133,5 +133,8 @@ disabled = true
 [vcsh]
 disabled = true
 
+[vlang]
+disabled = true
+
 [zig]
 disabled = true
