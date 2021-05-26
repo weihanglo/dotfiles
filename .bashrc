@@ -46,7 +46,7 @@ if [[ $? -eq 0 ]]; then
     # Load `fnm` once and for all
     source <(fnm env)
     # Load `pyenv` once and for all
-    source <(pyenv init -)
+    source <(pyenv init --path) && source <(pyenv init -)
     # Load `rbenv` once and for all
     source <(rbenv init -)
     # Local `opam` once and for all

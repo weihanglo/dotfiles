@@ -43,7 +43,7 @@ if status is-login
     # Load `fnm` once and for all
     fnm env | source
     # Load `pyenv` once and for all
-    pyenv init - | source
+    pyenv init --path | source; and pyenv init - | source
     # Load `rbenv` once and for all
     rbenv init - | source
     # Load `opam` once and for all
