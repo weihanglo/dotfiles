@@ -55,9 +55,7 @@ M.load_all = function ()
 
   -- Declare and load plugins
   require'packer'.startup(function(use)
-    -- Lock in commit b46aa48 for `plugins.wants` option
-    -- See https://github.com/wbthomason/packer.nvim/pull/279
-    use {'wbthomason/packer.nvim', opt = true, commit = 'b46aa48'}
+    use {'wbthomason/packer.nvim', opt = true}
 
     -- user interface
     use {'itchyny/lightline.vim'}
