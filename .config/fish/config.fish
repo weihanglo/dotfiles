@@ -61,6 +61,7 @@ if status is-interactive
     alias ipy='ipython'
     alias ports="lsof -PiTCP -sTCP:LISTEN"
     alias tree="exa -TF --group-directories-first"
+    alias P="fish -P"
     # Customizable prompt
     starship init fish | source
 end
