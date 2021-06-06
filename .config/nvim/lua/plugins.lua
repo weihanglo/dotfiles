@@ -37,7 +37,8 @@ end
 local function nvim_toggleterm_lua_setup()
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
-  map('n', '<localleader>t', '<cmd>execute v:count1 . "ToggleTerm"<cr>', opts)
+  map('n', '<localleader>t', ':<c-u>execute v:count1 . "ToggleTerm"<cr>', opts)
+  map('t', '<localleader>t', '<c-\\><c-n>:<c-u>execute v:count1 . "ToggleTerm"<cr>', opts)
 end
 
 --- Load all plugins
