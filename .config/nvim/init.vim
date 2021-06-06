@@ -65,7 +65,7 @@ augroup END
 
 augroup ModeChanges
     autocmd!
-    autocmd TermOpen * startinsert
+    autocmd TermOpen * setlocal signcolumn=no|startinsert
     autocmd TermClose term://*:tig*,term://*:gitui* bd!
 augroup END
 " }}}
