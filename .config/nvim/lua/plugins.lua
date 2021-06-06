@@ -78,6 +78,7 @@ M.load_all = function ()
     use {'hrsh7th/nvim-compe', opt = true}
     use {'weihanglo/lsp_extensions.nvim', opt = true, branch = 'customized'}
     use {'kosayoda/nvim-lightbulb', opt = true}
+    use {'liuchengxu/vista.vim', cmd = 'Vista'}
 
     -- fast moves
     use {'preservim/nerdtree', cmd = 'NERDTreeToggle'}
@@ -123,6 +124,8 @@ M.load_all = function ()
   nerdtree_setup()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
+  vim.g.vista_default_executive = 'nvim_lsp'
+  vim.g['vista#renderer#enable_icon'] = false
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
 end
