@@ -3,7 +3,7 @@
 #--------------------------------------#
 #   configs for fish shell, version 3  #
 #            by Weihang Lo             #
-#              Oct. 2020               #
+#              Jun. 2021               #
 #--------------------------------------#
 
 # Default shell to fish
@@ -41,13 +41,13 @@ if status is-login
     set -pgx PATH $HOME/.cargo/bin
 
     # Load `fnm` once and for all
-    fnm env | source
+    type -q fnm; and fnm env | source
     # Load `pyenv` once and for all
-    pyenv init --path | source; and pyenv init - | source
+    type -q pyenv; and pyenv init --path | source; and pyenv init - | source
     # Load `rbenv` once and for all
-    rbenv init - | source
+    type -q rbenv; and rbenv init - | source
     # Load `opam` once and for all
-    opam env | source
+    type -q opam; and opam env | source
 end
 
 # ------------------------------------------------------------------------------

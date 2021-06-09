@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 5.0   #
 #            by Weihang Lo             #
-#              Oct. 2020               #
+#              Jun. 2021               #
 #--------------------------------------#
 
 # Default shell to bash
@@ -44,13 +44,13 @@ if [[ $? -eq 0 ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 
     # Load `fnm` once and for all
-    source <(fnm env)
+    hash fnm && source <(fnm env)
     # Load `pyenv` once and for all
-    source <(pyenv init --path) && source <(pyenv init -)
+    hash pyenv && source <(pyenv init --path) && source <(pyenv init -)
     # Load `rbenv` once and for all
-    source <(rbenv init -)
+    hash rbenv && source <(rbenv init -)
     # Local `opam` once and for all
-    source <(opam env)
+    hash opam && source <(opam env)
 fi
 
 # ------------------------------------------------------------------------------
