@@ -64,6 +64,7 @@ if [[ $- == *i* ]]; then
     alias ipy='ipython'
     alias ports='lsof -PiTCP -sTCP:LISTEN'
     alias tree='exa -TF --group-directories-first'
+    alias k='kubectl'
     # Customizable prompt
     eval "$(starship init bash)"
 
