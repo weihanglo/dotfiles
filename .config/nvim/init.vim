@@ -92,6 +92,19 @@ command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
 command! Gblame execute 'Tig blame % +' . line('.')
 " Check highlight group under current cursor
 command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
+
+" Use map <buffer> to only map dd in the quickfix window.
+" Ref: https://stackoverflow.com/a/48817071/8851735
+function! RemoveQfItem()
+  let idx = line('.') - 1
+  let qflist = getqflist()
+  call remove(qflist, idx)
+  call setqflist(qflist, 'r')
+  :copen
+  let idx = idx + 1
+  execute idx
+endfunction
+autocmd FileType qf map <buffer> dd <cmd>call RemoveQfItem()<cr>
 " }}}
 
 " packer.nvim {{{
