@@ -10,20 +10,25 @@ local function nvim_treesitter_setup()
   }
 end
 
---- nvim-telescope/telescope.nvim
-local function telescope_nvim_setup()
+--- junegunn/fzf.vim
+local function fzf_vim_setup()
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
-  local unrestricted = ',-uu,--glob,!.git'
-  vim.api.nvim_command('command! GStatus Telescope git_status')
-  vim.api.nvim_command('command! GBcommits Telescope git_bcommits')
-  map('n', '<localleader>b',     '<cmd>Telescope buffers<cr>', opts)
-  map('n', '<localleader>c',     '<cmd>Telescope commands<cr>', opts)
-  map('n', '<c-p>',              '<cmd>Telescope find_files<cr>', opts)
-  local find = 'rg,--files,--smart-case'..unrestricted
-  map('n', '<localleader><c-p>', '<cmd>Telescope find_files find_command='..find..'<cr>', opts)
-  map('n', '<localleader>g',     '<cmd>Telescope live_grep<cr>', opts)
-  map('n', '<localleader>*',     "<cmd>exec 'Telescope grep_string prompt_prefix='.expand('<cword>').'>\\ '<cr>", opts)
+  -- From fzf official doc.
+  -- An action can be a reference to a function that processes selected lines.
+  vim.api.nvim_command [[
+    function! s:build_qflist(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val }')) | copen | cc
+    endfunction
+    let g:fzf_action = { 'ctrl-q': function('s:build_qflist'), 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
+  ]]
+  vim.api.nvim_command("command! -bang -nargs=? -complete=dir AllFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'rg --files --smart-case -uu --glob !.git'}), <bang>0)")
+  vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
+  map('n', '<localleader>b',     '<cmd>Buffers<cr>', opts)
+  map('n', '<localleader>c',     '<cmd>Commands<cr>', opts)
+  map('n', '<c-p>',              '<cmd>Files<cr>', opts)
+  map('n', '<localleader><c-p>', '<cmd>AllFiles<cr>', opts)
+  map('n', '<localleader>g',     "<cmd>Rg<cr>", opts)
 end
 
 --- preservim/nerdtree
@@ -99,13 +104,12 @@ M.load_all = function ()
 
     -- search
     use {
-      'nvim-telescope/telescope.nvim',
-      cmd = 'Telescope',
-      wants = {'popup.nvim', 'plenary.nvim'},
+      'junegunn/fzf.vim',
+      cmd = {'Files', 'GFiles', 'Buffers', 'Rg', 'Commands', 'BCommits'},
+      wants = {'fzf'},
       requires = {
-        {'nvim-lua/popup.nvim', opt = true},
-        {'nvim-lua/plenary.nvim', opt = true},
-      },
+        {'junegunn/fzf', opt = true}
+      }
     }
 
     -- registers
@@ -123,7 +127,7 @@ M.load_all = function ()
 
   -- Configure plugins
   nerdtree_setup()
-  telescope_nvim_setup()
+  fzf_vim_setup()
   nvim_toggleterm_lua_setup()
   vim.g.vista_default_executive = 'nvim_lsp'
   vim.g['vista#renderer#enable_icon'] = false
