@@ -92,7 +92,7 @@ M.load_all = function ()
     use {'mg979/vim-visual-multi', opt = true}
 
     -- vcs
-    use {'airblade/vim-gitgutter', keys = {'<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'}}
+    use {'airblade/vim-gitgutter'} -- , keys = {'<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'}}
 
     -- filetype
     use {'sheerun/vim-polyglot', event = {'BufNew'}}
@@ -133,6 +133,13 @@ M.load_all = function ()
   vim.g['vista#renderer#enable_icon'] = false
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
+  -- gitgutter symbols
+  vim.g.gitgutter_sign_added = '▎'
+  vim.g.gitgutter_sign_modified = '▎'
+  vim.g.gitgutter_sign_removed = '▁'
+  vim.g.gitgutter_sign_removed_first_line = '▔'
+  vim.g.gitgutter_sign_removed_above_and_below = '░'
+  vim.g.gitgutter_sign_modified_removed = '▎'
 end
 
 return M
