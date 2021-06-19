@@ -76,23 +76,27 @@ M.load_all = function ()
           'nvim-compe',
           'lsp_extensions.nvim',
           'nvim-lightbulb',
-          'vim-visual-multi',
           'nvim-treesitter'
       },
       config = function() require'lsp'.setup() end,
     }
     use {'hrsh7th/nvim-compe', opt = true}
-    use {'weihanglo/lsp_extensions.nvim', opt = true, branch = 'customized'}
+    use {'nvim-lua/lsp_extensions.nvim', opt = true}
     use {'kosayoda/nvim-lightbulb', opt = true}
     use {'liuchengxu/vista.vim', cmd = 'Vista'}
 
     -- fast moves
     use {'preservim/nerdtree', cmd = 'NERDTreeToggle'}
     use {'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle'}
-    use {'mg979/vim-visual-multi', opt = true}
+    use {'mg979/vim-visual-multi'}
+    use {
+      'akinsho/nvim-toggleterm.lua',
+      cmd = 'ToggleTerm',
+      config = function () require'toggleterm'.setup{start_in_insert = false} end,
+    }
 
     -- vcs
-    use {'airblade/vim-gitgutter'} -- , keys = {'<plug>(GitGutterNextHunk)', '<plug>(GitGutterPrevHunk)'}}
+    use {'airblade/vim-gitgutter'}
 
     -- filetype
     use {'sheerun/vim-polyglot', event = {'BufNew'}}
@@ -117,12 +121,6 @@ M.load_all = function ()
 
     -- profiling startup time
     use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
-
-    use {
-      'akinsho/nvim-toggleterm.lua',
-      cmd = 'ToggleTerm',
-      config = function () require'toggleterm'.setup{start_in_insert = false} end,
-    }
   end)
 
   -- Configure plugins
