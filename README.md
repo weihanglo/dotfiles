@@ -18,7 +18,6 @@ source ~/.dotfiles/bootstrap.sh
 - [**fish**]: Kitty need fish.
 - [**fnm**]: Ease the pain of sourcing nvm.
 - [**FZF**]: Fuzzy finder goes rock.
-- [**IPython**]: A must-have for a python lover.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.

@@ -27,7 +27,6 @@ files=(
     .gitconfig
     .gitignore
     .inputrc
-    .ipython/profile_default/ipython_config.py
     .tmux.conf
 )
 
