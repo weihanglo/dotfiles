@@ -103,6 +103,9 @@ disabled = true
 [python]
 format = "[$symbol$version]($style) "
 
+[rlang]
+disabled = true
+
 [red]
 disabled = true
 
