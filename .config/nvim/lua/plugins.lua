@@ -107,6 +107,7 @@ M.load_all = function ()
     }
 
     -- search
+    use {'google/vim-searchindex', opt = true} -- show search index beyond [>99/>99]
     use {
       'junegunn/fzf.vim',
       cmd = {'Files', 'GFiles', 'Buffers', 'Rg', 'Commands', 'BCommits'},
