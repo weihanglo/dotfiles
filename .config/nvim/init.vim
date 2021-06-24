@@ -92,18 +92,27 @@ command! Gblame execute 'Tig blame % +' . line('.')
 " Check highlight group under current cursor
 command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
 
-" Use map <buffer> to only map dd in the quickfix window.
+" Use map <buffer> to only map dd in the quickfix/loclist buffer.
 " Ref: https://stackoverflow.com/a/48817071/8851735
-function! RemoveQfItem()
-  let idx = line('.') - 1
-  let qflist = getqflist()
-  call remove(qflist, idx)
-  call setqflist(qflist, 'r')
-  :copen
-  let idx = idx + 1
-  execute idx
+function! RemoveListItem() abort
+    let l:idx = line('.') - 1
+    if getwininfo(win_getid())[0].loclist
+        let l:list = getloclist(winnr())
+        call remove(l:list, l:idx)
+        call setloclist(winnr(), l:list, 'r')
+        :lopen
+    elseif getwininfo(win_getid())[0].quickfix
+        let l:list = getqflist()
+        call remove(l:list, l:idx)
+        call setqflist(l:list, 'r')
+        :copen
+    else
+        echoerr 'both quickfix and loclist not found'
+    endif
+    let l:idx = idx + 1
+    execute l:idx
 endfunction
-autocmd FileType qf map <buffer> dd <cmd>call RemoveQfItem()<cr>
+autocmd FileType qf map <buffer> dd <cmd>call RemoveListItem()<cr>
 " }}}
 
 " packer.nvim {{{
