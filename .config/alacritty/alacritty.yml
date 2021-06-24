@@ -2,39 +2,16 @@ window:
   dimensions:
     columns: 80
     lines: 24
-  # Window decorations
-  #
-  # Values for `decorations`:
-  #     - full: Borders and title bar
-  #     - none: Neither borders nor title bar
-  #
-  # Values for `decorations` (macOS only):
-  #     - transparent: Title bar, transparent background and title bar buttons
-  #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: none
-  # Startup Mode (changes require restart)
-  #
-  # Values for `startup_mode`:
-  #   - Windowed
-  #   - Maximized
-  #   - Fullscreen
-  #
-  # Values for `startup_mode` (macOS only):
-  #   - SimpleFullscreen
   startup_mode: Maximized
 
 scrolling:
-  # Maximum number of lines in the scrollback buffer.
-  # Specifying '0' will disable scrolling.
   history: 100000
-  # Number of lines the viewport will move for every line scrolled when
-  # scrollback is enabled (history > 0).
   multiplier: 5
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
-# Font configuration (changes require restart)
 font:
   normal:
     family: JetBrains Mono
@@ -46,14 +23,12 @@ font:
     family: JetBrains Mono
     style: ExtraLight Italic
   bold_italic:
-    family: JetBrains Mono 
+    family: JetBrains Mono
     style: Bold Italic
-  size: 20
+  size: 24
 
-# Background opacity
 background_opacity: 0.7
 
-# Live config reload (changes require restart)
 live_config_reload: true
 
 selection:
