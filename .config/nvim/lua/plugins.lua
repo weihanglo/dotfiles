@@ -76,7 +76,7 @@ M.load_all = function ()
           'nvim-compe',
           'lsp_extensions.nvim',
           'nvim-lightbulb',
-          'nvim-treesitter'
+          'nvim-treesitter',
       },
       config = function() require'lsp'.setup() end,
     }

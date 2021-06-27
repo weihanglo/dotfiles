@@ -50,6 +50,7 @@ local function on_attach(client, bufnr)
   map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   map('n', '<localleader>e',        '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', opts)
+  map('n', '<localleader>E',        '<cmd>lua vim.lsp.diagnostic.set_loclist({workspace = true})<cr>', opts)
 
   -- Vim options setup
   local opt = function(...) vim.api.nvim_buf_set_option(bufnr, ...) end
