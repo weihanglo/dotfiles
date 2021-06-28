@@ -64,7 +64,7 @@ augroup END
 
 augroup ModeChanges
     autocmd!
-    autocmd TermOpen * setlocal signcolumn=no|startinsert
+    autocmd TermOpen * setlocal signcolumn=no nonu nornu|startinsert
     autocmd TermClose term://*:tig*,term://*:gitui* bd!
 augroup END
 " }}}
@@ -87,7 +87,6 @@ function! Tig(args) abort
     execute 'terminal tig ' . args
 endfunction
 command! -narg=* Tig call Tig(<q-args>)
-command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
 command! Gblame execute 'Tig blame % +' . line('.')
 " Check highlight group under current cursor
 command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
@@ -116,9 +115,7 @@ autocmd FileType qf map <buffer> dd <cmd>call RemoveListItem()<cr>
 " }}}
 
 " packer.nvim {{{
-if has('nvim')
-    lua require'plugins'.load_all()
-endif
+lua require'plugins'.load_all()
 " }}}
 
 " colorscheme {{{
@@ -137,8 +134,8 @@ colorscheme gruvbox-material
 
 " vim-gitgutter {{{
 let g:gitgutter_map_keys = 0
-nmap <silent> ]c                        <plug>(GitGutterNextHunk)
-nmap <silent> [c                        <plug>(GitGutterPrevHunk)
+nmap <silent> ]c        <plug>(GitGutterNextHunk)
+nmap <silent> [c        <plug>(GitGutterPrevHunk)
 " }}}
 
 " Vim-Visual-Multi {{{
