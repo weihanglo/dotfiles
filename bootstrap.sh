@@ -23,6 +23,7 @@ files=(
     .config/nvim/init.vim
     .config/nvim/lua/lsp.lua
     .config/nvim/lua/plugins.lua
+    .config/ripgreprc
     .config/starship.toml
     .gitconfig
     .gitignore

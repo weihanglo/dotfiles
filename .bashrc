@@ -25,8 +25,11 @@ if [[ $? -eq 0 ]]; then
     export LESS=isFMRX
     # EDITOR and VISUAL
     export VISUAL=nvim EDITOR=nvim
+    # Set locale
     export LC_ALL=en_US.UTF-8
 
+    # Ripgrep config
+    export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
     # Additional PATHs
     export PATH="$HOME/.local/bin:$PATH"
     export FZF_DEFAULT_COMMAND='rg --files --smart-case'

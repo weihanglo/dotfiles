@@ -1,0 +1,3 @@
+--follow
+--glob=!vendor
+--smart-case

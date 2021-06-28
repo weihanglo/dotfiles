@@ -22,6 +22,8 @@ if status is-login
     # Set locale
     set -gx LC_ALL en_US.UTF-8
 
+    # Ripgrep config
+    set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgreprc
     # Additional PATHs
     set -agx PATH $HOME/.local/bin
     # FZF
