@@ -1,7 +1,7 @@
 local M = {}
 
 --- nvim-treesitter/nvim-treesitter
-local function nvim_treesitter_setup()
+local function nvim_treesitter_config()
   return require'nvim-treesitter.configs'.setup{
     ensure_installed = "maintained",
     highlight = { enable = true },
@@ -42,8 +42,14 @@ end
 local function nvim_toggleterm_lua_setup()
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
-  map('n', '<localleader>t', ':<c-u>execute v:count1 . "ToggleTerm"<cr>', opts)
-  map('t', '<localleader>t', '<c-\\><c-n>:<c-u>execute v:count1 . "ToggleTerm"<cr>', opts)
+  map('n', '<localleader>t', ':<c-u>execute v:count . "ToggleTerm"<cr>', opts)
+  map('t', '<localleader>t', '<c-\\><c-n>:<c-u>execute v:count . "ToggleTerm"<cr>', opts)
+end
+local function nvim_toggleterm_lua_config()
+  require'toggleterm'.setup{
+    start_in_insert = false,
+    persist_size = false,
+  }
 end
 
 --- Load all plugins
@@ -92,7 +98,7 @@ M.load_all = function ()
     use {
       'akinsho/nvim-toggleterm.lua',
       cmd = 'ToggleTerm',
-      config = function () require'toggleterm'.setup{start_in_insert = false} end,
+      config = nvim_toggleterm_lua_config,
     }
 
     -- vcs
@@ -103,7 +109,7 @@ M.load_all = function ()
     use {
       'nvim-treesitter/nvim-treesitter',
       opt = true,
-      config = nvim_treesitter_setup,
+      config = nvim_treesitter_config,
     }
 
     -- search
