@@ -53,7 +53,7 @@ local function nvim_toggleterm_lua_config()
 end
 
 --- Load all plugins
-M.load_all = function ()
+function M.load_all()
   -- Auto install packer.nvim
   local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
   local cmd = vim.api.nvim_command
@@ -121,6 +121,15 @@ M.load_all = function ()
       requires = {
         {'junegunn/fzf', opt = true}
       }
+    }
+
+    -- dap
+    use {
+      'rcarriga/nvim-dap-ui',
+      ft = {'rust'},
+      wants = {'nvim-dap'},
+      requires = {{'mfussenegger/nvim-dap', opt = true}},
+      config = function() require'dap-configs'.setup() end
     }
 
     -- registers
