@@ -1,6 +1,10 @@
+-- Please put each language server under "$XDG_DATA_HOME/nvim/lss" directory,
+-- which equals `vim.fn.stdpath('data')`.
+
 local vim = vim
 local lspconfig = require'lspconfig'
 local M = {}
+local lss_dir = vim.fn.stdpath('data') .. '/lss'
 
 local function on_attach(client, bufnr)
   -- Auto-completion functionality from `hrsh7th/nvim-compe`
@@ -11,8 +15,8 @@ local function on_attach(client, bufnr)
       path = true,
       buffer = true,
       tags = true,
-      spell = true,
-      calc = true,
+      spell = false,
+      calc = false,
       emoji = true,
       nvim_lsp = true,
       nvim_lua = true,
@@ -222,7 +226,7 @@ local function sumneko_lua_setup()
   else
     print("Unsupported system for sumneko")
   end
-  local sumneko_root_path = vim.fn.stdpath('data') .. '/lss/lua-language-server'
+  local sumneko_root_path = lss_dir .. '/lua-language-server'
   local sumneko_binary = sumneko_root_path .. '/bin/' .. sys .. '/lua-language-server'
   lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
@@ -298,7 +302,8 @@ local function elixirls_setup()
   else
     print("Unsupported system for elixirls")
   end
-  local elixirls_root_path = vim.fn.stdpath('data') .. '/lss/elixir-ls'
+
+  local elixirls_root_path =  lss_dir .. '/elixir-ls'
   local elixirls_binary = elixirls_root_path .. '/release/language_server.' .. ext
   lspconfig.elixirls.setup{
     on_attach = on_attach,
