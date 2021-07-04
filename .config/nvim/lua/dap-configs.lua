@@ -3,20 +3,19 @@
 
 local vim = vim
 local M = {}
+local dap = require('dap')
+
+local function get_file(prompt, path)
+  return function()
+    path = path or ''
+    return vim.fn.input(prompt, vim.fn.getcwd() .. '/' .. path, 'file')
+  end
+end
 
 function M.setup()
-  local dap = require('dap')
   require'dapui'.setup()
 
-  local function get_file(prompt, path)
-    return function()
-      path = path or ''
-      return vim.fn.input(prompt, vim.fn.getcwd() .. '/' .. path, 'file')
-    end
-  end
-
   -- Vim commands setup
-
   vim.api.nvim_exec([[
     command! DapContinue            lua require'dap'.continue()
     command! DapRun                 lua require'dap'.run()
@@ -56,30 +55,37 @@ function M.setup()
   signdef('DapBreakpointRejected', {text='●', texthl='LineNr'})
   signdef('DapStopped',            {text='→', texthl='MatchParen'})
 
-  --- Adapter: lldb
-  -- Modern LLVM installations are shipped with lldb-vscode,
-  -- so you only need to add it to your PATH.
+  -- Load debugger adapter configurations
+  M.adapter_lldb()
+  M.adapter_go()
+
+  -- Load global configurations for each debugee
+  M.debugee_rust(false)
+  M.debugee_go(false)
+
+  -- Merge VSCode `.vscode/launch.json` under current workspace
+  require'dap.ext.vscode'.load_launchjs()
+end
+
+--- Adapter: lldb
+--
+-- `lldb-vscode --help`
+-- Modern LLVM installations are shipped with lldb-vscode,
+-- so you only need to add it to your PATH.
+function M.adapter_lldb()
   dap.adapters.lldb = {
     type = 'executable',
-    command = 'lldb-vscode'
+    command = 'lldb-vscode',
+    args = {}
   }
+end
 
-  --- Debugee: Rust
-  dap.configurations.rust = {
-    {
-      name = 'Launch LLDB for Rust',
-      type = 'lldb',
-      request = 'launch',
-      program = get_file('Executable to debug: ', 'target/debug/'),
-      cwd = '${workspaceFolder}',
-      stopOnEntry = false,
-      args = {},
-      runInTerminal = false,
-  --- Adapter: GO delve dap
-  --
-  -- `go get -u github.com/go-delve/delve/cmd/dlv`
-  -- `dlv help dap`
-  -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+--- Adapter: GO delve dap
+--
+-- `go get -u github.com/go-delve/delve/cmd/dlv`
+-- `dlv help dap`
+-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+function M.adapter_go()
   dap.adapters.go = function(callback, config)
     local function echoerr(msg) vim.api.nvim_echo({{msg, 'ErrorMsg'}}, true, {}) end
     local function echowarn(msg) vim.api.nvim_echo({{msg, 'WarningMsg'}}, true, {}) end
@@ -122,12 +128,60 @@ function M.setup()
       }
     )
   end
+end
 
-  --- Debugee: Go delve dap
-  --
-  -- https://github.com/go-delve/delve/blob/de117a2f/service/dap/server.go#L135-L148
-  -- https://github.com/go-delve/delve/blob/9dfd164c/service/dap/server.go#L737-L901
-  -- https://github.com/golang/vscode-go/blob/master/package.json
+--- Debugee: Rust
+--
+-- https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode#configurations
+-- https://github.com/llvm/llvm-project/blob/release/12.x/lldb/tools/lldb-vscode/package.json
+function M.debugee_rust(reload_launch_json)
+  dap.configurations.rust = {
+    {
+      name = 'Debug Rust executable',
+      type = 'lldb',
+      request = 'launch',
+      program = get_file('Executable to debug: ', 'target/debug/'),
+      cwd = '${workspaceFolder}',
+      stopOnEntry = false,
+      runInTerminal = false,
+      args = {},
+      env = {},
+    },
+    {
+      name = 'Debug Rust `cargo run`',
+      type = 'lldb',
+      request = 'launch',
+      program = 'cargo',
+      cwd = '${workspaceFolder}',
+      stopOnEntry = false,
+      runInTerminal = false,
+      args = {'run'},
+      env = {},
+    },
+    {
+      name = 'Debug Rust tests',
+      type = 'lldb',
+      request = 'launch',
+      program = 'cargo',
+      cwd = '${workspaceFolder}',
+      stopOnEntry = false,
+      runInTerminal = false,
+      args = {'test', '--', '${file}'},
+      env = {},
+    },
+  }
+
+  if reload_launch_json then
+    require'dap.ext.vscode'.load_launchjs()
+  end
+end
+
+--- Debugee: Go delve dap
+--
+-- https://github.com/go-delve/delve/blob/de117a2f/service/dap/server.go#L135-L148
+-- https://github.com/go-delve/delve/blob/9dfd164c/service/dap/server.go#L737-L901
+-- https://github.com/golang/vscode-go/blob/master/package.json
+function M.debugee_go(reload_launch_json)
   dap.configurations.go = {
     {
       type = 'go',
@@ -160,8 +214,9 @@ function M.setup()
     },
   }
 
-  -- Merge VSCode `.vscode/launch.json` under current workspace
-  require'dap.ext.vscode'.load_launchjs()
+  if reload_launch_json then
+    require'dap.ext.vscode'.load_launchjs()
+  end
 end
 
 return M
