@@ -126,7 +126,7 @@ function M.load_all()
     -- dap
     use {
       'rcarriga/nvim-dap-ui',
-      ft = {'rust'},
+      ft = {'rust', 'go'},
       wants = {'nvim-dap'},
       requires = {{'mfussenegger/nvim-dap', opt = true}},
       config = function() require'dap-configs'.setup() end
