@@ -11,6 +11,8 @@ local function get_file(prompt, path)
     return vim.fn.input(prompt, vim.fn.getcwd() .. '/' .. path, 'file')
   end
 end
+local function echoerr(msg) vim.api.nvim_echo({{msg, 'ErrorMsg'}}, true, {}) end
+local function echowarn(msg) vim.api.nvim_echo({{msg, 'WarningMsg'}}, true, {}) end
 
 function M.setup()
   require'dapui'.setup()
@@ -87,8 +89,6 @@ end
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 function M.adapter_go()
   dap.adapters.go = function(callback, config)
-    local function echoerr(msg) vim.api.nvim_echo({{msg, 'ErrorMsg'}}, true, {}) end
-    local function echowarn(msg) vim.api.nvim_echo({{msg, 'WarningMsg'}}, true, {}) end
     local function parse_port(data)
       -- stdout example: "DAP server listening at: 127.0.0.1:51576"
       local res = ''
@@ -135,6 +135,29 @@ end
 -- https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode#configurations
 -- https://github.com/llvm/llvm-project/blob/release/12.x/lldb/tools/lldb-vscode/package.json
 function M.debugee_rust(reload_launch_json)
+  local function get_test_executable()
+    echowarn('\n[DAP] building Rust tests...')
+    local result = vim.fn.system([[
+      cargo test --no-run --message-format=json 2> /dev/null | jq -r 'select((.executable != null) and (.target.kind | contains(["lib"]))) | .executable'
+    ]])
+    local test_targets = {}
+    for target in result:gmatch("[^\r\n]+") do
+        table.insert(test_targets, target)
+    end
+    if #test_targets == 1 then
+      return test_targets[1]
+    elseif #test_targets > 2 then
+      local inputlist = {'Select a test target'}
+      for i, target in ipairs(test_targets) do
+        table.insert(inputlist, i..': '..target)
+      end
+      local selected = vim.fn.inputlist(inputlist)
+      return test_targets[selected]
+    else
+      echowarn('[DAP] no test targest found')
+    end
+  end
+
   dap.configurations.rust = {
     {
       name = 'Debug Rust executable',
@@ -148,25 +171,14 @@ function M.debugee_rust(reload_launch_json)
       env = {},
     },
     {
-      name = 'Debug Rust `cargo run`',
-      type = 'lldb',
-      request = 'launch',
-      program = 'cargo',
-      cwd = '${workspaceFolder}',
-      stopOnEntry = false,
-      runInTerminal = false,
-      args = {'run'},
-      env = {},
-    },
-    {
       name = 'Debug Rust tests',
       type = 'lldb',
       request = 'launch',
-      program = 'cargo',
+      program = get_test_executable,
       cwd = '${workspaceFolder}',
       stopOnEntry = false,
       runInTerminal = false,
-      args = {'test', '--', '${file}'},
+      args = {},
       env = {},
     },
   }
