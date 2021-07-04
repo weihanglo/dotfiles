@@ -160,13 +160,13 @@ local function pyls_setup()
     local cwd = vim.fn.getcwd()
     local root = lspconfig.util.root_pattern('pyproject.toml')(cwd)
     if root then
-      cmd = 'poetry env info -p'
+      cmd = {'python', '-m', 'poetry', 'env', 'info', '-p'}
     end
 
     if root == '' or root == nil then
       root = lspconfig.util.root_pattern('Pipfile')(cwd)
       if root then
-        cmd = 'python -m pipenv --venv'
+        cmd = {'python', '-m', 'pipenv', '--venv'}
       end
     end
 
