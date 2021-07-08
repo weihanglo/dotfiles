@@ -91,11 +91,7 @@ function M.adapter_go()
   dap.adapters.go = function(callback, config)
     local function parse_port(data)
       -- stdout example: "DAP server listening at: 127.0.0.1:51576"
-      local res = ''
-      res = string.gsub(data, '%s+', '')
-      res = string.match(res, ':%d+$')
-      res = string.sub(res, 2)
-      return tonumber(res)
+      return tonumber(data:gsub('%s+', ''):match(':%d+$'):sub(2))
     end
     local dlv_started = false
     local function on_event(_, data, event)
