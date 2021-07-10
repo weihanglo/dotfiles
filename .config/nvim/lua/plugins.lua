@@ -1,5 +1,7 @@
 local M = {}
 
+local map = vim.api.nvim_set_keymap
+
 --- nvim-treesitter/nvim-treesitter
 local function nvim_treesitter_config()
   return require'nvim-treesitter.configs'.setup{
@@ -12,7 +14,6 @@ end
 
 --- junegunn/fzf.vim
 local function fzf_vim_setup()
-  local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
   -- From fzf official doc.
   -- An action can be a reference to a function that processes selected lines.
@@ -31,9 +32,55 @@ local function fzf_vim_setup()
   map('n', '<localleader>g',     "<cmd>Rg<cr>", opts)
 end
 
+--- hoob3rt/lualine.nvim
+local function lualine_setup()
+  local function encoding()
+    local enc = vim.o.fenc:len() > 0 and vim.o.fenc or vim.o.enc
+    return enc ~= 'utf-8' and enc or ''
+  end
+  require'lualine'.setup{
+    options = {
+      theme = 'gruvbox_material',
+      icons_enabled = false,
+      component_separators = '',
+      section_separators = '',
+    },
+    sections = {
+      lualine_a = {},
+      lualine_b = {
+        'branch',
+        {
+          'diff',
+          color_added = '#a9b665', -- hi GreenSign
+          color_modified = '#7daea3', -- hi BlueSign
+          color_removed = '#ea6962', -- hi RedSign
+        }
+      },
+      lualine_c = {
+        'filename',
+        {'diagnostics', sources = {'nvim_lsp'}}
+      },
+      lualine_x = {
+        encoding,
+        {'fileformat', format = function (x) return x ~= 'unix' and x or '' end},
+        'filetype'
+      },
+      lualine_y = {'progress'},
+      lualine_z = {'location'},
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {{'filename', path = 1}},
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+    },
+  }
+end
+
 --- airblade/vim-gitgutter
 local function vim_gitgutter_setup()
-  local map = vim.api.nvim_set_keymap
   local opts = { noremap = false, silent = true }
   map('n', '[c', '<plug>(GitGutterPrevHunk)', opts)
   map('n', ']c', '<plug>(GitGutterNextHunk)', opts)
@@ -49,14 +96,12 @@ end
 
 --- preservim/nerdtree
 local function nerdtree_setup()
-  local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
   map('n', '<localleader>n', '<cmd>NERDTreeToggle<cr>', opts)
 end
 
 -- akinsho/nvim-toggleterm.lua
 local function nvim_toggleterm_lua_setup()
-  local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
   map('n', '<localleader>t', ':<c-u>execute v:count . "ToggleTerm"<cr>', opts)
   map('t', '<localleader>t', '<c-\\><c-n>:<c-u>execute v:count . "ToggleTerm"<cr>', opts)
@@ -86,7 +131,7 @@ function M.load_all()
     use {'wbthomason/packer.nvim', opt = true}
 
     -- user interface
-    use {'itchyny/lightline.vim'}
+    use {'hoob3rt/lualine.nvim'}
     use {'sainnhe/gruvbox-material'}
     use {'edkolev/tmuxline.vim', opt = true}
 
@@ -156,6 +201,7 @@ function M.load_all()
   end)
 
   -- Configure plugins
+  lualine_setup()
   nerdtree_setup()
   fzf_vim_setup()
   nvim_toggleterm_lua_setup()

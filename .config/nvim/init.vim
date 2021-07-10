@@ -137,11 +137,6 @@ colorscheme gruvbox-material
 let g:VM_mouse_mappings = 1
 " }}}
 
-" Lightline {{{
-let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox_material'
-let g:lightline.subseparator = { 'left': '', 'right': '' }
-
 " Tmuxline {{{
 let g:tmuxline_powerline_separators = 0
 let g:tmuxline_preset = 'minimal'
