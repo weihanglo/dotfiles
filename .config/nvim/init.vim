@@ -25,6 +25,7 @@ set pumblend=15
 set pumheight=15
 set scrolloff=2
 set shiftwidth=4
+set shortmess+=I
 set showmatch
 set showtabline=0
 set sidescrolloff=4
