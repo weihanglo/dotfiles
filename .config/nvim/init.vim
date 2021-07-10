@@ -133,12 +133,6 @@ colorscheme gruvbox-material
 "hi! EndOFBuffer ctermbg=NONE guibg=NONE
 " }}}
 
-" vim-gitgutter {{{
-let g:gitgutter_map_keys = 0
-nmap <silent> ]c        <plug>(GitGutterNextHunk)
-nmap <silent> [c        <plug>(GitGutterPrevHunk)
-" }}}
-
 " Vim-Visual-Multi {{{
 let g:VM_mouse_mappings = 1
 " }}}

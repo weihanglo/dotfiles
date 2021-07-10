@@ -31,6 +31,22 @@ local function fzf_vim_setup()
   map('n', '<localleader>g',     "<cmd>Rg<cr>", opts)
 end
 
+--- airblade/vim-gitgutter
+local function vim_gitgutter_setup()
+  local map = vim.api.nvim_set_keymap
+  local opts = { noremap = false, silent = true }
+  map('n', '[c', '<plug>(GitGutterPrevHunk)', opts)
+  map('n', ']c', '<plug>(GitGutterNextHunk)', opts)
+  vim.g.gitgutter_map_keys = 0
+  -- gitgutter symbols
+  vim.g.gitgutter_sign_added = '▎'
+  vim.g.gitgutter_sign_modified = '▎'
+  vim.g.gitgutter_sign_removed = '▁'
+  vim.g.gitgutter_sign_removed_first_line = '▔'
+  vim.g.gitgutter_sign_removed_above_and_below = '░'
+  vim.g.gitgutter_sign_modified_removed = '▎'
+end
+
 --- preservim/nerdtree
 local function nerdtree_setup()
   local map = vim.api.nvim_set_keymap
@@ -143,17 +159,11 @@ function M.load_all()
   nerdtree_setup()
   fzf_vim_setup()
   nvim_toggleterm_lua_setup()
+  vim_gitgutter_setup()
   vim.g.vista_default_executive = 'nvim_lsp'
   vim.g['vista#renderer#enable_icon'] = false
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
-  -- gitgutter symbols
-  vim.g.gitgutter_sign_added = '▎'
-  vim.g.gitgutter_sign_modified = '▎'
-  vim.g.gitgutter_sign_removed = '▁'
-  vim.g.gitgutter_sign_removed_first_line = '▔'
-  vim.g.gitgutter_sign_removed_above_and_below = '░'
-  vim.g.gitgutter_sign_modified_removed = '▎'
 end
 
 return M
