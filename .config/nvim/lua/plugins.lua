@@ -133,7 +133,6 @@ function M.load_all()
     -- user interface
     use {'hoob3rt/lualine.nvim'}
     use {'sainnhe/gruvbox-material'}
-    use {'edkolev/tmuxline.vim', opt = true}
 
     -- nvim-lsp
     use {

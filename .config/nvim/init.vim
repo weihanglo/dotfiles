@@ -137,11 +137,6 @@ colorscheme gruvbox-material
 let g:VM_mouse_mappings = 1
 " }}}
 
-" Tmuxline {{{
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_preset = 'minimal'
-" }}}
-
 " zoomwintab.vim {{{
 let g:zoomwintab_remap = 0
 nnoremap <localleader>z <cmd>ZoomWinTabToggle<cr>
