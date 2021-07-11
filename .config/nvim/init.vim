@@ -1,7 +1,6 @@
 " General {{{
-set autoindent
 set clipboard+=unnamed,unnamedplus
-set colorcolumn=80
+set colorcolumn=80,120
 set completeopt=menuone,noinsert,noselect
 set cursorline
 set dictionary+=/usr/share/dict/words
@@ -9,16 +8,12 @@ set expandtab
 set foldmethod=indent
 set foldnestmax=5
 set hidden
-set history=10000
-set hlsearch
 set ignorecase
-set incsearch
 set lazyredraw
 set linebreak
 set list listchars=eol:¬,tab:▸\ ,extends:»,precedes:«,trail:•
 set mouse=a
 set nofoldenable
-set nonumber
 set noswapfile
 set nowrap
 set pumblend=15
@@ -31,21 +26,20 @@ set showtabline=0
 set sidescrolloff=4
 set smartcase
 set smartindent
-set smarttab
 set softtabstop=4
 set splitbelow
 set splitright
 set synmaxcol=200
 set termguicolors
-set timeoutlen=500
-set undodir=/tmp/nvim/undo
+set timeoutlen=350
 set undofile
 set undolevels=10000
 set updatetime=350
 set wildignore+=*.swo,*.swp,*~,*.log,*.db,*.sqilte,*__pycache__/*
 set wildignorecase
-set wildmenu wildmode=longest:full,full
+set wildmode=longest:full,full
 set winminheight=0
+set winminwidth=0
 " }}}
 
 " Filetype {{{
