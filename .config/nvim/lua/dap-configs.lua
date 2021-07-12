@@ -35,6 +35,7 @@ function M.setup()
     command! DapReplOpen            lua require'dap'.repl.open()
     command! DapReplClose           lua require'dap'.repl.close()
     command! DapUiToggle            lua require'dapui'.toggle()
+    command! DapReloadConfigs       lua require'dap-configs'.load_configs()
   ]], false)
 
   -- Vim keymaps setup
@@ -61,12 +62,8 @@ function M.setup()
   M.adapter_lldb()
   M.adapter_go()
 
-  -- Load global configurations for each debugee
-  M.debugee_rust(false)
-  M.debugee_go(false)
+  M.load_configs()
 
-  -- Merge VSCode `.vscode/launch.json` under current workspace
-  require'dap.ext.vscode'.load_launchjs()
 end
 
 --- Adapter: lldb
@@ -130,7 +127,7 @@ end
 --
 -- https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode#configurations
 -- https://github.com/llvm/llvm-project/blob/release/12.x/lldb/tools/lldb-vscode/package.json
-function M.debugee_rust(reload_launch_json)
+local function debugee_rust()
   local function get_test_executable()
     echowarn('\n[DAP] building Rust tests...')
     local result = vim.fn.system([[
@@ -178,10 +175,6 @@ function M.debugee_rust(reload_launch_json)
       env = {},
     },
   }
-
-  if reload_launch_json then
-    require'dap.ext.vscode'.load_launchjs()
-  end
 end
 
 --- Debugee: Go delve dap
@@ -189,7 +182,7 @@ end
 -- https://github.com/go-delve/delve/blob/de117a2f/service/dap/server.go#L135-L148
 -- https://github.com/go-delve/delve/blob/9dfd164c/service/dap/server.go#L737-L901
 -- https://github.com/golang/vscode-go/blob/master/package.json
-function M.debugee_go(reload_launch_json)
+local function debugee_go()
   dap.configurations.go = {
     {
       type = 'go',
@@ -221,10 +214,14 @@ function M.debugee_go(reload_launch_json)
       env = {}, -- env var table
     },
   }
+end
 
-  if reload_launch_json then
-    require'dap.ext.vscode'.load_launchjs()
-  end
+--- Loads global configurations for each debugee and merges VSCode
+-- `.vscode/launch.json` under current workspace.
+function M.load_configs()
+  debugee_rust()
+  debugee_go()
+  require'dap.ext.vscode'.load_launchjs()
 end
 
 return M
