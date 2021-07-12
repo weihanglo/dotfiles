@@ -46,7 +46,7 @@ local function lualine_setup()
       section_separators = '',
     },
     sections = {
-      lualine_a = {},
+      lualine_a = {'mode'},
       lualine_b = {
         'branch',
         {
