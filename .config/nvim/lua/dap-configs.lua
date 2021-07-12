@@ -81,7 +81,7 @@ end
 
 --- Adapter: GO delve dap
 --
--- `go get -u github.com/go-delve/delve/cmd/dlv`
+-- `go install github.com/go-delve/delve/cmd/dlv@latest`
 -- `dlv help dap`
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 function M.adapter_go()
