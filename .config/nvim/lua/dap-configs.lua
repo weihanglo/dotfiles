@@ -192,7 +192,7 @@ local function debugee_go()
       stopOnEntry = false,
       program = get_file('Pkg to debug: '),
       args = {}, -- array to progarm args
-      env = {}, -- env var table
+      -- env = {}, -- env var table
     },
     {
       type = 'go',
@@ -201,7 +201,7 @@ local function debugee_go()
       mode = 'test',
       program = get_file('Pkg to debug: ', 'pkg'),
       args = {}, -- array to progarm args
-      env = {}, -- env var table
+      -- env = {}, -- env var table
     },
     {
       type = 'go',
@@ -211,7 +211,7 @@ local function debugee_go()
       trace = true,
       program = get_file('Executable to debug: '),
       args = {}, -- array to progarm args
-      env = {}, -- env var table
+      -- env = {}, -- env var table
     },
   }
 end
