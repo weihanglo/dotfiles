@@ -113,29 +113,3 @@ autocmd FileType qf map <buffer> dd <cmd>call RemoveListItem()<cr>
 " packer.nvim {{{
 lua require'plugins'.load_all()
 " }}}
-
-" colorscheme {{{
-let g:gruvbox_material_background = 'soft'
-let g:gruvbox_material_better_performance = 1
-let g:gruvbox_material_diagnostic_line_highlight = 1
-let g:gruvbox_material_diagnostic_text_highlight = 1
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_transparent_background = 1
-colorscheme gruvbox-material
-"hi! Normal  ctermbg=NONE guibg=NONE
-"hi! NonText ctermbg=NONE guibg=NONE
-"hi! EndOFBuffer ctermbg=NONE guibg=NONE
-" }}}
-
-" Vim-Visual-Multi {{{
-let g:VM_mouse_mappings = 1
-" }}}
-
-" zoomwintab.vim {{{
-let g:zoomwintab_remap = 0
-nnoremap <localleader>z <cmd>ZoomWinTabToggle<cr>
-nnoremap <c-w>z         <cmd>ZoomWinTabToggle<cr>
-tnoremap <localleader>z <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
-tnoremap <c-w>z         <c-\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>
-" }}}

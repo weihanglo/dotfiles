@@ -2,6 +2,32 @@ local M = {}
 
 local map = vim.api.nvim_set_keymap
 
+--- sainnhe/gruvbox-material
+local function gruvbox_material_setup()
+  vim.g.gruvbox_material_background = 'hard'
+  vim.g.gruvbox_material_better_performance = 1
+  vim.g.gruvbox_material_diagnostic_line_highlight = 1
+  vim.g.gruvbox_material_diagnostic_text_highlight = 1
+  vim.g.gruvbox_material_enable_bold = 1
+  vim.g.gruvbox_material_enable_italic = 1
+  vim.g.gruvbox_material_transparent_background = 1
+  vim.cmd [[colorscheme gruvbox-material]]
+  -- hi! Normal  ctermbg=NONE guibg=NONE
+  -- hi! NonText ctermbg=NONE guibg=NONE
+  -- hi! EndOFBuffer ctermbg=NONE guibg=NONE
+end
+
+
+--- troydm/zoomwintab.vim
+local function zoomwintab_vim_setup()
+  local opts = { noremap = true, silent = false }
+  map('n', '<localleader>z',    '<cmd>ZoomWinTabToggle<cr>', opts)
+  map('n', '<c-w>z',            '<cmd>ZoomWinTabToggle<cr>', opts)
+  map('t', '<localleader>z',    '<c-\\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>', opts)
+  map('t', '<c-w>z',            '<c-\\><c-n><cmd>ZoomWinTabToggle<cr><cmd>startinsert<cr>', opts)
+  vim.g.zoomwintab_remap = 0
+end
+
 --- nvim-treesitter/nvim-treesitter
 local function nvim_treesitter_config()
   return require'nvim-treesitter.configs'.setup{
@@ -200,6 +226,8 @@ function M.load_all()
   end)
 
   -- Configure plugins
+  gruvbox_material_setup()
+  zoomwintab_vim_setup()
   lualine_setup()
   nerdtree_setup()
   fzf_vim_setup()
@@ -209,6 +237,8 @@ function M.load_all()
   vim.g['vista#renderer#enable_icon'] = false
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
+  -- Enable vim-visual-multi mouse mappings
+  vim.g.VM_mouse_mappings = 1
 end
 
 return M
