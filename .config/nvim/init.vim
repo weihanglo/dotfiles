@@ -110,6 +110,13 @@ endfunction
 autocmd FileType qf map <buffer> dd <cmd>call RemoveListItem()<cr>
 " }}}
 
+" grepprg: Ripgrep {{{
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+command -nargs=+ -complete=file -bar Ripgrep silent! lgrep! <args>|lopen|redraw!
+nnoremap <localleader>G :Ripgrep<space>
+" }}}
+
 " packer.nvim {{{
 lua require'plugins'.load_all()
 " }}}
