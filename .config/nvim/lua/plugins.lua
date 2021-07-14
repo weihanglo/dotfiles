@@ -160,6 +160,11 @@ function M.load_all()
     use {'hoob3rt/lualine.nvim'}
     use {'sainnhe/gruvbox-material'}
     use {'tversteeg/registers.nvim'}
+    use {
+      'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
+      ft = 'qf',
+      config = function () require'bqf'.setup{preview = {auto_preview = false}} end
+    }
 
     -- nvim-lsp
     use {
