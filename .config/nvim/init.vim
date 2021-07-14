@@ -48,7 +48,7 @@ augroup FiletypeDetectPlus
     autocmd FileType vim setlocal foldmethod=marker
     " two space indent for web developing
     autocmd BufNewFile,BufFilePre,BufRead
-        \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md}
+        \ *.{js,jsx,ts,tsx,css,html,yaml,yml,toml,json,md,lua}
         \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
     " go use tab
     autocmd FileType go
