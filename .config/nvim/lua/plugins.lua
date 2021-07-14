@@ -159,6 +159,7 @@ function M.load_all()
     -- user interface
     use {'hoob3rt/lualine.nvim'}
     use {'sainnhe/gruvbox-material'}
+    use {'tversteeg/registers.nvim'}
 
     -- nvim-lsp
     use {
@@ -175,7 +176,6 @@ function M.load_all()
     use {'hrsh7th/nvim-compe', opt = true}
     use {'nvim-lua/lsp_extensions.nvim', opt = true}
     use {'kosayoda/nvim-lightbulb', opt = true}
-    use {'liuchengxu/vista.vim', cmd = 'Vista'}
 
     -- fast moves
     use {'preservim/nerdtree', cmd = 'NERDTreeToggle'}
@@ -218,9 +218,6 @@ function M.load_all()
       config = function() require'dap-configs'.setup() end
     }
 
-    -- registers
-    use {'tversteeg/registers.nvim'}
-
     -- profiling startup time
     use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
   end)
@@ -233,8 +230,6 @@ function M.load_all()
   fzf_vim_setup()
   nvim_toggleterm_lua_setup()
   vim_gitgutter_setup()
-  vim.g.vista_default_executive = 'nvim_lsp'
-  vim.g['vista#renderer#enable_icon'] = false
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
   -- Enable vim-visual-multi mouse mappings
