@@ -50,6 +50,9 @@ disabled = true
 [git_branch]
 format = '[$symbol$branch]($style) '
 
+[git_metrics]
+disabled = true
+
 [git_status]
 # Disabled due to terriable performance in large git repos (e.g. rustc)
 disabled = true
