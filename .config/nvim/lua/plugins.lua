@@ -50,7 +50,7 @@ local function fzf_vim_setup()
     let g:fzf_action = { 'ctrl-q': function('s:build_qflist'), 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
   ]]
   vim.api.nvim_command("command! -bang -nargs=? -complete=dir AllFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'rg --files --smart-case -uu --glob !.git'}), <bang>0)")
-  vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
+  vim.g.fzf_layout = { window = { width = 1, height = 0.8 } }
   map('n', '<localleader>b',     '<cmd>Buffers<cr>', opts)
   map('n', '<localleader>c',     '<cmd>Commands<cr>', opts)
   map('n', '<c-p>',              '<cmd>Files<cr>', opts)
@@ -82,11 +82,9 @@ local function lualine_setup()
           color_removed = '#ea6962', -- hi RedSign
         }
       },
-      lualine_c = {
-        'filename',
-        {'diagnostics', sources = {'nvim_lsp'}}
-      },
+      lualine_c = {'filename'},
       lualine_x = {
+        {'diagnostics', sources = {'nvim_lsp'}},
         encoding,
         {'fileformat', format = function (x) return x ~= 'unix' and x or '' end},
         'filetype'
