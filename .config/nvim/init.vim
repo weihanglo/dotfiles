@@ -64,7 +64,7 @@ augroup ModeChanges
 augroup END
 " }}}
 
-" Genernal key mappings {{{
+" Genernal key mappings and commands {{{
 let maplocalleader = ','
 " Move visual block
 vnoremap K :m '<-2<cr>gv=gv

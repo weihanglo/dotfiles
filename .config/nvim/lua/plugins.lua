@@ -183,7 +183,7 @@ function M.load_all()
     -- fast moves
     use {'preservim/nerdtree', cmd = 'NERDTreeToggle'}
     use {'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle'}
-    use {'mg979/vim-visual-multi'}
+    use {'mg979/vim-visual-multi', opt = true}
     use {
       'akinsho/nvim-toggleterm.lua',
       cmd = 'ToggleTerm',
@@ -220,9 +220,6 @@ function M.load_all()
       requires = {{'mfussenegger/nvim-dap', opt = true}},
       config = function() require'dap-configs'.setup() end
     }
-
-    -- profiling startup time
-    use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
   end)
 
   -- Configure plugins
