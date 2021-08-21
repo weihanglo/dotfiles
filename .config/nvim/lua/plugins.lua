@@ -223,6 +223,7 @@ function M.load_all()
       'nvim-treesitter/nvim-treesitter',
       opt = true,
       config = nvim_treesitter_config,
+      branch = '0.5-compat',
     }
 
     -- search
