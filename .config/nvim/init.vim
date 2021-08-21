@@ -116,7 +116,6 @@ set grepformat=%f:%l:%c:%m,%f:%l:%m
 command -nargs=+ -complete=file -bar Ripgrep silent! grep! <args>|copen|redraw!
 command -nargs=+ -complete=file -bar Ripgrepadd silent! grep! <args>|copen|redraw!
 nnoremap <localleader>G :Ripgrep<space>
-nnoremap <localleader>* :Ripgrep '\b<c-r><c-w>\b'<cr>
 " }}}
 
 " packer.nvim {{{

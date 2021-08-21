@@ -44,17 +44,17 @@ local function on_attach(client, bufnr)
   -- Vim keymaps setup
   local map = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local opts = { noremap = true, silent = true }
-  map('n', '<c-]>',                 '<cmd>LspDefinition<cr>', opts)
+  map('n', '<c-]>',                 '<cmd>Telescope lsp_definitions<cr>', opts)
   map('n', 'K',                     '<cmd>LspHover<cr>', opts)
   map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
-  map('n', '<localleader><space>',  '<cmd>LspCodeAction<cr>', opts)
+  map('n', '<localleader><space>',  '<cmd>Telescope lsp_code_actions theme=get_cursor<cr>', opts)
   map('n', '<f7>',                  '<cmd>LspReferences<cr>', opts)
   map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
   map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
   map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
-  map('n', '<localleader>e',        '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', opts)
-  map('n', '<localleader>E',        '<cmd>lua vim.lsp.diagnostic.set_loclist({workspace = true})<cr>', opts)
+  map('n', '<localleader>e',        '<cmd>Telescope lsp_document_diagnostics<cr>', opts)
+  map('n', '<localleader>E',        '<cmd>Telescope lsp_workspace_diagnostics<cr>', opts)
 
   -- Vim options setup
   local opt = function(...) vim.api.nvim_buf_set_option(bufnr, ...) end

@@ -38,24 +38,43 @@ local function nvim_treesitter_config()
   }
 end
 
---- junegunn/fzf.vim
-local function fzf_vim_setup()
+--- nvim-telescope/telescope.nvim
+local function telescope_nvim_setup()
   local opts = { noremap = true, silent = true }
-  -- From fzf official doc.
-  -- An action can be a reference to a function that processes selected lines.
-  vim.api.nvim_command [[
-    function! s:build_qflist(lines)
-      call setqflist(map(copy(a:lines), '{ "filename": v:val }')) | copen | cc
-    endfunction
-    let g:fzf_action = { 'ctrl-q': function('s:build_qflist'), 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
-  ]]
-  vim.api.nvim_command("command! -bang -nargs=? -complete=dir AllFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'rg --files --smart-case -uu --glob !.git'}), <bang>0)")
-  vim.g.fzf_layout = { window = { width = 1, height = 0.8 } }
-  map('n', '<localleader>b',     '<cmd>Buffers<cr>', opts)
-  map('n', '<localleader>c',     '<cmd>Commands<cr>', opts)
-  map('n', '<c-p>',              '<cmd>Files<cr>', opts)
-  map('n', '<localleader><c-p>', '<cmd>AllFiles<cr>', opts)
-  map('n', '<localleader>g',     "<cmd>Rg<cr>", opts)
+  vim.api.nvim_command('command! GStatus Telescope git_status')
+  vim.api.nvim_command('command! GBcommits Telescope git_bcommits')
+  map('n', '<localleader>b',     '<cmd>Telescope buffers<cr>', opts)
+  map('n', '<localleader>c',     '<cmd>Telescope commands theme=get_dropdown<cr>', opts)
+  map('n', '<c-p>',              '<cmd>Telescope find_files<cr>', opts)
+  local find = 'rg,--files,--smart-case,-uu,--glob,!.git'
+  map('n', '<localleader><c-p>', '<cmd>Telescope find_files find_command='..find..'<cr>', opts)
+  map('n', '<localleader>g',     '<cmd>Telescope live_grep<cr>', opts)
+  map('n', '<localleader>*',     "<cmd>exec 'Telescope grep_string prompt_prefix='.expand('<cword>').'>\\ '<cr>", opts)
+end
+local function telescope_nvim_config()
+  require('telescope').setup{
+    defaults = {
+      disable_devicons = true,
+      layout_config = {
+        horizontal = {
+          preview_width = 0.5,
+          width = 0.95,
+        },
+      },
+    },
+    pickers = {
+      buffers = {
+        theme = 'dropdown',
+        previewer = false,
+        mappings = {
+          i = {
+            ['<c-d>'] = 'delete_buffer',
+          },
+        },
+      },
+      commands = {theme = 'dropdown'},
+    },
+  }
 end
 
 --- hoob3rt/lualine.nvim
@@ -209,12 +228,11 @@ function M.load_all()
     -- search
     use {'google/vim-searchindex', opt = true} -- show search index beyond [>99/>99]
     use {
-      'junegunn/fzf.vim',
-      cmd = {'Files', 'GFiles', 'Buffers', 'Rg', 'Commands', 'BCommits'},
-      wants = {'fzf'},
-      requires = {
-        {'junegunn/fzf', opt = true}
-      }
+      'nvim-telescope/telescope.nvim',
+      wants = {'plenary.nvim'},
+      requires = {{'nvim-lua/plenary.nvim', opt = true}},
+      cmd = {'Telescope'},
+      config = telescope_nvim_config,
     }
 
     -- dap
@@ -232,7 +250,7 @@ function M.load_all()
   zoomwintab_vim_setup()
   lualine_setup()
   nerdtree_setup()
-  fzf_vim_setup()
+  telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
   vim_gitgutter_setup()
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
