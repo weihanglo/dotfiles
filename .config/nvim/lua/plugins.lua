@@ -58,7 +58,7 @@ local function telescope_nvim_config()
       layout_config = {
         horizontal = {
           preview_width = 0.5,
-          width = 0.95,
+          width = 0.90,
         },
       },
     },
