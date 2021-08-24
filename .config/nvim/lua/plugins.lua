@@ -52,33 +52,8 @@ local function telescope_nvim_setup()
   map('n', '<localleader>*',     "<cmd>exec 'Telescope grep_string prompt_prefix='.expand('<cword>').'>\\ '<cr>", opts)
 end
 local function telescope_nvim_config()
-  -- Skip previews for binary files
-  -- Ref: https://git.io/JEZMO
-  local previewers = require('telescope.previewers')
-  local Job = require('plenary.job')
-  local new_maker = function(filepath, bufnr, opts)
-    filepath = vim.fn.expand(filepath)
-    Job:new({
-      command = 'file',
-      args = {'--mime-type', '-b', filepath},
-      on_exit = function(j)
-        local mime_type = vim.split(j:result()[1], '/')[1]
-        if mime_type == 'text' then
-          previewers.buffer_previewer_maker(filepath, bufnr, opts)
-        else
-          -- maybe we want to write something to the buffer here
-          vim.schedule(function()
-            local msg = {'Binary content from file:', '', '\t'..filepath, '', 'will not be previewed.'}
-            vim.api.nvim_buf_set_lines(bufnr, 0, #msg, false, msg)
-          end)
-        end
-      end
-    }):sync()
-  end
-
   require('telescope').setup{
     defaults = {
-      buffer_previewer_maker = new_maker,
       disable_devicons = true,
       layout_config = {
         horizontal = {
