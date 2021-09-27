@@ -9,6 +9,9 @@ format = "[🔋$percentage]($style) "
 [cmake]
 disabled = true
 
+[cobol]
+disabled = true
+
 [conda]
 disabled = true
 
