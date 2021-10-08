@@ -191,7 +191,7 @@ function M.load_all()
           'nvim-compe',
           'lsp_extensions.nvim',
           'nvim-lightbulb',
-          'nvim-treesitter',
+          'nvim-treesitter-context',
       },
       config = function() require'lsp'.setup() end,
     }
@@ -215,10 +215,18 @@ function M.load_all()
     -- filetype
     use {'sheerun/vim-polyglot', event = {'BufNew'}}
     use {
-      'nvim-treesitter/nvim-treesitter',
+      'romgrk/nvim-treesitter-context',
       opt = true,
-      config = nvim_treesitter_config,
-      branch = '0.5-compat',
+      wants = {'nvim-treesitter'},
+      requires = {
+        {
+          'nvim-treesitter/nvim-treesitter',
+          opt = true,
+          config = nvim_treesitter_config,
+          branch = '0.5-compat',
+        },
+      },
+      config = function() require'treesitter-context'.setup() end,
     }
 
     -- search
