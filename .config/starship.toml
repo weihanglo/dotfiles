@@ -103,6 +103,9 @@ disabled = true
 [php]
 disabled = true
 
+[pulumi]
+disabled = true
+
 [purescript]
 disabled = true
 
