@@ -85,7 +85,7 @@ local function lualine_setup()
   end
   require'lualine'.setup{
     options = {
-      theme = 'gruvbox_material',
+      theme = 'gruvbox-material',
       icons_enabled = false,
       component_separators = '',
       section_separators = '',
@@ -103,7 +103,7 @@ local function lualine_setup()
       },
       lualine_c = {'filename'},
       lualine_x = {
-        {'diagnostics', sources = {'nvim_lsp'}},
+        {'diagnostics', sources = {'nvim_diagnostic'}},
         encoding,
         {'fileformat', format = function (x) return x ~= 'unix' and x or '' end},
         'filetype'
