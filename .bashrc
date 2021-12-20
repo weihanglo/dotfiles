@@ -70,6 +70,8 @@ if [[ $- == *i* ]]; then
     alias k='kubectl'
     # Customizable prompt
     eval "$(starship init bash)"
+    # A smarter cd command
+    hash zoxide && eval "$(zoxide init bash)"
 
     # Bash completion
     if [[ -n "$PS1" ]]; then

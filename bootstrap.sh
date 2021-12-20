@@ -52,6 +52,10 @@ install_starship() {
     cargo install starship
 }
 
+install_zoxide() {
+    cargo install zoxide
+}
+
 install_git_delta() {
     cargo install git-delta
 }
@@ -128,3 +132,4 @@ confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
 confirm "install ripgrep, a better grep" install_ripgrep
 confirm "install starship, prompt with sane defaults" install_starship
 confirm "install delta, diff viewer with joy" install_git_delta
+confirm "install zoxide, a smarter cd command" install_zoxide

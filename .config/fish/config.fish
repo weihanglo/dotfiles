@@ -67,6 +67,8 @@ if status is-interactive
     alias P="fish -P"
     # Customizable prompt
     starship init fish | source
+    # A smarter cd command
+    type -q zoxide; and zoxide init fish | source
 end
 
 # ------------------------------------------------------------------------------
