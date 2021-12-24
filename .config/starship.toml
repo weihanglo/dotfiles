@@ -3,6 +3,9 @@ add_newline = false
 [aws]
 disabled = true
 
+[azure]
+disabled = true
+
 [battery]
 format = "[🔋$percentage]($style) "
 
@@ -128,6 +131,9 @@ format = "[$symbol$version]($style) "
 disabled = true
 
 [singularity]
+disabled = true
+
+[sudo]
 disabled = true
 
 [swift]
