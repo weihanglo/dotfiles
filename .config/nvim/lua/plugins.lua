@@ -137,10 +137,41 @@ local function vim_gitgutter_setup()
   vim.g.gitgutter_sign_modified_removed = '▎'
 end
 
---- preservim/nerdtree
-local function nerdtree_setup()
+--- kyazdani42/nvim-tree.lua
+local function nvim_tree_setup()
   local opts = { noremap = true, silent = true }
-  map('n', '<localleader>n', '<cmd>NERDTreeToggle<cr>', opts)
+  map('n', '<localleader>n', '<cmd>NvimTreeToggle<cr>', opts)
+  vim.g.nvim_tree_show_icons = {
+    git = 0,
+    files = 1,
+    folders = 1,
+    folder_arrows = 0,
+  }
+  vim.g.nvim_tree_icons = {
+    default = ' ',
+    symlink = ' ',
+    folder = {
+      arrow_open = '▾',
+      arrow_closed = "▸",
+      default = "▸",
+      open = "▾",
+      empty = "▸",
+      empty_open = "▾",
+      symlink = "▸",
+      symlink_open = "▾",
+    },
+  }
+  vim.g.nvim_tree_add_trailing = 1
+  vim.g.nvim_tree_group_empty = 1
+  vim.g.nvim_tree_git_hl = 1
+end
+local function nvim_tree_config()
+  require'nvim-tree'.setup{
+    view = {
+      side = 'right',
+      signcolumn = 'no',
+    },
+  }
 end
 
 -- akinsho/nvim-toggleterm.lua
@@ -200,7 +231,11 @@ function M.load_all()
     use {'kosayoda/nvim-lightbulb', opt = true}
 
     -- fast moves
-    use {'preservim/nerdtree', cmd = 'NERDTreeToggle'}
+    use {
+      'kyazdani42/nvim-tree.lua',
+      cmd ='NvimTreeToggle',
+      config = nvim_tree_config,
+    }
     use {'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle'}
     use {'mg979/vim-visual-multi', opt = true}
     use {
@@ -253,7 +288,7 @@ function M.load_all()
   gruvbox_material_setup()
   zoomwintab_vim_setup()
   lualine_setup()
-  nerdtree_setup()
+  nvim_tree_setup()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
   vim_gitgutter_setup()
