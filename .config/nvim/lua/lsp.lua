@@ -196,13 +196,13 @@ end
 local function sumneko_lua_setup()
   local sys
   if vim.fn.has("mac") == 1 then
-    sys = "macOS"
+    sys = 'macOS'
   elseif vim.fn.has("unix") == 1 then
-    sys = "Linux"
+    sys = 'Linux'
   elseif vim.fn.has('win32') == 1 then
-    sys = "Windows"
+    sys = 'Windows'
   else
-    print("Unsupported system for sumneko")
+    vim.notify('Unsupported system for sumneko', vim.log.levels.WARN)
   end
   local sumneko_root_path = lss_dir .. '/lua-language-server'
   local sumneko_binary = sumneko_root_path .. '/bin/' .. sys .. '/lua-language-server'
@@ -278,11 +278,11 @@ end
 local function elixirls_setup()
   local ext
   if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
-    ext = "sh"
+    ext = 'sh'
   elseif vim.fn.has('win32') == 1 then
-      ext = "bat"
+    ext = 'bat'
   else
-    print("Unsupported system for elixirls")
+    vim.notify('Unsupported system for elixirls', vim.log.levels.WARN)
   end
 
   local elixirls_root_path =  lss_dir .. '/elixir-ls'
