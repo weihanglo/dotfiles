@@ -139,14 +139,16 @@ end
 ---
 --- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 local function gopls_setup()
-  lspconfig.gopls.setup{ on_attach = on_attach }
+  lspconfig.gopls.setup{
+    on_attach = on_attach
+  }
 end
 
 --- Python Language Server setup.
---- `python3 -m pip install 'python-language-server[all]'`
+--- `python3 -m pipx install 'python-lsp-server[all]'`
 ---
---- Ref: https://github.com/palantir/python-language-server
-local function pyls_setup()
+--- Ref: https://github.com/python-lsp/python-lsp-server
+local function pylsp_setup()
   --- Asynchorounsly get python virtualenv path for current working directory.
   --- Currently support: `pipenv`, `poetry`.
   ---
@@ -194,13 +196,13 @@ local function pyls_setup()
   get_python_venv_path(function(venv_path)
     local echo = vim.api.nvim_echo
     local settings = {
-      pyls = {
+      pylsp = {
         plugins = {
           jedi = { environment = vim.NIL }
         }
       }
     }
-    lspconfig.pyls.setup{
+    lspconfig.pylsp.setup{
       on_attach = on_attach,
       settings = settings,
     }
@@ -208,7 +210,7 @@ local function pyls_setup()
       echo({{'[LSP] Python venv not found', 'WarningMsg'}}, true, {})
     else
       echo({{'[LSP] set Python virtualenv at '..venv_path, 'WarningMsg'}}, true, {})
-      settings.pyls.plugins.jedi = { environment = venv_path }
+      settings.pylsp.plugins.jedi = { environment = venv_path }
     end
   end)
 end
@@ -325,7 +327,7 @@ M.setup = function()
   rust_analyzer_setup()
   gopls_setup()
   tsserver_setup()
-  pyls_setup()
+  pylsp_setup()
   sumneko_lua_setup()
   clangd_setup()
   solargraph_setup()
