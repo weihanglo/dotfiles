@@ -13,10 +13,12 @@ files_to_sync=(
     .bashrc
     .cargo/config.toml
     .config/alacritty/alacritty.yml
+    .config/autostart/x11setup.desktop
     .config/bat/config
     .config/fish/config.fish
     .config/gitui/key_bindings.ron
     .config/kitty/kitty.conf
+    .config/leftwm/config.toml
     .config/nvim/init.vim
     .config/nvim/lua/dap-configs.lua
     .config/nvim/lua/lsp.lua
@@ -27,6 +29,7 @@ files_to_sync=(
     .gitignore
     .inputrc
     .tmux.conf
+    .xbindkeysrc
 )
 
 cargo_crates=(
