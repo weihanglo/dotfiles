@@ -46,7 +46,7 @@ cargo_crates=(
 )
 
 python_packages=(
-  jupyter
+  ipython
   pipenv
   poetry
   python-lsp-server[all]
@@ -101,7 +101,7 @@ install_cargo_binaries() {
 install_python_binaries() {
   python3 -m pip install -U pipx pip
   python3 -m pipx ensurepath
-  echo ${python_packages[@]} | xargs -n1 python3 -m pipx install --include-deps
+  echo ${python_packages[@]} | xargs -n1 python3 -m pipx install
 }
 
 # confirm helper function running before installation
