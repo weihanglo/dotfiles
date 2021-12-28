@@ -1,3 +1,8 @@
 [alias]
 br = "build --release"
 rr = "run --release"
+
+[target.x86_64-unknown-linux-gnu]
+# For clang11 or lower, use link-arg=-fuse-ld=<path>.
+linker = "clang"
+rustflags = ["-C", "link-arg=--ld-path=/usr/bin/mold"]
