@@ -6,24 +6,18 @@ local lspconfig = require'lspconfig'
 local M = {}
 local lss_dir = vim.fn.stdpath('data') .. '/lss'
 
-local function on_attach(client, bufnr)
-  -- Auto-completion functionality from `hrsh7th/nvim-compe`
-  -- This will setup with buffers attached with LSP clients.
-  require'compe'.setup {
-    preselect = 'disable',
-    source = {
-      path = true,
-      buffer = true,
-      tags = true,
-      spell = false,
-      calc = false,
-      emoji = true,
-      nvim_lsp = true,
-      nvim_lua = true,
-      vsnip = true,
-    },
-  }
+--- Auto-completion capabilities from `hrsh7th/nvim-cmp`
+local function make_capabilities()
+  return require('cmp_nvim_lsp').update_capabilities(
+    vim.lsp.protocol.make_client_capabilities(),
+    {
+      -- disable snippet since we do not choose any snippet engine yet
+      snippetSupport = false,
+    }
+  )
+end
 
+local function on_attach(client, bufnr)
   -- Vim commands setup
   vim.api.nvim_exec([[
     command! LspCodeAction       lua vim.lsp.buf.code_action()
@@ -50,15 +44,14 @@ local function on_attach(client, bufnr)
   map('n', '<localleader><space>',  '<cmd>Telescope lsp_code_actions theme=get_cursor<cr>', opts)
   map('n', '<f7>',                  '<cmd>LspReferences<cr>', opts)
   map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
-  map('i', '<cr>',                  'compe#confirm("<cr>")', { noremap = true, silent = true, expr = true })
   map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   map('n', '<localleader>e',        '<cmd>Telescope lsp_document_diagnostics<cr>', opts)
   map('n', '<localleader>E',        '<cmd>Telescope lsp_workspace_diagnostics<cr>', opts)
 
-  -- Vim options setup
-  local opt = function(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- Vim options setup (Obsolete. Temporarily replaced by nvim-cmp)
+  -- local opt = function(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  -- opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Vim autocommands setup
   -- Show available code actions on sign column.
@@ -106,12 +99,8 @@ local function rust_analyzer_setup()
     on_attach(client, bufnr)
   end
 
-  -- LSP snippet. Ref: https://git.io/Jqf0c
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
   lspconfig.rust_analyzer.setup{
-    capabilities = capabilities,
+    capabilities = make_capabilities(),
     on_attach = rust_on_attach,
     settings = {
       ['rust-analyzer'] = {
@@ -130,7 +119,8 @@ end
 --- Ref: https://github.com/theia-ide/typescript-language-server
 local function tsserver_setup()
   lspconfig.tsserver.setup{
-    on_attach = on_attach
+    capabilities = make_capabilities(),
+    on_attach = on_attach,
   }
 end
 
@@ -140,7 +130,8 @@ end
 --- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 local function gopls_setup()
   lspconfig.gopls.setup{
-    on_attach = on_attach
+    capabilities = make_capabilities(),
+    on_attach = on_attach,
   }
 end
 
@@ -203,6 +194,7 @@ local function pylsp_setup()
       }
     }
     lspconfig.pylsp.setup{
+      capabilities = make_capabilities(),
       on_attach = on_attach,
       settings = settings,
     }
@@ -234,8 +226,9 @@ local function sumneko_lua_setup()
   local sumneko_root_path = lss_dir .. '/lua-language-server'
   local sumneko_binary = sumneko_root_path .. '/bin/' .. sys .. '/lua-language-server'
   lspconfig.sumneko_lua.setup {
-    on_attach = on_attach,
+    capabilities = make_capabilities(),
     cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'};
+    on_attach = on_attach,
     settings = {
       Lua = {
         runtime = {
@@ -264,6 +257,7 @@ end
 --- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
 local function clangd_setup()
   lspconfig.clangd.setup{
+    capabilities = make_capabilities(),
     on_attach = on_attach,
   }
 end
@@ -274,6 +268,7 @@ end
 --- Ref: https://github.com/castwide/solargraph
  local function solargraph_setup()
   lspconfig.solargraph.setup{
+    capabilities = make_capabilities(),
     on_attach = on_attach,
   }
 end
@@ -285,6 +280,7 @@ end
 --- Ref: https://github.com/ocaml/ocaml-lsp
 local function ocamllsp_setup()
   lspconfig.ocamllsp.setup{
+    capabilities = make_capabilities(),
     on_attach = on_attach,
   }
 end
@@ -311,8 +307,9 @@ local function elixirls_setup()
   local elixirls_root_path =  lss_dir .. '/elixir-ls'
   local elixirls_binary = elixirls_root_path .. '/release/language_server.' .. ext
   lspconfig.elixirls.setup{
+    capabilities = make_capabilities(),
+    cmd = {elixirls_binary},
     on_attach = on_attach,
-    cmd = {elixirls_binary}
   }
 end
 

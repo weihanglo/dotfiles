@@ -191,6 +191,47 @@ local function nvim_toggleterm_lua_config()
   }
 end
 
+--- hrsh7th/nvim-cmp
+local function nvim_cmp_setup()
+  local cmp = require'cmp'
+
+  cmp.setup{
+    mapping = {
+      ['<cr>'] = cmp.mapping.confirm(),
+      -- replace omnifunc?
+      ['<c-x><c-o>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<c-y>'] = cmp.config.disable,
+      ['<c-e>'] = cmp.config.disable,
+      ['<s-tab>'] = cmp.config.disable,
+      ['<tag>'] = cmp.config.disable,
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+    }, {
+      { name = 'buffer' },
+      { name = 'path' },
+    }),
+    experimental = { ghost_text = true },
+  }
+
+  cmp.setup.cmdline('/', {
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp_document_symbol' },
+    }, {
+      { name = 'buffer', max_item_count = 5 },
+    })
+  })
+
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path', max_item_count = 5 },
+    }, {
+      { name = 'cmdline', max_item_count = 5 },
+    })
+  })
+end
+
+
 --- Load all plugins
 function M.load_all()
   -- Auto install packer.nvim
@@ -218,19 +259,27 @@ function M.load_all()
       config = function () require'bqf'.setup{preview = {auto_preview = false}} end
     }
 
+    -- auto-completion
+    use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-cmdline'}
+    use {'hrsh7th/cmp-nvim-lsp', opt = true}
+    use {'hrsh7th/cmp-nvim-lsp-document-symbol', opt = true}
+    use {'hrsh7th/cmp-path'}
+
     -- nvim-lsp
     use {
       'neovim/nvim-lspconfig',
       event = {'BufNew'},
       wants = {
-          'nvim-compe',
+          'cmp-nvim-lsp',
+          'cmp-nvim-lsp-document-symbol',
           'lsp_extensions.nvim',
           'nvim-lightbulb',
           'nvim-treesitter-context',
       },
       config = function() require'lsp'.setup() end,
     }
-    use {'hrsh7th/nvim-compe', opt = true}
     use {'nvim-lua/lsp_extensions.nvim', opt = true}
     use {'kosayoda/nvim-lightbulb', opt = true}
 
@@ -296,6 +345,7 @@ function M.load_all()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
   vim_gitgutter_setup()
+  nvim_cmp_setup()
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
   -- Enable vim-visual-multi mouse mappings
