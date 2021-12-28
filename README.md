@@ -2,11 +2,11 @@
 
 ## Usage
 
-Just clone and run script!
+Just clone and run the script!
 
 ```bash
 git clone https://github.com/weihanglo/dotfiles.git ~/.dotfiles
-source ~/.dotfiles/bootstrap.sh
+source ~/.dotfiles/bootstrap.bash
 ```
 
 ## Tools We Love
@@ -15,9 +15,10 @@ source ~/.dotfiles/bootstrap.sh
 - [**bat**]: A cat(1) clone with wings.
 - [**delta**]: Enjoyable diff viewer.
 - [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
-- [**fish**]: Kitty need fish.
+- [**fish**]: Kitty needs fish.
 - [**fnm**]: Ease the pain of sourcing nvm.
 - [**FZF**]: Fuzzy finder goes rock.
+- [**GitUI**]: One of the best TUI Git client on Earth.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.
@@ -25,6 +26,7 @@ source ~/.dotfiles/bootstrap.sh
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
 - [**Starship**]: Cross-shell prompt with sane defaults.
 - [**tmux**]: Awesome tool that defeats all terminal window managers.
+- [**zoxide**] A smarter cd(1) command. Built in Rust.
 
 Want to share your config file? 
 Feel free to create an issue or pull request!
@@ -42,7 +44,7 @@ Copyright © 2015 - 2021 Weihang Lo
 [**fish**]: https://fishshell.com/
 [**fnm**]: https://github.com/Schniz/fnm
 [**FZF**]: https://github.com/junegunn/fzf
-[**IPython**]: https://ipython.org
+[**GitUI**]: https://github.com/extrawurst/gitui
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
 [**kitty**]: https://sw.kovidgoyal.net/kitty/
 [**Neovim**]: https://neovim.io
@@ -50,3 +52,4 @@ Copyright © 2015 - 2021 Weihang Lo
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
 [**Starship**]: https://starship.rs
 [**tmux**]: https://tmux.github.io
+[**zoxide**]: https://github.com/ajeetdsouza/zoxide

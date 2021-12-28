@@ -18,7 +18,9 @@ files=(
     .bashrc
     .cargo/config.toml
     .config/alacritty/alacritty.yml
+    .config/bat/config
     .config/fish/config.fish
+    .config/gitui/key_bindings.ron
     .config/kitty/kitty.conf
     .config/nvim/init.vim
     .config/nvim/lua/dap-configs.lua
