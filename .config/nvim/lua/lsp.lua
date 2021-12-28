@@ -140,71 +140,52 @@ end
 ---
 --- Ref: https://github.com/python-lsp/python-lsp-server
 local function pylsp_setup()
-  --- Asynchorounsly get python virtualenv path for current working directory.
+  --- Get python virtualenv path for current working directory.
   --- Currently support: `pipenv`, `poetry`.
   ---
-  --- This is done by neovim job-control system. See `:h job-control`.
-  local function get_python_venv_path(callback)
-    local function on_event(_, data, event)
-      if event == 'stdout' then
-        -- Here are gibberish leading and trailing whitespace elements.
-        callback(data[1])
-      end
-    end
-
-    local cmd = ''
+  --- Thanks to `on_new_config`, this is only executed when the project root
+  --- matching patterns of pylsp.
+  local function get_python_venv_path()
+    local cmd = nil
     local cwd = vim.fn.getcwd()
-    local root = lspconfig.util.root_pattern('pyproject.toml')(cwd)
-    if root then
-      cmd = {'python', '-m', 'poetry', 'env', 'info', '-p'}
+    if lspconfig.util.root_pattern('pyproject.toml')(cwd) then
+      cmd = {'poetry', 'env', 'info', '-p'}
     end
-
-    if root == '' or root == nil then
-      root = lspconfig.util.root_pattern('Pipfile')(cwd)
-      if root then
-        cmd = {'python', '-m', 'pipenv', '--venv'}
+    if cmd == nil then
+      if lspconfig.util.root_pattern('Pipfile')(cwd) then
+        cmd = {'pipenv', '--venv'}
       end
     end
-
-    if root == '' or root == nil then
-      callback('')
+    if cmd == nil then
+      return ''
     end
 
-    if cmd ~= '' then
-      vim.fn.jobstart(
-        cmd,
-        {
-          on_exit = on_event,
-          on_stdout = on_event,
-          on_stderr = on_event,
-          stdout_buffered = true,
-          stderr_buffered = true,
-        }
-      )
+    local venv_path = vim.fn.systemlist(cmd)[1]
+    if vim.v.shell_error ~= 0 then
+      return ''
     end
+
+    return venv_path
   end
 
-  get_python_venv_path(function(venv_path)
-    local echo = vim.api.nvim_echo
-    local settings = {
-      pylsp = {
-        plugins = {
-          jedi = { environment = vim.NIL }
-        }
-      }
-    }
-    lspconfig.pylsp.setup{
-      capabilities = make_capabilities(),
-      on_attach = on_attach,
-      settings = settings,
-    }
-    if venv_path == '' or venv_path == nil then
-      echo({{'[LSP] Python venv not found', 'WarningMsg'}}, true, {})
-    else
-      echo({{'[LSP] set Python virtualenv at '..venv_path, 'WarningMsg'}}, true, {})
-      settings.pylsp.plugins.jedi = { environment = venv_path }
-    end
-  end)
+  local function on_new_config(config, _)
+      local venv_path = get_python_venv_path()
+      if venv_path == '' or venv_path == nil then
+        vim.notify('[LSP] Python venv not found', vim.log.levels.WARN)
+      else
+        vim.notify('[LSP] set Python virtualenv at '..venv_path, vim.log.levels.INFO)
+        config.settings.pylsp.plugins.jedi = { environment = venv_path }
+      end
+  end
+
+  local settings = { pylsp = { plugins = { jedi = { environment = vim.NIL } } } }
+
+  lspconfig.pylsp.setup{
+    capabilities = make_capabilities(),
+    on_attach = on_attach,
+    settings = settings,
+    on_new_config = on_new_config,
+  }
 end
 
 --- lua-language-server setup.
