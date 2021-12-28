@@ -2,7 +2,7 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Apr. 2021               #
+#              Dec. 2021               #
 #--------------------------------------#
 
 # Define source and backup directory
@@ -36,32 +36,24 @@ files=(
 # Put custom installaltion commands here
 # --------------------------------------
 
-install_neovim() {
-    brew install neovim || brew upgrade neovim 
-}
+install_cargo_binaries() {
+  crates=(
+    bat
+    cargo-update
+    exa
+    fd-find
+    git-delta
+    gitui
+    mdbook
+    ripgrep
+    starship
+    tealdeer
+    tokei
+    watchexec-cli
+    zoxide
+  )
 
-install_nvim_python() {
-    pip3 install -U neovim pynvim
-}
-
-install_ripgrep() {
-    cargo install ripgrep
-}
-
-install_starship() {
-    cargo install starship
-}
-
-install_zoxide() {
-    cargo install zoxide
-}
-
-install_git_delta() {
-    cargo install git-delta
-}
-
-neovim_replace_vimrc() {
-    ln -is $dir/.config/nvim/init.vim $HOME/.vimrc
+  cargo install ${crates[@]}
 }
 
 install_tmux_package_manager() {
@@ -120,16 +112,6 @@ confirm () {
 
 
 # confirm installation
-if [[ $(uname) == 'Darwin' ]]; then
-    confirm 'install neovim' install_neovim
-    if [[ -f $(which 'pip3') ]]; then
-        confirm 'install nvim-python' install_nvim_python
-    fi
-fi
 
-confirm "replace .vimrc by neovim's init.vim" neovim_replace_vimrc
 confirm "install tpm (TMUX Package Manager)" install_tmux_package_manager
-confirm "install ripgrep, a better grep" install_ripgrep
-confirm "install starship, prompt with sane defaults" install_starship
-confirm "install delta, diff viewer with joy" install_git_delta
-confirm "install zoxide, a smarter cd command" install_zoxide
+confirm "install all goods from cargo" install_cargo_binaries
