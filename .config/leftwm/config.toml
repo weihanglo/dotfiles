@@ -9,7 +9,7 @@ focus_behaviour = "Sloppy"
 focus_new_windows = true
 
 scratchpad = [
-  { name = "Terminal", value = "kitty", x = 0.0, y = 0.0, height = 1.0, width = 1.0 },
+  { name = "Terminal", value = "WINIT_X11_SCALE_FACTOR=1 alacritty", x = 0.0, y = 0.0, height = 1.0, width = 1.0 },
 ]
 
 keybind = [
