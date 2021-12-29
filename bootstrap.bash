@@ -5,6 +5,8 @@
 #              Dec. 2021               #
 #--------------------------------------#
 
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
 # --------------------------------------
 # Put config/dir to sync in this variable
 # --------------------------------------
@@ -107,6 +109,14 @@ install_python_binaries() {
   echo ${python_packages[@]} | xargs -n1 python3 -m pipx install
 }
 
+# Note that you need to register leftwm.desktop in /usr/share/xsessions/
+install_leftwm_and_theme() {
+  cargo install leftwm
+  themes_dir="$HOME/.config/leftwm/themes"
+  mkdir -p "$themes_dir"
+  ln -vfs $SCRIPTPATH/.config/leftwm/themes/basic "$themes_dir/current"
+}
+
 # confirm helper function running before installation
 confirm () {
     echo
@@ -140,6 +150,8 @@ if [[ -n "$1" ]]; then
     python|py)
       install_python_binaries
       ;;
+    wm|leftwm)
+      install_leftwm_and_theme
   esac
 else
   confirm "Synchronize all config files" sync_config_files
