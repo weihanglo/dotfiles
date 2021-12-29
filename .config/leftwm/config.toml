@@ -1,0 +1,64 @@
+modkey = "Mod4"
+mousekey = "Mod4"
+workspaces = []
+tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+layouts = ["MainAndVertStack", "MainAndHorizontalStack", "MainAndDeck", "GridHorizontal", "EvenHorizontal", "EvenVertical", "Fibonacci", "CenterMain", "CenterMainBalanced", "Monocle", "RightWiderLeftStack", "LeftWiderRightStack"]
+layout_mode = "Workspace"
+disable_current_tag_swap = false
+focus_behaviour = "Sloppy"
+focus_new_windows = true
+
+scratchpad = [
+  { name = "Terminal", value = "kitty", x = 0.0, y = 0.0, height = 1.0, width = 1.0 },
+]
+
+keybind = [
+  # Scratchpads
+  { command = "ToggleScratchPad", value = "Terminal", modifier = ["modkey"], key = "Return" },
+
+  # Windows management
+  { command = "CloseWindow", modifier = ["modkey"], key = "q" },
+  { command = "MoveWindowUp", modifier = ["modkey", "Shift"], key = "k" },
+  { command = "MoveWindowDown", modifier = ["modkey", "Shift"], key = "j" },
+  { command = "MoveWindowTop", modifier = ["modkey"], key = "space" },
+  { command = "FocusWindowUp", modifier = ["modkey"], key = "k" },
+  { command = "FocusWindowDown", modifier = ["modkey"], key = "j" },
+
+  # Layouts and workspaces
+  { command = "MoveToLastWorkspace", modifier = ["modkey", "Shift"], key = "w" },
+  { command = "FocusWorkspaceNext", modifier = ["modkey"], key = "Right" },
+  { command = "FocusWorkspacePrevious", modifier = ["modkey"], key = "Left" },
+  { command = "NextLayout", modifier = ["modkey", "Control"], key = "Up" },
+  { command = "PreviousLayout", modifier = ["modkey", "Control"], key = "Down" },
+
+  # Tags management
+  { command = "FocusNextTag", modifier = ["modkey"], key = "l" },
+  { command = "FocusPreviousTag", modifier = ["modkey"], key = "h" },
+  { command = "GotoTag", value = "1", modifier = ["Control"], key = "F1" },
+  { command = "GotoTag", value = "2", modifier = ["Control"], key = "F2" },
+  { command = "GotoTag", value = "3", modifier = ["Control"], key = "F3" },
+  { command = "GotoTag", value = "4", modifier = ["Control"], key = "F4" },
+  { command = "GotoTag", value = "5", modifier = ["Control"], key = "F5" },
+  { command = "GotoTag", value = "6", modifier = ["Control"], key = "F6" },
+  { command = "GotoTag", value = "7", modifier = ["Control"], key = "F7" },
+  { command = "GotoTag", value = "8", modifier = ["Control"], key = "F8" },
+  { command = "GotoTag", value = "9", modifier = ["Control"], key = "F9" },
+  { command = "MoveToTag", value = "1", modifier = ["Control", "Shift"], key = "F1" },
+  { command = "MoveToTag", value = "2", modifier = ["Control", "Shift"], key = "F2" },
+  { command = "MoveToTag", value = "3", modifier = ["Control", "Shift"], key = "F3" },
+  { command = "MoveToTag", value = "4", modifier = ["Control", "Shift"], key = "F4" },
+  { command = "MoveToTag", value = "5", modifier = ["Control", "Shift"], key = "F5" },
+  { command = "MoveToTag", value = "6", modifier = ["Control", "Shift"], key = "F6" },
+  { command = "MoveToTag", value = "7", modifier = ["Control", "Shift"], key = "F7" },
+  { command = "MoveToTag", value = "8", modifier = ["Control", "Shift"], key = "F8" },
+  { command = "MoveToTag", value = "9", modifier = ["Control", "Shift"], key = "F9" },
+  { command = "SwapTags", modifier = ["Mod1"], key = "Tab"  },
+
+  # Miscellaneous
+  { command = "Execute", value = "loginctl kill-session $XDG_SESSION_ID", modifier = ["modkey", "Shift"], key = "x" },
+  { command = "Execute", value = "rofi -show run", modifier = ["Mod1"], key = "space" },
+  { command = "Execute", value = "slock", modifier = ["modkey", "Control"], key = "l" },
+  { command = "SoftReload", modifier = ["modkey", "Shift"], key = "r" },
+  { command = "ToggleFloating", modifier = ["modkey", "Shift"], key = "f" },
+  { command = "ToggleFullScreen", modifier = ["modkey"], key = "f" },
+]
