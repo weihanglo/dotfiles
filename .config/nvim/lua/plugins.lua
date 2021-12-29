@@ -210,6 +210,7 @@ local function nvim_cmp_setup()
     }, {
       { name = 'buffer' },
       { name = 'path' },
+      { name = 'emoji' },
     }),
     experimental = { ghost_text = true },
   }
@@ -263,6 +264,7 @@ function M.load_all()
     use {'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-cmdline'}
+    use {'hrsh7th/cmp-emoji'}
     use {'hrsh7th/cmp-nvim-lsp', opt = true}
     use {'hrsh7th/cmp-nvim-lsp-document-symbol', opt = true}
     use {'hrsh7th/cmp-path'}
