@@ -63,31 +63,28 @@ python_packages=(
 
 sync_config_files () {
   # Define source and backup directory
-  dir=$HOME/.dotfiles
+  dir=$SCRIPTPATH
   origdir=$HOME/.dotfiles.orig
 
-  echo -n "Creating $origdir for backup ..."
-  mkdir -p $origdir
-  echo "done"
+  echo "Creating $origdir for backup old dotfiles ..."
+  mkdir -vp $origdir
 
-  echo -n "cd to $dir ..."
-  cd $dir
-  echo "done"
+  echo "cd to $dir ..."
+  pushd $dir
 
   # Symlink files
   for file in ${files_to_sync[@]}; do
-      echo "$file"
-      echo -e "\tMoving $file to $origdir/$file"
       if [[ -z "$file" ]]; then
-          echo -e "No file $file found"
+          echo -e "Failed to move $file to $origdir/$file: No file $file found"
           return
       fi
       mkdir -p "$HOME/$(dirname $file)"
       mkdir -p "$origdir/$(dirname $file)"
-      mv "$HOME/$file" "$origdir/$file"
-      echo -e "\tSymlinking to $file in $dir"
-      ln -is "$dir/$file" "$HOME/$file"
+      mv -v "$HOME/$file" "$origdir/$file"
+      ln -ivs "$dir/$file" "$HOME/$file"
   done
+
+  popd
 }
 
 install_tmux_package_manager() {
