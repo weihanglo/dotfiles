@@ -146,6 +146,8 @@ local function pylsp_setup()
   ---
   --- Thanks to `on_new_config`, this is only executed when the project root
   --- matching patterns of pylsp.
+  ---
+  --- This is done by neovim job-control system. See `:h job-control`.
   local function get_python_venv_path()
     local cmd = nil
     local cwd = vim.fn.getcwd()
@@ -158,23 +160,45 @@ local function pylsp_setup()
       end
     end
     if cmd == nil then
+      vim.notify('[LSP] Not a poetry or pipenv project', vim.log.levels.INFO)
       return ''
     end
 
-    local venv_path = vim.fn.systemlist(cmd)[1]
-    if vim.v.shell_error ~= 0 then
+    local cmd_out = ''
+    local cmd_err = ''
+    local job_id = vim.fn.jobstart(
+      cmd,
+      {
+        on_stdout = function (_, d, _) cmd_out = d end,
+        on_stderr = function (_, d, _) cmd_err = d end,
+        stdout_buffered = true,
+        stderr_buffered = true,
+      }
+    )
+    local exit_code = 0
+    if job_id > 0 then
+      exit_code = vim.fn.jobwait({job_id}, 5000)[1] -- wait for 5 seconds
+    end
+    if exit_code > 0 then
+      vim.notify(
+        string.format(
+          '[LSP] Failed to detect python venv\ncmd: `%q`\nerr: %s',
+          table.concat(cmd, ' '),
+          table.concat(cmd_err, '\n')
+        ),
+        vim.log.levels.WARN
+      )
       return ''
     end
 
+    local venv_path = cmd_out[1]
+    vim.notify('[LSP] Set python venv at:\n'..venv_path, vim.log.levels.INFO)
     return venv_path
   end
 
   local function on_new_config(config, _)
       local venv_path = get_python_venv_path()
-      if venv_path == '' or venv_path == nil then
-        vim.notify('[LSP] Python venv not found', vim.log.levels.WARN)
-      else
-        vim.notify('[LSP] set Python virtualenv at '..venv_path, vim.log.levels.INFO)
+      if venv_path ~= nil and venv_path ~= '' then
         config.settings.pylsp.plugins.jedi = { environment = venv_path }
       end
   end
