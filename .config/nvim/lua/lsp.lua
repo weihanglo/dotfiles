@@ -109,7 +109,8 @@ local function rust_analyzer_setup()
         procMacro = { enable = true },
         experimental = { procAttrMacros = true },
       }
-    }
+    },
+    single_file_support = true,
   }
 end
 
