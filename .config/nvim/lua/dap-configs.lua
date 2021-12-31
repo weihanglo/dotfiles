@@ -11,12 +11,6 @@ local function get_file(prompt, path)
     return vim.fn.input(prompt, vim.fn.getcwd() .. '/' .. path, 'file')
   end
 end
-local function echoerr(msg)
-  vim.api.nvim_echo({ { msg, 'ErrorMsg' } }, true, {})
-end
-local function echowarn(msg)
-  vim.api.nvim_echo({ { msg, 'WarningMsg' } }, true, {})
-end
 
 function M.setup()
   require('dapui').setup()
@@ -105,16 +99,16 @@ function M.adapter_go()
         data = table.concat(data)
         local port = parse_port(data)
         if not port then
-          echoerr('[DAP] Cannot parse port from stdout of `delve dap`')
+          vim.notify('[DAP] Cannot parse port from stdout of `delve dap`', vim.log.levels.ERROR)
         else
-          echowarn('[DAP] listening on port ' .. port)
+          vim.notify('[DAP] listening on port ' .. port, vim.log.levels.INFO)
           dlv_started = true
           callback({ type = 'server', host = '127.0.0.1', port = port })
         end
       elseif event == 'stderr' then
-        echowarn('[DAP] stderr: ' .. table.concat(data))
+        vim.notify('[DAP] stderr:\n' .. table.concat(data), vim.log.levels.WARN)
       else
-        echowarn('[DAP] `delve dap` is exitting')
+        vim.notify('[DAP] `delve dap` is exitting', vim.log.levels.WARN)
       end
     end
 
@@ -132,7 +126,7 @@ end
 -- https://github.com/llvm/llvm-project/blob/release/12.x/lldb/tools/lldb-vscode/package.json
 local function debugee_rust()
   local function get_test_executable()
-    echowarn('\n[DAP] building Rust tests...')
+    vim.notify('\n[DAP] building Rust tests...', vim.log.levels.INFO)
     local result = vim.fn.system([[
       cargo test --no-run --message-format=json 2> /dev/null | jq -r 'select((.executable != null) and (.target.kind | contains(["lib"]))) | .executable'
     ]])
@@ -150,7 +144,7 @@ local function debugee_rust()
       local selected = vim.fn.inputlist(inputlist)
       return test_targets[selected]
     else
-      echowarn('[DAP] no test targest found')
+      vim.notify('[DAP] no test targest found', vim.log.levels.INFO)
     end
   end
 
