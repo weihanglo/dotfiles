@@ -11,14 +11,19 @@ local function get_file(prompt, path)
     return vim.fn.input(prompt, vim.fn.getcwd() .. '/' .. path, 'file')
   end
 end
-local function echoerr(msg) vim.api.nvim_echo({{msg, 'ErrorMsg'}}, true, {}) end
-local function echowarn(msg) vim.api.nvim_echo({{msg, 'WarningMsg'}}, true, {}) end
+local function echoerr(msg)
+  vim.api.nvim_echo({ { msg, 'ErrorMsg' } }, true, {})
+end
+local function echowarn(msg)
+  vim.api.nvim_echo({ { msg, 'WarningMsg' } }, true, {})
+end
 
 function M.setup()
-  require'dapui'.setup()
+  require('dapui').setup()
 
   -- Vim commands setup
-  vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
     command! DapContinue            lua require'dap'.continue()
     command! DapRun                 lua require'dap'.run()
     command! DapRunToCursor         lua require'dap'.run_to_cursor()
@@ -36,34 +41,35 @@ function M.setup()
     command! DapReplClose           lua require'dap'.repl.close()
     command! DapUiToggle            lua require'dapui'.toggle()
     command! DapReloadConfigs       lua require'dap-configs'.load_configs()
-  ]], false)
+  ]],
+    false
+  )
 
   -- Vim keymaps setup
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
   -- Yep. Function keys with modifier are usually mulfunctional.
-  map('n', '<f5>',    '<cmd>DapContinue<cr>', opts)
-  map('n', '<s-f5>',  '<cmd>DapStop<cr>', opts)
-  map('n', '<f6>',    '<cmd>DapStepPause<cr>', opts)
-  map('n', '<f9>',    '<cmd>DapToggleBreakpoint<cr>', opts)
-  map('n', '<f10>',   '<cmd>DapStepOver<cr>', opts)
+  map('n', '<f5>', '<cmd>DapContinue<cr>', opts)
+  map('n', '<s-f5>', '<cmd>DapStop<cr>', opts)
+  map('n', '<f6>', '<cmd>DapStepPause<cr>', opts)
+  map('n', '<f9>', '<cmd>DapToggleBreakpoint<cr>', opts)
+  map('n', '<f10>', '<cmd>DapStepOver<cr>', opts)
   map('n', '<c-f10>', '<cmd>DapRunToCursor<cr>', opts)
-  map('n', '<f11>',   '<cmd>DapStepInto<cr>', opts)
+  map('n', '<f11>', '<cmd>DapStepInto<cr>', opts)
   map('n', '<s-f11>', '<cmd>DapStepOut<cr>', opts)
 
   -- Debug signs setups
   local signdef = vim.fn.sign_define
-  signdef('DapBreakpoint',         {text='●', texthl='WarningMsg'})
-  signdef('DapLogPoint',           {text='◆', texthl='WarningMsg'})
-  signdef('DapBreakpointRejected', {text='●', texthl='LineNr'})
-  signdef('DapStopped',            {text='→', texthl='MatchParen'})
+  signdef('DapBreakpoint', { text = '●', texthl = 'WarningMsg' })
+  signdef('DapLogPoint', { text = '◆', texthl = 'WarningMsg' })
+  signdef('DapBreakpointRejected', { text = '●', texthl = 'LineNr' })
+  signdef('DapStopped', { text = '→', texthl = 'MatchParen' })
 
   -- Load debugger adapter configurations
   M.adapter_lldb()
   M.adapter_go()
 
   M.load_configs()
-
 end
 
 --- Adapter: lldb
@@ -75,7 +81,7 @@ function M.adapter_lldb()
   dap.adapters.lldb = {
     type = 'executable',
     command = 'lldb-vscode',
-    args = {}
+    args = {},
   }
 end
 
@@ -101,25 +107,22 @@ function M.adapter_go()
         if not port then
           echoerr('[DAP] Cannot parse port from stdout of `delve dap`')
         else
-          echowarn('[DAP] listening on port '..port)
+          echowarn('[DAP] listening on port ' .. port)
           dlv_started = true
-          callback({type = 'server', host = '127.0.0.1', port = port})
+          callback({ type = 'server', host = '127.0.0.1', port = port })
         end
       elseif event == 'stderr' then
-          echowarn('[DAP] stderr: '..table.concat(data))
+        echowarn('[DAP] stderr: ' .. table.concat(data))
       else
         echowarn('[DAP] `delve dap` is exitting')
       end
     end
 
-    vim.fn.jobstart(
-      {'dlv', 'dap', '--build-flags="-v"'},
-      {
-        on_exit = on_event,
-        on_stdout = on_event,
-        on_stderr = on_event,
-      }
-    )
+    vim.fn.jobstart({ 'dlv', 'dap', '--build-flags="-v"' }, {
+      on_exit = on_event,
+      on_stdout = on_event,
+      on_stderr = on_event,
+    })
   end
 end
 
@@ -134,15 +137,15 @@ local function debugee_rust()
       cargo test --no-run --message-format=json 2> /dev/null | jq -r 'select((.executable != null) and (.target.kind | contains(["lib"]))) | .executable'
     ]])
     local test_targets = {}
-    for target in result:gmatch("[^\r\n]+") do
-        table.insert(test_targets, target)
+    for target in result:gmatch('[^\r\n]+') do
+      table.insert(test_targets, target)
     end
     if #test_targets == 1 then
       return test_targets[1]
     elseif #test_targets > 2 then
-      local inputlist = {'Select a test target'}
+      local inputlist = { 'Select a test target' }
       for i, target in ipairs(test_targets) do
-        table.insert(inputlist, i..': '..target)
+        table.insert(inputlist, i .. ': ' .. target)
       end
       local selected = vim.fn.inputlist(inputlist)
       return test_targets[selected]
@@ -221,7 +224,7 @@ end
 function M.load_configs()
   debugee_rust()
   debugee_go()
-  require'dap.ext.vscode'.load_launchjs()
+  require('dap.ext.vscode').load_launchjs()
 end
 
 return M

@@ -2,24 +2,22 @@
 -- which equals `vim.fn.stdpath('data')`.
 
 local vim = vim
-local lspconfig = require'lspconfig'
+local lspconfig = require('lspconfig')
 local M = {}
 local lss_dir = vim.fn.stdpath('data') .. '/lss'
 
 --- Auto-completion capabilities from `hrsh7th/nvim-cmp`
 local function make_capabilities()
-  return require('cmp_nvim_lsp').update_capabilities(
-    vim.lsp.protocol.make_client_capabilities(),
-    {
-      -- disable snippet since we do not choose any snippet engine yet
-      snippetSupport = false,
-    }
-  )
+  return require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities(), {
+    -- disable snippet since we do not choose any snippet engine yet
+    snippetSupport = false,
+  })
 end
 
 local function on_attach(client, bufnr)
   -- Vim commands setup
-  vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
     command! LspCodeAction       lua vim.lsp.buf.code_action()
     command! LspDeclaration      lua vim.lsp.buf.declaration()
     command! LspDefinition       lua vim.lsp.buf.definition()
@@ -33,21 +31,25 @@ local function on_attach(client, bufnr)
     command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
     command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
     command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
-  ]], false)
+  ]],
+    false
+  )
 
   -- Vim keymaps setup
-  local map = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local map = function(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
   local opts = { noremap = true, silent = true }
-  map('n', '<c-]>',                 '<cmd>Telescope lsp_definitions<cr>', opts)
-  map('n', 'K',                     '<cmd>LspHover<cr>', opts)
-  map('n', '<c-k>',                 '<cmd>LspSignatureHelp<cr>', opts)
-  map('n', '<localleader><space>',  '<cmd>Telescope lsp_code_actions theme=get_cursor<cr>', opts)
-  map('n', '<f7>',                  '<cmd>LspReferences<cr>', opts)
-  map('n', '<f2>',                  '<cmd>LspRename<cr>', opts)
-  map('n', ']e',                    '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-  map('n', '[e',                    '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
-  map('n', '<localleader>e',        '<cmd>Telescope lsp_document_diagnostics<cr>', opts)
-  map('n', '<localleader>E',        '<cmd>Telescope lsp_workspace_diagnostics<cr>', opts)
+  map('n', '<c-]>', '<cmd>Telescope lsp_definitions<cr>', opts)
+  map('n', 'K', '<cmd>LspHover<cr>', opts)
+  map('n', '<c-k>', '<cmd>LspSignatureHelp<cr>', opts)
+  map('n', '<localleader><space>', '<cmd>Telescope lsp_code_actions theme=get_cursor<cr>', opts)
+  map('n', '<f7>', '<cmd>LspReferences<cr>', opts)
+  map('n', '<f2>', '<cmd>LspRename<cr>', opts)
+  map('n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+  map('n', '[e', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+  map('n', '<localleader>e', '<cmd>Telescope lsp_document_diagnostics<cr>', opts)
+  map('n', '<localleader>E', '<cmd>Telescope lsp_workspace_diagnostics<cr>', opts)
 
   -- Vim options setup (Obsolete. Temporarily replaced by nvim-cmp)
   -- local opt = function(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -55,23 +57,29 @@ local function on_attach(client, bufnr)
 
   -- Vim autocommands setup
   -- Show available code actions on sign column.
-  vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
     augroup LspAutoCommands
       autocmd! * <buffer>
       autocmd CursorHold,CursorHoldI <buffer> lua require'nvim-lightbulb'.update_lightbulb()
     augroup END
-  ]], false)
+  ]],
+    false
+  )
 
   if client.resolved_capabilities.document_highlight then
     -- Highlight word under cursor.
-    vim.api.nvim_exec([[
+    vim.api.nvim_exec(
+      [[
       augroup LspDocumentHighlight
         autocmd! * <buffer>
         autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]], false)
+    ]],
+      false
+    )
   end
 end
 
@@ -82,24 +90,27 @@ end
 local function rust_analyzer_setup()
   -- Inlay hints for rust
   function M.inlay_hints()
-    require'lsp_extensions'.inlay_hints{
+    require('lsp_extensions').inlay_hints({
       only_current_line = true,
       prefix = ' » ',
       highlight = 'NonText',
       enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' },
-    }
+    })
   end
   local function rust_on_attach(client, bufnr)
-    vim.api.nvim_exec([[
+    vim.api.nvim_exec(
+      [[
       augroup RustInlayHint
         autocmd! * <buffer>
         autocmd CursorHold,CursorHoldI <buffer> silent lua require'lsp'.inlay_hints()
       augroup END
-    ]], false)
+    ]],
+      false
+    )
     on_attach(client, bufnr)
   end
 
-  lspconfig.rust_analyzer.setup{
+  lspconfig.rust_analyzer.setup({
     capabilities = make_capabilities(),
     on_attach = rust_on_attach,
     settings = {
@@ -108,10 +119,10 @@ local function rust_analyzer_setup()
         lruCapacity = 512,
         procMacro = { enable = true },
         experimental = { procAttrMacros = true },
-      }
+      },
     },
     single_file_support = true,
-  }
+  })
 end
 
 --- TypeScript Language Server setup.
@@ -119,10 +130,10 @@ end
 ---
 --- Ref: https://github.com/theia-ide/typescript-language-server
 local function tsserver_setup()
-  lspconfig.tsserver.setup{
+  lspconfig.tsserver.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
-  }
+  })
 end
 
 --- gopls setup.
@@ -130,10 +141,10 @@ end
 ---
 --- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 local function gopls_setup()
-  lspconfig.gopls.setup{
+  lspconfig.gopls.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
-  }
+  })
 end
 
 --- Python Language Server setup.
@@ -152,11 +163,11 @@ local function pylsp_setup()
     local cmd = nil
     local cwd = vim.fn.getcwd()
     if lspconfig.util.root_pattern('pyproject.toml')(cwd) then
-      cmd = {'poetry', 'env', 'info', '-p'}
+      cmd = { 'poetry', 'env', 'info', '-p' }
     end
     if cmd == nil then
       if lspconfig.util.root_pattern('Pipfile')(cwd) then
-        cmd = {'pipenv', '--venv'}
+        cmd = { 'pipenv', '--venv' }
       end
     end
     if cmd == nil then
@@ -166,18 +177,19 @@ local function pylsp_setup()
 
     local cmd_out = ''
     local cmd_err = ''
-    local job_id = vim.fn.jobstart(
-      cmd,
-      {
-        on_stdout = function (_, d, _) cmd_out = d end,
-        on_stderr = function (_, d, _) cmd_err = d end,
-        stdout_buffered = true,
-        stderr_buffered = true,
-      }
-    )
+    local job_id = vim.fn.jobstart(cmd, {
+      on_stdout = function(_, d, _)
+        cmd_out = d
+      end,
+      on_stderr = function(_, d, _)
+        cmd_err = d
+      end,
+      stdout_buffered = true,
+      stderr_buffered = true,
+    })
     local exit_code = 0
     if job_id > 0 then
-      exit_code = vim.fn.jobwait({job_id}, 5000)[1] -- wait for 5 seconds
+      exit_code = vim.fn.jobwait({ job_id }, 5000)[1] -- wait for 5 seconds
     end
     if exit_code > 0 then
       vim.notify(
@@ -192,25 +204,25 @@ local function pylsp_setup()
     end
 
     local venv_path = cmd_out[1]
-    vim.notify('[LSP] Set python venv at:\n'..venv_path, vim.log.levels.INFO)
+    vim.notify('[LSP] Set python venv at:\n' .. venv_path, vim.log.levels.INFO)
     return venv_path
   end
 
   local function on_new_config(config, _)
-      local venv_path = get_python_venv_path()
-      if venv_path ~= nil and venv_path ~= '' then
-        config.settings.pylsp.plugins.jedi = { environment = venv_path }
-      end
+    local venv_path = get_python_venv_path()
+    if venv_path ~= nil and venv_path ~= '' then
+      config.settings.pylsp.plugins.jedi = { environment = venv_path }
+    end
   end
 
   local settings = { pylsp = { plugins = { jedi = { environment = vim.NIL } } } }
 
-  lspconfig.pylsp.setup{
+  lspconfig.pylsp.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
     settings = settings,
     on_new_config = on_new_config,
-  }
+  })
 end
 
 --- lua-language-server setup.
@@ -220,9 +232,9 @@ end
 --- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
 local function sumneko_lua_setup()
   local sys
-  if vim.fn.has("mac") == 1 then
+  if vim.fn.has('mac') == 1 then
     sys = 'macOS'
-  elseif vim.fn.has("unix") == 1 then
+  elseif vim.fn.has('unix') == 1 then
     sys = 'Linux'
   elseif vim.fn.has('win32') == 1 then
     sys = 'Windows'
@@ -231,9 +243,9 @@ local function sumneko_lua_setup()
   end
   local sumneko_root_path = lss_dir .. '/lua-language-server'
   local sumneko_binary = sumneko_root_path .. '/bin/' .. sys .. '/lua-language-server'
-  lspconfig.sumneko_lua.setup {
+  lspconfig.sumneko_lua.setup({
     capabilities = make_capabilities(),
-    cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'};
+    cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
     on_attach = on_attach,
     settings = {
       Lua = {
@@ -242,7 +254,7 @@ local function sumneko_lua_setup()
           path = vim.split(package.path, ';'),
         },
         diagnostics = {
-          globals = {'vim'},
+          globals = { 'vim' },
         },
         workspace = {
           library = {
@@ -252,7 +264,7 @@ local function sumneko_lua_setup()
         },
       },
     },
-  }
+  })
 end
 
 --- cland setup.
@@ -262,33 +274,32 @@ end
 --- [1]: https://clangd.llvm.org/installation.html
 --- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
 local function clangd_setup()
-  lspconfig.clangd.setup{
+  lspconfig.clangd.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
-  }
+  })
 end
 
 --- Solargraph setup.
 --- `gem install solargraph`
 ---
 --- Ref: https://github.com/castwide/solargraph
- local function solargraph_setup()
-  lspconfig.solargraph.setup{
+local function solargraph_setup()
+  lspconfig.solargraph.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
-  }
+  })
 end
-
 
 --- OCaml-LSP setup.
 --- `opam install ocaml-lsp-server`
 ---
 --- Ref: https://github.com/ocaml/ocaml-lsp
 local function ocamllsp_setup()
-  lspconfig.ocamllsp.setup{
+  lspconfig.ocamllsp.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
-  }
+  })
 end
 
 --- ElixirLS setup.
@@ -302,7 +313,7 @@ end
 --- Ref: https://github.com/elixir-lsp/elixir-ls
 local function elixirls_setup()
   local ext
-  if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
+  if vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1 then
     ext = 'sh'
   elseif vim.fn.has('win32') == 1 then
     ext = 'bat'
@@ -310,13 +321,13 @@ local function elixirls_setup()
     vim.notify('Unsupported system for elixirls', vim.log.levels.WARN)
   end
 
-  local elixirls_root_path =  lss_dir .. '/elixir-ls'
+  local elixirls_root_path = lss_dir .. '/elixir-ls'
   local elixirls_binary = elixirls_root_path .. '/release/language_server.' .. ext
-  lspconfig.elixirls.setup{
+  lspconfig.elixirls.setup({
     capabilities = make_capabilities(),
-    cmd = {elixirls_binary},
+    cmd = { elixirls_binary },
     on_attach = on_attach,
-  }
+  })
 end
 
 --- Setup all language servers from above configurations.
