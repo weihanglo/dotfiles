@@ -102,7 +102,7 @@ function! RemoveListItem() abort
         call setqflist(l:list, 'r')
         :copen
     else
-        echoerr 'both quickfix and loclist not found'
+        lua vim.notify('both quickfix and loclist not found', vim.log.levels.ERROR)
     endif
     let l:idx = idx + 1
     execute l:idx

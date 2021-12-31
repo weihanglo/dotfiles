@@ -122,6 +122,23 @@ local function lualine_setup()
   }
 end
 
+--- rcarriga/nvim-notify
+local function nvim_notify_config()
+  require'notify'.setup{
+    background_colour = '#000000',
+    minimum_width = 40,
+    stages = 'slide',
+    icons = {
+      ERROR = "[ERROR]",
+      WARN = "[WARN]",
+      INFO = "[INFO]",
+      DEBUG = "[DEBUG]",
+      TRACE = "[TRACE]",
+    },
+  }
+  vim.notify = require'notify' -- override built-in notify
+end
+
 --- airblade/vim-gitgutter
 local function vim_gitgutter_setup()
   local opts = { noremap = false, silent = true }
@@ -254,6 +271,7 @@ function M.load_all()
     use {'hoob3rt/lualine.nvim'}
     use {'sainnhe/gruvbox-material'}
     use {'tversteeg/registers.nvim'}
+    use {'rcarriga/nvim-notify', config = nvim_notify_config}
     use {
       'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
       ft = 'qf',
