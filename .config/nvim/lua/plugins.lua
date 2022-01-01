@@ -320,6 +320,7 @@ local function declare_plugins(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     event = lazy_events,
+    run = ':TSUpdate',
     config = nvim_treesitter_config,
   })
   use({
