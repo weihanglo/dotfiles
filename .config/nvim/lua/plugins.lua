@@ -261,7 +261,7 @@ local function declare_plugins(use)
   use({ 'wbthomason/packer.nvim', opt = true })
 
   -- user interface
-  use({ 'hoob3rt/lualine.nvim' })
+  use({ 'nvim-lualine/lualine.nvim' })
   use({ 'sainnhe/gruvbox-material' })
   use({ 'tversteeg/registers.nvim', event = lazy_events })
   use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
