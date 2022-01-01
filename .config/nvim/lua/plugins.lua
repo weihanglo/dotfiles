@@ -288,13 +288,14 @@ local function declare_plugins(use)
   use({
     'neovim/nvim-lspconfig',
     after = 'cmp-nvim-lsp', -- We have the auto-completion capabilities!
-    wants = { 'lsp_extensions.nvim', 'nvim-lightbulb' },
+    wants = { 'lsp_extensions.nvim', 'nvim-lightbulb', 'lsp_signature.nvim' },
     config = function()
       require('lsp').setup()
     end,
   })
   use({ 'nvim-lua/lsp_extensions.nvim', opt = true })
   use({ 'kosayoda/nvim-lightbulb', opt = true })
+  use({ 'ray-x/lsp_signature.nvim', opt = true })
 
   -- fast moves
   use({

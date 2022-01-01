@@ -337,6 +337,12 @@ M.setup = function()
   -- Delay showing virtual text while inserting
   vim.g.diagnostic_insert_delay = 1
 
+  -- ray-x/lsp_signature.nvim (show parameter signature while typing)
+  require 'lsp_signature'.setup{
+    doc_lines = 0,
+    transparency = 100,
+  }
+
   -- Language servers setup
   rust_analyzer_setup()
   gopls_setup()
