@@ -265,6 +265,7 @@ local function declare_plugins(use)
   use({ 'sainnhe/gruvbox-material' })
   use({ 'tversteeg/registers.nvim', event = lazy_events })
   use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
+  use({ 'lukas-reineke/indent-blankline.nvim', cmd = 'IndentBlanklineToggle' })
   use({
     'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
     ft = 'qf',
