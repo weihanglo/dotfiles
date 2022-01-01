@@ -256,7 +256,7 @@ end
 
 --- Declare all plugins
 local function declare_plugins(use)
-  local lazy_events = { 'BufRead', 'BufNewFile', 'InsertEnter' }
+  local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
 
   use({ 'wbthomason/packer.nvim', opt = true })
 
