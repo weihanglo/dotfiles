@@ -287,7 +287,7 @@ local function declare_plugins(use)
   -- nvim-lsp
   use({
     'neovim/nvim-lspconfig',
-    event = lazy_events,
+    after = 'cmp-nvim-lsp', -- We have the auto-completion capabilities!
     wants = { 'lsp_extensions.nvim', 'nvim-lightbulb' },
     config = function()
       require('lsp').setup()
