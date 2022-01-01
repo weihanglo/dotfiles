@@ -34,7 +34,7 @@ function M.setup()
     command! DapReplOpen            lua require'dap'.repl.open()
     command! DapReplClose           lua require'dap'.repl.close()
     command! DapUiToggle            lua require'dapui'.toggle()
-    command! DapReloadConfigs       lua require'dap-configs'.load_configs()
+    command! DapReloadConfigs       lua require'dap-configs'.load_configs(true)
   ]],
     false
   )
@@ -215,10 +215,13 @@ end
 
 --- Loads global configurations for each debugee and merges VSCode
 -- `.vscode/launch.json` under current workspace.
-function M.load_configs()
+function M.load_configs(show_notification)
   debugee_rust()
   debugee_go()
   require('dap.ext.vscode').load_launchjs()
+  if show_notification then
+    vim.notify('Reload DAP configurations', vim.log.levels.INFO)
+  end
 end
 
 return M

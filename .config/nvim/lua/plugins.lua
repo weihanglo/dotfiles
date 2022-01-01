@@ -40,8 +40,8 @@ end
 --- nvim-telescope/telescope.nvim
 local function telescope_nvim_setup()
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_command('command! GStatus Telescope git_status')
-  vim.api.nvim_command('command! GBcommits Telescope git_bcommits')
+  vim.cmd('command! GStatus Telescope git_status')
+  vim.cmd('command! GBcommits Telescope git_bcommits')
   map('n', '<localleader>b', '<cmd>Telescope buffers<cr>', opts)
   map('n', '<localleader>c', '<cmd>Telescope commands theme=get_dropdown<cr>', opts)
   map('n', '<c-p>', '<cmd>Telescope find_files<cr>', opts)
@@ -254,13 +254,101 @@ local function nvim_cmp_config()
   })
 end
 
+--- Declare all plugins
+local function declare_plugins(use)
+  local lazy_events = { 'BufRead', 'BufNewFile', 'InsertEnter' }
+
+  use({ 'wbthomason/packer.nvim', opt = true })
+
+  -- user interface
+  use({ 'hoob3rt/lualine.nvim' })
+  use({ 'sainnhe/gruvbox-material' })
+  use({ 'tversteeg/registers.nvim', event = lazy_events })
+  use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
+  use({
+    'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
+    ft = 'qf',
+    config = function()
+      require('bqf').setup({ preview = { auto_preview = false } })
+    end,
+  })
+
+  -- auto-completion
+  local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
+  use({ 'hrsh7th/nvim-cmp', event = cmdline_lazy_events, config = nvim_cmp_config })
+  use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
+  use({ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' })
+  use({ 'hrsh7th/cmp-emoji', after = 'nvim-cmp' })
+  use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
+  use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
+  use({ 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' })
+  use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
+
+  -- nvim-lsp
+  use({
+    'neovim/nvim-lspconfig',
+    event = lazy_events,
+    wants = { 'lsp_extensions.nvim', 'nvim-lightbulb' },
+    config = function()
+      require('lsp').setup()
+    end,
+  })
+  use({ 'nvim-lua/lsp_extensions.nvim', opt = true })
+  use({ 'kosayoda/nvim-lightbulb', opt = true })
+
+  -- fast moves
+  use({
+    'kyazdani42/nvim-tree.lua',
+    cmd = 'NvimTreeToggle',
+    config = nvim_tree_config,
+  })
+  use({ 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' })
+  use({ 'mg979/vim-visual-multi', event = lazy_events })
+  use({
+    'akinsho/nvim-toggleterm.lua',
+    cmd = 'ToggleTerm',
+    config = nvim_toggleterm_lua_config,
+  })
+
+  -- vcs
+  use({ 'airblade/vim-gitgutter' })
+
+  -- filetype
+  use({ 'sheerun/vim-polyglot', event = lazy_events })
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    event = lazy_events,
+    config = nvim_treesitter_config,
+  })
+  use({
+    'romgrk/nvim-treesitter-context',
+    after = 'nvim-treesitter',
+    config = function()
+      require('treesitter-context').setup()
+    end,
+  })
+
+  -- search
+  use({ 'google/vim-searchindex', opt = true }) -- show search index beyond [>99/>99]
+  use({
+    'nvim-telescope/telescope.nvim',
+    wants = { 'plenary.nvim' },
+    requires = { { 'nvim-lua/plenary.nvim', opt = true } },
+    cmd = { 'Telescope' },
+    config = telescope_nvim_config,
+  })
+
+  -- dap
+  use({ 'mfussenegger/nvim-dap', cmd = 'DapPluginLoad' })
+  use({ 'rcarriga/nvim-dap-ui', after = 'nvim-dap' })
+end
+
 --- Load all plugins
 function M.load_all()
   -- Auto install packer.nvim
   local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-    vim.cmd('packadd packer.nvim')
+    vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
   end
 
   vim.cmd('packadd packer.nvim')
@@ -271,111 +359,8 @@ function M.load_all()
     augroup end
   ]])
 
-  local packer_config = {
-    display = {
-      open_fn = function()
-        return require('packer.util').float({ border = 'single' })
-      end,
-    },
-  }
-
-  local lazy_events = { 'BufRead', 'BufNewFile', 'InsertEnter' }
-
   -- Declare and load plugins
-  require('packer').startup({
-    function(use)
-      use({ 'wbthomason/packer.nvim', opt = true })
-
-      -- user interface
-      use({ 'hoob3rt/lualine.nvim' })
-      use({ 'sainnhe/gruvbox-material' })
-      use({ 'tversteeg/registers.nvim', event = lazy_events })
-      use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
-      use({
-        'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
-        ft = 'qf',
-        config = function()
-          require('bqf').setup({ preview = { auto_preview = false } })
-        end,
-      })
-
-      -- auto-completion
-      local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
-      use({ 'hrsh7th/nvim-cmp', event = cmdline_lazy_events, config = nvim_cmp_config })
-      use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
-      use({ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' })
-      use({ 'hrsh7th/cmp-emoji', after = 'nvim-cmp' })
-      use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
-      use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
-      use({ 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' })
-      use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
-
-      -- nvim-lsp
-      use({
-        'neovim/nvim-lspconfig',
-        event = lazy_events,
-        wants = { 'lsp_extensions.nvim', 'nvim-lightbulb' },
-        config = function()
-          require('lsp').setup()
-        end,
-      })
-      use({ 'nvim-lua/lsp_extensions.nvim', opt = true })
-      use({ 'kosayoda/nvim-lightbulb', opt = true })
-
-      -- fast moves
-      use({
-        'kyazdani42/nvim-tree.lua',
-        cmd = 'NvimTreeToggle',
-        config = nvim_tree_config,
-      })
-      use({ 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' })
-      use({ 'mg979/vim-visual-multi', event = lazy_events })
-      use({
-        'akinsho/nvim-toggleterm.lua',
-        cmd = 'ToggleTerm',
-        config = nvim_toggleterm_lua_config,
-      })
-
-      -- vcs
-      use({ 'airblade/vim-gitgutter' })
-
-      -- filetype
-      use({ 'sheerun/vim-polyglot', event = lazy_events })
-      use({
-        'nvim-treesitter/nvim-treesitter',
-        event = lazy_events,
-        config = nvim_treesitter_config,
-      })
-      use({
-        'romgrk/nvim-treesitter-context',
-        after = 'nvim-treesitter',
-        config = function()
-          require('treesitter-context').setup()
-        end,
-      })
-
-      -- search
-      use({ 'google/vim-searchindex', opt = true }) -- show search index beyond [>99/>99]
-      use({
-        'nvim-telescope/telescope.nvim',
-        wants = { 'plenary.nvim' },
-        requires = { { 'nvim-lua/plenary.nvim', opt = true } },
-        cmd = { 'Telescope' },
-        config = telescope_nvim_config,
-      })
-
-      -- dap
-      use({ 'mfussenegger/nvim-dap', ft = { 'rust', 'go' } })
-      use({
-        'rcarriga/nvim-dap-ui',
-        after = 'nvim-dap',
-        config = function()
-          require('dap-configs').setup()
-        end,
-      })
-    end,
-    config = packer_config,
-  })
+  require('packer').startup({ declare_plugins, config = { display = { open_fn = require('packer.util').float } } })
 
   -- Configure plugins
   gruvbox_material_setup()
@@ -389,6 +374,8 @@ function M.load_all()
   vim.g.no_ocaml_maps = true
   -- Enable vim-visual-multi mouse mappings
   vim.g.VM_mouse_mappings = 1
+  -- Configure nvim-dap on demand
+  vim.cmd([[command! DapPluginLoad execute 'PackerLoad nvim-dap' | lua require('dap-configs').setup()]])
 end
 
 return M
