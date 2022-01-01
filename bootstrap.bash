@@ -41,6 +41,7 @@ cargo_crates=(
   fd-find
   git-delta
   gitui
+  hyperfine
   mdbook
   ripgrep
   starship
