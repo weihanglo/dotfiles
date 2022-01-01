@@ -240,15 +240,15 @@ local function nvim_cmp_setup()
     sources = cmp.config.sources({
       { name = 'nvim_lsp_document_symbol' },
     }, {
-      { name = 'buffer', max_item_count = 5 },
+      { name = 'buffer' },
     }),
   })
 
   cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
-      { name = 'path', max_item_count = 5 },
+      { name = 'path' },
     }, {
-      { name = 'cmdline', max_item_count = 5 },
+      { name = 'cmdline' },
     }),
   })
 end
