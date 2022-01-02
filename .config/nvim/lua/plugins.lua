@@ -186,7 +186,7 @@ local function nvim_tree_setup()
   vim.g.nvim_tree_group_empty = 1
   vim.g.nvim_tree_git_hl = 1
   vim.g.nvim_tree_window_picker_exclude = {
-    filetype = { 'packer', 'qf', 'toggleterm' },
+    filetype = { 'packer', 'qf', 'toggleterm', 'notify' },
     buftype = { 'terminal' },
   }
 end
