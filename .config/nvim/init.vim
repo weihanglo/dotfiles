@@ -106,7 +106,17 @@ function! RemoveListItem() abort
     let l:idx = idx + 1
     execute l:idx
 endfunction
-autocmd FileType qf map <buffer> dd <cmd>call RemoveListItem()<cr>
+augroup QuickfixPlus
+    autocmd!
+    autocmd FileType qf map <buffer> dd <cmd>call RemoveListItem()<cr>
+augroup END
+" }}}
+
+" `:h lua-highlight` {{{
+augroup HighlightYank
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=250}
+augroup END
 " }}}
 
 " grepprg: Ripgrep {{{
