@@ -223,8 +223,6 @@ local function nvim_cmp_config()
       ['<c-x><c-o>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
       ['<c-y>'] = cmp.config.disable,
       ['<c-e>'] = cmp.config.disable,
-      ['<s-tab>'] = cmp.config.disable,
-      ['<tag>'] = cmp.config.disable,
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
