@@ -7,7 +7,6 @@ set dictionary+=/usr/share/dict/words
 set expandtab
 set foldmethod=indent
 set foldnestmax=5
-set hidden
 set ignorecase
 set lazyredraw
 set linebreak
@@ -17,7 +16,7 @@ set nofoldenable
 set noswapfile
 set nowrap
 set pumblend=15
-set pumheight=15
+set pumheight=10
 set scrolloff=2
 set shiftwidth=4
 set showmatch
