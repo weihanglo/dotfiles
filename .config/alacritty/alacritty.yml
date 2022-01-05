@@ -25,7 +25,7 @@ font:
   bold_italic:
     family: JetBrains Mono
     style: Bold Italic
-  size: 24
+  size: 20
 
 background_opacity: 0.7
 
