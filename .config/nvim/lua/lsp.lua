@@ -126,7 +126,7 @@ local function rust_analyzer_setup()
 end
 
 --- TypeScript Language Server setup.
---- `npm i g typescript-language-server`
+--- `npm i -g typescript-language-server typescript` (typescript for type checking)
 ---
 --- Ref: https://github.com/theia-ide/typescript-language-server
 local function tsserver_setup()
