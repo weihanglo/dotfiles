@@ -252,6 +252,11 @@ local function nvim_cmp_config()
   })
 end
 
+local function copilot_setup()
+  vim.cmd([[imap <silent><script><expr> <c-space> copilot#Accept("")]])
+  vim.g.copilot_no_tab_map = true
+end
+
 --- Declare all plugins
 local function declare_plugins(use)
   local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
@@ -282,6 +287,7 @@ local function declare_plugins(use)
   use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
+  use({ 'github/copilot.vim', event = lazy_events })
 
   -- nvim-lsp
   use({
@@ -371,6 +377,7 @@ function M.load_all()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
   vim_gitgutter_setup()
+  copilot_setup()
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
   -- Enable vim-visual-multi mouse mappings
