@@ -339,6 +339,7 @@ M.setup = function()
 
   -- ray-x/lsp_signature.nvim (show parameter signature while typing)
   require 'lsp_signature'.setup{
+    bind = true,
     doc_lines = 5,
     transparency = 100,
     floating_window = false,
