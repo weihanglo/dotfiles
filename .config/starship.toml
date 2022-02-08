@@ -78,6 +78,9 @@ disabled = true
 [kotlin]
 disabled = true
 
+[localip]
+disabled = true
+
 [lua]
 format = "[$symbol$version]($style) "
 
