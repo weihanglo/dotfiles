@@ -337,22 +337,6 @@ M.setup = function()
   -- Delay showing virtual text while inserting
   vim.g.diagnostic_insert_delay = 1
 
-  -- ray-x/lsp_signature.nvim (show parameter signature while typing)
-  require('lsp_signature').setup({
-    bind = true,
-    doc_lines = 5,
-    transparency = 100,
-    floating_window = false,
-    floating_window_above_cur_line = false, -- set false to not overlay with pop menu
-    toggle_key = '<c-k>', -- LspHover but in insert mode
-  })
-
-  -- j-hui/fidget.nvim (show progress bar)
-  require('fidget').setup({
-    text = { spinner = 'dots' },
-    window = { blend = 0 },
-  })
-
   -- Language servers setup
   rust_analyzer_setup()
   gopls_setup()

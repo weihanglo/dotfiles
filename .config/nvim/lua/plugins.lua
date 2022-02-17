@@ -252,6 +252,26 @@ local function nvim_cmp_config()
   })
 end
 
+--- ray-x/lsp_signature.nvim (show parameter signature while typing)
+local function lsp_signature_nvim_config()
+  require('lsp_signature').setup({
+    bind = true,
+    doc_lines = 5,
+    transparency = 100,
+    floating_window = false,
+    floating_window_above_cur_line = false, -- set false to not overlay with pop menu
+    toggle_key = '<c-k>', -- LspHover but in insert mode
+  })
+end
+
+--- j-hui/fidget.nvim (show progress bar)
+local function fidget_nvim_config()
+  require('fidget').setup({
+    text = { spinner = 'dots' },
+    window = { blend = 0 },
+  })
+end
+
 local function copilot_setup()
   vim.cmd([[imap <silent><script><expr> <c-space> copilot#Accept("")]])
   vim.g.copilot_no_tab_map = true
@@ -300,8 +320,8 @@ local function declare_plugins(use)
   })
   use({ 'nvim-lua/lsp_extensions.nvim', opt = true })
   use({ 'kosayoda/nvim-lightbulb', opt = true })
-  use({ 'ray-x/lsp_signature.nvim', opt = true })
-  use({ 'j-hui/fidget.nvim', opt = true })
+  use({ 'ray-x/lsp_signature.nvim', opt = true, config = lsp_signature_nvim_config })
+  use({ 'j-hui/fidget.nvim', opt = true, config = fidget_nvim_config })
 
   -- fast moves
   use({
