@@ -143,19 +143,26 @@ local function nvim_notify_config()
   vim.notify = require('notify') -- override built-in notify
 end
 
---- airblade/vim-gitgutter
-local function vim_gitgutter_setup()
-  local opts = { noremap = false, silent = true }
-  map('n', '[c', '<plug>(GitGutterPrevHunk)', opts)
-  map('n', ']c', '<plug>(GitGutterNextHunk)', opts)
-  vim.g.gitgutter_map_keys = 0
-  -- gitgutter symbols
-  vim.g.gitgutter_sign_added = '▎'
-  vim.g.gitgutter_sign_modified = '▎'
-  vim.g.gitgutter_sign_removed = '▁'
-  vim.g.gitgutter_sign_removed_first_line = '▔'
-  vim.g.gitgutter_sign_removed_above_and_below = '░'
-  vim.g.gitgutter_sign_modified_removed = '▎'
+--- lewis6991/gitsigns.nvim
+local function gitsigns_nvim_config()
+  require('gitsigns').setup({
+    on_attach = function(bufnr)
+      local opts = { noremap = false, silent = true, expr = true }
+      local map = function(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+      end
+
+      map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", opts)
+      map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", opts)
+    end,
+    signs = {
+      add = { text = '▎' },
+      change = { text = '▎' },
+      delete = { text = '▁' },
+      topdelete = { text = '▔' },
+      changedelete = { text = '░' },
+    },
+  })
 end
 
 --- kyazdani42/nvim-tree.lua
@@ -338,7 +345,13 @@ local function declare_plugins(use)
   })
 
   -- vcs
-  use({ 'airblade/vim-gitgutter' })
+  use({
+    'lewis6991/gitsigns.nvim',
+    wants = { 'plenary.nvim' },
+    requires = { { 'nvim-lua/plenary.nvim', opt = true } },
+    event = lazy_events,
+    config = gitsigns_nvim_config,
+  })
 
   -- filetype
   use({ 'sheerun/vim-polyglot', event = lazy_events })
@@ -397,7 +410,6 @@ function M.load_all()
   nvim_tree_setup()
   telescope_nvim_setup()
   nvim_toggleterm_lua_setup()
-  vim_gitgutter_setup()
   copilot_setup()
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
