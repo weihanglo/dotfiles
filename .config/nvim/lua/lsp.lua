@@ -117,8 +117,6 @@ local function rust_analyzer_setup()
       ['rust-analyzer'] = {
         -- Default 128. Ref: https://git.io/JTczw
         lruCapacity = 512,
-        procMacro = { enable = true },
-        experimental = { procAttrMacros = true },
       },
     },
     single_file_support = true,
