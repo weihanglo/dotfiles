@@ -192,16 +192,22 @@ local function nvim_tree_setup()
   vim.g.nvim_tree_add_trailing = 1
   vim.g.nvim_tree_group_empty = 1
   vim.g.nvim_tree_git_hl = 1
-  vim.g.nvim_tree_window_picker_exclude = {
-    filetype = { 'packer', 'qf', 'toggleterm', 'notify' },
-    buftype = { 'terminal' },
-  }
 end
 local function nvim_tree_config()
   require('nvim-tree').setup({
     view = {
       side = 'right',
       signcolumn = 'no',
+    },
+    action = {
+      open_file = {
+        window_picker = {
+          exclude = {
+            filetype = { 'packer', 'qf', 'toggleterm', 'notify', 'diff' },
+            buftype = { "nofile", "terminal", "help" },
+          },
+        },
+      },
     },
   })
 end
