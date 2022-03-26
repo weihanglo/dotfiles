@@ -4,6 +4,7 @@ window:
     lines: 24
   decorations: none
   startup_mode: Maximized
+  opacity: 0.7
 
 scrolling:
   history: 100000
@@ -26,8 +27,6 @@ font:
     family: JetBrains Mono
     style: Bold Italic
   size: 20
-
-background_opacity: 0.7
 
 live_config_reload: true
 
