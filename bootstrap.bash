@@ -43,6 +43,7 @@ cargo_crates=(
   gitui
   hyperfine
   mdbook
+  procs
   ripgrep
   starship
   tealdeer
