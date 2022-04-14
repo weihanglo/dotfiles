@@ -212,13 +212,13 @@ local function nvim_tree_config()
   })
 end
 
--- akinsho/nvim-toggleterm.lua
-local function nvim_toggleterm_lua_setup()
+-- akinsho/toggleterm.nvim
+local function toggleterm_nvim_setup()
   local opts = { noremap = true, silent = true }
   map('n', '<localleader>t', ':<c-u>execute v:count . "ToggleTerm"<cr>', opts)
   map('t', '<localleader>t', '<c-\\><c-n>:<c-u>execute v:count . "ToggleTerm"<cr>', opts)
 end
-local function nvim_toggleterm_lua_config()
+local function toggleterm_nvim_config()
   require('toggleterm').setup({
     start_in_insert = false,
     persist_size = false,
@@ -345,9 +345,9 @@ local function declare_plugins(use)
   use({ 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' })
   use({ 'mg979/vim-visual-multi', event = lazy_events })
   use({
-    'akinsho/nvim-toggleterm.lua',
+    'akinsho/toggleterm.nvim',
     cmd = 'ToggleTerm',
-    config = nvim_toggleterm_lua_config,
+    config = toggleterm_nvim_config,
   })
 
   -- vcs
@@ -415,7 +415,7 @@ function M.load_all()
   lualine_setup()
   nvim_tree_setup()
   telescope_nvim_setup()
-  nvim_toggleterm_lua_setup()
+  toggleterm_nvim_setup()
   copilot_setup()
   -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
   vim.g.no_ocaml_maps = true
