@@ -30,7 +30,7 @@ end
 --- nvim-treesitter/nvim-treesitter
 local function nvim_treesitter_config()
   return require('nvim-treesitter.configs').setup({
-    ensure_installed = 'maintained',
+    ensure_installed = 'all',
     highlight = { enable = true },
     incremental_selection = { enable = true },
     indent = { enabled = true },
