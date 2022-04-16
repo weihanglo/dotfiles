@@ -12,6 +12,9 @@ format = "[🔋$percentage]($style) "
 [buf]
 disabled = true
 
+[c]
+disabled = true
+
 [cmake]
 disabled = true
 
@@ -137,6 +140,9 @@ disabled = true
 format = "[$symbol$version]($style) "
 
 [scala]
+disabled = true
+
+[spack]
 disabled = true
 
 [singularity]
