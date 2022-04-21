@@ -230,13 +230,11 @@ local function nvim_cmp_config()
   local cmp = require('cmp')
 
   cmp.setup({
-    mapping = {
+    mapping =  cmp.mapping.preset.insert({
       ['<cr>'] = cmp.mapping.confirm(),
       -- replace omnifunc?
       ['<c-x><c-o>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<c-y>'] = cmp.config.disable,
-      ['<c-e>'] = cmp.config.disable,
-    },
+    }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'nvim_lua' },
@@ -249,6 +247,7 @@ local function nvim_cmp_config()
   })
 
   cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'nvim_lsp_document_symbol' },
     }, {
@@ -257,6 +256,7 @@ local function nvim_cmp_config()
   })
 
   cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'path' },
     }, {
