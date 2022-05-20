@@ -260,6 +260,9 @@ local function sumneko_lua_setup()
             [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
           },
         },
+        telemetry = {
+          enable = false,
+        },
       },
     },
   })
