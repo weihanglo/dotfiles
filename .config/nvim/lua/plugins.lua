@@ -199,7 +199,7 @@ local function nvim_tree_config()
       side = 'right',
       signcolumn = 'no',
     },
-    action = {
+    actions = {
       open_file = {
         window_picker = {
           exclude = {
