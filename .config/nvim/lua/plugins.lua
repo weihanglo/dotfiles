@@ -169,30 +169,8 @@ end
 local function nvim_tree_setup()
   local opts = { noremap = true, silent = true }
   map('n', '<localleader>n', '<cmd>NvimTreeToggle<cr>', opts)
-  vim.g.nvim_tree_show_icons = {
-    git = 0,
-    files = 1,
-    folders = 1,
-    folder_arrows = 0,
-  }
-  vim.g.nvim_tree_icons = {
-    default = ' ',
-    symlink = ' ',
-    folder = {
-      arrow_open = '▾',
-      arrow_closed = '▸',
-      default = '▸',
-      open = '▾',
-      empty = '▸',
-      empty_open = '▾',
-      symlink = '▸',
-      symlink_open = '▾',
-    },
-  }
-  vim.g.nvim_tree_add_trailing = 1
-  vim.g.nvim_tree_group_empty = 1
-  vim.g.nvim_tree_git_hl = 1
 end
+
 local function nvim_tree_config()
   require('nvim-tree').setup({
     view = {
@@ -204,7 +182,34 @@ local function nvim_tree_config()
         window_picker = {
           exclude = {
             filetype = { 'packer', 'qf', 'toggleterm', 'notify', 'diff' },
-            buftype = { "nofile", "terminal", "help" },
+            buftype = { 'nofile', 'terminal', 'help' },
+          },
+        },
+      },
+    },
+    renderer = {
+      add_trailing = true,
+      group_empty = true,
+      highlight_git = true,
+      icons = {
+        show = {
+          file = true,
+          folder_arrow = false,
+          folder = true,
+          git = false,
+        },
+        glyphs = {
+          default = ' ',
+          symlink = ' ',
+          folder = {
+            arrow_open = '▾',
+            arrow_closed = '▸',
+            default = '▸',
+            open = '▾',
+            empty = '▸',
+            empty_open = '▾',
+            symlink = '▸',
+            symlink_open = '▾',
           },
         },
       },
