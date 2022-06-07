@@ -373,7 +373,7 @@ local function declare_plugins(use)
     config = nvim_treesitter_config,
   })
   use({
-    'romgrk/nvim-treesitter-context',
+    'nvim-treesitter/nvim-treesitter-context',
     after = 'nvim-treesitter',
     config = function()
       require('treesitter-context').setup()
