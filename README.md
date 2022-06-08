@@ -21,7 +21,6 @@ bash ~/.dotfiles/bootstrap.bash
 - [**GitUI**]: One of the best TUI Git client on Earth.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
-- [**LeftWM**]: I don't know why I need a window manager....
 - [**Neovim**]: Next-generation Vim. Required.
 - [**pyenv**]: Simple Python version management.
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
@@ -48,7 +47,6 @@ Copyright © 2015 - 2021 Weihang Lo
 [**GitUI**]: https://github.com/extrawurst/gitui
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/
 [**kitty**]: https://sw.kovidgoyal.net/kitty/
-[**LeftWM**]: http://leftwm.org/
 [**Neovim**]: https://neovim.io
 [**pyenv**]: https://github.com/pyenv/pyenv
 [**ripgrep**]: https://github.com/burntsushi/ripgrep

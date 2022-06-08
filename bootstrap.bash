@@ -15,12 +15,10 @@ files_to_sync=(
     .bashrc
     .cargo/config.toml
     .config/alacritty/alacritty.yml
-    .config/autostart/x11setup.desktop
     .config/bat/config
     .config/fish/config.fish
     .config/gitui/key_bindings.ron
     .config/kitty/kitty.conf
-    .config/leftwm/config.toml
     .config/nvim/init.vim
     .config/nvim/lua/dap-configs.lua
     .config/nvim/lua/lsp.lua
@@ -31,7 +29,6 @@ files_to_sync=(
     .gitignore
     .inputrc
     .tmux.conf
-    .xbindkeysrc
 )
 
 cargo_crates=(
@@ -108,14 +105,6 @@ install_python_binaries() {
   echo ${python_packages[@]} | xargs -n1 python3 -m pipx install
 }
 
-# Note that you need to register leftwm.desktop in /usr/share/xsessions/
-install_leftwm_and_theme() {
-  cargo install leftwm
-  themes_dir="$HOME/.config/leftwm/themes"
-  mkdir -p "$themes_dir"
-  ln -vfs $SCRIPTPATH/.config/leftwm/themes/basic "$themes_dir/current"
-}
-
 # confirm helper function running before installation
 confirm () {
     echo
@@ -148,9 +137,6 @@ if [[ -n "$1" ]]; then
       ;;
     python|py)
       install_python_binaries
-      ;;
-    wm|leftwm)
-      install_leftwm_and_theme
   esac
 else
   confirm "Synchronize all config files" sync_config_files

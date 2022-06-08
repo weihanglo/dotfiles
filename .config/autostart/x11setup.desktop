@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Comment=X11 setup for key bindings and input devices
-Exec="/home/$(whoami)/.dotfiles/bin/x11setup.bash"
-Name=x11setup.bash
-NoDisplay=true
