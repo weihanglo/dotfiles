@@ -27,6 +27,9 @@ disabled = true
 [crystal]
 disabled = true
 
+[daml]
+disabled = true
+
 [dart]
 disabled = true
 
