@@ -133,6 +133,9 @@ format = "[$symbol$version]($style) "
 [rlang]
 disabled = true
 
+[raku]
+disabled = true
+
 [red]
 disabled = true
 
