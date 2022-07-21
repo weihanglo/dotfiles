@@ -331,6 +331,17 @@ local function elixirls_setup()
   })
 end
 
+--- Kotlin Language Server setup.
+--- `./gradlew :server:installDist`
+---
+--- Ref: https://github.com/fwcd/kotlin-language-server/blob/main/BUILDING.md
+local function kotlin_language_server_setup()
+  lspconfig.kotlin_language_server.setup({
+    capabilities = make_capabilities(),
+    on_attach = on_attach,
+  })
+end
+
 --- Setup all language servers from above configurations.
 M.setup = function()
   -- Show virtual text for diagnoses
@@ -348,6 +359,7 @@ M.setup = function()
   solargraph_setup()
   ocamllsp_setup()
   elixirls_setup()
+  kotlin_language_server_setup()
 end
 
 return M
