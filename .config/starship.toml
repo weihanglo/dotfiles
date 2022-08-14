@@ -12,6 +12,9 @@ format = "[🔋$percentage]($style) "
 [buf]
 disabled = true
 
+[bun]
+disabled = true
+
 [c]
 disabled = true
 
