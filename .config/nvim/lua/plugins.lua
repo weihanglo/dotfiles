@@ -143,6 +143,14 @@ local function nvim_notify_config()
   vim.notify = require('notify') -- override built-in notify
 end
 
+--- nacro90/numb.nvim
+local function numb_nvim_config() 
+  require('numb').setup({
+    show_numbers = false,
+    number_only = true,
+  })
+end
+
 --- lewis6991/gitsigns.nvim
 local function gitsigns_nvim_config()
   require('gitsigns').setup({
@@ -307,6 +315,7 @@ local function declare_plugins(use)
   use({ 'tversteeg/registers.nvim', event = lazy_events })
   use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
   use({ 'lukas-reineke/indent-blankline.nvim', cmd = 'IndentBlanklineToggle' })
+  use({ 'nacro90/numb.nvim', event = { 'CmdLineEnter' }, config = numb_nvim_config })
   use({
     'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
     ft = 'qf',
