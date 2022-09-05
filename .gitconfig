@@ -54,5 +54,3 @@
 	line-numbers = true
 [init]
 	defaultBranch = main
-[clone]
-	defaultRemoteName = up # upstream
