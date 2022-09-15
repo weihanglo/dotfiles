@@ -2,7 +2,6 @@
 *.RData
 *.sw[op]
 *~
-*.log
 *.db
 *.sqilte
 *.sqilte3
