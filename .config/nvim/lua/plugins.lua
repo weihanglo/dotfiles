@@ -372,6 +372,23 @@ local function declare_plugins(use)
     event = lazy_events,
     config = gitsigns_nvim_config,
   })
+  use({
+    'ruifm/gitlinker.nvim',
+    wants = { 'plenary.nvim' },
+    requires = { { 'nvim-lua/plenary.nvim', opt = true } },
+    event = lazy_events,
+    config = function()
+      require('gitlinker').setup({
+        opts = {
+          add_current_line_on_normal_mode = true,
+          action_callback = require('gitlinker.actions').open_in_browser,
+          print_url = true,
+          -- Default mapping is `<leader>gy`.
+          -- I don't like it but leave it for now.
+        },
+      })
+    end,
+  })
 
   -- filetype
   use({ 'sheerun/vim-polyglot', event = lazy_events })
