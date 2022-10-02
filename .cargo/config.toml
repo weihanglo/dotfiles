@@ -1,6 +1,7 @@
 [alias]
 br = "build --release"
 rr = "run --release"
+docp = "doc --document-private-items --no-deps --open"
 
 [target.x86_64-unknown-linux-gnu]
 # For clang11 or lower, use link-arg=-fuse-ld=<path>.
