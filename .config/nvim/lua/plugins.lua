@@ -303,6 +303,14 @@ local function copilot_setup()
   vim.g.copilot_no_tab_map = true
 end
 
+--- tversteeg/registers.nvim
+local function registers_nvim_config()
+  require('registers').setup({
+    show_empty = false,
+    window = { border = 'rounded' },
+  })
+end
+
 --- Declare all plugins
 local function declare_plugins(use)
   local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
@@ -312,8 +320,12 @@ local function declare_plugins(use)
   -- user interface
   use({ 'nvim-lualine/lualine.nvim' })
   use({ 'sainnhe/gruvbox-material' })
-  use({ 'tversteeg/registers.nvim', event = lazy_events })
   use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
+  use({ 
+    'tversteeg/registers.nvim',
+    event = lazy_events,
+    config = registers_nvim_config,
+  })
   use({ 'lukas-reineke/indent-blankline.nvim', cmd = 'IndentBlanklineToggle' })
   use({ 'nacro90/numb.nvim', event = { 'CmdLineEnter' }, config = numb_nvim_config })
   use({
