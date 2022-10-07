@@ -172,6 +172,9 @@ local function debugee_rust()
       env = {},
     },
   }
+  -- HACK: `type` needs to be "rust" but vscode only recognize "lldb"
+  -- Let's setup a compatible layer then.
+  dap.configurations.lldb = dap.configurations.rust
 end
 
 --- Debugee: Go delve dap
