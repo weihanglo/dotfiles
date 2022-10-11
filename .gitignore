@@ -13,6 +13,9 @@ __debug_bin
 
 node_modules
 
+# local ignore file for ripgrep
+/.ignore
+
 #-------------------
 # Editor
 #-------------------
