@@ -67,7 +67,7 @@ local function on_attach(client, bufnr)
     false
   )
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     -- Highlight word under cursor.
     vim.api.nvim_exec(
       [[
