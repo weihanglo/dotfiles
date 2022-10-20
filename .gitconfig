@@ -24,6 +24,7 @@
 [diff]
 	tool = nvim
 	colorMoved = default
+	renames = copies
 [difftool]
 	prompt = true
 [difftool "nvim"]
@@ -54,3 +55,5 @@
 	line-numbers = true
 [init]
 	defaultBranch = main
+[log]
+	follow = true
