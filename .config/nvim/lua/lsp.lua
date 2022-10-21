@@ -8,7 +8,7 @@ local lss_dir = vim.fn.stdpath('data') .. '/lss'
 
 --- Auto-completion capabilities from `hrsh7th/nvim-cmp`
 local function make_capabilities()
-  return require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities(), {
+  return require('cmp_nvim_lsp').default_capabilities({
     -- disable snippet since we do not choose any snippet engine yet
     snippetSupport = false,
   })
