@@ -3,17 +3,17 @@ br = "build --release"
 rr = "run --release"
 docp = "doc --document-private-items --no-deps --open"
 
-[target.x86_64-unknown-linux-gnu]
-# For clang11 or lower, use link-arg=-fuse-ld=<path>.
-linker = "clang"
-rustflags = ["-C", "link-arg=--ld-path=/usr/bin/mold"]
+#[target.x86_64-unknown-linux-gnu]
+## For clang11 or lower, use link-arg=-fuse-ld=<path>.
+#linker = "clang"
+#rustflags = ["-C", "link-arg=--ld-path=/usr/bin/mold"]
 
 # CAVEAT: debug symbols not generated correctly on ARM64 macbook
 # <https://github.com/rui314/mold/issues/663>
-[target.aarch64-apple-darwin]
-linker = "clang"
-rustflags = ["-C", "link-arg=--ld-path=/opt/homebrew/bin/ld64.mold"]
+#[target.aarch64-apple-darwin]
+#linker = "clang"
+#rustflags = ["-C", "link-arg=--ld-path=/opt/homebrew/bin/ld64.mold"]
 
-[target.x86_64-apple-darwin]
-linker = "clang"
-rustflags = ["-C", "link-arg=--ld-path=/usr/local/bin/ld64.mold"]
+#[target.x86_64-apple-darwin]
+#linker = "clang"
+#rustflags = ["-C", "link-arg=--ld-path=/usr/local/bin/ld64.mold"]
