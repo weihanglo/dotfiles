@@ -4,6 +4,9 @@ local map = vim.api.nvim_set_keymap
 
 --- sainnhe/gruvbox-material
 local function gruvbox_material_setup()
+  if vim.g.vscode then
+    return
+  end
   vim.g.gruvbox_material_background = 'soft'
   vim.g.gruvbox_material_better_performance = 1
   vim.g.gruvbox_material_diagnostic_line_highlight = 1
@@ -320,8 +323,8 @@ local function declare_plugins(use)
   -- user interface
   use({ 'nvim-lualine/lualine.nvim' })
   use({ 'sainnhe/gruvbox-material' })
-  use({ 'rcarriga/nvim-notify', config = nvim_notify_config })
-  use({ 
+  use({ 'rcarriga/nvim-notify', config = nvim_notify_config, opt = true })
+  use({
     'tversteeg/registers.nvim',
     event = lazy_events,
     config = registers_nvim_config,
