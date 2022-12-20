@@ -62,6 +62,9 @@ format = '$env_value '
 [erlang]
 disabled = true
 
+[fill]
+disabled = true
+
 [gcloud]
 disabled = true
 
@@ -78,7 +81,13 @@ disabled = true
 [golang]
 format = "[$symbol$version]($style) "
 
+[guix_shell]
+disabled = true
+
 [haskell]
+disabled = true
+
+[haxe]
 disabled = true
 
 [helm]
@@ -111,6 +120,9 @@ format = "[$symbol$version]($style) "
 
 [ocaml]
 format = "[$symbol$version]($style) "
+
+[opa]
+disabled = true
 
 [openstack]
 disabled = true
