@@ -176,7 +176,7 @@ local function gitsigns_nvim_config()
   })
 end
 
---- kyazdani42/nvim-tree.lua
+--- nvim-tree/nvim-tree.lua
 local function nvim_tree_setup()
   local opts = { noremap = true, silent = true }
   map('n', '<localleader>n', '<cmd>NvimTreeToggle<cr>', opts)
@@ -361,7 +361,7 @@ local function declare_plugins(use)
 
   -- fast moves
   use({
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     cmd = 'NvimTreeToggle',
     config = nvim_tree_config,
   })
