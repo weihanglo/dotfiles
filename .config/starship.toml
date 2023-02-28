@@ -62,7 +62,13 @@ format = '$env_value '
 [erlang]
 disabled = true
 
+[fennel]
+disabled = true
+
 [fill]
+disabled = true
+
+[fossil_branch]
 disabled = true
 
 [gcloud]
@@ -81,6 +87,9 @@ disabled = true
 [golang]
 format = "[$symbol$version]($style) "
 
+[gradle]
+disabled = true
+
 [guix_shell]
 disabled = true
 
@@ -91,6 +100,9 @@ disabled = true
 disabled = true
 
 [helm]
+disabled = true
+
+[hg_branch]
 disabled = true
 
 [java]
@@ -131,6 +143,9 @@ disabled = true
 disabled = true
 
 [perl]
+disabled = true
+
+[pijul_channel]
 disabled = true
 
 [php]
