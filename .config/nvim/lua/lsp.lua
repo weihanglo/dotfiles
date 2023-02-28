@@ -117,6 +117,9 @@ local function rust_analyzer_setup()
       ['rust-analyzer'] = {
         -- Default 128. Ref: https://git.io/JTczw
         lruCapacity = 512,
+        rustc = {
+          source = "discover",
+        }
       },
     },
     single_file_support = true,
