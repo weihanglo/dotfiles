@@ -42,6 +42,7 @@ cargo_crates=(
   mdbook
   procs
   ripgrep
+  rtx-cli
   starship
   tealdeer
   tokei

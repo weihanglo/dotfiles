@@ -33,27 +33,16 @@ if [[ $? -eq 0 ]]; then
     # Additional PATHs
     export PATH="$HOME/.local/bin:$PATH"
     export FZF_DEFAULT_COMMAND='rg --files --smart-case'
-    # Ruby
-    export GEM_HOME="$HOME/.gem"
-    export PATH="$GEM_HOME/bin:$PATH"
-    ## Golang
-    export GOPATH="$HOME/go"
-    export PATH="$GOPATH/bin:$PATH"
-    # Python
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
-    export PATH="$PYENV_ROOT/bin:$PATH"
     # Rust
     export PATH="$HOME/.cargo/bin:$PATH"
 
-    # Load `fnm` once and for all
-    hash fnm && source <(fnm env)
-    # Load `pyenv` once and for all
-    hash pyenv && source <(pyenv init --path) && source <(pyenv init -)
-    # Load `rbenv` once and for all
-    hash rbenv && source <(rbenv init -)
-    # Local `opam` once and for all
-    hash opam && source <(opam env)
+    # Load `rtx` once and for all. A replacement for
+    # - go
+    # - nvm (fnm)
+    # - opam
+    # - pyenv
+    # - rbenv
+    hash rtx && source <(rtx activate bash)
 fi
 
 # ------------------------------------------------------------------------------

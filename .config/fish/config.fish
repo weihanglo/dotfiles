@@ -3,7 +3,7 @@
 #--------------------------------------#
 #   configs for fish shell, version 3  #
 #            by Weihang Lo             #
-#              Jun. 2021               #
+#              Mar. 2023               #
 #--------------------------------------#
 
 # Default shell to fish
@@ -29,27 +29,16 @@ if status is-login
     # FZF
     set -gx FZF_DEFAULT_COMMAND "rg --files --smart-case"
     set -pgx PATH $HOME/.fzf/bin
-    # Ruby
-    set -gx GEM_HOME $HOME/.gem
-    set -pgx PATH $GEM_HOME/bin
-    # Golang
-    set -gx GOPATH $HOME/go
-    set -pgx PATH $GOPATH/bin
-    # Python
-    set -gx PYENV_ROOT $HOME/.pyenv
-    set -gx PIPENV_PYTHON $PYENV_ROOT/shims/python
-    set -pgx PATH $PYENV_ROOT/bin
     # Rust
     set -pgx PATH $HOME/.cargo/bin
 
-    # Load `fnm` once and for all
-    type -q fnm; and fnm env | source
-    # Load `pyenv` once and for all
-    type -q pyenv; and pyenv init --path | source; and pyenv init - | source
-    # Load `rbenv` once and for all
-    type -q rbenv; and rbenv init - | source
-    # Load `opam` once and for all
-    type -q opam; and opam env | source
+    # Load `rtx` once and for all. A replacement for
+    # - go
+    # - nvm (fnm)
+    # - opam
+    # - pyenv
+    # - rbenv
+    type -q rtx; and rtx activate fish | source
 end
 
 # ------------------------------------------------------------------------------
