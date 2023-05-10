@@ -1,36 +1,3 @@
-[core]
-	editor = nvim
-	excludesfile = ~/.gitignore
-	compression = 0
-	pager = delta
-	preloadIndex = true
-[merge]
-	tool = nvim
-[mergetool]
-	prompt = true
-[mergetool "nvim"]
-	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[mergetool "nvimdiff"]
-	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[user]
-	name = Weihang Lo
-	email = me@weihanglo.tw
-	signingkey = D7DBF189825E82E7
-[color]
-	ui = true
-	diff = true
-	status = true
-	interactive = true
-[diff]
-	tool = nvim
-	colorMoved = default
-	renames = copies
-[difftool]
-	prompt = true
-[difftool "nvim"]
-	cmd = nvim -d $LOCAL $REMOTE
-[commit]
-	gpgsign = true
 [alias]
 	br = branch -vv
 	ci = commit -v
@@ -44,16 +11,49 @@
 	st = status -sb
 	sw = switch
 	wt = worktree
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-[pull]
-	ff = only
+[color]
+	diff = true
+	interactive = true
+	status = true
+	ui = true
+[commit]
+	gpgsign = true
+[core]
+	compression = 0
+	editor = nvim
+	excludesfile = ~/.gitignore
+	pager = delta
+	preloadIndex = true
 [delta]
 	line-numbers = true
+[diff]
+	colorMoved = default
+	renames = copies
+	tool = nvim
+[difftool]
+	prompt = true
+[difftool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+	required = true
+	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
 [log]
 	follow = true
+[merge]
+	tool = nvim
+[mergetool]
+	prompt = true
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "nvimdiff"]
+	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[pull]
+	ff = only
+[user]
+	email = me@weihanglo.tw
+	name = Weihang Lo
+	signingkey = D7DBF189825E82E7
