@@ -4,6 +4,9 @@ rr = "run --release"
 docp = "doc --document-private-items --no-deps --open"
 docc = "clippy -- -W clippy::doc_markdown"
 
+[registries.crates-io]
+protocol = "git"
+
 #[target.x86_64-unknown-linux-gnu]
 ## For clang11 or lower, use link-arg=-fuse-ld=<path>.
 #linker = "clang"
