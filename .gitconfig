@@ -43,6 +43,7 @@
 	defaultBranch = main
 [log]
 	follow = true
+	date = iso8601-strict
 [merge]
 	tool = nvim
 [mergetool]
