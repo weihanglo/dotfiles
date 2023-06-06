@@ -178,10 +178,13 @@ format = "[$symbol$version]($style) "
 [scala]
 disabled = true
 
-[spack]
+[singularity]
 disabled = true
 
-[singularity]
+[solidity]
+disabled = true
+
+[spack]
 disabled = true
 
 [sudo]
