@@ -1,7 +1,7 @@
 [alias]
 br = "build --release"
 rr = "run --release"
-docp = "doc --document-private-items --no-deps --open"
+docp = "doc --document-private-items --no-deps"
 docc = "clippy -- -W clippy::doc_markdown"
 
 #[target.x86_64-unknown-linux-gnu]
