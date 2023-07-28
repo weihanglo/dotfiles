@@ -338,7 +338,6 @@ local function declare_plugins(use)
   use({ 'hrsh7th/nvim-cmp', event = cmdline_lazy_events, config = nvim_cmp_config })
   use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' })
-  use({ 'hrsh7th/cmp-emoji', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' })
@@ -357,7 +356,7 @@ local function declare_plugins(use)
   use({ 'nvim-lua/lsp_extensions.nvim', opt = true })
   use({ 'kosayoda/nvim-lightbulb', opt = true })
   use({ 'ray-x/lsp_signature.nvim', opt = true, config = lsp_signature_nvim_config })
-  use({ 'j-hui/fidget.nvim', opt = true, config = fidget_nvim_config })
+  use({ 'j-hui/fidget.nvim', opt = true, config = fidget_nvim_config, tag = 'legacy' })
 
   -- fast moves
   use({
