@@ -227,41 +227,23 @@ local function pylsp_setup()
 end
 
 --- lua-language-server setup.
---- `git clone https://github.com/sumneko/lua-language-server` and build!
+--- `git clone https://github.com/LuaLS/lua-language-server` and build!
 ---
---- Ref: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
---- https://github.com/neovim/nvim-lspconfig/blob/2258598/lua/lspconfig/sumneko_lua.lua#L26-L70
-local function sumneko_lua_setup()
-  local sys
-  if vim.fn.has('mac') == 1 then
-    sys = 'macOS'
-  elseif vim.fn.has('unix') == 1 then
-    sys = 'Linux'
-  elseif vim.fn.has('win32') == 1 then
-    sys = 'Windows'
-  else
-    vim.notify('Unsupported system for sumneko', vim.log.levels.WARN)
-  end
-  local sumneko_root_path = lss_dir .. '/lua-language-server'
-  local sumneko_binary = sumneko_root_path .. '/bin/' .. sys .. '/lua-language-server'
-  lspconfig.sumneko_lua.setup({
+--- Ref: https://github.com/LuaLS/lua-language-server/wiki/Getting-Started
+local function lua_ls_setup()
+  lspconfig.lua_ls.setup({
     capabilities = make_capabilities(),
-    cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
     on_attach = on_attach,
     settings = {
       Lua = {
         runtime = {
           version = 'LuaJIT',
-          path = vim.split(package.path, ';'),
         },
         diagnostics = {
           globals = { 'vim' },
         },
         workspace = {
-          library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-          },
+          library = vim.api.nvim_get_runtime_file("", true),
         },
         telemetry = {
           enable = false,
@@ -357,7 +339,7 @@ M.setup = function()
   gopls_setup()
   tsserver_setup()
   pylsp_setup()
-  -- sumneko_lua_setup()
+  lua_ls_setup()
   clangd_setup()
   solargraph_setup()
   ocamllsp_setup()
