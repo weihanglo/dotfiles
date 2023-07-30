@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  .bashrc for GNU bash, version 5.0   #
 #            by Weihang Lo             #
-#              Jun. 2021               #
+#              July 2023               #
 #--------------------------------------#
 
 # Default shell to bash
@@ -21,27 +21,8 @@ export PROMPT_COMMAND='history -a'
 
 shopt -q login_shell
 if [[ $? -eq 0 ]]; then
-    # LESS pager. More power.
-    export LESS=isFMRX
-    # EDITOR and VISUAL
-    export VISUAL=nvim EDITOR=nvim
-    # Set locale
-    export LC_ALL=en_US.UTF-8
-
-    # Ripgrep config
-    export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
-    # Additional PATHs
-    export PATH="$HOME/.local/bin:$PATH"
-    export FZF_DEFAULT_COMMAND='rg --files --smart-case'
-    # Rust
-    export PATH="$HOME/.cargo/bin:$PATH"
-
-    # Load `rtx` once and for all. A replacement for
-    # - go
-    # - nvm (fnm)
-    # - opam
-    # - pyenv
-    # - rbenv
+    source "$HOME/.shenv"
+    # Load `rtx` once and for all.
     hash rtx && source <(rtx activate bash)
 fi
 
@@ -50,13 +31,7 @@ fi
 # ------------------------------------------------------------------------------
 
 if [[ $- == *i* ]]; then
-    alias cat='bat'
-    alias ll='exa -lhgF --git'
-    alias ls='exa'
-    alias ipy='ipython'
-    alias ports='lsof -PiTCP -sTCP:LISTEN'
-    alias tree='exa -TF --group-directories-first'
-    alias k='kubectl'
+    source "$HOME/.shalias"
     # Customizable prompt
     eval "$(starship init bash)"
     # A smarter cd command

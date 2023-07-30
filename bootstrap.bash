@@ -28,7 +28,11 @@ files_to_sync=(
     .gitconfig
     .gitignore
     .inputrc
+    .shalias
+    .shenv
     .tmux.conf
+    .zshenv
+    .zshrc
 )
 
 cargo_crates=(

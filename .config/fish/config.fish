@@ -3,7 +3,7 @@
 #--------------------------------------#
 #   configs for fish shell, version 3  #
 #            by Weihang Lo             #
-#              Mar. 2023               #
+#              July 2023               #
 #--------------------------------------#
 
 # Default shell to fish
@@ -32,12 +32,7 @@ if status is-login
     # Rust
     set -pgx PATH $HOME/.cargo/bin
 
-    # Load `rtx` once and for all. A replacement for
-    # - go
-    # - nvm (fnm)
-    # - opam
-    # - pyenv
-    # - rbenv
+    # Load `rtx` once and for all.
     type -q rtx; and rtx activate fish | source
 end
 
