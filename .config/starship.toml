@@ -124,7 +124,7 @@ format = "[$symbol$version]($style) "
 disabled = true
 
 [nix_shell]
-disabled = true
+disabled = false
 
 [nodejs]
 symbol = "🐢 "
