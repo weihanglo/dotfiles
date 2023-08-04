@@ -7,7 +7,7 @@
 #--------------------------------------#
 
 # Default shell to fish
-set -gx SHELL fish
+set -gx SHELL (command -v fish)
 
 # ------------------------------------------------------------------------------
 # Run for login shell.

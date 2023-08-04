@@ -7,7 +7,7 @@
 #--------------------------------------#
 
 # Default shell to zsh
-export SHELL=zsh
+export SHELL=$(command -v zsh)
 
 # TODO: porting history controls
 

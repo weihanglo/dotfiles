@@ -7,7 +7,8 @@
 #--------------------------------------#
 
 # Default shell to bash
-export SHELL=bash
+export SHELL=$(command -v bash)
+
 # History settings (prepare earlily to avoid history corrupttion)
 export HISTSIZE=
 export HISTFILESIZE=
