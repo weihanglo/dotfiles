@@ -17,7 +17,7 @@ if [[ -o interactive ]]; then
     # A smarter cd command
     hash zoxide && eval "$(zoxide init zsh)"
     # A smarter history management
-    hash atuin && eval "$(atuin init zsh)"
+    hash atuin && eval "$(atuin init zsh --disable-up-arrow)"
 
     # TODO: add auto-completion integration
 fi

@@ -51,7 +51,7 @@ if status is-interactive
     # A smarter cd command
     type -q zoxide; and zoxide init fish | source
     # A smarter history management
-    type -q atuin; and atuin init fish | source
+    type -q atuin; and atuin init fish --disable-up-arrow | source
 end
 
 # ------------------------------------------------------------------------------
