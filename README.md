@@ -1,4 +1,4 @@
-# Dotfiles for macOS/Linux!!
+# Weihang Lo's Dotfiles 
 
 ## Usage
 
@@ -12,11 +12,11 @@ bash ~/.dotfiles/bootstrap.bash
 ## Tools We Love
 
 - [**Alacritty**]: Maybe the fastest terminal emulator ever.
+- [**Atuin**]: Magical shell history 
 - [**bat**]: A cat(1) clone with wings.
 - [**delta**]: Enjoyable diff viewer.
 - [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
 - [**fish**]: Kitty needs fish.
-- [**FZF**]: Fuzzy finder goes rock.
 - [**GitUI**]: One of the best TUI Git client on Earth.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
 - [**kitty**]: Another GPU-based terminal emulator that just works.
@@ -37,6 +37,7 @@ Feel free to create an issue or pull request!
 Copyright © 2015 - Present Weihang Lo
 
 [**Alacritty**]: https://github.com/jwilm/alacritty
+[**Atuin**]: https://atuin.sh/
 [**bat**]: https://github.com/sharkdp/bat
 [**delta**]: https://github.com/dandavison/delta
 [**exa**]: https://the.exa.website/

@@ -3,7 +3,7 @@
 #--------------------------------------#
 #  Like .zshenv but for both bash/zsh  #
 #            by Weihang Lo             #
-#              July 2023               #
+#              Aug. 2023               #
 #--------------------------------------#
 
 export LESS=isFMRX
@@ -16,6 +16,5 @@ export LC_ALL=en_US.UTF-8
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 # Additional PATHs
 export PATH="$HOME/.local/bin:$PATH"
-export FZF_DEFAULT_COMMAND='rg --files --smart-case'
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"

@@ -3,13 +3,11 @@
 #--------------------------------------#
 #   .zshenv but I seldom use zshell    #
 #            by Weihang Lo             #
-#              July 2023               #
+#              Aug. 2023               #
 #--------------------------------------#
 
 # Default shell to zsh
 export SHELL=$(command -v zsh)
-
-# TODO: porting history controls
 
 # ------------------------------------------------------------------------------
 # Run for login shell.

@@ -2,7 +2,7 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Dec. 2021               #
+#              Aug. 2023               #
 #--------------------------------------#
 
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
@@ -15,6 +15,7 @@ files_to_sync=(
     .bashrc
     .cargo/config.toml
     .config/alacritty/alacritty.yml
+    .config/atuin/config.toml
     .config/bat/config
     .config/fish/config.fish
     .config/gitui/key_bindings.ron
@@ -36,6 +37,7 @@ files_to_sync=(
 )
 
 cargo_crates=(
+  atuin
   bat
   cargo-update
   exa
@@ -51,6 +53,7 @@ cargo_crates=(
   tealdeer
   tokei
   watchexec-cli
+  zellij
   zoxide
 )
 

@@ -10,11 +10,12 @@
 export SHELL=$(command -v bash)
 
 # History settings (prepare earlily to avoid history corrupttion)
-export HISTSIZE=
-export HISTFILESIZE=
-export HISTCONTROL="erasedups:ignoreboth"
-export HISTIGNORE="&:[ ]*:exit:ls*:cd*:git*:tig*:nvim"
-export PROMPT_COMMAND='history -a'
+# Temporariliy superseded by atuin
+#export HISTSIZE=
+#export HISTFILESIZE=
+#export HISTCONTROL="erasedups:ignoreboth"
+#export HISTIGNORE="&:[ ]*:exit:ls*:cd*:git*:tig*:nvim"
+#export PROMPT_COMMAND='history -a'
 
 # ------------------------------------------------------------------------------
 # Run for login shell.
@@ -37,6 +38,8 @@ if [[ $- == *i* ]]; then
     eval "$(starship init bash)"
     # A smarter cd command
     hash zoxide && eval "$(zoxide init bash)"
+    # A smarter history management
+    hash atuin && eval "$(atuin init bash)"
 
     # Bash completion
     if [[ -n "$PS1" ]]; then
@@ -54,5 +57,3 @@ fi
 # ------------------------------------------------------------------------------
 # Commands that always run for all sessions go below.
 # ------------------------------------------------------------------------------
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

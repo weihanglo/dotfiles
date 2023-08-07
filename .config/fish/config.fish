@@ -3,7 +3,7 @@
 #--------------------------------------#
 #   configs for fish shell, version 3  #
 #            by Weihang Lo             #
-#              July 2023               #
+#              Aug. 2023               #
 #--------------------------------------#
 
 # Default shell to fish
@@ -26,9 +26,6 @@ if status is-login
     set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgreprc
     # Additional PATHs
     set -agx PATH $HOME/.local/bin
-    # FZF
-    set -gx FZF_DEFAULT_COMMAND "rg --files --smart-case"
-    set -pgx PATH $HOME/.fzf/bin
     # Rust
     set -pgx PATH $HOME/.cargo/bin
 
@@ -53,6 +50,8 @@ if status is-interactive
     starship init fish | source
     # A smarter cd command
     type -q zoxide; and zoxide init fish | source
+    # A smarter history management
+    type -q atuin; and atuin init fish | source
 end
 
 # ------------------------------------------------------------------------------
