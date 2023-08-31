@@ -39,7 +39,7 @@ if [[ $- == *i* ]]; then
     # A smarter cd command
     hash zoxide && eval "$(zoxide init bash)"
     # A smarter history management
-    hash atuin && eval "$(atuin init bash)"
+    hash atuin && eval "$(atuin init bash --disable-up-arrow)"
 
     # Bash completion
     if [[ -n "$PS1" ]]; then
