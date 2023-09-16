@@ -40,7 +40,7 @@ cargo_crates=(
   atuin
   bat
   cargo-update
-  exa
+  eza
   fd-find
   git-delta
   gitui

@@ -15,7 +15,7 @@ bash ~/.dotfiles/bootstrap.bash
 - [**Atuin**]: Magical shell history 
 - [**bat**]: A cat(1) clone with wings.
 - [**delta**]: Enjoyable diff viewer.
-- [**exa**]: Modern `ls` with sane defaults and `tree`'s functionalities.
+- [**eza**]: Modern `ls` with sane defaults and `tree`'s functionalities.
 - [**fish**]: Kitty needs fish.
 - [**GitUI**]: One of the best TUI Git client on Earth.
 - [**JetBrains Mono**]: Probably the best monospace font for coder.
@@ -40,7 +40,7 @@ Copyright © 2015 - Present Weihang Lo
 [**Atuin**]: https://atuin.sh/
 [**bat**]: https://github.com/sharkdp/bat
 [**delta**]: https://github.com/dandavison/delta
-[**exa**]: https://the.exa.website/
+[**eza**]: https://github.com/eza-community/eza
 [**fish**]: https://fishshell.com/
 [**GitUI**]: https://github.com/extrawurst/gitui
 [**JetBrains Mono**]: https://www.jetbrains.com/lp/mono/

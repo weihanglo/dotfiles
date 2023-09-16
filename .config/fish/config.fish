@@ -39,11 +39,11 @@ end
 
 if status is-interactive
     alias cat="bat"
-    alias ll="exa -lhgF --git"
-    alias ls="exa"
+    alias ll="eza -lhgF --git"
+    alias ls="eza"
     alias ipy="ipython"
     alias ports="lsof -PiTCP -sTCP:LISTEN"
-    alias tree="exa -TF --group-directories-first"
+    alias tree="eza -TF --group-directories-first"
     alias k="kubectl"
     alias P="fish -P"
     # Customizable prompt
