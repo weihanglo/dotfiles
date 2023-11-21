@@ -22,7 +22,6 @@ bash ~/.dotfiles/bootstrap.bash
 - [**kitty**]: Another GPU-based terminal emulator that just works.
 - [**Neovim**]: Next-generation Vim. Required.
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
-- [**rtx**]: Runtime Executor (asdf rust clone).
 - [**Starship**]: Cross-shell prompt with sane defaults.
 - [**tmux**]: Awesome tool that defeats all terminal window managers.
 - [**zoxide**] A smarter cd(1) command. Built in Rust.
@@ -47,7 +46,6 @@ Copyright © 2015 - Present Weihang Lo
 [**kitty**]: https://sw.kovidgoyal.net/kitty/
 [**Neovim**]: https://neovim.io
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
-[**rtx**]: https://github.com/jdxcode/rtx
 [**Starship**]: https://starship.rs
 [**tmux**]: https://tmux.github.io
 [**zoxide**]: https://github.com/ajeetdsouza/zoxide

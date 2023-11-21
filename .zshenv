@@ -15,6 +15,4 @@ export SHELL=$(command -v zsh)
 
 if [[ -o login ]]; then
     source "$HOME/.shenv"
-    # Load `rtx` once and for all.
-    hash rtx && source <(rtx activate zsh)
 fi

@@ -24,8 +24,6 @@ export SHELL=$(command -v bash)
 shopt -q login_shell
 if [[ $? -eq 0 ]]; then
     source "$HOME/.shenv"
-    # Load `rtx` once and for all.
-    hash rtx && source <(rtx activate bash --disable-up-arrow)
 fi
 
 # ------------------------------------------------------------------------------

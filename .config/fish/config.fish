@@ -28,9 +28,6 @@ if status is-login
     set -agx PATH $HOME/.local/bin
     # Rust
     set -pgx PATH $HOME/.cargo/bin
-
-    # Load `rtx` once and for all.
-    type -q rtx; and rtx activate fish | source
 end
 
 # ------------------------------------------------------------------------------
