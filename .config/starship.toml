@@ -71,6 +71,9 @@ disabled = true
 [fossil_branch]
 disabled = true
 
+[fossil_metrics]
+disabled = true
+
 [gcloud]
 disabled = true
 
@@ -199,6 +202,9 @@ disabled = true
 [time]
 disabled = false
 format = "[$time](dimmed white)"
+
+[typst]
+disabled = true
 
 [vagrant]
 disabled = true
