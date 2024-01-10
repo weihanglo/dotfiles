@@ -410,7 +410,11 @@ local function declare_plugins(use)
     'nvim-treesitter/nvim-treesitter-context',
     after = 'nvim-treesitter',
     config = function()
-      require('treesitter-context').setup()
+      require('treesitter-context').setup({
+        max_lines = 7,
+        multiline_threshold = 1,
+        mode = "topline",
+      })
     end,
   })
 
