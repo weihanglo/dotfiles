@@ -2,16 +2,16 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Aug. 2023               #
+#              Feb. 2024               #
 #--------------------------------------#
 
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+SCRIPTPATH="$( cd "$(dirname "$0")" && pwd -P )"
 
 # --------------------------------------
 # Put config/dir to sync in this variable
 # --------------------------------------
 
-files_to_sync=(
+readonly files_to_sync=(
     .bashrc
     .cargo/config.toml
     .config/alacritty/alacritty.yml
@@ -36,7 +36,7 @@ files_to_sync=(
     .zshrc
 )
 
-cargo_crates=(
+readonly cargo_crates=(
   atuin
   bat
   cargo-update
@@ -60,7 +60,7 @@ python_packages=(
   ipython
   pipenv
   poetry
-  python-lsp-server[all]
+  'python-lsp-server[all]'
 )
 
 # --------------------------------------
@@ -73,24 +73,24 @@ sync_config_files () {
   origdir=$HOME/.dotfiles.orig
 
   echo "Creating $origdir for backup old dotfiles ..."
-  mkdir -vp $origdir
+  mkdir -vp "$origdir"
 
   echo "cd to $dir ..."
-  pushd $dir
+  pushd "$dir" || exit 1
 
   # Symlink files
-  for file in ${files_to_sync[@]}; do
+  for file in "${files_to_sync[@]}"; do
       if [[ -z "$file" ]]; then
           echo -e "Failed to move $file to $origdir/$file: No file $file found"
           return
       fi
-      mkdir -p "$HOME/$(dirname $file)"
-      mkdir -p "$origdir/$(dirname $file)"
+      mkdir -p "$HOME/$(dirname "$file")"
+      mkdir -p "$origdir/$(dirname "$file")"
       mv -v "$HOME/$file" "$origdir/$file"
       ln -ivs "$dir/$file" "$HOME/$file"
   done
 
-  popd
+  popd || exit 1
 }
 
 install_tmux_package_manager() {
@@ -103,19 +103,19 @@ install_tmux_package_manager() {
 }
 
 install_cargo_binaries() {
-  cargo install ${cargo_crates[@]}
+  cargo install "${cargo_crates[@]}" --locked
 }
 
 install_python_binaries() {
   python3 -m pip install -U pipx pip
   python3 -m pipx ensurepath
-  echo ${python_packages[@]} | xargs -n1 python3 -m pipx install
+  echo "${python_packages[@]}" | xargs -n1 python3 -m pipx install
 }
 
 # confirm helper function running before installation
 confirm () {
     echo
-    read -p "${3:-}$1? [y/N]" response
+    read -r -p "${3:-}$1? [y/N]" response
     case $response in
         [yY][eE][sS]|[yY])
             $2
