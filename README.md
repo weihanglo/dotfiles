@@ -15,6 +15,7 @@ bash ~/.dotfiles/bootstrap.bash
 - [**Atuin**]: Magical shell history 
 - [**bat**]: A cat(1) clone with wings.
 - [**delta**]: Enjoyable diff viewer.
+- [**Difftastic**]: A structural diff that understands syntax.
 - [**eza**]: Modern `ls` with sane defaults and `tree`'s functionalities.
 - [**fish**]: Kitty needs fish.
 - [**GitUI**]: One of the best TUI Git client on Earth.
@@ -39,6 +40,7 @@ Copyright © 2015 - Present Weihang Lo
 [**Atuin**]: https://atuin.sh/
 [**bat**]: https://github.com/sharkdp/bat
 [**delta**]: https://github.com/dandavison/delta
+[**Difftastic**]: https://difftastic.wilfred.me.uk/
 [**eza**]: https://github.com/eza-community/eza
 [**fish**]: https://fishshell.com/
 [**GitUI**]: https://github.com/extrawurst/gitui

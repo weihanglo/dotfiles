@@ -40,6 +40,7 @@ readonly cargo_crates=(
   atuin
   bat
   cargo-update
+  difftastic
   eza
   fd-find
   git-delta

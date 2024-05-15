@@ -29,11 +29,11 @@
 [diff]
 	colorMoved = default
 	renames = copies
-	tool = nvim
+	tool = difftastic
 [difftool]
-	prompt = true
-[difftool "nvim"]
-	cmd = nvim -d $LOCAL $REMOTE
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -52,6 +52,8 @@
 	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "nvimdiff"]
 	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[pager]
+	difftool = true
 [pull]
 	ff = only
 [user]
