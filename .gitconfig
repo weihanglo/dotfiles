@@ -5,7 +5,7 @@
 	cp = cherry-pick
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 	pl = pull
-	rb = rebase -i --update-refs
+	rb = rebase -i
 	sm = submodule
 	ss = stash
 	st = status -sb
@@ -56,6 +56,8 @@
 	difftool = true
 [pull]
 	ff = only
+[rebase]
+	updateRefs = true
 [user]
 	email = me@weihanglo.tw
 	name = Weihang Lo
