@@ -1,0 +1,6 @@
+default_shell "fish"
+
+// simplified_ui true
+pane_frames false
+
+scroll_buffer_size 100000

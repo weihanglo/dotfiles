@@ -26,12 +26,12 @@ readonly files_to_sync=(
     .config/nvim/lua/plugins.lua
     .config/ripgreprc
     .config/starship.toml
+    .config/zellij/config.kdl
     .gitconfig
     .gitignore
     .inputrc
     .shalias
     .shenv
-    .tmux.conf
     .zshenv
     .zshrc
 )
@@ -94,15 +94,6 @@ sync_config_files () {
   popd || exit 1
 }
 
-install_tmux_package_manager() {
-    tpm_dir="$HOME/.tmux/plugins/tpm"
-    if [[ ! -d "$tpm_dir" ]]; then
-        git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
-    else
-        echo 'TMUX Package Manager has already be installed.'
-    fi
-}
-
 install_cargo_binaries() {
   cargo install "${cargo_crates[@]}" --locked
 }
@@ -137,9 +128,6 @@ if [[ -n "$1" ]]; then
     sync)
       sync_config_files
       ;;
-    tpm)
-      install_tmux_package_manager
-      ;;
     cargo|rust)
       install_cargo_binaries
       ;;
@@ -148,7 +136,6 @@ if [[ -n "$1" ]]; then
   esac
 else
   confirm "Synchronize all config files" sync_config_files
-  confirm "Install tpm (TMUX Package Manager)" install_tmux_package_manager
   confirm "Install all goods from cargo" install_cargo_binaries
   confirm "Install useful python binaries" install_python_binaries
 fi

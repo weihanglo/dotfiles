@@ -24,8 +24,8 @@ bash ~/.dotfiles/bootstrap.bash
 - [**Neovim**]: Next-generation Vim. Required.
 - [**ripgrep**]: Better, stronger `grep` written in Rust.
 - [**Starship**]: Cross-shell prompt with sane defaults.
-- [**tmux**]: Awesome tool that defeats all terminal window managers.
-- [**zoxide**] A smarter cd(1) command. Built in Rust.
+- [**zoxide**]: A smarter cd(1) command. Built in Rust.
+- [**Zellij**]: A terminal workspace with batteries included
 
 Want to share your config file? 
 Feel free to create an issue or pull request!
@@ -49,5 +49,5 @@ Copyright © 2015 - Present Weihang Lo
 [**Neovim**]: https://neovim.io
 [**ripgrep**]: https://github.com/burntsushi/ripgrep
 [**Starship**]: https://starship.rs
-[**tmux**]: https://tmux.github.io
 [**zoxide**]: https://github.com/ajeetdsouza/zoxide
+[**Zellij**]: https://zellij.dev/
