@@ -27,6 +27,9 @@ disabled = true
 [conda]
 disabled = true
 
+[container]
+disabled = true
+
 [crystal]
 disabled = true
 
@@ -87,6 +90,9 @@ disabled = true
 # Disabled due to terriable performance in large git repos (e.g. rustc)
 disabled = true
 
+[gleam]
+disabled = true
+
 [golang]
 format = "[$symbol$version]($style) "
 
@@ -123,6 +129,15 @@ disabled = true
 [lua]
 format = "[$symbol$version]($style) "
 
+[memory_usage]
+disabled = true
+
+[meson]
+disabled = true
+
+[nats]
+disabled = true
+
 [nim]
 disabled = true
 
@@ -135,6 +150,9 @@ format = "[$symbol$version]($style) "
 
 [ocaml]
 format = "[$symbol$version]($style) "
+
+[odin]
+disabled = true
 
 [opa]
 disabled = true
@@ -162,6 +180,9 @@ disabled = true
 
 [python]
 format = "[$symbol$version]($style) "
+
+[quarto]
+disabled = true
 
 [rlang]
 disabled = true
