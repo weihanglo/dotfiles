@@ -262,15 +262,6 @@ local function nvim_cmp_config()
     experimental = { ghost_text = true },
   })
 
-  cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp_document_symbol' },
-    }, {
-      { name = 'buffer' },
-    }),
-  })
-
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -325,13 +316,6 @@ local function declare_plugins(use)
       require('bqf').setup({ preview = { auto_preview = false } })
     end,
   })
-  use({
-    'folke/which-key.nvim',
-    event = lazy_events,
-    config = function()
-      require("which-key").setup({})
-    end
-  })
 
   -- auto-completion
   local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
@@ -340,7 +324,6 @@ local function declare_plugins(use)
   use({ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
-  use({ 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' })
   use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
   use({ 'github/copilot.vim', event = lazy_events })
 
