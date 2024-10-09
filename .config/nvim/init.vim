@@ -1,4 +1,5 @@
 " General {{{
+set background=light
 set clipboard+=unnamed,unnamedplus
 set colorcolumn=80,120
 set completeopt=menuone,noinsert,noselect
