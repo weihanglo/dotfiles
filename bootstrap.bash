@@ -27,6 +27,7 @@ readonly files_to_sync=(
     .config/ripgreprc
     .config/starship.toml
     .config/zellij/config.kdl
+    .config/zellij/themes/gruvbox.kdl
     .gitconfig
     .gitignore
     .inputrc
