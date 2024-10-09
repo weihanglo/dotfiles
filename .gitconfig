@@ -25,7 +25,9 @@
 	pager = delta
 	preloadIndex = true
 [delta]
+	hyperlinks = true
 	line-numbers = true
+	syntax-theme = gruvbox-light
 [diff]
 	colorMoved = default
 	renames = copies
