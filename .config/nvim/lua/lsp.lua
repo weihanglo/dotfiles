@@ -121,7 +121,12 @@ local function rust_analyzer_setup()
         },
         rustc = {
           source = "discover",
-        }
+        },
+        server = {
+          extraEnv = {
+            RA_LOG = "info"
+          }
+        },
       },
     },
     single_file_support = true,
@@ -129,11 +134,11 @@ local function rust_analyzer_setup()
 end
 
 --- TypeScript Language Server setup.
---- `npm i -g typescript-language-server typescript` (typescript for type checking)
+--- `npm install -g typescript typescript-language-server`
 ---
---- Ref: https://github.com/theia-ide/typescript-language-server
-local function tsserver_setup()
-  lspconfig.tsserver.setup({
+--- Ref: https://github.com/typescript-language-server/typescript-language-server
+local function ts_ls_setup()
+  lspconfig.ts_ls.setup({
     capabilities = make_capabilities(),
     on_attach = on_attach,
   })
@@ -339,7 +344,7 @@ M.setup = function()
   -- Language servers setup
   rust_analyzer_setup()
   gopls_setup()
-  tsserver_setup()
+  ts_ls_setup()
   pylsp_setup()
   lua_ls_setup()
   clangd_setup()
