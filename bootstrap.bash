@@ -2,7 +2,7 @@
 #--------------------------------------#
 #    Boostrap all your config files    #
 #            by Weihang Lo             #
-#              Feb. 2024               #
+#              Oct. 2024               #
 #--------------------------------------#
 
 SCRIPTPATH="$( cd "$(dirname "$0")" && pwd -P )"
@@ -21,6 +21,7 @@ readonly files_to_sync=(
     .config/gitui/key_bindings.ron
     .config/kitty/kitty.conf
     .config/nvim/init.vim
+    .config/nvim/lazy-lock.json
     .config/nvim/lua/dap-configs.lua
     .config/nvim/lua/lsp.lua
     .config/nvim/lua/plugins.lua

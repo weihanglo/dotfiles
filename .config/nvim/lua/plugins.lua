@@ -284,152 +284,146 @@ local function lsp_signature_nvim_config()
   })
 end
 
---- j-hui/fidget.nvim (show progress bar)
-local function fidget_nvim_config()
-  require('fidget').setup({
-    text = { spinner = 'dots' },
-    window = { blend = 0 },
-  })
-end
-
 local function copilot_setup()
   vim.cmd([[imap <silent><script><expr> <c-space> copilot#Accept("")]])
   vim.g.copilot_no_tab_map = true
 end
 
 --- Declare all plugins
-local function declare_plugins(use)
-  local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
+local function declare_plugins()
+  return {
+    -- user interface
+    { 'nvim-lualine/lualine.nvim' },
+    { 'sainnhe/gruvbox-material' },
+    { 'rcarriga/nvim-notify', event = 'VeryLazy', config = nvim_notify_config },
+    { 'lukas-reineke/indent-blankline.nvim', cmd = 'IndentBlanklineToggle' },
+    { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = numb_nvim_config },
+    {
+      'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
+      ft = 'qf',
+      config = function()
+        require('bqf').setup({ preview = { auto_preview = false } })
+      end,
+    },
 
-  use({ 'wbthomason/packer.nvim', opt = true })
+    -- auto-completion
+    {
+      'hrsh7th/nvim-cmp',
+      event = 'VeryLazy',
+      config = nvim_cmp_config,
+      dependencies = {
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lua',
+      },
+    },
+    { 'github/copilot.vim', lazy = true },
 
-  -- user interface
-  use({ 'nvim-lualine/lualine.nvim' })
-  use({ 'sainnhe/gruvbox-material' })
-  use({ 'rcarriga/nvim-notify', config = nvim_notify_config, opt = true })
-  use({ 'lukas-reineke/indent-blankline.nvim', cmd = 'IndentBlanklineToggle' })
-  use({ 'nacro90/numb.nvim', event = { 'CmdLineEnter' }, config = numb_nvim_config })
-  use({
-    'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
-    ft = 'qf',
-    config = function()
-      require('bqf').setup({ preview = { auto_preview = false } })
-    end,
-  })
+    -- vcs
+    { 'lewis6991/gitsigns.nvim', event = 'VeryLazy', config = gitsigns_nvim_config },
+    { 'linrongbin16/gitlinker.nvim', cmd = 'GitLink' },
 
-  -- auto-completion
-  local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
-  use({ 'hrsh7th/nvim-cmp', event = cmdline_lazy_events, config = nvim_cmp_config })
-  use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
-  use({ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' })
-  use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
-  use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
-  use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
-  use({ 'github/copilot.vim', event = lazy_events })
+    -- filetype
+    { 'sheerun/vim-polyglot', event = 'VeryLazy' },
+    {
+      'nvim-treesitter/nvim-treesitter',
+      event = 'VeryLazy',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter-context',
+      },
+      build = ':TSUpdate',
+      config = nvim_treesitter_config,
+    },
+    {
+      'nvim-treesitter/nvim-treesitter-context',
+      lazy = true,
+      config = function()
+        require('treesitter-context').setup({
+          max_lines = 7,
+          multiline_threshold = 1,
+          mode = 'topline',
+        })
+      end,
+    },
 
-  -- nvim-lsp
-  use({
-    'neovim/nvim-lspconfig',
-    after = 'cmp-nvim-lsp', -- We have the auto-completion capabilities!
-    wants = { 'lsp_extensions.nvim', 'nvim-lightbulb', 'lsp_signature.nvim', 'fidget.nvim' },
-    config = function()
-      require('lsp').setup()
-    end,
-  })
-  use({ 'nvim-lua/lsp_extensions.nvim', opt = true })
-  use({ 'kosayoda/nvim-lightbulb', opt = true })
-  use({ 'ray-x/lsp_signature.nvim', opt = true, config = lsp_signature_nvim_config })
-  use({ 'j-hui/fidget.nvim', opt = true, config = fidget_nvim_config, tag = 'legacy' })
+    -- search
+    { 'google/vim-searchindex', event = 'CmdlineEnter' }, -- show search index beyond [>99/>99]
+    {
+      'nvim-telescope/telescope.nvim',
+      tag = '0.1.8',
+      dependencies = { 
+        'nvim-lua/plenary.nvim'
+      },
+      cmd = 'Telescope',
+      config = telescope_nvim_config,
+    },
+    { 'nvim-lua/plenary.nvim', lazy = true },
 
-  -- fast moves
-  use({
-    'nvim-tree/nvim-tree.lua',
-    cmd = 'NvimTreeToggle',
-    config = nvim_tree_config,
-  })
-  use({ 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' })
-  use({ 'mg979/vim-visual-multi', event = lazy_events })
-  use({
-    'akinsho/toggleterm.nvim',
-    cmd = 'ToggleTerm',
-    config = toggleterm_nvim_config,
-  })
+    -- nvim-lsp
+    {
+      'neovim/nvim-lspconfig',
+      event = 'VeryLazy',
+      dependencies = { 
+        'lsp_extensions.nvim',
+        'nvim-lightbulb',
+        'lsp_signature.nvim',
+        'fidget.nvim',
+      },
 
-  -- vcs
-  use({
-    'lewis6991/gitsigns.nvim',
-    wants = { 'plenary.nvim' },
-    requires = { { 'nvim-lua/plenary.nvim', opt = true } },
-    event = lazy_events,
-    config = gitsigns_nvim_config,
-  })
-  use({
-    'ruifm/gitlinker.nvim',
-    wants = { 'plenary.nvim' },
-    requires = { { 'nvim-lua/plenary.nvim', opt = true } },
-    event = lazy_events,
-    config = function()
-      require('gitlinker').setup({
-        opts = {
-          add_current_line_on_normal_mode = true,
-          action_callback = require('gitlinker.actions').open_in_browser,
-          print_url = true,
-          -- Default mapping is `<leader>gy`.
-          -- I don't like it but leave it for now.
-        },
-      })
-    end,
-  })
+      config = function()
+        require('lsp').setup()
+      end,
+    },
+    { 'nvim-lua/lsp_extensions.nvim', lazy = true },
+    { 'kosayoda/nvim-lightbulb', lazy = true },
+    { 'ray-x/lsp_signature.nvim', lazy = true, config = lsp_signature_nvim_config },
+    { 'j-hui/fidget.nvim', lazy = true },
 
-  -- filetype
-  use({ 'sheerun/vim-polyglot', event = lazy_events })
-  use({
-    'nvim-treesitter/nvim-treesitter',
-    event = lazy_events,
-    run = ':TSUpdate',
-    config = nvim_treesitter_config,
-  })
-  use({
-    'nvim-treesitter/nvim-treesitter-context',
-    after = 'nvim-treesitter',
-    config = function()
-      require('treesitter-context').setup({
-        max_lines = 7,
-        multiline_threshold = 1,
-        mode = "topline",
-      })
-    end,
-  })
+    -- fast moves
+    { 'nvim-tree/nvim-tree.lua', cmd = 'NvimTreeToggle', config = nvim_tree_config },
+    { 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' },
+    { 'mg979/vim-visual-multi', event = 'VeryLazy' },
+    { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', config = toggleterm_nvim_config },
 
-  -- search
-  use({ 'google/vim-searchindex', opt = true }) -- show search index beyond [>99/>99]
-  use({
-    'nvim-telescope/telescope.nvim',
-    wants = { 'plenary.nvim' },
-    requires = { { 'nvim-lua/plenary.nvim', opt = true } },
-    cmd = { 'Telescope' },
-    config = telescope_nvim_config,
-  })
+  }
 end
 
 --- Load all plugins
 function M.load_all()
-  -- Auto install packer.nvim
-  local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+  -- Bootstrap lazy.nvim
+  local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+  if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+    local out = vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+      vim.api.nvim_echo({
+        { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
+        { out, 'WarningMsg' },
+        { '\nPress any key to exit...' },
+      }, true, {})
+      vim.fn.getchar()
+      os.exit(1)
+    end
   end
+  vim.opt.rtp:prepend(lazypath)
 
-  vim.cmd('packadd packer.nvim')
-  vim.cmd([[
-    augroup packer_user_config
-      autocmd!
-      autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-    augroup end
-  ]])
-
-  -- Declare and load plugins
-  require('packer').startup({ declare_plugins, config = { display = { open_fn = require('packer.util').float } } })
+  -- Setup lazy.nvim
+  require('lazy').setup({
+    spec = declare_plugins(),
+    -- automatically check for plugin updates
+    checker = { 
+      enabled = true,
+      frequency = 86400, -- everyday
+    },
+    pkg = {
+      sources = {
+        "lazy",
+        "packspec",
+      },
+    }
+  })
 
   -- Configure plugins
   gruvbox_material_setup()
