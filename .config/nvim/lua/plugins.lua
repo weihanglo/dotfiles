@@ -32,11 +32,20 @@ end
 
 --- nvim-treesitter/nvim-treesitter
 local function nvim_treesitter_config()
-  return require('nvim-treesitter.configs').setup({
+  require('nvim-treesitter.configs').setup({
     ensure_installed = 'all',
     highlight = { enable = true },
     incremental_selection = { enable = true },
     indent = { enabled = true },
+  })
+end
+
+--- nvim-treesitter/nvim-treesitter-context
+local function nvim_treesitter_context_config()
+  require('treesitter-context').setup({
+    max_lines = 7,
+    multiline_threshold = 1,
+    mode = 'topline',
   })
 end
 
@@ -301,6 +310,10 @@ local function copilot_setup()
   vim.g.copilot_no_tab_map = true
 end
 
+local function nvim_bqf_config()
+  require('bqf').setup({ preview = { auto_preview = false } })
+end
+
 --- Declare all plugins
 local function declare_plugins()
   local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
@@ -311,13 +324,7 @@ local function declare_plugins()
     { 'sainnhe/gruvbox-material' },
     { 'rcarriga/nvim-notify', event = lazy_events, config = nvim_notify_config },
     { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = numb_nvim_config },
-    {
-      'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
-      ft = 'qf',
-      config = function()
-        require('bqf').setup({ preview = { auto_preview = false } })
-      end,
-    },
+    { 'kevinhwang91/nvim-bqf', ft = 'qf', config = nvim_bqf_config }, -- yep, this is UI. Currently I use only preview window.
 
     -- auto-completion
     {
@@ -349,17 +356,7 @@ local function declare_plugins()
       build = ':TSUpdate',
       config = nvim_treesitter_config,
     },
-    {
-      'nvim-treesitter/nvim-treesitter-context',
-      lazy = true,
-      config = function()
-        require('treesitter-context').setup({
-          max_lines = 7,
-          multiline_threshold = 1,
-          mode = 'topline',
-        })
-      end,
-    },
+    { 'nvim-treesitter/nvim-treesitter-context', lazy = true, config = nvim_treesitter_context_config },
 
     -- search
     { 'google/vim-searchindex', event = 'CmdlineEnter' }, -- show search index beyond [>99/>99]
