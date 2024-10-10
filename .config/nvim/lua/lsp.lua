@@ -120,12 +120,12 @@ local function rust_analyzer_setup()
           capacity = 512,
         },
         rustc = {
-          source = "discover",
+          source = 'discover',
         },
         server = {
           extraEnv = {
-            RA_LOG = "info"
-          }
+            RA_LOG = 'info',
+          },
         },
       },
     },
@@ -250,7 +250,7 @@ local function lua_ls_setup()
           globals = { 'vim' },
         },
         workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
+          library = vim.api.nvim_get_runtime_file('', true),
         },
         telemetry = {
           enable = false,

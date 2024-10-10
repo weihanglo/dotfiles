@@ -359,11 +359,11 @@ local function declare_plugins()
     { 'nvim-treesitter/nvim-treesitter-context', lazy = true, config = nvim_treesitter_context_config },
 
     -- search
-    { 'google/vim-searchindex', event = 'CmdlineEnter' }, -- show search index beyond [>99/>99]
+    { 'google/vim-searchindex', event = 'CmdLineEnter' }, -- show search index beyond [>99/>99]
     {
       'nvim-telescope/telescope.nvim',
       tag = '0.1.8',
-      dependencies = { 
+      dependencies = {
         'nvim-lua/plenary.nvim'
       },
       cmd = 'Telescope',
@@ -381,7 +381,6 @@ local function declare_plugins()
         'ray-x/lsp_signature.nvim',
         'j-hui/fidget.nvim',
       },
-
       config = function()
         require('lsp').setup()
       end,
