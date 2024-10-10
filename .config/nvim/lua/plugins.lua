@@ -303,11 +303,13 @@ end
 
 --- Declare all plugins
 local function declare_plugins()
+  local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
+  local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
   return {
     -- user interface
     { 'nvim-lualine/lualine.nvim' },
     { 'sainnhe/gruvbox-material' },
-    { 'rcarriga/nvim-notify', event = 'VeryLazy', config = nvim_notify_config },
+    { 'rcarriga/nvim-notify', event = lazy_events, config = nvim_notify_config },
     { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = numb_nvim_config },
     {
       'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
@@ -320,7 +322,7 @@ local function declare_plugins()
     -- auto-completion
     {
       'hrsh7th/nvim-cmp',
-      event = 'VeryLazy',
+      event = cmdline_lazy_events,
       config = nvim_cmp_config,
       dependencies = {
         'hrsh7th/cmp-buffer',
@@ -333,14 +335,14 @@ local function declare_plugins()
     { 'github/copilot.vim', lazy = true },
 
     -- vcs
-    { 'lewis6991/gitsigns.nvim', event = 'VeryLazy', config = gitsigns_nvim_config },
+    { 'lewis6991/gitsigns.nvim', event = lazy_events, config = gitsigns_nvim_config },
     { 'linrongbin16/gitlinker.nvim', cmd = 'GitLink' },
 
     -- filetype
-    { 'sheerun/vim-polyglot', event = 'VeryLazy' },
+    { 'sheerun/vim-polyglot', event = lazy_events },
     {
       'nvim-treesitter/nvim-treesitter',
-      event = 'VeryLazy',
+      event = lazy_events,
       dependencies = {
         'nvim-treesitter/nvim-treesitter-context',
       },
@@ -375,7 +377,7 @@ local function declare_plugins()
     -- nvim-lsp
     {
       'neovim/nvim-lspconfig',
-      event = 'VeryLazy',
+      event = lazy_events,
       dependencies = { 
         'nvim-lua/lsp_extensions.nvim',
         'kosayoda/nvim-lightbulb',
@@ -395,7 +397,7 @@ local function declare_plugins()
     -- fast moves
     { 'nvim-tree/nvim-tree.lua', cmd = 'NvimTreeToggle', config = nvim_tree_config },
     { 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' },
-    { 'mg979/vim-visual-multi', event = 'VeryLazy' },
+    { 'mg979/vim-visual-multi', event = lazy_events },
     { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', config = toggleterm_nvim_config },
 
   }
