@@ -410,10 +410,6 @@ local function declare_plugins(use)
     cmd = { 'Telescope' },
     config = telescope_nvim_config,
   })
-
-  -- dap
-  use({ 'mfussenegger/nvim-dap', cmd = 'DapPluginLoad' })
-  use({ 'rcarriga/nvim-dap-ui', after = 'nvim-dap' })
 end
 
 --- Load all plugins
@@ -447,8 +443,6 @@ function M.load_all()
   vim.g.no_ocaml_maps = true
   -- Enable vim-visual-multi mouse mappings
   vim.g.VM_mouse_mappings = 1
-  -- Configure nvim-dap on demand
-  vim.cmd([[command! DapPluginLoad execute 'PackerLoad nvim-dap' | lua require('dap-configs').setup()]])
 end
 
 return M
