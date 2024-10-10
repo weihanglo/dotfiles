@@ -284,6 +284,18 @@ local function lsp_signature_nvim_config()
   })
 end
 
+--- j-hui/fidget.nvim
+local function fidget_nvim_config()
+  require('fidget').setup({
+    notification = {
+      window = {
+        max_width = 40,
+        winblend = 0,
+      },
+    },
+  })
+end
+
 local function copilot_setup()
   vim.cmd([[imap <silent><script><expr> <c-space> copilot#Accept("")]])
   vim.g.copilot_no_tab_map = true
@@ -296,7 +308,6 @@ local function declare_plugins()
     { 'nvim-lualine/lualine.nvim' },
     { 'sainnhe/gruvbox-material' },
     { 'rcarriga/nvim-notify', event = 'VeryLazy', config = nvim_notify_config },
-    { 'lukas-reineke/indent-blankline.nvim', cmd = 'IndentBlanklineToggle' },
     { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = numb_nvim_config },
     {
       'kevinhwang91/nvim-bqf', -- yep, this is UI. Currently I use only preview window.
@@ -366,10 +377,10 @@ local function declare_plugins()
       'neovim/nvim-lspconfig',
       event = 'VeryLazy',
       dependencies = { 
-        'lsp_extensions.nvim',
-        'nvim-lightbulb',
-        'lsp_signature.nvim',
-        'fidget.nvim',
+        'nvim-lua/lsp_extensions.nvim',
+        'kosayoda/nvim-lightbulb',
+        'ray-x/lsp_signature.nvim',
+        'j-hui/fidget.nvim',
       },
 
       config = function()
@@ -379,7 +390,7 @@ local function declare_plugins()
     { 'nvim-lua/lsp_extensions.nvim', lazy = true },
     { 'kosayoda/nvim-lightbulb', lazy = true },
     { 'ray-x/lsp_signature.nvim', lazy = true, config = lsp_signature_nvim_config },
-    { 'j-hui/fidget.nvim', lazy = true },
+    { 'j-hui/fidget.nvim', lazy = true, config = fidget_nvim_config },
 
     -- fast moves
     { 'nvim-tree/nvim-tree.lua', cmd = 'NvimTreeToggle', config = nvim_tree_config },
