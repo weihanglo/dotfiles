@@ -312,6 +312,11 @@ local function fidget_nvim_config()
         winblend = 0,
       },
     },
+    integration = {
+      ["nvim-tree"] = {
+        enable = false,
+      },
+    },
   })
 end
 
