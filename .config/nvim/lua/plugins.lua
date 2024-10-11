@@ -49,6 +49,11 @@ local function nvim_treesitter_context_config()
   })
 end
 
+--- neovim/nvim-lspconfig
+local function nvim_lspconfig_config()
+  require('lsp').setup()
+end
+
 --- nvim-telescope/telescope.nvim
 local function telescope_nvim_setup()
   local opts = { noremap = true, silent = true }
@@ -185,6 +190,11 @@ local function gitsigns_nvim_config()
   })
 end
 
+--- linrongbin16/gitlinker.nvim
+local function gitlinker_nvim_config()
+  require('gitlinker').setup()
+end
+
 --- nvim-tree/nvim-tree.lua
 local function nvim_tree_setup()
   local opts = { noremap = true, silent = true }
@@ -310,10 +320,6 @@ local function copilot_setup()
   vim.g.copilot_no_tab_map = true
 end
 
-local function nvim_bqf_config()
-  require('bqf').setup({ preview = { auto_preview = false } })
-end
-
 --- Declare all plugins
 local function declare_plugins()
   local lazy_events = { 'BufRead', 'CursorHold', 'CursorMoved', 'BufNewFile', 'InsertEnter' }
@@ -322,9 +328,9 @@ local function declare_plugins()
     -- user interface
     { 'nvim-lualine/lualine.nvim' },
     { 'sainnhe/gruvbox-material' },
-    { 'rcarriga/nvim-notify', event = lazy_events, config = nvim_notify_config },
-    { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = numb_nvim_config },
-    { 'kevinhwang91/nvim-bqf', ft = 'qf', config = nvim_bqf_config }, -- yep, this is UI. Currently I use only preview window.
+    { 'rcarriga/nvim-notify', config = nvim_notify_config },
+    { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = true },
+    { 'kevinhwang91/nvim-bqf', ft = 'qf', config = true }, -- yep, this is UI. Currently I use only preview window.
 
     -- auto-completion
     {
@@ -343,7 +349,7 @@ local function declare_plugins()
 
     -- vcs
     { 'lewis6991/gitsigns.nvim', event = lazy_events, config = gitsigns_nvim_config },
-    { 'linrongbin16/gitlinker.nvim', cmd = 'GitLink' },
+    { 'linrongbin16/gitlinker.nvim', cmd = 'GitLink', config = true },
 
     -- filetype
     { 'sheerun/vim-polyglot', event = lazy_events },
@@ -381,9 +387,7 @@ local function declare_plugins()
         'ray-x/lsp_signature.nvim',
         'j-hui/fidget.nvim',
       },
-      config = function()
-        require('lsp').setup()
-      end,
+      config = nvim_lspconfig_config,
     },
     { 'nvim-lua/lsp_extensions.nvim', lazy = true },
     { 'kosayoda/nvim-lightbulb', lazy = true },
