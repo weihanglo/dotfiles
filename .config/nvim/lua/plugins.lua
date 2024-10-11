@@ -352,7 +352,6 @@ local function declare_plugins()
     { 'linrongbin16/gitlinker.nvim', cmd = 'GitLink', config = true },
 
     -- filetype
-    { 'sheerun/vim-polyglot', event = lazy_events },
     {
       'nvim-treesitter/nvim-treesitter',
       event = lazy_events,
@@ -446,8 +445,6 @@ function M.load_all()
   telescope_nvim_setup()
   toggleterm_nvim_setup()
   copilot_setup()
-  -- Disable keymaps from ocaml/vim-ocaml (https://git.io/JYbMm)
-  vim.g.no_ocaml_maps = true
   -- Enable vim-visual-multi mouse mappings
   vim.g.VM_mouse_mappings = 1
 end
