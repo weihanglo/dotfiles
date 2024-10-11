@@ -374,7 +374,6 @@ local function declare_plugins()
       cmd = 'Telescope',
       config = telescope_nvim_config,
     },
-    { 'nvim-lua/plenary.nvim', lazy = true },
 
     -- nvim-lsp
     {
@@ -388,8 +387,6 @@ local function declare_plugins()
       },
       config = nvim_lspconfig_config,
     },
-    { 'nvim-lua/lsp_extensions.nvim', lazy = true },
-    { 'kosayoda/nvim-lightbulb', lazy = true },
     { 'ray-x/lsp_signature.nvim', lazy = true, config = lsp_signature_nvim_config },
     { 'j-hui/fidget.nvim', lazy = true, config = fidget_nvim_config },
 
