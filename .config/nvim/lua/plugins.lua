@@ -383,7 +383,16 @@ local function declare_plugins()
     -- nvim-lsp
     {
       'neovim/nvim-lspconfig',
-      event = lazy_events,
+      -- While in lsp module several server have a setup function
+      -- This enables only languages I currently work on.
+      ft = {
+        -- rust-analyzer
+        'rust',
+        -- pylsp
+        'python',
+        -- clangd
+        'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto',
+      },
       dependencies = { 
         'nvim-lua/lsp_extensions.nvim',
         'kosayoda/nvim-lightbulb',
