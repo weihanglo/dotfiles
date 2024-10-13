@@ -4,12 +4,12 @@ local map = vim.api.nvim_set_keymap
 
 --- catppuccin/nvim
 local function catppuccin_config()
-  require("catppuccin").setup({
+  require('catppuccin').setup({
     transparent_background = true,
     integrations = {
-        notify = true,
+      notify = true,
     },
-})
+  })
 end
 
 --- troydm/zoomwintab.vim
@@ -136,7 +136,7 @@ local function nvim_notify_config()
 end
 
 --- nacro90/numb.nvim
-local function numb_nvim_config() 
+local function numb_nvim_config()
   require('numb').setup({
     show_numbers = false,
     number_only = true,
@@ -240,7 +240,7 @@ local function nvim_cmp_config()
   local cmp = require('cmp')
 
   cmp.setup({
-    mapping =  cmp.mapping.preset.insert({
+    mapping = cmp.mapping.preset.insert({
       ['<cr>'] = cmp.mapping.confirm(),
       -- replace omnifunc?
       ['<c-x><c-o>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -288,7 +288,7 @@ local function fidget_nvim_config()
       },
     },
     integration = {
-      ["nvim-tree"] = {
+      ['nvim-tree'] = {
         enable = false,
       },
     },
@@ -306,7 +306,7 @@ local function declare_plugins()
   local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
   return {
     -- user interface
-    { "catppuccin/nvim", name = "catppuccin", config = catppuccin_config  },
+    { 'catppuccin/nvim', name = 'catppuccin', config = catppuccin_config },
     { 'nvim-lualine/lualine.nvim' },
     { 'rcarriga/nvim-notify', config = nvim_notify_config },
     { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = true },
@@ -349,7 +349,7 @@ local function declare_plugins()
       'nvim-telescope/telescope.nvim',
       tag = '0.1.8',
       dependencies = {
-        'nvim-lua/plenary.nvim'
+        'nvim-lua/plenary.nvim',
       },
       cmd = 'Telescope',
       config = telescope_nvim_config,
@@ -368,7 +368,7 @@ local function declare_plugins()
         -- clangd
         'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto',
       },
-      dependencies = { 
+      dependencies = {
         'nvim-lua/lsp_extensions.nvim',
         'kosayoda/nvim-lightbulb',
         'ray-x/lsp_signature.nvim',
@@ -384,7 +384,6 @@ local function declare_plugins()
     { 'troydm/zoomwintab.vim', cmd = 'ZoomWinTabToggle' },
     { 'mg979/vim-visual-multi', event = lazy_events },
     { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', config = toggleterm_nvim_config },
-
   }
 end
 
@@ -411,20 +410,20 @@ function M.load_all()
   require('lazy').setup({
     spec = declare_plugins(),
     -- automatically check for plugin updates
-    checker = { 
+    checker = {
       enabled = true,
       frequency = 86400, -- everyday
     },
     pkg = {
       sources = {
-        "lazy",
-        "packspec",
+        'lazy',
+        'packspec',
       },
-    }
+    },
   })
 
   -- Configure plugins
-  vim.cmd.colorscheme "catppuccin"
+  vim.cmd.colorscheme('catppuccin')
   zoomwintab_vim_setup()
   lualine_setup()
   nvim_tree_setup()
