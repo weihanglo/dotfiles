@@ -25,9 +25,9 @@
 	pager = delta
 	preloadIndex = true
 [delta]
+	features = catppuccin-latte
 	hyperlinks = true
 	line-numbers = true
-	syntax-theme = gruvbox-light
 [diff]
 	colorMoved = default
 	renames = copies
@@ -41,6 +41,8 @@
 	process = git-lfs filter-process
 	required = true
 	smudge = git-lfs smudge -- %f
+[include]
+	path = ~/.config/delta/themes/catppuccin.gitconfig
 [init]
 	defaultBranch = main
 [log]

@@ -17,18 +17,20 @@ readonly files_to_sync=(
     .config/alacritty/alacritty.yml
     .config/atuin/config.toml
     .config/bat/config
+    .config/bat/themes/Catppuccin\ Latte.tmTheme
+    .config/delta/themes/catppuccin.gitconfig
     .config/fish/config.fish
+    .config/fish/themes/Catppuccin\ Latte.theme
     .config/gitui/key_bindings.ron
+    .config/kitty/current-theme.conf
     .config/kitty/kitty.conf
     .config/nvim/init.vim
     .config/nvim/lazy-lock.json
-    .config/nvim/lua/dap-configs.lua
     .config/nvim/lua/lsp.lua
     .config/nvim/lua/plugins.lua
     .config/ripgreprc
     .config/starship.toml
     .config/zellij/config.kdl
-    .config/zellij/themes/gruvbox.kdl
     .gitconfig
     .gitignore
     .inputrc
@@ -96,6 +98,14 @@ sync_config_files () {
   popd || exit 1
 }
 
+sync_colorscheme() {
+    echo ">> Rebuild cache for faster theme selection"
+    hash bat && bat cache --build
+
+    echo ">> Save fish theme to universal variables"
+    hash fish && fish -c 'fish_config theme save "Catppuccin Latte"'
+}
+
 install_cargo_binaries() {
   cargo install "${cargo_crates[@]}" --locked
 }
@@ -135,9 +145,14 @@ if [[ -n "$1" ]]; then
       ;;
     python|py)
       install_python_binaries
+      ;;
+    theme)
+      sync_colorscheme
+      ;;
   esac
 else
   confirm "Synchronize all config files" sync_config_files
   confirm "Install all goods from cargo" install_cargo_binaries
   confirm "Install useful python binaries" install_python_binaries
+  confirm "Synchronize colorscheme for tools" sync_colorscheme
 fi

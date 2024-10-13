@@ -2,22 +2,14 @@ local M = {}
 
 local map = vim.api.nvim_set_keymap
 
---- sainnhe/gruvbox-material
-local function gruvbox_material_setup()
-  if vim.g.vscode then
-    return
-  end
-  vim.g.gruvbox_material_background = 'soft'
-  vim.g.gruvbox_material_better_performance = 1
-  vim.g.gruvbox_material_diagnostic_line_highlight = 1
-  vim.g.gruvbox_material_diagnostic_text_highlight = 1
-  vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
-  vim.g.gruvbox_material_enable_italic = 1
-  vim.g.gruvbox_material_transparent_background = 1
-  vim.cmd([[colorscheme gruvbox-material]])
-  -- hi! Normal  ctermbg=NONE guibg=NONE
-  -- hi! NonText ctermbg=NONE guibg=NONE
-  -- hi! EndOFBuffer ctermbg=NONE guibg=NONE
+--- catppuccin/nvim
+local function catppuccin_config()
+  require("catppuccin").setup({
+    transparent_background = true,
+    integrations = {
+        notify = true,
+    },
+})
 end
 
 --- troydm/zoomwintab.vim
@@ -101,22 +93,13 @@ local function lualine_setup()
   end
   require('lualine').setup({
     options = {
-      theme = 'gruvbox-material',
       icons_enabled = false,
       component_separators = '',
       section_separators = '',
     },
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = {
-        'branch',
-        {
-          'diff',
-          color_added = '#a9b665', -- hi GreenSign
-          color_modified = '#7daea3', -- hi BlueSign
-          color_removed = '#ea6962', -- hi RedSign
-        },
-      },
+      lualine_b = { 'branch', { 'diff' } },
       lualine_c = { 'filename' },
       lualine_x = {
         { 'diagnostics', sources = { 'nvim_diagnostic' } },
@@ -146,16 +129,8 @@ end
 --- rcarriga/nvim-notify
 local function nvim_notify_config()
   require('notify').setup({
-    background_colour = '#000000',
-    minimum_width = 40,
+    minimum_width = 30,
     stages = 'slide',
-    icons = {
-      ERROR = '[ERROR]',
-      WARN = '[WARN]',
-      INFO = '[INFO]',
-      DEBUG = '[DEBUG]',
-      TRACE = '[TRACE]',
-    },
   })
   vim.notify = require('notify') -- override built-in notify
 end
@@ -331,8 +306,8 @@ local function declare_plugins()
   local cmdline_lazy_events = { 'CmdLineEnter', unpack(lazy_events) }
   return {
     -- user interface
+    { "catppuccin/nvim", name = "catppuccin", config = catppuccin_config  },
     { 'nvim-lualine/lualine.nvim' },
-    { 'sainnhe/gruvbox-material' },
     { 'rcarriga/nvim-notify', config = nvim_notify_config },
     { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = true },
     { 'kevinhwang91/nvim-bqf', ft = 'qf', config = true }, -- yep, this is UI. Currently I use only preview window.
@@ -449,7 +424,7 @@ function M.load_all()
   })
 
   -- Configure plugins
-  gruvbox_material_setup()
+  vim.cmd.colorscheme "catppuccin"
   zoomwintab_vim_setup()
   lualine_setup()
   nvim_tree_setup()
