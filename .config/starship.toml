@@ -166,6 +166,9 @@ disabled = true
 [meson]
 disabled = true
 
+[mojo]
+disabled = true
+
 [nats]
 disabled = true
 
