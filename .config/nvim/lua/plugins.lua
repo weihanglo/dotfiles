@@ -6,9 +6,6 @@ local map = vim.api.nvim_set_keymap
 local function catppuccin_config()
   require('catppuccin').setup({
     transparent_background = true,
-    integrations = {
-      notify = true,
-    },
   })
 end
 
@@ -126,15 +123,6 @@ local function lualine_setup()
   })
 end
 
---- rcarriga/nvim-notify
-local function nvim_notify_config()
-  require('notify').setup({
-    minimum_width = 30,
-    stages = 'slide',
-  })
-  vim.notify = require('notify') -- override built-in notify
-end
-
 --- nacro90/numb.nvim
 local function numb_nvim_config()
   require('numb').setup({
@@ -186,7 +174,7 @@ local function nvim_tree_config()
       open_file = {
         window_picker = {
           exclude = {
-            filetype = { 'packer', 'qf', 'toggleterm', 'notify', 'diff' },
+            filetype = { 'packer', 'qf', 'toggleterm', 'diff' },
             buftype = { 'nofile', 'terminal', 'help' },
           },
         },
@@ -308,7 +296,6 @@ local function declare_plugins()
     -- user interface
     { 'catppuccin/nvim', name = 'catppuccin', config = catppuccin_config },
     { 'nvim-lualine/lualine.nvim' },
-    { 'rcarriga/nvim-notify', config = nvim_notify_config },
     { 'nacro90/numb.nvim', event = 'CmdLineEnter', config = true },
     { 'kevinhwang91/nvim-bqf', ft = 'qf', config = true }, -- yep, this is UI. Currently I use only preview window.
 
