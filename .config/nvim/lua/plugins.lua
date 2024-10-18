@@ -399,7 +399,7 @@ function M.load_all()
     -- automatically check for plugin updates
     checker = {
       enabled = true,
-      frequency = 86400, -- everyday
+      frequency = 8640000, -- every 10 days
     },
     pkg = {
       sources = {
