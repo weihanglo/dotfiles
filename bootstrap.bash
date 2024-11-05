@@ -43,12 +43,14 @@ readonly files_to_sync=(
 readonly cargo_crates=(
   atuin
   bat
+  cargo-binstall
   cargo-update
   difftastic
   eza
   fd-find
   git-delta
   gitui
+  hexyl
   hyperfine
   mdbook
   procs
