@@ -48,12 +48,23 @@ local function telescope_nvim_setup()
   local opts = { noremap = true, silent = true }
   vim.cmd('command! GStatus Telescope git_status')
   vim.cmd('command! GBcommits Telescope git_bcommits')
+
+  function live_grep_in_dir()
+    local current_file_dir = vim.fn.expand('%:p:h')
+    local input = vim.fn.input('Search in: ', current_file_dir, 'dir')
+    if input ~= '' then
+      require('telescope.builtin').live_grep({ search_dirs = { input } })
+    end
+  end
+  vim.api.nvim_create_user_command('LiveGrepIn', live_grep_in_dir, {})
+
   map('n', '<localleader>b', '<cmd>Telescope buffers<cr>', opts)
   map('n', '<localleader>c', '<cmd>Telescope commands theme=get_dropdown<cr>', opts)
   map('n', '<c-p>', '<cmd>Telescope find_files<cr>', opts)
   local find = 'rg,--files,--smart-case,-uu,--glob,!.git'
   map('n', '<localleader><c-p>', '<cmd>Telescope find_files find_command=' .. find .. '<cr>', opts)
   map('n', '<localleader>g', '<cmd>Telescope live_grep<cr>', opts)
+  map('n', '<localleader>G', '<cmd>LiveGrepIn<cr>', opts)
   map('n', '<localleader>*', "<cmd>exec 'Telescope grep_string prompt_prefix='.expand('<cword>').'>\\ '<cr>", opts)
 end
 local function telescope_nvim_config()
