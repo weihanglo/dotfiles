@@ -88,31 +88,9 @@ end
 ---
 --- Ref: https://github.com/rust-analyzer/rust-analyzer
 local function rust_analyzer_setup()
-  -- Inlay hints for rust
-  function M.inlay_hints()
-    require('lsp_extensions').inlay_hints({
-      only_current_line = true,
-      prefix = ' » ',
-      highlight = 'NonText',
-      enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' },
-    })
-  end
-  local function rust_on_attach(client, bufnr)
-    vim.api.nvim_exec(
-      [[
-      augroup RustInlayHint
-        autocmd! * <buffer>
-        autocmd CursorHold,CursorHoldI <buffer> silent lua require'lsp'.inlay_hints()
-      augroup END
-    ]],
-      false
-    )
-    on_attach(client, bufnr)
-  end
-
   lspconfig.rust_analyzer.setup({
     capabilities = make_capabilities(),
-    on_attach = rust_on_attach,
+    on_attach = on_attach,
     settings = {
       ['rust-analyzer'] = {
         -- Default 128. Ref: https://git.io/JTczw
