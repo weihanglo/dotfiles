@@ -21,13 +21,8 @@
 [core]
 	compression = 0
 	editor = nvim
-	excludesfile = ~/.gitignore
 	pager = delta
 	preloadIndex = true
-[delta]
-	features = catppuccin-latte
-	hyperlinks = true
-	line-numbers = true
 [diff]
 	colorMoved = default
 	renames = copies
@@ -50,6 +45,7 @@
 	date = iso8601-strict
 [merge]
 	tool = nvim
+	conflictstyle = zdiff3
 [mergetool]
 	prompt = true
 [mergetool "nvim"]
