@@ -36,8 +36,6 @@
 	process = git-lfs filter-process
 	required = true
 	smudge = git-lfs smudge -- %f
-[include]
-	path = ~/.config/delta/themes/catppuccin.gitconfig
 [init]
 	defaultBranch = main
 [log]
