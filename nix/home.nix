@@ -51,11 +51,8 @@
   home.packages = with pkgs; [
     (lib.hiPrio rust-analyzer)
     difftastic
-    eza
     fd
-    gnupg
     hyperfine
-    jq
     mdbook
     rustup
     shellcheck
@@ -111,6 +108,8 @@
     };
   };
 
+  programs.eza.enable = true;
+
   programs.fish = {
     enable = true;
     interactiveShellInit = builtins.readFile ../config/fish/config.fish;
@@ -118,6 +117,10 @@
       fish_user_key_bindings = "fish_vi_key_bindings";
     };
   };
+
+  programs.gpg.enable = true;
+
+  programs.jq.enable = true;
 
   programs.neovim = {
     enable = true;
