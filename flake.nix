@@ -34,7 +34,7 @@
       ];
 
       perSystem =
-        {
+        ctx@{
           pkgs,
           lib,
           ...
@@ -50,6 +50,8 @@
             # Optionally use extraSpecialArgs
             # to pass through arguments to home.nix
           };
+
+          devShells = import ./nix/dev-shells.nix ctx;
         };
     };
 }
