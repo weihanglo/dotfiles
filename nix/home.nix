@@ -57,7 +57,6 @@
     hyperfine
     jq
     mdbook
-    neovim
     rustup
     shellcheck
     shfmt
@@ -68,8 +67,6 @@
 
   home.sessionVariables = {
     LESS = "isFRMX";
-    VISUAL = "nvim";
-    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
@@ -120,6 +117,12 @@
     functions = {
       fish_user_key_bindings = "fish_vi_key_bindings";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
   };
 
   programs.kitty = {
@@ -177,6 +180,7 @@
 
   xdg = {
     enable = true;
+    configFile."nvim".source = ../config/nvim;
     configFile."fish/themes/Catppuccin Latte.theme".source =
       let
         catppuccin-fish = pkgs.fetchFromGitHub {
