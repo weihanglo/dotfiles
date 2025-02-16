@@ -122,6 +122,25 @@
     };
   };
 
+  programs.kitty = {
+    enable = true;
+    themeFile = "Catppuccin-Latte";
+    settings = {
+      font_family = "JetBrains Mono ExtraLight";
+      bold_font = "JetBrains Mono Bold";
+      italic_font = "JetBrains Mono Light Italic";
+      bold_italic_font = "JetBrains Mono Bold Italic";
+      font_size = 20.0;
+      scrollback_lines = 10000;
+      hide_window_decorations = "yes";
+      background_opacity = 0.7;
+      dynamic_background_opacity = "yes";
+      clipboard_control = "write-clipboard write-primary no-append";
+      macos_option_as_alt = "left";
+      macos_quit_when_last_window_closed = "yes";
+    };
+  };
+
   programs.readline = {
     enable = true;
     extraConfig = builtins.readFile ../config/inputrc;
@@ -168,16 +187,5 @@
         };
       in
       "${catppuccin-fish}/themes/Catppuccin Latte.theme";
-    configFile."kitty/kitty.conf".source = ../config/kitty/kitty.conf;
-    configFile."kitty/current-theme.conf".source =
-      let
-        catppuccin-kitty = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "kitty";
-          rev = "b14e8385c827f2d41660b71c7fec1e92bdcf2676";
-          hash = "sha256-59ON7CzVgfZUo7F81qQZQ1r6kpcjR3OPvTl99gzDP8E=";
-        };
-      in
-      "${catppuccin-kitty}/themes/latte.conf";
   };
 }
