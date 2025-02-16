@@ -53,6 +53,7 @@
     difftastic
     eza
     fd
+    gnupg
     hyperfine
     jq
     mdbook
