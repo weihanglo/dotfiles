@@ -12,8 +12,6 @@ SCRIPTPATH="$( cd "$(dirname "$0")" && pwd -P )"
 # --------------------------------------
 
 readonly files_to_sync=(
-    .config/kitty/current-theme.conf
-    .config/kitty/kitty.conf
     .config/nvim/init.vim
     .config/nvim/lazy-lock.json
     .config/nvim/lua/lsp.lua
