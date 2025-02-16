@@ -5,7 +5,9 @@ in
 {
   programs.starship = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
     enableInteractive = true;
     settings = {
       add_newline = false;
