@@ -1,13 +1,24 @@
-# Weihang Lo's Dotfiles 
+# Weihang Lo's Dotfiles
 
 ## Usage
 
-```bash
+Build and activate [home-manager] configuration:
+
+```console
 nix run home-manager/release-24.11 -- switch --flake github:weihanglo/dotfiles
 ```
 
-```bash
+Build and activate [nix-darwin] configuration:
+
+```console
 nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake github:weihanglo/dotfiles
+```
+
+Activave different dev shells:
+
+```console
+nix develop github:weihanglo/dotfiles#cargo
+nix develop github:weihanglo/dotfiles#rust
 ```
 
 ## License
@@ -15,3 +26,6 @@ nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake github:weih
 [The MIT License (MIT)](LICENSE)
 
 Copyright © 2015 - Present Weihang Lo
+
+[nix-darwin]: https://github.com/LnL7/nix-darwin
+[home-manager]: https://github.com/nix-community/home-manager
