@@ -364,7 +364,12 @@ local function declare_plugins()
         -- pylsp
         'python',
         -- clangd
-        'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto',
+        'c',
+        'cpp',
+        'objc',
+        'objcpp',
+        'cuda',
+        'proto',
       },
       dependencies = {
         'nvim-lua/lsp_extensions.nvim',
