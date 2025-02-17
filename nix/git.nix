@@ -34,7 +34,8 @@
       enable = true;
       options = {
         features = "catppuccin-latte";
-        hyperlinks = true;
+        # There might not be any application to open hyperlinks on Linux.
+        hyperlinks = pkgs.stdenv.hostPlatform.isDarwin;
         line-numbers = true;
       };
     };
