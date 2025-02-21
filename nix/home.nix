@@ -57,7 +57,6 @@
     rustup
     shellcheck
     shfmt
-    tig
   ];
 
   home.file = { };

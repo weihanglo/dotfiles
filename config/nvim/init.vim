@@ -59,7 +59,7 @@ augroup END
 augroup ModeChanges
     autocmd!
     autocmd TermOpen * setlocal signcolumn=no nonu nornu|startinsert
-    autocmd TermClose term://*:tig*,term://*:gitui* bd!
+    autocmd TermClose term://*:gitui* bd!
 augroup END
 " }}}
 
@@ -74,15 +74,7 @@ vnoremap // y/<c-r>"<cr>
 nnoremap \\ <cmd>nohl<cr>
 " Buffer deletion
 nnoremap <silent> <localleader>d <cmd>bp<bar>bd #<cr>
-" gitui and tig
-function! Tig(args) abort
-    let args = expandcmd(a:args)
-    tabedit
-    execute 'terminal tig ' . args
-endfunction
-command! -narg=* Tig call Tig(<q-args>)
 command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
-command! Gblame execute 'Tig blame % +' . line('.')
 " Check highlight group under current cursor
 command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
 
