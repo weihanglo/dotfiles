@@ -16,7 +16,10 @@
 	interactive = true
 	status = true
 	ui = true
+[column]
+	ui = auto
 [commit]
+	cleanup = scissors
 	gpgsign = true
 [core]
 	compression = 0
@@ -31,6 +34,9 @@
 	prompt = false
 [difftool "difftastic"]
 	cmd = difft "$LOCAL" "$REMOTE"
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -44,6 +50,7 @@
 [merge]
 	tool = nvim
 	conflictstyle = zdiff3
+	keepbackup = false
 [mergetool]
 	prompt = true
 [mergetool "nvim"]
@@ -54,7 +61,11 @@
 	difftool = true
 [pull]
 	ff = only
+	rebase = true
+[rerere]
+	enabled = true
 [rebase]
+	autoSquash = true
 	updateRefs = true
 [user]
 	email = me@weihanglo.tw
