@@ -25,7 +25,7 @@ in
   # Dev shell for rustc development
   rust =
     let
-      llvmPkgs = pkgs.llvmPackages_20;
+      llvmPkgs = pkgs.llvmPackages_19;
     in
     pkgs.mkShell.override { inherit (llvmPkgs) stdenv; } {
       name = "rust";
