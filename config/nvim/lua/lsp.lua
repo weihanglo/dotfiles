@@ -333,7 +333,7 @@ M.setup = function()
   vim.g.diagnostic_insert_delay = 1
   -- Round border for hover helps
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'shadow',
+    border = 'rounded',
   })
 
   -- Language servers setup
