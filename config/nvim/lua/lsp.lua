@@ -264,67 +264,6 @@ local function clangd_setup()
   })
 end
 
---- Solargraph setup.
---- `gem install solargraph`
----
---- Ref: https://github.com/castwide/solargraph
-local function solargraph_setup()
-  lspconfig.solargraph.setup({
-    capabilities = make_capabilities(),
-    on_attach = on_attach,
-  })
-end
-
---- OCaml-LSP setup.
---- `opam install ocaml-lsp-server`
----
---- Ref: https://github.com/ocaml/ocaml-lsp
-local function ocamllsp_setup()
-  lspconfig.ocamllsp.setup({
-    capabilities = make_capabilities(),
-    on_attach = on_attach,
-  })
-end
-
---- ElixirLS setup.
----
---- ```
---- git clone https://github.com/elixir-lsp/elixir-ls.git`
---- mix compile
---- mix elixir_ls.release
---- ```
----
---- Ref: https://github.com/elixir-lsp/elixir-ls
-local function elixirls_setup()
-  local ext
-  if vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1 then
-    ext = 'sh'
-  elseif vim.fn.has('win32') == 1 then
-    ext = 'bat'
-  else
-    vim.notify('Unsupported system for elixirls', vim.log.levels.WARN)
-  end
-
-  local elixirls_root_path = lss_dir .. '/elixir-ls'
-  local elixirls_binary = elixirls_root_path .. '/release/language_server.' .. ext
-  lspconfig.elixirls.setup({
-    capabilities = make_capabilities(),
-    cmd = { elixirls_binary },
-    on_attach = on_attach,
-  })
-end
-
---- Kotlin Language Server setup.
---- `./gradlew :server:installDist`
----
---- Ref: https://github.com/fwcd/kotlin-language-server/blob/main/BUILDING.md
-local function kotlin_language_server_setup()
-  lspconfig.kotlin_language_server.setup({
-    capabilities = make_capabilities(),
-    on_attach = on_attach,
-  })
-end
-
 --- Setup all language servers from above configurations.
 M.setup = function()
   -- Show virtual text for diagnoses
@@ -343,10 +282,6 @@ M.setup = function()
   pylsp_setup()
   lua_ls_setup()
   clangd_setup()
-  solargraph_setup()
-  ocamllsp_setup()
-  elixirls_setup()
-  kotlin_language_server_setup()
 end
 
 return M
