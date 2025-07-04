@@ -1,6 +1,7 @@
 {
   system.stateVersion = 6;
 
+  nix.enable = false;
   nix.settings = {
     accept-flake-config = true;
     build-users-group = "nixbld";
