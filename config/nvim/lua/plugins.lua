@@ -22,7 +22,51 @@ end
 --- nvim-treesitter/nvim-treesitter
 local function nvim_treesitter_config()
   require('nvim-treesitter.configs').setup({
-    ensure_installed = 'all',
+    ensure_installed = {
+      'bash',
+      'c',
+      'cmake',
+      'cpp',
+      'csv',
+      'diff',
+      'dockerfile',
+      'fish',
+      'git_config',
+      'git_rebase',
+      'gitattributes',
+      'gitcommit',
+      'gitignore',
+      'html',
+      'json',
+      'json5',
+      'llvm',
+      'lua',
+      'luadoc',
+      'make',
+      'markdown',
+      'markdown_inline',
+      'mermaid',
+      'nix',
+      'ocaml',
+      'python',
+      'ron',
+      'rst',
+      'ruby',
+      'rust',
+      'ssh_config',
+      'starlark',
+      'strace',
+      'tera',
+      'tmux',
+      'toml',
+      'typescript',
+      'vim',
+      'vimdoc',
+      'xml',
+      'xresources',
+      'yaml',
+      'zig',
+    },
     highlight = { enable = true },
     incremental_selection = { enable = true },
     indent = { enabled = true },
@@ -265,18 +309,6 @@ local function nvim_cmp_config()
   })
 end
 
---- ray-x/lsp_signature.nvim (show parameter signature while typing)
-local function lsp_signature_nvim_config()
-  require('lsp_signature').setup({
-    bind = true,
-    doc_lines = 5,
-    transparency = 100,
-    floating_window = false,
-    floating_window_above_cur_line = false, -- set false to not overlay with pop menu
-    toggle_key = '<c-k>', -- LspHover but in insert mode
-  })
-end
-
 --- j-hui/fidget.nvim
 local function fidget_nvim_config()
   require('fidget').setup({
@@ -336,6 +368,7 @@ local function declare_plugins()
       dependencies = {
         'nvim-treesitter/nvim-treesitter-context',
       },
+      branch = 'master',
       build = ':TSUpdate',
       config = nvim_treesitter_config,
     },
@@ -374,12 +407,10 @@ local function declare_plugins()
       dependencies = {
         'nvim-lua/lsp_extensions.nvim',
         'kosayoda/nvim-lightbulb',
-        'ray-x/lsp_signature.nvim',
         'j-hui/fidget.nvim',
       },
       config = nvim_lspconfig_config,
     },
-    { 'ray-x/lsp_signature.nvim', lazy = true, config = lsp_signature_nvim_config },
     { 'j-hui/fidget.nvim', lazy = true, config = fidget_nvim_config },
 
     -- fast moves
