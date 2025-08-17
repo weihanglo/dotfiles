@@ -22,13 +22,13 @@ local function on_attach(client, bufnr)
     command! LspDeclaration      lua vim.lsp.buf.declaration()
     command! LspDefinition       lua vim.lsp.buf.definition()
     command! LspDocumentSymbol   lua vim.lsp.buf.document_symbol()
-    command! LspHover            lua vim.lsp.buf.hover()
+    command! LspHover            lua vim.lsp.buf.hover({ border = 'rounded' })
     command! LspImplementation   lua vim.lsp.buf.implementation()
     command! LspIncomingCalls    lua vim.lsp.buf.incoming_calls()
     command! LspOutgoingCalls    lua vim.lsp.buf.outgoing_calls()
     command! LspReferences       lua vim.lsp.buf.references()
     command! LspRename           lua vim.lsp.buf.rename()
-    command! LspSignatureHelp    lua vim.lsp.buf.signature_help()
+    command! LspSignatureHelp    lua vim.lsp.buf.signature_help({ border = 'rounded' })
     command! LspTypeDefinition   lua vim.lsp.buf.type_definition()
     command! LspWorkspaceSymbol  lua vim.lsp.buf.workspace_symbol()
   ]],
@@ -257,10 +257,6 @@ M.setup = function()
   vim.g.diagnostic_enable_virtual_text = 1
   -- Delay showing virtual text while inserting
   vim.g.diagnostic_insert_delay = 1
-  -- Round border for hover helps
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'rounded',
-  })
 
   -- Language servers setup
   rust_analyzer_setup()
