@@ -23,12 +23,12 @@
     casks = [
       "firefox"
       "font-jetbrains-mono"
-      "ghostty"
       "jetbrains-toolbox"
       "kitty"
       "signal"
       "sublime-text"
       "visual-studio-code"
+      "zed"
     ];
     onActivation.cleanup = "zap";
   };
