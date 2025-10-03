@@ -88,7 +88,7 @@ end
 ---
 --- Ref: https://github.com/rust-analyzer/rust-analyzer
 local function rust_analyzer_setup()
-  lspconfig.rust_analyzer.setup({
+  vim.lsp.config('rust_analyzer', {
     capabilities = make_capabilities(),
     on_attach = on_attach,
     settings = {
@@ -109,6 +109,7 @@ local function rust_analyzer_setup()
     },
     single_file_support = true,
   })
+  vim.lsp.enable('rust_analyzer')
 end
 
 --- TypeScript Language Server setup.
@@ -116,10 +117,11 @@ end
 ---
 --- Ref: https://github.com/typescript-language-server/typescript-language-server
 local function ts_ls_setup()
-  lspconfig.ts_ls.setup({
+  vim.lsp.config('ts_ls', {
     capabilities = make_capabilities(),
     on_attach = on_attach,
   })
+  vim.lsp.enable('ts_ls')
 end
 
 --- gopls setup.
@@ -127,10 +129,11 @@ end
 ---
 --- Ref: https://github.com/golang/tools/blob/master/gopls/README.md
 local function gopls_setup()
-  lspconfig.gopls.setup({
+  vim.lsp.config('gopls', {
     capabilities = make_capabilities(),
     on_attach = on_attach,
   })
+  vim.lsp.enable('gopls')
 end
 
 --- Python Language Server setup.
@@ -203,12 +206,13 @@ local function pylsp_setup()
 
   local settings = { pylsp = { plugins = { jedi = { environment = vim.NIL } } } }
 
-  lspconfig.pylsp.setup({
+  vim.lsp.config('pylsp', {
     capabilities = make_capabilities(),
     on_attach = on_attach,
     settings = settings,
     on_new_config = on_new_config,
   })
+  vim.lsp.enable('pylsp')
 end
 
 --- lua-language-server setup.
@@ -216,7 +220,7 @@ end
 ---
 --- Ref: https://github.com/LuaLS/lua-language-server/wiki/Getting-Started
 local function lua_ls_setup()
-  lspconfig.lua_ls.setup({
+  vim.lsp.config('lua_ls', {
     capabilities = make_capabilities(),
     on_attach = on_attach,
     settings = {
@@ -236,6 +240,7 @@ local function lua_ls_setup()
       },
     },
   })
+  vim.lsp.enable('lua_ls')
 end
 
 --- cland setup.
@@ -245,10 +250,11 @@ end
 --- [1]: https://clangd.llvm.org/installation.html
 --- [2]: https://clang.llvm.org/docs/JSONCompilationDatabase.html
 local function clangd_setup()
-  lspconfig.clangd.setup({
+  vim.lsp.config('clangd', {
     capabilities = make_capabilities(),
     on_attach = on_attach,
   })
+  vim.lsp.enable('clangd')
 end
 
 --- Setup all language servers from above configurations.
