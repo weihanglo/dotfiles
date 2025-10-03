@@ -85,6 +85,8 @@
     };
   };
 
+  programs.awscli.enable = true;
+
   programs.bash.enable = true;
 
   programs.bat = {
