@@ -44,9 +44,22 @@
           lib,
           ...
         }:
+        let
+          pkgs' = import pkgs.path {
+            system = ctx.system;
+            overlays = [
+              (final: prev: {
+                kitty = prev.kitty.overrideAttrs (old: {
+                  # Probably not NixOS/nixpkgs#448279 but let's skip it for a while.
+                  doCheck = false;
+                });
+              })
+            ];
+          };
+        in
         {
           legacyPackages.homeConfigurations.whlo = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            pkgs = pkgs';
 
             modules = [
               ./nix/home.nix
