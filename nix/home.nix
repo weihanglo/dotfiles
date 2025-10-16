@@ -123,6 +123,8 @@
 
   programs.jq.enable = true;
 
+  programs.jujutsu.enable = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
