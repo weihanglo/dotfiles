@@ -23,6 +23,7 @@
     casks = [
       "firefox"
       "font-jetbrains-mono"
+      "ghostty"
       "jetbrains-toolbox"
       "kitty"
       "signal"
@@ -35,6 +36,7 @@
 
   ids.gids.nixbld = 30000;
 
+  system.primaryUser = "whlo";
   system.defaults.CustomUserPreferences = {
     NSGlobalDomain = {
       AppleAccentColor = 6;
