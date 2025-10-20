@@ -52,6 +52,7 @@
     (lib.hiPrio rust-analyzer)
     difftastic
     fd
+    gh
     hyperfine
     mdbook
     rustup
