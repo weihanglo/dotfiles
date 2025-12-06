@@ -77,6 +77,8 @@ nnoremap <silent> <localleader>d <cmd>bp<bar>bd #<cr>
 command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
 " Check highlight group under current cursor
 command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
+" So you can run `:RustFmt` without worrying let chain
+let g:rustfmt_options='--style-edition=2024 --edition=2024'
 
 " Use map <buffer> to only map dd in the quickfix/loclist buffer.
 " Ref: https://stackoverflow.com/a/48817071/8851735
