@@ -47,6 +47,7 @@
         let
           pkgs' = import pkgs.path {
             system = ctx.system;
+            config = import ./nix/nixpkgs-config.nix ctx;
             overlays = [
               (final: prev: {
                 kitty = prev.kitty.overrideAttrs (old: {

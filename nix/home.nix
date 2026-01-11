@@ -50,6 +50,7 @@
 
   home.packages = with pkgs; [
     (lib.hiPrio rust-analyzer)
+    claude-code
     difftastic
     fd
     gh
