@@ -48,30 +48,6 @@
           pkgs' = import pkgs.path {
             system = ctx.system;
             config = import ./nix/nixpkgs-config.nix ctx;
-            overlays = [
-              (final: prev: {
-                kitty = prev.kitty.overrideAttrs (old: {
-                  # Probably not NixOS/nixpkgs#448279 but let's skip it for a while.
-                  doCheck = false;
-                });
-                gitui = prev.gitui.overrideAttrs (attrs: {
-                  # https://github.com/NixOS/nixpkgs/issues/450861
-                  postPatch =
-                    attrs.postPatch
-                    + prev.lib.optionalString prev.stdenv.hostPlatform.isDarwin ''
-                      local asm_file="../gitui-0.27.0-vendor/sha1-asm-0.5.3/src/aarch64_apple.S"
-                      substituteInPlace "$asm_file" \
-                        --replace-fail $'\tldr\tq4, [x1, #:lo12:.K0@PAGEOFF]' $'\tadd\tx1, x1, .K0@PAGEOFF\n\tldr\tq4, [x1]'
-                      substituteInPlace "$asm_file" \
-                        --replace-fail $'\tldr\tq4, [x1, #:lo12:.K1@PAGEOFF]' $'\tadd\tx1, x1, .K1@PAGEOFF\n\tldr\tq4, [x1]'
-                      substituteInPlace "$asm_file" \
-                        --replace-fail $'\tldr\tq4, [x1, #:lo12:.K2@PAGEOFF]' $'\tadd\tx1, x1, .K2@PAGEOFF\n\tldr\tq4, [x1]'
-                      substituteInPlace "$asm_file" \
-                        --replace-fail $'\tldr\tq4, [x1, #:lo12:.K3@PAGEOFF]' $'\tadd\tx1, x1, .K3@PAGEOFF\n\tldr\tq4, [x1]'
-                    '';
-                });
-              })
-            ];
           };
         in
         {
