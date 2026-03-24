@@ -50,7 +50,6 @@
 
   home.packages = with pkgs; [
     (lib.hiPrio rust-analyzer)
-    claude-code
     difftastic
     fd
     gh
@@ -90,6 +89,11 @@
   programs.awscli.enable = true;
 
   programs.bash.enable = true;
+
+  programs.claude-code = {
+    enable = true;
+    memory.source = ../config/claude-code/CLAUDE.md;
+  };
 
   programs.bat = {
     enable = true;
