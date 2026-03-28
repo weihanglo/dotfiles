@@ -92,7 +92,7 @@
 
   programs.claude-code = {
     enable = true;
-    memory.source = ../config/claude-code/CLAUDE.md;
+    memory.source = ../config/ai/AGENTS.md;
   };
 
   programs.bat = {
