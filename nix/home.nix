@@ -60,7 +60,9 @@
     shfmt
   ];
 
-  home.file = { };
+  home.file = {
+    ".codex/AGENTS.md".source = ../config/ai/AGENTS.md;
+  };
 
   home.sessionVariables = {
     LESS = "isFRMX";
@@ -94,6 +96,8 @@
     enable = true;
     memory.source = ../config/ai/AGENTS.md;
   };
+
+  programs.codex.enable = true;
 
   programs.bat = {
     enable = true;
