@@ -20,6 +20,7 @@
       ".DS_Store"
       ".idea"
       ".vscode"
+      "/.claude/"
       "/.design-docs/"
       "__debug_bin"
       "__pycache__"
