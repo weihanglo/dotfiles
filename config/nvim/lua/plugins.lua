@@ -375,7 +375,7 @@ local function declare_plugins()
 		{ "google/vim-searchindex", event = "CmdLineEnter" }, -- show search index beyond [>99/>99]
 		{
 			"nvim-telescope/telescope.nvim",
-			tag = "0.1.8",
+			tag = "v0.2.2",
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 			},
