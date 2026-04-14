@@ -21,7 +21,7 @@ end
 
 --- nvim-treesitter/nvim-treesitter
 local function nvim_treesitter_config()
-	require("nvim-treesitter.configs").setup({
+	require("nvim-treesitter").setup({
 		ensure_installed = {
 			"bash",
 			"c",
@@ -67,9 +67,6 @@ local function nvim_treesitter_config()
 			"yaml",
 			"zig",
 		},
-		highlight = { enable = true },
-		incremental_selection = { enable = true },
-		indent = { enabled = true },
 	})
 end
 
@@ -368,7 +365,7 @@ local function declare_plugins()
 			dependencies = {
 				"nvim-treesitter/nvim-treesitter-context",
 			},
-			branch = "master",
+			branch = "main",
 			build = ":TSUpdate",
 			config = nvim_treesitter_config,
 		},
