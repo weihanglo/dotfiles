@@ -94,10 +94,13 @@
 
   programs.claude-code = {
     enable = true;
-    memory.source = ../config/ai/AGENTS.md;
+    context = ../config/ai/AGENTS.md;
   };
 
-  programs.codex.enable = true;
+  programs.codex = {
+    enable = true;
+    context = ../config/ai/AGENTS.md;
+  };
 
   programs.bat = {
     enable = true;
