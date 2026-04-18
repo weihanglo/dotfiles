@@ -42,6 +42,8 @@
 	process = git-lfs filter-process
 	required = true
 	smudge = git-lfs smudge -- %f
+[gpg]
+	format = openpgp
 [init]
 	defaultBranch = main
 [log]
