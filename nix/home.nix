@@ -139,6 +139,7 @@
     enable = true;
     defaultEditor = true;
     vimAlias = true;
+    extraConfig = builtins.readFile ../config/nvim/init.vim;
   };
 
   programs.kitty = {
@@ -196,7 +197,8 @@
 
   xdg = {
     enable = true;
-    configFile."nvim".source = ../config/nvim;
+    configFile."nvim/lua".source = ../config/nvim/lua;
+    configFile."nvim/lazy-lock.json".source = ../config/nvim/lazy-lock.json;
     configFile."fish/themes/Catppuccin Latte.theme".source =
       let
         catppuccin-fish = pkgs.fetchFromGitHub {
