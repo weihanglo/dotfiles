@@ -5,13 +5,13 @@
 Build and activate [home-manager] configuration:
 
 ```console
-nix run home-manager/release-24.11 -- switch --flake github:weihanglo/dotfiles
+nix run home-manager -- switch --flake github:weihanglo/dotfiles
 ```
 
 Build and activate [nix-darwin] configuration:
 
 ```console
-nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake github:weihanglo/dotfiles
+nix run nix-darwin#darwin-rebuild -- switch --flake github:weihanglo/dotfiles
 ```
 
 Activave different dev shells:
