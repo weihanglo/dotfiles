@@ -95,6 +95,9 @@
   programs.claude-code = {
     enable = true;
     context = ../config/ai/AGENTS.md;
+    rules = {
+      commit-style = ../config/ai/commit-style.md;
+    };
   };
 
   programs.codex = {

@@ -53,7 +53,7 @@ For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use t
   * You provide a succinct message suggestions explaining why
   * Messages follow Conventional Commits
 * Tests belong in their own commits, separate from the feature/fix commit. The workflow:
-  1. Commit tests that assert CURRENT behavior (tests pass now)
+  1. Commit tests that assert CURRENT behavior (tests pass now, even if asserting errors)
   2. In a later commit, update assertions alongside the implementation
   3. `git bisect` stays useful and the test diff shows exact behavior change
 * Do not claim you have actually run tests or commands — only state expected results and reasoning.
