@@ -61,7 +61,6 @@
   ];
 
   home.file = {
-    ".codex/AGENTS.md".source = ../config/ai/AGENTS.md;
   };
 
   home.sessionVariables = {
