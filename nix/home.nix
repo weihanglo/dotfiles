@@ -61,6 +61,8 @@
   ];
 
   home.file = {
+    ".kiro/steering/agents.md".source = ../config/ai/AGENTS.md;
+    ".kiro/steering/commit-style.md".source = ../config/ai/commit-style.md;
   };
 
   home.sessionVariables = {

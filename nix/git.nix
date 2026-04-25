@@ -21,6 +21,7 @@
       ".idea"
       ".vscode"
       "/.claude/"
+      "/.kiro/"
       "/.design-docs/"
       "__debug_bin"
       "__pycache__"
