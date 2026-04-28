@@ -20,7 +20,10 @@
 
   homebrew = {
     enable = true;
+    taps = [ "st0012/cctop" ];
     casks = [
+      "cctop"
+      "jetbrains-toolbox"
       "firefox"
       "font-jetbrains-mono"
       "kitty"
