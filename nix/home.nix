@@ -165,6 +165,8 @@
       clipboard_control = "write-clipboard write-primary no-append";
       macos_option_as_alt = "left";
       macos_quit_when_last_window_closed = "yes";
+      allow_remote_control = "socket-only";
+      listen_on = "unix:/tmp/kitty-{kitty_pid}";
     };
   };
 
