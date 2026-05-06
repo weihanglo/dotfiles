@@ -79,6 +79,7 @@ When running commands on behalf of me, do (in this order)
 * `git --no-pager` for diffing, log viewing, and any ops that pager may be involved
 * Use `gh` CLI when talking to GitHub
 * Use `rg` instead of `grep`
+* Try nixpkgs if missing tool: `nix shell nixpkgs#<pkg>` or `nix develop`
 
 ---
 
