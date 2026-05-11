@@ -138,6 +138,8 @@
 
   programs.gpg.enable = true;
 
+  programs.jjui.enable = true;
+
   programs.jq.enable = true;
 
   programs.jujutsu.enable = true;
