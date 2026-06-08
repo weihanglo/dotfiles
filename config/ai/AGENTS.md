@@ -45,11 +45,11 @@ For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use t
 
 ## Design principles
 
-* Prefer logical atomic design steps that can be a git atomic commit
+* Prefer logical atomic design steps that can be an atomic commit
   * For example, formatting or refactor should be standalone commit
   * Don't overly do it. It is aimed to be reviewable and revertable.
 * Stop before proceeding to next step
-  * Human will do the git commit
+  * Human will do the VCS commit
   * You provide a succinct message suggestions explaining why
   * Messages follow Conventional Commits
 * Tests belong in their own commits, separate from the feature/fix commit. The workflow:
@@ -75,8 +75,10 @@ When running commands on behalf of me, do (in this order)
 * When writing temp tests, put files under `target/tmp/`.
 * Never run destructive git operations (`push --force`, `reset --hard`, `rebase`, `branch -D`, etc.) without consent
 * `git commit` and `git push` are fine when asked
+* `git --no-pager` / `jj --no-pager` for diffing, log viewing, and any ops that pager may be involved
+* Prefer `jj` over `git` when available.
+* Most jj ops are undoable (`jj undo`); remote ops (`jj git push`) need consent.
 * When reading Rust dependency source, prefer local `~/.cargo/registry` over remote docs
-* `git --no-pager` for diffing, log viewing, and any ops that pager may be involved
 * Use `gh` CLI when talking to GitHub
 * Use `rg` instead of `grep`
 * Try nixpkgs if missing tool: `nix shell nixpkgs#<pkg>` or `nix develop`
