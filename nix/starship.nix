@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   lang-format = "[$symbol$version]($style) ";
 in
@@ -21,9 +21,6 @@ in
         format = "$env_value ";
       };
       git_branch.format = "[$symbol$branch]($style) ";
-      lua.format = lang-format;
-      python.format = lang-format;
-      rust.format = lang-format;
       time = {
         disabled = false;
         format = "[$time](dimmed white)";
@@ -35,8 +32,6 @@ in
         "$git_branch"
         "$git_commit"
         "$git_state"
-        "$python"
-        "$rust"
         "$nix_shell"
         "$env_var"
         "$cmd_duration"
