@@ -69,19 +69,18 @@ For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use t
 
 When running commands on behalf of me, do (in this order)
 
-* Prepend a white space to avoid polluting shell history
-* Run under nix shell if working on Cargo: `nix develop github:weihanglo/dotfiles#cargo --quiet --command`
-* Wrap in `zsh -l -c <cmd>` for remote machines
-* When writing temp tests, put files under `target/tmp/`.
-* Never run destructive git operations (`push --force`, `reset --hard`, `rebase`, `branch -D`, etc.) without consent
-* `git commit` and `git push` are fine when asked
-* `git --no-pager` / `jj --no-pager` for diffing, log viewing, and any ops that pager may be involved
-* Prefer `jj` over `git` when available.
-* Most jj ops are undoable (`jj undo`); remote ops (`jj git push`) need consent.
-* When reading Rust dependency source, prefer local `~/.cargo/registry` over remote docs
+* Run under nix shell if working on Cargo project itself: `nix develop github:weihanglo/dotfiles#cargo --quiet --command`
+* If missing tool, try nixpkgs `nix shell nixpkgs#<pkg>` or `nix develop`
+* Wrap in `zsh -l -c <cmd>` if on remote machines
+* When writing temp tests, put files under `/tmp/`
+* Ask before running destructive git operations (`push --force`, `reset --hard`, etc.)
+* `git --no-pager` / `jj --no-pager` for diffing, log viewing, etc.
+* Prefer `jj` over `git` when available
+* Most jj ops are undoable (`jj undo`); remote ops need consent.
+* Prefer local `~/.cargo/registry` over remote docs when reading Rust source
+* Fetch Rust packages via `cargo info`
 * Use `gh` CLI when talking to GitHub
 * Use `rg` instead of `grep`
-* Try nixpkgs if missing tool: `nix shell nixpkgs#<pkg>` or `nix develop`
 
 ---
 
