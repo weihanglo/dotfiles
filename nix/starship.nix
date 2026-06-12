@@ -21,6 +21,12 @@ in
         format = "$env_value ";
       };
       git_branch.format = "[$symbol$branch]($style) ";
+      nix_shell = {
+          format = "[$state(\($name\))]($style) ";
+          impure_msg = "*";
+          pure_msg = "";
+          unknown_msg = "?";
+      };
       time = {
         disabled = false;
         format = "[$time](dimmed white)";
