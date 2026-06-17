@@ -21,6 +21,14 @@ nix develop github:weihanglo/dotfiles#cargo
 nix develop github:weihanglo/dotfiles#rust
 ```
 
+Homebrew casks are not version-pinned and `brew bundle` won't upgrade
+already-installed ones during `darwin-rebuild switch`.
+Upgrade them explicitly when desired:
+
+```console
+brew update && brew upgrade --cask <name>
+```
+
 ## License
 
 [The MIT License (MIT)](LICENSE)
