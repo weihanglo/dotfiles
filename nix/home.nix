@@ -146,7 +146,6 @@
     enable = true;
     settings = {
       aliases = {
-        c = [ "commit" ];
         ci = [
           "commit"
           "--interactive"
@@ -156,7 +155,11 @@
           "--tool"
           "difft"
         ];
-        n = [ "new" ];
+        ll = [
+          "log"
+          "-r"
+          "trunk() | (trunk()..@)::"
+        ];
         pull = [
           "git"
           "fetch"
@@ -166,8 +169,6 @@
           "git"
           "push"
         ];
-        r = [ "rebase" ];
-        s = [ "squash" ];
         si = [
           "squash"
           "--interactive"
