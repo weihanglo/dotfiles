@@ -27,6 +27,7 @@
       "firefox"
       "font-jetbrains-mono"
       "kitty"
+      "parallels"
       "signal"
       "zed"
     ];
