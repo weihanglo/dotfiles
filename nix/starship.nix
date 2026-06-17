@@ -9,6 +9,7 @@ in
     enableFishIntegration = true;
     enableZshIntegration = true;
     enableInteractive = true;
+    extraPackages = [ pkgs.starship-jj ];
     settings = {
       add_newline = false;
       battery.format = "[🔋$percentage]($style) ";
@@ -20,7 +21,6 @@ in
         variable = "__PRIVATE_MODE";
         format = "$env_value ";
       };
-      git_branch.format = "[$symbol$branch]($style) ";
       nix_shell = {
           format = "[$state(\($name\))]($style) ";
           impure_msg = "*";
@@ -35,9 +35,7 @@ in
         "$username"
         "$hostname"
         "$directory"
-        "$git_branch"
-        "$git_commit"
-        "$git_state"
+        "$\{custom.jj\} "
         "$nix_shell"
         "$env_var"
         "$cmd_duration"
