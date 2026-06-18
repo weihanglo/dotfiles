@@ -105,6 +105,14 @@ local function rust_analyzer_setup()
 						RA_LOG = "info",
 					},
 				},
+				files = {
+					-- Use the server-side watcher instead of the Neovim client watcher.
+					-- The client watcher globs `**/Cargo.toml` without honoring `.gitignore`.
+					-- Cargo's testsuite generate thousands of `Cargo.toml` under `target/`
+					-- and triggered workspace reload + r-a flycheck.
+					watcher = "server",
+					excludeDirs = { "target" },
+				},
 			},
 		},
 		single_file_support = true,
