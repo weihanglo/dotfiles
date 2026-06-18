@@ -22,10 +22,10 @@ in
         format = "$env_value ";
       };
       nix_shell = {
-          format = "[$state(\($name\))]($style) ";
-          impure_msg = "*";
-          pure_msg = "";
-          unknown_msg = "?";
+        format = "[$state(\($name\))]($style) ";
+        impure_msg = "*";
+        pure_msg = "";
+        unknown_msg = "?";
       };
       time = {
         disabled = false;
