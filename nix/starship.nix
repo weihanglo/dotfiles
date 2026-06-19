@@ -13,6 +13,18 @@ in
     settings = {
       add_newline = false;
       battery.format = "[🔋$percentage]($style) ";
+      custom.jj = {
+        format = "$output";
+        command = "prompt";
+        ignore_timeout = true;
+        shell = [
+          "starship-jj"
+          "--ignore-working-copy"
+          "starship"
+        ];
+        use_stdin = false;
+        when = true;
+      };
       directory = {
         truncation_length = 2;
         fish_style_pwd_dir_length = 1;
