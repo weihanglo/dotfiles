@@ -20,7 +20,7 @@
         ll = [
           "log"
           "-r"
-          "trunk() | (trunk()..@)::"
+          "trunk() | stack()::"
         ];
         pull = [
           "git"
@@ -37,6 +37,7 @@
         ];
       };
       git = {
+        private-commits = "denylist()";
         sign-on-push = true;
       };
       merge-tools = {
@@ -58,6 +59,13 @@
         behavior = "drop";
         backend = "gpg";
         key = "D7DBF189825E82E7";
+      };
+      revset-aliases = {
+        "wip()" = "description(glob-i:'wip:*')";
+        "private()" = "description(glob-i:'private:*')";
+        "denylist()" = "wip() | private()";
+        "stack()" = "trunk()..@";
+        "ready()" = "mutable() ~ denylist() ~ empty() ~ description(exact:'')";
       };
       ui = {
         pager = "delta";
