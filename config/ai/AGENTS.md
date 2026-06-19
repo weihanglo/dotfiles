@@ -49,7 +49,7 @@ For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use t
   * For example, formatting or refactor should be standalone commit
   * Don't overly do it. It is aimed to be reviewable and revertable.
 * Stop before proceeding to next step
-  * Human will do the VCS commit
+  * Human will do the VCS push
   * You provide a succinct message suggestions explaining why
   * Messages follow Conventional Commits
 * Tests belong in their own commits, separate from the feature/fix commit. The workflow:
@@ -59,7 +59,8 @@ For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use t
 * Do not claim you have actually run tests or commands — only state expected results and reasoning.
 * If you introduce trivial errors (syntax, imports, formatting), fix them immediately — do not ask for permission.
 * Use Semantic Line Breaks when writing docs
-* Comments should explain WHY not HOW, unless the HOW is complicated
+* Code comments should explain WHY not HOW, unless the HOW is complicated
+  * Keep succinct where possible; narrative goes in the commit message
 * If asked, put design docs under the `.design-docs/` directory
 * For the full commit/PR philosophy, see: https://epage.github.io/blog/dev/pr-style/
 
