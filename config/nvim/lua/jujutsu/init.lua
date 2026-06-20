@@ -3,8 +3,10 @@
 --- This module is just the orchestrator: it wires the feature modules together
 --- on setup(). Each feature lives in its own file and owns its state, commands,
 --- and autocmds:
+---
 ---   * jujutsu.jj      — the only place that shells out to the `jj` CLI
 ---   * jujutsu.gutter  — uncommitted-change signs in the sign column
+---   * jujutsu.blame   — `jj file annotate` line/file blame
 ---
 --- To add a new jj feature, drop a module with a setup() here and call it below.
 
@@ -12,6 +14,7 @@ local M = {}
 
 function M.setup()
 	require("jujutsu.gutter").setup()
+	require("jujutsu.blame").setup()
 end
 
 return M

@@ -362,6 +362,7 @@ local function declare_plugins()
 			dir = vim.fn.stdpath("config") .. "/lua/jujutsu",
 			name = "jujutsu",
 			event = lazy_events,
+			cmd = { "JJBlame", "JJBlameLine" },
 			config = function()
 				require("jujutsu").setup()
 			end,
