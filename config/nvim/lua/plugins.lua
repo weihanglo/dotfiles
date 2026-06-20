@@ -357,6 +357,15 @@ local function declare_plugins()
 		-- vcs
 		{ "lewis6991/gitsigns.nvim", event = lazy_events, config = gitsigns_nvim_config },
 		{ "linrongbin16/gitlinker.nvim", cmd = "GitLink", config = true },
+		{
+			-- Local plugin: jujutsu (jj) integration, see lua/jujutsu/.
+			dir = vim.fn.stdpath("config") .. "/lua/jujutsu",
+			name = "jujutsu",
+			event = lazy_events,
+			config = function()
+				require("jujutsu").setup()
+			end,
+		},
 
 		-- filetype
 		{
