@@ -12,6 +12,15 @@
 
 local M = {}
 
+--- Whether a path lives inside a jj repo. Used by the gitsigns config to bow
+--- out where jujutsu owns the gutter (in a colocated repo the two would draw
+--- identical signs, since git HEAD tracks jj's `@-`).
+--- @param path string
+--- @return boolean
+function M.in_repo(path)
+	return require("jujutsu.jj").in_repo(path)
+end
+
 function M.setup()
 	require("jujutsu.gutter").setup()
 	require("jujutsu.blame").setup()

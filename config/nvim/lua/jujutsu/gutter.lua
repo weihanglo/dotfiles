@@ -21,10 +21,8 @@ local BASE_REV = "@-"
 local DEBOUNCE_MS = 200
 local NS = api.nvim_create_namespace("jujutsu_gutter")
 
--- TODO(coexistence): these glyphs are identical to the gitsigns config in
--- plugins.lua, so the two overdraw each other in a git+jj repo. Give the jj
--- gutter a distinct glyph / sign priority before re-enabling gitsigns.
--- Highlights link to GitSigns* groups, which catppuccin themes.
+-- Glyphs match the gitsigns config in plugins.lua for a consistent gutter.
+-- Highlights link to `GitSigns*` groups, which catppuccin themes.
 local SIGNS = {
 	add = { text = "▎", hl = "GitSignsAdd" },
 	change = { text = "▎", hl = "GitSignsChange" },

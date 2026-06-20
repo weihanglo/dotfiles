@@ -187,6 +187,14 @@ end
 local function gitsigns_nvim_config()
 	require("gitsigns").setup({
 		on_attach = function(bufnr)
+			-- Defer to jujutsu.nvim where it owns the gutter; in a colocated
+			-- repo gitsigns would otherwise draw identical signs over it.
+			-- Returning false aborts the attach, per:
+			-- https://github.com/lewis6991/gitsigns.nvim/blob/8d82c240f190fc33723d48c308ccc1ed8baad69d/lua/gitsigns/attach.lua#L398
+			if require("jujutsu").in_repo(vim.api.nvim_buf_get_name(bufnr)) then
+				return false
+			end
+
 			local opts = { noremap = false, silent = true, expr = true }
 			local map = function(...)
 				vim.api.nvim_buf_set_keymap(bufnr, ...)

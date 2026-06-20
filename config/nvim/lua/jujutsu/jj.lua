@@ -34,4 +34,14 @@ function M.root(dir)
 	return out and out[1] ~= "" and vim.fs.normalize(out[1]) or nil
 end
 
+--- Whether a path lives inside a jj repo, by `.jj` marker lookup.
+---
+--- Cheap and synchronous (no subprocess), unlike root() — safe to call from
+--- hot paths such as another plugin's attach callback.
+--- @param path string
+--- @return boolean
+function M.in_repo(path)
+	return vim.fs.root(path, ".jj") ~= nil
+end
+
 return M
