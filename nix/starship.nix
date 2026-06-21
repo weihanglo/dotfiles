@@ -1,6 +1,31 @@
 { lib, pkgs, ... }:
 let
   lang-format = "[$symbol$version]($style) ";
+
+  jj-config = (pkgs.formats.toml { }).generate "starship-jj.toml" {
+    module_separator = " ";
+    module = [
+      {
+        type = "Bookmarks";
+        color = "Magenta";
+        max_bookmarks = 1;
+      }
+      {
+        type = "Commit";
+        max_length = 24;
+        previous_message_symbol = "⇣";
+      }
+      {
+        type = "State";
+        separator = " ";
+      }
+      {
+        type = "Metrics";
+        hide_if_empty = true;
+        template = "[{changed} {added}{removed}]";
+      }
+    ];
+  };
 in
 {
   programs.starship = {
@@ -15,14 +40,21 @@ in
       battery.format = "[🔋$percentage]($style) ";
       custom.jj = {
         format = "$output";
+        # Note we can't append `--starship-config` to `command`.
+        # If used with `use_stdin = false`,
+        # starship hands `command` to the shell as a single argument,
+        # which starship-jj would reject as a subcommand.
         command = "prompt";
         ignore_timeout = true;
         shell = [
           "starship-jj"
           "--ignore-working-copy"
           "starship"
+          "prompt"
+          "--starship-config"
+          "${jj-config}"
         ];
-        use_stdin = false;
+        use_stdin = true;
         when = true;
       };
       directory = {
