@@ -3,24 +3,17 @@ let
   lang-format = "[$symbol$version]($style) ";
 
   jj-config = (pkgs.formats.toml { }).generate "starship-jj.toml" {
-    module_separator = " ";
     module = [
       {
         type = "Bookmarks";
-        color = "Magenta";
-        max_bookmarks = 1;
-      }
-      {
-        type = "Commit";
-        max_length = 24;
-        previous_message_symbol = "⇣";
+        surround_with_quotes = false;
       }
       {
         type = "State";
-        separator = " ";
       }
       {
         type = "Metrics";
+        color = "BrightBlack";
         hide_if_empty = true;
         template = "[{changed} {added}{removed}]";
       }
