@@ -62,6 +62,9 @@ in
         variable = "__PRIVATE_MODE";
         format = "$env_value ";
       };
+      hostname = {
+        format = "[@$hostname]($style) ";
+      };
       nix_shell = {
         format = "[$state(\($name\))]($style) ";
         impure_msg = "*";
@@ -71,6 +74,9 @@ in
       time = {
         disabled = false;
         format = "[$time](dimmed white)";
+      };
+      username = {
+        format = "[$user]($style)";
       };
       format = lib.concatStrings [
         "$username"
