@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 let
   jj-config = (pkgs.formats.toml { }).generate "starship-jj.toml" {
+    module_separator = "";
     module = [
       {
         type = "Bookmarks";
@@ -8,6 +9,11 @@ let
       }
       {
         type = "State";
+        empty = {
+          disabled = true;
+          # `text` is required by starship-jj even when disabled.
+          text = "";
+        };
       }
       {
         type = "Metrics";
