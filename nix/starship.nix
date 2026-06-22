@@ -1,7 +1,5 @@
 { lib, pkgs, ... }:
 let
-  lang-format = "[$symbol$version]($style) ";
-
   jj-config = (pkgs.formats.toml { }).generate "starship-jj.toml" {
     module = [
       {
