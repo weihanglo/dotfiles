@@ -1,8 +1,8 @@
 --- Working-copy status picker, in the spirit of `:Telescope git_status`.
 ---
 --- Surface:
----   :JJStatus  Telescope picker of files changed in the working copy (`@`),
----              <CR> opens the file.
+---   :JJ status  Telescope picker of files changed in the working copy (`@`),
+---               <CR> opens the file.
 ---
 --- Design axioms (keep these when editing):
 ---   * Read-only: status never mutates the repo (jj.run uses
@@ -138,12 +138,6 @@ function M.status()
 			end,
 		})
 		:find()
-end
-
-function M.setup()
-	vim.api.nvim_create_user_command("JJStatus", M.status, {
-		desc = "jj status: Telescope picker of working-copy changes",
-	})
 end
 
 return M

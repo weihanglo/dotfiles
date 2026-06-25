@@ -1,8 +1,8 @@
 --- Blame display backed by `jj file annotate` (no reblame).
 ---
 --- Two surfaces:
----   :JJBlameLine  toggle current-line virtual text (change-id, author, ago, summary)
----   :JJBlame      open a scroll-synced annotation column for the whole file
+---   :JJ blameline  toggle current-line virtual text (change-id, author, ago, summary)
+---   :JJ blame      open a scroll-synced annotation column for the whole file
 ---
 --- Design axioms (keep these when editing):
 ---   * Read-only: annotate never mutates the repo (jj.run uses
@@ -148,11 +148,8 @@ function M.blame_file()
 end
 
 function M.setup()
-	api.nvim_create_user_command("JJBlame", M.blame_file, { desc = "jj annotate: full-file blame" })
-	api.nvim_create_user_command("JJBlameLine", M.toggle_current_line, {
-		desc = "jj annotate: toggle current-line blame",
-	})
-
+	-- Commands are registered centrally by the orchestrator's `:JJ` dispatcher;
+	-- here we only own the autocmd that refreshes current-line blame.
 	api.nvim_create_autocmd("CursorMoved", {
 		group = api.nvim_create_augroup("jujutsu_blame", { clear = true }),
 		callback = function()

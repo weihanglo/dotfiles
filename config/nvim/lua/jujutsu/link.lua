@@ -2,8 +2,8 @@
 --- gitlinker.nvim but driven by jj.
 ---
 --- Surface:
----   :JJLink  copy a GitHub permalink to the `+` register and open it.
----            Works on the cursor line (normal) or the selection (visual).
+---   :JJ link  copy a GitHub permalink to the `+` register and open it.
+---             Works on the cursor line (normal) or the selection (visual).
 ---
 --- The rev is the closest *pushed* ancestor — `latest(::@ & remote_bookmarks())`
 --- — so the link points at a commit_id that actually exists on the remote and
@@ -121,18 +121,6 @@ function M.link(lstart, lend)
 	vim.fn.setreg("+", url)
 	vim.notify(url, vim.log.levels.INFO)
 	pcall(vim.ui.open, url)
-end
-
-function M.setup()
-	vim.api.nvim_create_user_command("JJLink", function(args)
-		-- `:'<,'>JJLink` exits visual mode before running, so the selection is
-		-- gone by now; read the range the command captured instead. line1/line2
-		-- default to the cursor line when no range is given.
-		M.link(args.line1, args.line2)
-	end, {
-		range = true,
-		desc = "jj: copy/open a GitHub permalink to the current line(s)",
-	})
 end
 
 return M
