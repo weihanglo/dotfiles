@@ -9,6 +9,7 @@
 ---   * jujutsu.blame   — `jj file annotate` line/file blame
 ---   * jujutsu.status  — working-copy change picker
 ---   * jujutsu.link    — GitHub permalink for the current line(s)
+---   * jujutsu.ui      — launch the jjui terminal UI
 ---
 --- To add a new `:JJ` subcommand, add an entry to `subcommands` below; to add a
 --- feature with autocmds/signs, give it a setup() and call it in M.setup().
@@ -34,6 +35,9 @@ local subcommands = {
 		-- gone; read the range the command captured. line1/line2 default to the
 		-- cursor line when no range is given.
 		require("jujutsu.link").link(opts.line1, opts.line2)
+	end,
+	ui = function()
+		require("jujutsu.ui").open()
 	end,
 }
 
@@ -72,12 +76,13 @@ end
 function M.setup()
 	require("jujutsu.gutter").setup()
 	require("jujutsu.blame").setup()
+	require("jujutsu.ui").setup()
 
 	vim.api.nvim_create_user_command("JJ", dispatch, {
 		nargs = "*",
 		range = true,
 		complete = complete,
-		desc = "jujutsu: <status|blame|blameline|link>",
+		desc = "jujutsu: <status|blame|blameline|link|ui>",
 	})
 end
 
