@@ -44,4 +44,28 @@ function M.in_repo(path)
 	return vim.fs.root(path, ".jj") ~= nil
 end
 
+--- Notify with the shared `jujutsu:` prefix. Returns nil so a guard can both
+--- report and bail in one line: `return jj.warn("not in a jj repo")`.
+--- @param msg string
+--- @return nil
+function M.warn(msg)
+	vim.notify("jujutsu: " .. msg, vim.log.levels.WARN)
+end
+
+--- Like warn(), but at INFO level. Also returns nil for the bail-in-one-line
+--- pattern.
+--- @param msg string
+--- @return nil
+function M.info(msg)
+	vim.notify("jujutsu: " .. msg, vim.log.levels.INFO)
+end
+
+--- Like warn(), but at ERROR level. Also returns nil for the bail-in-one-line
+--- pattern.
+--- @param msg string
+--- @return nil
+function M.error(msg)
+	vim.notify("jujutsu: " .. msg, vim.log.levels.ERROR)
+end
+
 return M

@@ -54,18 +54,15 @@ function M.status()
 	local dir = path ~= "" and vim.fs.dirname(path) or vim.fn.getcwd()
 	local root = jj.root(dir)
 	if not root then
-		vim.notify("jujutsu: not in a jj repo", vim.log.levels.WARN)
-		return
+		return jj.warn("not in a jj repo")
 	end
 
 	local entries = changes(root)
 	if not entries then
-		vim.notify("jujutsu: status failed", vim.log.levels.ERROR)
-		return
+		return jj.error("status failed")
 	end
 	if #entries == 0 then
-		vim.notify("jujutsu: working copy has no changes", vim.log.levels.INFO)
-		return
+		return jj.info("working copy has no changes")
 	end
 
 	local pickers = require("telescope.pickers")

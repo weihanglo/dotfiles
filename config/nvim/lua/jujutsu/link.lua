@@ -52,15 +52,13 @@ end
 local function build_url(lstart, lend)
 	local path = vim.api.nvim_buf_get_name(0)
 	if path == "" then
-		vim.notify("jujutsu: buffer has no file", vim.log.levels.WARN)
-		return nil
+		return jj.warn("buffer has no file")
 	end
 	local dir = vim.fs.dirname(path)
 
 	local root = jj.root(dir)
 	if not root then
-		vim.notify("jujutsu: not in a jj repo", vim.log.levels.WARN)
-		return nil
+		return jj.warn("not in a jj repo")
 	end
 
 	-- First configured remote, preferring one literally named "origin".
@@ -73,20 +71,17 @@ local function build_url(lstart, lend)
 		end
 	end
 	if not remote_url then
-		vim.notify("jujutsu: no git remote configured", vim.log.levels.WARN)
-		return nil
+		return jj.warn("no git remote configured")
 	end
 
 	local parsed = parse_remote(remote_url)
 	if not parsed then
-		vim.notify("jujutsu: cannot parse remote url: " .. remote_url, vim.log.levels.ERROR)
-		return nil
+		return jj.error("cannot parse remote url: " .. remote_url)
 	end
 
 	local rev = jj.run({ "log", "--no-graph", "-r", PUSHED_REV, "-T", "commit_id" }, root)
 	if not rev or not rev[1] or rev[1] == "" then
-		vim.notify("jujutsu: no pushed ancestor to link against", vim.log.levels.WARN)
-		return nil
+		return jj.warn("no pushed ancestor to link against")
 	end
 	local commit = rev[1]
 
@@ -96,7 +91,7 @@ local function build_url(lstart, lend)
 	-- valid, it just may not match what's on screen.
 	local diff = jj.run({ "diff", "--from", commit, "--name-only", relpath }, root)
 	if diff and #diff > 0 then
-		vim.notify("jujutsu: file differs from linked rev " .. commit:sub(1, 8), vim.log.levels.WARN)
+		jj.warn("file differs from linked rev " .. commit:sub(1, 8))
 	end
 
 	local anchor = string.format("#L%d", lstart)

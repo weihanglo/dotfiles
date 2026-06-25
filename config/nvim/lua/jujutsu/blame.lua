@@ -39,7 +39,7 @@ local function annotate(bufnr)
 	local dir = vim.fs.dirname(path)
 	local out = jj.run({ "file", "annotate", "-T", TEMPLATE, path }, dir)
 	if not out then
-		vim.notify("jujutsu: blame failed for " .. path, vim.log.levels.ERROR)
+		jj.error("blame failed for " .. path)
 		return nil
 	end
 
