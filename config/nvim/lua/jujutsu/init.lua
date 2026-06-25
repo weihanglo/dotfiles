@@ -8,6 +8,7 @@
 ---   * jujutsu.gutter  — uncommitted-change signs in the sign column
 ---   * jujutsu.blame   — `jj file annotate` line/file blame
 ---   * jujutsu.status  — `:JJStatus` working-copy change picker
+---   * jujutsu.link    — `:JJLink` GitHub permalink for the current line(s)
 ---
 --- To add a new jj feature, drop a module with a setup() here and call it below.
 
@@ -26,6 +27,7 @@ function M.setup()
 	require("jujutsu.gutter").setup()
 	require("jujutsu.blame").setup()
 	require("jujutsu.status").setup()
+	require("jujutsu.link").setup()
 end
 
 return M
