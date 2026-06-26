@@ -19,66 +19,6 @@ local function zoomwintab_vim_setup()
 	vim.g.zoomwintab_remap = 0
 end
 
---- nvim-treesitter/nvim-treesitter
-local function nvim_treesitter_config()
-	require("nvim-treesitter").setup({
-		ensure_installed = {
-			"bash",
-			"c",
-			"cmake",
-			"cpp",
-			"csv",
-			"diff",
-			"dockerfile",
-			"fish",
-			"git_config",
-			"git_rebase",
-			"gitattributes",
-			"gitcommit",
-			"gitignore",
-			"html",
-			"json",
-			"json5",
-			"llvm",
-			"lua",
-			"luadoc",
-			"make",
-			"markdown",
-			"markdown_inline",
-			"mermaid",
-			"nix",
-			"ocaml",
-			"python",
-			"ron",
-			"rst",
-			"ruby",
-			"rust",
-			"ssh_config",
-			"starlark",
-			"strace",
-			"tera",
-			"tmux",
-			"toml",
-			"typescript",
-			"vim",
-			"vimdoc",
-			"xml",
-			"xresources",
-			"yaml",
-			"zig",
-		},
-	})
-end
-
---- nvim-treesitter/nvim-treesitter-context
-local function nvim_treesitter_context_config()
-	require("treesitter-context").setup({
-		max_lines = 7,
-		multiline_threshold = 1,
-		mode = "topline",
-	})
-end
-
 --- neovim/nvim-lspconfig
 local function nvim_lspconfig_config()
 	require("lsp").setup()
@@ -375,19 +315,6 @@ local function declare_plugins()
 				require("jujutsu").setup()
 			end,
 		},
-
-		-- filetype
-		{
-			"nvim-treesitter/nvim-treesitter",
-			event = lazy_events,
-			dependencies = {
-				"nvim-treesitter/nvim-treesitter-context",
-			},
-			branch = "main",
-			build = ":TSUpdate",
-			config = nvim_treesitter_config,
-		},
-		{ "nvim-treesitter/nvim-treesitter-context", lazy = true, config = nvim_treesitter_context_config },
 
 		-- search
 		{ "google/vim-searchindex", event = "CmdLineEnter" }, -- show search index beyond [>99/>99]

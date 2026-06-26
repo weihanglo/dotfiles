@@ -79,9 +79,7 @@ function M.status()
 		items = { { width = 1 }, { remaining = true } },
 	})
 
-	-- Preview the per-file `jj diff`, highlighted as `diff` — mirrors what
-	-- `:Telescope git_status` does, and sidesteps treesitter highlighting the
-	-- file's own language (which can error on a stale grammar query).
+	-- Preview the per-file `jj diff`, highlighted as `diff`.
 	local previewer = previewers.new_buffer_previewer({
 		title = "jj diff",
 		get_buffer_by_name = function(_, entry)
