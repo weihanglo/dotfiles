@@ -58,6 +58,19 @@ augroup END
 
 " Built-in treesitter highlighting. Parsers/queries are provisioned by Nix
 " (see nix/neovim.nix); start() is a no-op-with-pcall where no parser exists.
+"
+" Some grammar queries use the `is?`/`is-not? local` predicates, which only
+" nvim-treesitter registers — without it an unknown predicate aborts the whole
+" highlight query. We don't run nvim-treesitter, so define them here. Lacking
+" its locals analysis we assume builtins are never shadowed: `is-not? local`
+" is always true, `is? local` always false. Remove once upstream drops them:
+" https://github.com/nix-community/tree-sitter-nix/blob/eabf96807ea4ab6d6c7f09b671a88cd483542840/queries/highlights.scm#L18-L22
+" https://github.com/tree-sitter/tree-sitter-ruby/blob/v0.23.1/queries/highlights.scm#L4
+lua << EOF
+local q = vim.treesitter.query
+q.add_predicate("is?", function() return false end, { force = true })
+q.add_predicate("is-not?", function() return true end, { force = true })
+EOF
 augroup TreesitterHighlight
     autocmd!
     autocmd FileType * lua pcall(vim.treesitter.start)
