@@ -10,6 +10,7 @@
     ./starship.nix
     ./git.nix
     ./jj.nix
+    ./neovim.nix
   ];
 
   home.username = "whlo";
@@ -140,13 +141,6 @@
   programs.gpg.enable = true;
 
   programs.jq.enable = true;
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-    extraConfig = builtins.readFile ../config/nvim/init.vim;
-  };
 
   programs.kitty = {
     enable = true;

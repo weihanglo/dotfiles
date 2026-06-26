@@ -56,6 +56,13 @@ augroup FiletypeDetectPlus
     autocmd InsertEnter,WinLeave * setlocal nocursorline
 augroup END
 
+" Built-in treesitter highlighting. Parsers/queries are provisioned by Nix
+" (see nix/neovim.nix); start() is a no-op-with-pcall where no parser exists.
+augroup TreesitterHighlight
+    autocmd!
+    autocmd FileType * lua pcall(vim.treesitter.start)
+augroup END
+
 augroup ModeChanges
     autocmd!
     autocmd TermOpen * setlocal signcolumn=no nonu nornu|startinsert
