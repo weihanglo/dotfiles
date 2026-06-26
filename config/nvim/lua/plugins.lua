@@ -28,7 +28,6 @@ end
 local function telescope_nvim_setup()
 	local opts = { noremap = true, silent = true }
 	vim.cmd("command! GStatus Telescope git_status")
-	vim.cmd("command! GBcommits Telescope git_bcommits")
 
 	function live_grep_in_dir()
 		local current_file_dir = vim.fn.expand("%:p:h")
@@ -153,11 +152,6 @@ local function gitsigns_nvim_config()
 	})
 end
 
---- linrongbin16/gitlinker.nvim
-local function gitlinker_nvim_config()
-	require("gitlinker").setup()
-end
-
 --- nvim-tree/nvim-tree.lua
 local function nvim_tree_setup()
 	local opts = { noremap = true, silent = true }
@@ -271,11 +265,6 @@ local function fidget_nvim_config()
 	})
 end
 
-local function copilot_setup()
-	vim.cmd([[imap <silent><script><expr> <c-space> copilot#Accept("")]])
-	vim.g.copilot_no_tab_map = true
-end
-
 --- Declare all plugins
 local function declare_plugins()
 	local lazy_events = { "BufRead", "CursorHold", "CursorMoved", "BufNewFile", "InsertEnter" }
@@ -297,14 +286,11 @@ local function declare_plugins()
 				"hrsh7th/cmp-cmdline",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-nvim-lua",
 			},
 		},
-		{ "github/copilot.vim", lazy = true },
 
 		-- vcs
 		{ "lewis6991/gitsigns.nvim", event = lazy_events, config = gitsigns_nvim_config },
-		{ "linrongbin16/gitlinker.nvim", cmd = "GitLink", config = true },
 		{
 			-- Local plugin: jujutsu (jj) integration, see lua/jujutsu/.
 			dir = vim.fn.stdpath("config") .. "/lua/jujutsu",
@@ -347,7 +333,6 @@ local function declare_plugins()
 				"proto",
 			},
 			dependencies = {
-				"nvim-lua/lsp_extensions.nvim",
 				"kosayoda/nvim-lightbulb",
 				"j-hui/fidget.nvim",
 			},
@@ -404,7 +389,6 @@ function M.load_all()
 	nvim_tree_setup()
 	telescope_nvim_setup()
 	toggleterm_nvim_setup()
-	copilot_setup()
 	-- Enable vim-visual-multi mouse mappings
 	vim.g.VM_mouse_mappings = 1
 end
