@@ -387,8 +387,7 @@ function M.load_all()
 		spec = declare_plugins(),
 		-- automatically check for plugin updates
 		checker = {
-			enabled = true,
-			frequency = 8640000, -- every 10 days
+			enabled = false,
 		},
 		pkg = {
 			sources = {
