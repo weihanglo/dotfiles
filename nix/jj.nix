@@ -38,6 +38,7 @@
       };
       git = {
         private-commits = "denylist()";
+        push = "weihanglo";
         sign-on-push = true;
       };
       merge-tools = {
