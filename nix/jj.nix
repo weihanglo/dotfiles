@@ -35,6 +35,18 @@
           "squash"
           "--interactive"
         ];
+        tidy = [
+          "util"
+          "exec"
+          "--"
+          "bash"
+          "-c"
+          ''
+            jj bookmark list -r 'merged()' -T 'if(remote, "", name ++ "\n")' \
+              | xargs jj bookmark delete
+          ''
+          ""
+        ];
       };
       git = {
         private-commits = "denylist()";
@@ -70,6 +82,7 @@
         "private()" = "description(glob-i:'private:*')";
         "denylist()" = "wip() | private()";
         "stack()" = "trunk()..@";
+        "merged()" = "::trunk() ~ trunk()";
         "ready()" = "mutable() ~ denylist() ~ empty() ~ description(exact:'')";
       };
       ui = {
