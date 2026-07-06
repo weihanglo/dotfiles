@@ -58,7 +58,7 @@
       signing = {
         behavior = "drop";
         backend = "gpg";
-        key = "D7DBF189825E82E7";
+        key = "CE332572CAB157E9";
       };
       revset-aliases = {
         "wip()" = "description(glob-i:'wip:*')";
