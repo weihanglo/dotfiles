@@ -60,7 +60,11 @@
         backend = "gpg";
         key = "CE332572CAB157E9";
       };
+      revsets = {
+        bookmark-advance-to = "closest_pushable(@)";
+      };
       revset-aliases = {
+        "closest_pushable(to)" = "heads(::to & ready())";
         "wip()" = "description(glob-i:'wip:*')";
         "private()" = "description(glob-i:'private:*')";
         "denylist()" = "wip() | private()";
