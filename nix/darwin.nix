@@ -65,6 +65,15 @@
       "com.apple.trackpad.forceClick" = false;
       "com.apple.trackpad.scaling" = 3.0;
     };
+    finder = {
+      AppleShowAllExtensions = true;
+      FXEnableExtensionChangeWarning = false;
+      FXPreferredViewStyle = "Nlsv";
+      ShowPathbar = true;
+      ShowStatusBar = true;
+      _FXShowPosixPathInTitle = true;
+      _FXSortFoldersFirst = true;
+    };
     dock = {
       autohide = true;
       largesize = 92;
