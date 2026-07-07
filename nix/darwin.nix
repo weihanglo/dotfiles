@@ -37,30 +37,34 @@
   ids.gids.nixbld = 30000;
 
   system.primaryUser = "whlo";
+  # Keys without a typed `system.defaults.NSGlobalDomain` option in nix-darwin
+  # must be written through this raw escape hatch.
   system.defaults.CustomUserPreferences = {
     NSGlobalDomain = {
       AppleAccentColor = 6;
       AppleAquaColorVariant = 1;
       AppleHighlightColor = "1.000000 0.749020 0.823529 Pink";
-      AppleICUForce24HourTime = true;
       AppleLanguages = [
         "en-US"
         "zh-Hant-US"
       ];
       AppleLocale = "en_US";
-      ApplePressAndHoldEnabled = 0;
-      InitialKeyRepeat = 15;
-      KeyRepeat = 2;
-      NSAutomaticSpellingCorrectionEnabled = false;
-      "com.apple.springing.delay" = "0.5";
-      "com.apple.springing.enabled" = 1;
-      "com.apple.trackpad.forceClick" = 0;
-      "com.apple.trackpad.scaling" = 3;
       "com.apple.trackpad.scrolling" = "0.4412";
     };
   };
 
   system.defaults = {
+    NSGlobalDomain = {
+      AppleICUForce24HourTime = true;
+      ApplePressAndHoldEnabled = false;
+      InitialKeyRepeat = 15;
+      KeyRepeat = 2;
+      NSAutomaticSpellingCorrectionEnabled = false;
+      "com.apple.springing.delay" = 0.5;
+      "com.apple.springing.enabled" = true;
+      "com.apple.trackpad.forceClick" = false;
+      "com.apple.trackpad.scaling" = 3.0;
+    };
     dock = {
       autohide = true;
       largesize = 92;
