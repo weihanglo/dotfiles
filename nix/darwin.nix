@@ -51,6 +51,12 @@
       AppleLocale = "en_US";
       "com.apple.trackpad.scrolling" = "0.4412";
     };
+    # Free the three-finger swipe so it can drive TrackpadThreeFingerDrag.
+    "com.apple.AppleMultitouchTrackpad" = {
+      TrackpadThreeFingerHorizSwipeGesture = 0;
+      TrackpadThreeFingerVertSwipeGesture = 0;
+      TrackpadThreeFingerTapGesture = 2;
+    };
   };
 
   system.defaults = {
@@ -59,6 +65,8 @@
       ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
+      NSAutomaticCapitalizationEnabled = false;
+      NSAutomaticPeriodSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       "com.apple.springing.delay" = 0.5;
       "com.apple.springing.enabled" = true;
@@ -73,6 +81,11 @@
       ShowStatusBar = true;
       _FXShowPosixPathInTitle = true;
       _FXSortFoldersFirst = true;
+    };
+    menuExtraClock = {
+      ShowAMPM = true;
+      ShowDate = 0;
+      ShowDayOfWeek = true;
     };
     dock = {
       autohide = true;
