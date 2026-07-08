@@ -23,13 +23,10 @@
     taps = [ "st0012/cctop" ];
     casks = [
       "cctop"
-      "jetbrains-toolbox"
-      "firefox"
       "font-jetbrains-mono"
       "kitty"
       "parallels"
       "signal"
-      "zed"
     ];
     onActivation.cleanup = "zap";
   };
