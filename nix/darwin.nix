@@ -96,6 +96,9 @@
       Dragging = true;
       TrackpadThreeFingerDrag = true;
     };
+    universalaccess = {
+      mouseDriverCursorSize = 4.0;
+    };
   };
 
   system.keyboard = {
