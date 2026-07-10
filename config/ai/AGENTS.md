@@ -70,7 +70,8 @@ For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use t
 
 When running commands on behalf of me, do (in this order)
 
-* Run under nix shell if working on Cargo project itself: `nix develop github:weihanglo/dotfiles#cargo --quiet --command`
+* `nix develop github:weihanglo/dotfiles#cargo --quiet --command <cmd>` —
+  only for building/testing rust-lang/cargo itself; everything else runs directly
 * If missing tool, try nixpkgs `nix shell nixpkgs#<pkg>` or `nix develop`
 * Wrap in `zsh -l -c <cmd>` if on remote machines
 * When writing temp tests, put files under `/tmp/`
