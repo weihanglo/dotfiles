@@ -5,7 +5,7 @@
 --- modules, each of which owns its own logic, state, and autocmds:
 ---
 ---   * jujutsu.jj      — the only place that shells out to the `jj` CLI
----   * jujutsu.gutter  — uncommitted-change signs in the sign column
+---   * jujutsu.gutter  — uncommitted-change signs and ]c/[c hunk motions
 ---   * jujutsu.blame   — `jj file annotate` line/file blame
 ---   * jujutsu.status  — working-copy change picker
 ---   * jujutsu.link    — GitHub permalink for the current line(s)

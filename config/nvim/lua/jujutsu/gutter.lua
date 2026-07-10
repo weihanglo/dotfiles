@@ -1,4 +1,6 @@
---- Gutter signs for uncommitted jj changes, in the spirit of gitsigns.nvim.
+--- Gutter signs and hunk motions for uncommitted jj changes, in the spirit
+--- of gitsigns.nvim. Attached buffers get `]c`/`[c` mapped to next/prev hunk,
+--- matching the gitsigns mappings so muscle memory carries over.
 ---
 --- Signs reflect the diff of the *live buffer* against the working-copy parent
 --- (`@-`). Diffing the buffer rather than `jj diff` output means unsaved edits
@@ -67,6 +69,18 @@ local function hunk_signs(ca, sb, cb, place)
 	end
 end
 
+--- Diff the live buffer against the BASE_REV snapshot.
+--- @param bufnr integer
+--- @return integer[][] hunks vim.diff indices quadruples, ascending by line
+local function compute_hunks(bufnr)
+	local st = state[bufnr]
+	local base = table.concat(st.base_lines, "\n")
+	local buf = table.concat(api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
+	local hunks = vim.diff(base .. "\n", buf .. "\n", { result_type = "indices" })
+	--- @cast hunks integer[][]
+	return hunks
+end
+
 --- Recompute and render signs for a buffer. Idempotent.
 --- @param bufnr integer
 local function render(bufnr)
@@ -77,11 +91,7 @@ local function render(bufnr)
 
 	api.nvim_buf_clear_namespace(bufnr, NS, 0, -1)
 
-	local base = table.concat(st.base_lines, "\n")
-	local buf = table.concat(api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
-	local hunks = vim.diff(base .. "\n", buf .. "\n", { result_type = "indices" })
-	--- @cast hunks integer[][]
-
+	local hunks = compute_hunks(bufnr)
 	local line_count = api.nvim_buf_line_count(bufnr)
 	local place = function(lnum, kind)
 		if lnum < 1 or lnum > line_count then
@@ -98,6 +108,85 @@ local function render(bufnr)
 		-- h = { start_base, count_base, start_buf, count_buf }
 		hunk_signs(h[2], h[3], h[4], place)
 	end
+end
+
+--- Buffer-line span occupied by a hunk. A pure deletion has no buffer lines;
+--- it collapses to the anchor line its sign is drawn on.
+--- @param h integer[] vim.diff indices quadruple
+--- @return integer start, integer fin
+local function hunk_span(h)
+	local sb, cb = h[3], h[4]
+	if cb == 0 then
+		local anchor = math.max(sb, 1)
+		return anchor, anchor
+	end
+	return sb, sb + cb - 1
+end
+
+--- Index of the hunk to land on from lnum, or nil when out of hunks and
+--- 'wrapscan' is off. Same wrap semantics as gitsigns and `n`/`N`.
+--- @param hunks integer[][]
+--- @param lnum integer
+--- @param direction "next"|"prev"
+--- @return integer?
+local function find_nearest(hunks, lnum, direction)
+	if direction == "next" then
+		for i, h in ipairs(hunks) do
+			if hunk_span(h) > lnum then
+				return i
+			end
+		end
+	else
+		for i = #hunks, 1, -1 do
+			local _, fin = hunk_span(hunks[i])
+			if fin < lnum then
+				return i
+			end
+		end
+	end
+	if vim.o.wrapscan then
+		return direction == "next" and 1 or #hunks
+	end
+end
+
+--- Transient statusline message; unlike jj.warn it leaves no notify history,
+--- fitting a motion that may fire many times in a row.
+--- @param msg string
+--- @param hl string
+local function echo(msg, hl)
+	api.nvim_echo({ { msg, hl } }, false, {})
+end
+
+--- Jump the cursor to the start of the next/previous hunk, v:count1 times,
+--- wrapping per 'wrapscan'. The builtin `[c`/`]c` land on hunk starts in both
+--- directions, so we do too (gitsigns lands on the end when going back).
+--- @param direction "next"|"prev"
+function M.nav_hunk(direction)
+	local bufnr = api.nvim_get_current_buf()
+	if not state[bufnr] then
+		return
+	end
+
+	-- Recompute rather than reuse render()'s result: renders are debounced,
+	-- so anything cached may lag the buffer by up to DEBOUNCE_MS of edits.
+	local hunks = compute_hunks(bufnr)
+	if #hunks == 0 then
+		return echo("No hunks", "WarningMsg")
+	end
+
+	local lnum = api.nvim_win_get_cursor(0)[1]
+	local index
+	for _ = 1, vim.v.count1 do
+		index = find_nearest(hunks, lnum, direction)
+		if not index then
+			return echo("No more hunks", "WarningMsg")
+		end
+		lnum = hunk_span(hunks[index])
+	end
+
+	vim.cmd("normal! m'") -- record the jump for <C-o>
+	api.nvim_win_set_cursor(0, { lnum, 0 })
+	echo(("Hunk %d of %d"):format(index, #hunks), "None")
 end
 
 --- Debounced render driven by buffer edits.
@@ -141,6 +230,19 @@ function M.attach(bufnr)
 	load_base(bufnr)
 	render(bufnr)
 
+	-- Hunk motions, mirroring the gitsigns mappings in plugins.lua (which bow
+	-- out in jj repos). In a diff window the builtin motion is the right thing,
+	-- per the gitsigns README recipe.
+	for lhs, dir in pairs({ ["]c"] = "next", ["[c"] = "prev" }) do
+		vim.keymap.set("n", lhs, function()
+			if vim.wo.diff then
+				vim.cmd.normal({ vim.v.count1 .. lhs, bang = true })
+			else
+				M.nav_hunk(dir)
+			end
+		end, { buffer = bufnr, desc = "jujutsu: " .. dir .. " hunk" })
+	end
+
 	local group = api.nvim_create_augroup("jujutsu_gutter_buf_" .. bufnr, { clear = true })
 	api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		group = group,
@@ -180,6 +282,9 @@ function M.detach(bufnr)
 	end
 	if api.nvim_buf_is_valid(bufnr) then
 		api.nvim_buf_clear_namespace(bufnr, NS, 0, -1)
+		for _, lhs in ipairs({ "]c", "[c" }) do
+			pcall(vim.keymap.del, "n", lhs, { buffer = bufnr })
+		end
 	end
 	pcall(api.nvim_del_augroup_by_name, "jujutsu_gutter_buf_" .. bufnr)
 	state[bufnr] = nil
