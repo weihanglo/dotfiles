@@ -138,6 +138,29 @@
     };
   };
 
+  programs.ghostty = {
+    enable = true;
+    # App installed via Homebrew cask: nixpkgs `ghostty` is Linux-only,
+    # and the cask self-updates unlike `ghostty-bin`.
+    package = null;
+    settings = {
+      theme = "Catppuccin Latte";
+      font-family = "JetBrains Mono";
+      font-style = "ExtraLight";
+      font-style-bold = "Bold";
+      font-style-italic = "Light Italic";
+      font-style-bold-italic = "Bold Italic";
+      font-size = 20;
+      background-opacity = 0.7;
+      background-blur = true;
+      macos-titlebar-style = "hidden";
+      macos-option-as-alt = "left";
+      mouse-hide-while-typing = true;
+      quit-after-last-window-closed = true;
+      window-save-state = "always";
+    };
+  };
+
   programs.gpg.enable = true;
 
   programs.jq.enable = true;
