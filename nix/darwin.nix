@@ -90,6 +90,7 @@
       magnification = true;
       show-recents = false;
       orientation = "right";
+      wvous-br-corner = 1; # disable Quick Note hot corner
     };
     trackpad = {
       Clicking = true;
