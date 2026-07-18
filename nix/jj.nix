@@ -42,8 +42,10 @@
           "bash"
           "-c"
           ''
-            jj bookmark list -r 'merged()' -T 'if(remote, "", name ++ "\n")' \
-              | xargs jj bookmark delete
+            {
+              jj bookmark list -r 'merged()' -T 'if(remote, "", name ++ "\n")'
+              jj bookmark list -T 'if(remote, "", if(present, "", name ++ "\n"))'
+            } | sort -u | xargs jj bookmark forget --include-remotes
           ''
           ""
         ];
