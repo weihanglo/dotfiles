@@ -46,6 +46,7 @@
               jj bookmark list -r 'merged()' -T 'if(remote, "", name ++ "\n")'
               jj bookmark list -T 'if(remote, "", if(present, "", name ++ "\n"))'
             } | sort -u | xargs jj bookmark forget --include-remotes
+            jj abandon -r 'stale()'
           ''
           ""
         ];
@@ -86,6 +87,7 @@
         "stack()" = "trunk()..@";
         "merged()" = "::trunk() ~ trunk()";
         "undescribed()" = "description(exact:'')";
+        "stale()" = "heads(mutable()) & empty() & undescribed() ~ merges() ~ bookmarks() ~ working_copies()";
         "ready()" = "mutable() ~ denylist() ~ empty() ~ undescribed()";
       };
       ui = {
