@@ -83,7 +83,8 @@
         "denylist()" = "wip() | private()";
         "stack()" = "trunk()..@";
         "merged()" = "::trunk() ~ trunk()";
-        "ready()" = "mutable() ~ denylist() ~ empty() ~ description(exact:'')";
+        "undescribed()" = "description(exact:'')";
+        "ready()" = "mutable() ~ denylist() ~ empty() ~ undescribed()";
       };
       ui = {
         pager = "delta";
