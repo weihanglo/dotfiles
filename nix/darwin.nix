@@ -85,6 +85,7 @@
       ShowDate = 0;
       ShowDayOfWeek = true;
     };
+    hitoolbox.AppleFnUsageType = "Do Nothing";
     dock = {
       autohide = true;
       largesize = 92;
