@@ -49,6 +49,25 @@
       AppleLocale = "en_US";
       "com.apple.trackpad.scrolling" = "0.4412";
     };
+    "com.apple.symbolichotkeys".AppleSymbolicHotKeys = {
+      # (toggole last two used input sources)
+      "60" = {
+        enabled = false;
+      };
+      # (cycle all input sources)
+      "61" = {
+        enabled = true;
+        value = {
+          # Option+Space
+          parameters = [
+            32 # ASCII code for space
+            49 # virtual keycode for space
+            524288 # modifier mask: Option
+          ];
+          type = "standard";
+        };
+      };
+    };
     # Free the three-finger swipe so it can drive TrackpadThreeFingerDrag.
     "com.apple.AppleMultitouchTrackpad" = {
       TrackpadThreeFingerHorizSwipeGesture = 0;
