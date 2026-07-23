@@ -20,29 +20,6 @@
 
 ---
 
-## Plan / Code workflow
-
-For moderate/complex tasks (non-trivial logic, cross-module, concurrency), use two modes: **Plan** (analyze, align) then **Code** (implement). For trivial tasks, skip this and answer directly.
-
-### Plan mode
-
-* Read and understand relevant code **before** proposing any changes.
-* Give 1-3 options with tradeoffs, impact scope, risks, and verification approach.
-* Do not scope-creep — stay within the requested task.
-
-### Code mode
-
-* Prefer minimal, reviewable patches over full-file dumps.
-* State what you will change and how to verify before writing code.
-* If implementation hits a fundamental problem, switch back to Plan and explain why.
-
-### Switching rules
-
-* When I say "implement" / "go ahead" / "write it": enter Code mode immediately. Do not re-ask for confirmation.
-* Once a plan is chosen, proceed to Code in the next reply — do not keep elaborating the plan.
-
----
-
 ## Design principles
 
 * Prefer logical atomic design steps that can be an atomic commit
