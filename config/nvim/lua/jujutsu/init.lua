@@ -41,13 +41,13 @@ local subcommands = {
 	end,
 }
 
---- Run `:JJ <subcommand>`, reporting an unknown or missing name.
+--- Run `:JJ <subcommand>`, defaulting to `ui` when no name is given.
 --- @param opts table the nvim_create_user_command argument table
 local function dispatch(opts)
-	local name = opts.fargs[1]
-	local handler = name and subcommands[name]
+	local name = opts.fargs[1] or "ui"
+	local handler = subcommands[name]
 	if not handler then
-		require("jujutsu.jj").error("unknown subcommand: " .. (name or "(none given)"))
+		require("jujutsu.jj").error("unknown subcommand: " .. name)
 		return
 	end
 	handler(opts)
@@ -82,7 +82,7 @@ function M.setup()
 		nargs = "*",
 		range = true,
 		complete = complete,
-		desc = "jujutsu: <status|blame|blameline|link|ui>",
+		desc = "jujutsu: <status|blame|blameline|link|ui> (default: ui)",
 	})
 end
 
