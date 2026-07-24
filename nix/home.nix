@@ -204,13 +204,6 @@
     ];
   };
 
-  programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableZshIntegration = true;
-  };
-
   programs.zellij = {
     enable = true;
     settings = {
