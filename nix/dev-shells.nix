@@ -48,5 +48,12 @@ in
         ]
         ++ cargo.nativeBuildInputs;
       buildInputs = cargo.buildInputs;
+      # Even without a nix compiler, the shell exports the nix apple-sdk via
+      # SDKROOT/DEVELOPER_DIR. Apple clang honors SDKROOT, and the nix SDK
+      # lacks libiconv.tbd (nixpkgs ships libiconv separately), breaking
+      # `-liconv` links. Unset so Apple clang falls back to the system SDK.
+      shellHook = lib.optionalString pkgs.stdenv.isDarwin ''
+        unset SDKROOT DEVELOPER_DIR
+      '';
     };
 }
