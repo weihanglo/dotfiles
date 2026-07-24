@@ -2,7 +2,12 @@
   ...
 }:
 {
-  programs.jjui.enable = true;
+  programs.jjui = {
+    enable = true;
+    settings = {
+      preview.width_percentage = 75.0;
+    };
+  };
 
   programs.jujutsu = {
     enable = true;
