@@ -95,6 +95,9 @@ nnoremap \\ <cmd>nohl<cr>
 " Buffer deletion
 nnoremap <silent> <localleader>d <cmd>bp<bar>bd #<cr>
 command! -narg=* Git tabedit|execute 'terminal gitui ' . <q-args>
+cnoreabbrev jj JJ
+cnoreabbrev Jj JJ
+cnoreabbrev jJ JJ
 " Check highlight group under current cursor
 command! CheckHighlight echo synIDattr(synID(line("."), col("."), 1), "name")
 " So you can run `:RustFmt` without worrying let chain
