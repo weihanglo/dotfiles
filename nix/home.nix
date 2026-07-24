@@ -186,6 +186,10 @@
     };
   };
 
+  # fish enables this for `apropos` completions,
+  # but on Darwin programs.man.package is null and it only warns on every switch.
+  programs.man.generateCaches = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin false;
+
   programs.readline = {
     enable = true;
     extraConfig = builtins.readFile ../config/inputrc;
