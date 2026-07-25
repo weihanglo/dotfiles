@@ -30,7 +30,6 @@
     casks = [
       "cctop"
       "font-jetbrains-mono"
-      "ghostty"
       "kitty"
       "parallels"
       "signal"
