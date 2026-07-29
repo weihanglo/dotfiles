@@ -71,6 +71,59 @@
     LESS = "isFRMX";
   };
 
+  # Claude Code rewrites settings.json at runtime,
+  # so it cannot be a read-only store symlink.
+  # See anthropics/claude-code#3575
+  home.activation.claudeSettings =
+    let
+      baseline = (pkgs.formats.json { }).generate "claude-settings-baseline.json" {
+        includeCoAuthoredBy = false;
+        permissions = {
+          defaultMode = "bypassPermissions";
+          allow = [
+            "Read(*)"
+            "Bash(cargo *)"
+            "Bash(fd *)"
+            "Bash(find *)"
+            "Bash(gh issue list*)"
+            "Bash(gh issue view*)"
+            "Bash(gh pr checks*)"
+            "Bash(gh pr diff*)"
+            "Bash(gh pr list*)"
+            "Bash(gh pr view*)"
+            "Bash(gh search *)"
+            "Bash(grep:*)"
+            "Bash(jj:*)"
+            "Bash(rg *)"
+            "Bash(wc *)"
+          ];
+          ask = [
+            "Bash(git push:*)"
+            "Bash(jj git push:*)"
+            "Bash(jj push:*)"
+          ];
+        };
+        skipDangerousModePermissionPrompt = true;
+        enabledPlugins."cctop@cctop" = true;
+        extraKnownMarketplaces.cctop.source = {
+          source = "github";
+          repo = "st0012/cctop";
+        };
+      };
+      merge = pkgs.writeShellScript "merge-claude-settings" ''
+        set -euo pipefail
+        settings="$HOME/.claude/settings.json"
+        mkdir -p "$HOME/.claude"
+        [ -s "$settings" ] || echo '{}' > "$settings"
+        tmp="$(mktemp)"
+        ${lib.getExe pkgs.jq} --slurp '.[0] * .[1]' "$settings" ${baseline} > "$tmp"
+        mv "$tmp" "$settings"
+      '';
+    in
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run ${merge}
+    '';
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
