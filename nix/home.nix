@@ -52,9 +52,6 @@
 
   home.packages = with pkgs; [
     (lib.hiPrio rust-analyzer)
-    difftastic
-    fd
-    gh
     hyperfine
     mdbook
     rustup
@@ -182,6 +179,8 @@
   };
 
   programs.eza.enable = true;
+
+  programs.fd.enable = true;
 
   programs.fish = {
     enable = true;

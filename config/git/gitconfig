@@ -29,11 +29,8 @@
 [diff]
 	colorMoved = default
 	renames = copies
-	tool = difftastic
 [difftool]
 	prompt = false
-[difftool "difftastic"]
-	cmd = difft "$LOCAL" "$REMOTE"
 [fetch]
 	prune = true
 	pruneTags = true

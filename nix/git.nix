@@ -12,6 +12,20 @@
       line-numbers = true;
     };
   };
+
+  programs.difftastic = {
+    enable = true;
+    git = {
+      enable = true;
+      mode = "difftool";
+    };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = false;
+  };
+
   programs.git = {
     enable = true;
     ignores = [
