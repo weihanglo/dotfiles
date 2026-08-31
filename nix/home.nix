@@ -76,7 +76,6 @@
       baseline = (pkgs.formats.json { }).generate "claude-settings-baseline.json" {
         includeCoAuthoredBy = false;
         permissions = {
-          defaultMode = "bypassPermissions";
           allow = [
             "Read(*)"
             "Bash(cargo *)"
