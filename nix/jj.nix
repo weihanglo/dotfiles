@@ -59,7 +59,6 @@
       git = {
         private-commits = "denylist()";
         push = "weihanglo";
-        sign-on-push = true;
       };
       merge-tools = {
         delta = {
@@ -83,6 +82,7 @@
       };
       revsets = {
         bookmark-advance-to = "closest_pushable(@)";
+        git-sign-on-push = "~signed() & mine()";
       };
       revset-aliases = {
         "closest_pushable(to)" = "heads(::to & ready())";
