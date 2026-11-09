@@ -154,6 +154,10 @@
 
   programs.codex = {
     enable = true;
+    # cargoUseSystemLibs forces system AWS-LC/zstd/sqlite/jemalloc,
+    # none of which the codex derivation provides, so *-sys build scripts panic.
+    # Drop once fixed upstream: https://github.com/NixOS/nixpkgs/issues/585124
+    package = pkgs.codex.overrideAttrs { dontCargoUseSystemLibs = true; };
     context = ../config/ai/AGENTS.md;
   };
 
