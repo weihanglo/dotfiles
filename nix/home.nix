@@ -77,7 +77,7 @@
         includeCoAuthoredBy = false;
         permissions = {
           allow = [
-            "Read(*)"
+            "Read"
             "Bash(cargo *)"
             "Bash(fd *)"
             "Bash(find *)"
