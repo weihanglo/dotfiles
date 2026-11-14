@@ -27,7 +27,7 @@
           "-r"
           "trunk() | stack()::"
         ];
-        pull = [
+        pl = [
           "git"
           "fetch"
           "--all-remotes"
