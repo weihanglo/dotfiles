@@ -53,6 +53,9 @@ When running commands on behalf of me, do (in this order)
 * Ask before running destructive git/VCS operations (`push --force`, `reset --hard`, etc.)
 * `git --no-pager` / `jj --no-pager` for diffing, log viewing, etc.
 * Prefer `jj` over `git` when available
+* With jj, edit the existing stack in place (`edit`, `squash --into`, `split`, `absorb`, `rebase -r/-s`);
+  don't rebuild it with fresh `jj new` changes, since that breaks change ID stability.
+  Exception: changes that are immutable or checked out in another workspace.
 * Most jj ops are undoable (`jj undo`); remote ops need consent.
 * Prefer local `~/.cargo/registry` over remote docs when reading Rust source
 * Fetch Rust packages via `cargo info`
