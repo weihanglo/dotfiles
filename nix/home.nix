@@ -199,6 +199,7 @@
 
   programs.kitty = {
     enable = true;
+    package = null;
     themeFile = "Catppuccin-Latte";
     settings = {
       font_family = "JetBrains Mono ExtraLight";
@@ -215,6 +216,7 @@
       macos_quit_when_last_window_closed = "yes";
       allow_remote_control = "socket-only";
       listen_on = "unix:/tmp/kitty-{kitty_pid}";
+      watcher = "${../config/kitty/zellij-inbox-notify.py}";
     };
   };
 
