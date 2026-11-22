@@ -20,15 +20,7 @@
 
   homebrew = {
     enable = true;
-    # Homebrew 6 refuses untrusted third-party taps during activation,
-    taps = [
-      {
-        name = "st0012/cctop";
-        trusted = true;
-      }
-    ];
     casks = [
-      "cctop"
       "font-jetbrains-mono"
       "kitty"
       "parallels"

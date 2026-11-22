@@ -100,11 +100,6 @@
           ];
         };
         skipDangerousModePermissionPrompt = true;
-        enabledPlugins."cctop@cctop" = true;
-        extraKnownMarketplaces.cctop.source = {
-          source = "github";
-          repo = "st0012/cctop";
-        };
       };
       merge = pkgs.writeShellScript "merge-claude-settings" ''
         set -euo pipefail
