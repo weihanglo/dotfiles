@@ -12,6 +12,12 @@
   programs.jujutsu = {
     enable = true;
     settings = {
+      "--scope" = [
+        {
+          "--when".environments = [ "JJUI" ];
+          ui.diff-formatter = "delta";
+        }
+      ];
       aliases = {
         ci = [
           "commit"

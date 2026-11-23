@@ -3,15 +3,7 @@
   ...
 }:
 {
-  programs.delta = {
-    enable = true;
-    options = {
-      features = "catppuccin-latte";
-      # There might not be any application to open hyperlinks on Linux.
-      hyperlinks = pkgs.stdenv.hostPlatform.isDarwin;
-      line-numbers = true;
-    };
-  };
+  programs.delta.enable = true;
 
   programs.difftastic = {
     enable = true;
@@ -56,6 +48,12 @@
       }
     ];
     lfs.enable = true;
+    settings.delta = {
+      features = "catppuccin-latte";
+      # There might not be any application to open hyperlinks on Linux.
+      hyperlinks = pkgs.stdenv.hostPlatform.isDarwin;
+      line-numbers = true;
+    };
   };
 
   programs.gitui =
